@@ -1,0 +1,16 @@
+{
+  "presets": [
+    "@babel/preset-env"
+  ],
+  "plugins": [
+    // "@babel/proposal-object-rest-spread",
+    ["@babel/plugin-proposal-pipeline-operator", { "proposal": "smart" }],
+    // "@babel/plugin-transform-runtime",
+    // "@babel/plugin-proposal-class-properties",
+    // "@babel/plugin-proposal-private-methods",
+    "require-context-hook",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-throw-expressions"
+  ],
+  "sourceMaps": true
+}

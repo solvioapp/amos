@@ -1,0 +1,34 @@
+type Topic {
+  # id: ID!
+  name: String!
+  children: [IS_PART_OF!]!
+  parents: [IS_PART_OF!]!
+  amosGames: [FOR_TOPIC!]!
+  # top
+}
+
+type IS_PART_OF @relation (name: "IS_PART_OF") {
+  from: Topic!
+  to: Topic!
+}
+
+input CreateTopicInput {
+  name: String!
+  children: [String!]!
+  parents: [String!]!
+}
+
+type Path {
+  list: [String!]!
+}
+
+extend type Query {
+  autocomplete (name: String!): [Path!]!
+  getChildrenRec (name: String!, level: Int!): [Path!]!
+  # search (topic: Topic!): [Resource!]!
+  getMostCommonPrerequisites (name: String!): [String!]!
+}
+
+extend type Mutation {
+  createTopic (input: CreateTopicInput!): Topic! @hasRole (roles: [admin])
+}
