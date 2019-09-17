@@ -21,5 +21,11 @@ services:
     depends_on:
     - neo4j
 
-  # web:
-  #   build: ["npm", "build"]
+  web:
+    build: ./web
+    ports:
+      - 3000:3000
+    links:
+    - api
+    depends_on:
+    - api
