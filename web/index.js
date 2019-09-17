@@ -7,7 +7,7 @@ const app = express()
 app.use(express.static(`public`, {maxAge: `1d`}))
 
 app.use(`*`, (req, res) => {
-  fs.createReadStream(`./dist/index.html`).pipe(res)
+  fs.createReadStream(`./public/index.html`).pipe(res)
 })
 
 const server = http.Server(app)
