@@ -78,6 +78,10 @@ const develop = {
 
 const production = {
   mode: `production`,
+  output: {
+    filename: `[hash].js`,
+    path: rootPath(`public`),
+  },
   plugins: [
     new DynamicCdnWebpackPlugin({
       env: `production`,
