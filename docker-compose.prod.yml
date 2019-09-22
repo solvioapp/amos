@@ -1,8 +1,6 @@
 version: '3'
 services:
   db:
-    # build: ./db
-    # container_name: db
     image: solviofoundation/amos_db:latest
     ports:
       - 7473:7473
@@ -10,10 +8,7 @@ services:
       - 7687:7687
 
   api:
-    # build: ./api
-    # container_name: api
     image: solviofoundation/amos_api:latest
-    # command: npm run start
     ports:
       - 80:4001
     environment:
