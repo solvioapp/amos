@@ -1,8 +1,8 @@
-version: '3'
+version: '3.7'
 services:
   db:
-    # build: ./db
-    image: solviofoundation/amos_db
+    build: ./db
+    container_name: amos_db
     ports:
       - 7473:7473
       - 7474:7474
@@ -10,9 +10,7 @@ services:
 
   api:
     build: ./api
-    # image: solviofoundation/amos_api
-    # container_name: api
-    command: npm run start
+    container_name: amos_api
     ports:
       - 4000:4000
       - 4001:4001
@@ -28,7 +26,8 @@ services:
 
   web:
     build: ./web
-    # image: solviofoundation/amos_web
+    container_name: amos_web
+    # command: 
     ports:
       - 80:3000
       - 8080:8080
@@ -36,10 +35,12 @@ services:
     - api
     depends_on:
     - api
+    # environment:
+      # - CUSTOM_API_URL=http://api:4001
     volumes:
       - ./web:/app
       - /app/node_modules # data volume
 
-# volumes:
-  # api-nm:
-    # external: true
+volumes:
+  api-nm:
+    external: true

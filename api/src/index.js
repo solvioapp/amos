@@ -1,10 +1,16 @@
 import 'regenerator-runtime/runtime'
 import createServer from './server'
 import CONFIG from './config'
-const {app} = createServer()
 
 const port = CONFIG.GRAPHQL_PORT
-const path = `/graphql`;
+
+const {app} = createServer()
+app.listen({port}, () => {
+  console.log(`NEO4J_URI`, CONFIG.NEO4J_URI)
+  console.log(`GraphQL Server ready at ${port} 🚀`)
+})
+// const port = CONFIG.GRAPHQL_PORT
+// const path = `/graphql`;
 
 // app.use(express.static(`public`, {maxAge: `1d`}))
 
@@ -22,7 +28,7 @@ const path = `/graphql`;
 // app.get(``, )
 
 
-// app.listen({port, path}, () => {
+// app.listen({port}, () => {
 //   /* eslint-disable-next-line no-console */
 //   // console.log(`GraphQLServer ready at http://localhost:${port}${path} ... ${CONFIG.GRAPHQL_URI} 🚀`)
 //   console.log(`GraphQLServer ready  🚀`)

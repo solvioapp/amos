@@ -25,14 +25,15 @@ const CREATE_TOPIC = gql`
     }
   }
 `
-const uri = `/graphql`
+const uri = `${window._env_.CUSTOM_API_URL}/graphql`
 const client = new ApolloClient({
   uri,
 })
 
 
 const Foo = () => {
-  `I am working!11` |> console.log
+  `I am working!12` |> console.log
+  window |> console.log('window', #)
   uri |> console.log('uri', #)
   const {loading, error, data: dataQ} = useQuery(QUERY_TOPIC)
   const [createTopic, {data: dataM}] = useMutation(CREATE_TOPIC)

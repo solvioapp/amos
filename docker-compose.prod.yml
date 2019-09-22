@@ -1,22 +1,23 @@
 version: '3'
 services:
   db:
-    image: solviofoundation/amos_db
+    # build: ./db
+    # container_name: db
+    image: solviofoundation/amos_db:latest
     ports:
       - 7473:7473
       - 7474:7474
       - 7687:7687
 
-  webserver:
-    # image: solviofoundation/amos_webserver
-    build: .
+  api:
+    # build: ./api
+    # container_name: api
+    image: solviofoundation/amos_api:latest
+    # command: npm run start
     ports:
       - 80:4001
     environment:
-      NODE_ENV: production
-      GRAPHQ_PORT: 4001
+      - NODE_ENV=production
+      - GRAPHQL_PORT=4001
     links:
       - db
-    volumes:
-      - ./api:/app # 
-      - /app/node_modules # data volume
