@@ -1,0 +1,9 @@
+version: '3'
+services:
+  web:
+    image: solviofoundation/amos_web:latest
+    environment:
+      - CUSTOM_API_URL=http://18.223.247.68
+      - hi=hi2
+    ports:
+      - 80:3000

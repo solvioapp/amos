@@ -10,9 +10,8 @@ services:
   api:
     image: solviofoundation/amos_api:latest
     ports:
-      - 80:4001
+      - 80:80
     environment:
       - NODE_ENV=production
-      - GRAPHQL_PORT=4001
-    links:
-      - db
+      - GRAPHQL_PORT=80
+      - NEO4J_URI=bolt://localhost:7687
