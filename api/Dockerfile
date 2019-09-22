@@ -4,9 +4,10 @@ RUN mkdir -p /app
 WORKDIR /app
 
 COPY package.json .
-RUN npm install
+RUN npm install --quiet
 COPY . .
 
 EXPOSE 4000 4001
 
-CMD ["npm", "run", "start-dev"]
+RUN npm run build
+CMD ["npm", "run", "start"]

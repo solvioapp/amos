@@ -15,7 +15,10 @@
     "url": "https://github.com/solviofoundation/amos-web.git"
   },
   "dependencies": {
+    "@apollo/react-hooks": "^3.1.1",
+    "apollo-boost": "^0.4.4",
     "express": "^4.17.1",
+    "graphql": "^14.5.6",
     "history": "^4.10.1",
     "ramda": "^0.26.1",
     "react": "^16.9.0",
@@ -30,6 +33,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.5.0",
     "@babel/plugin-transform-runtime": "^7.6.0",
     "@babel/preset-env": "^7.6.0",
     "@babel/preset-react": "^7.0.0",

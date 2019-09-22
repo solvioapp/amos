@@ -1,31 +1,45 @@
-version: '3.7'
+version: '3'
 services:
-  neo4j:
-    build: ./neo4j
+  db:
+    build: ./db
+    # image: solviofoundation/amos_db
     ports:
+      - 7473:7473
       - 7474:7474
       - 7687:7687
-    environment:
-      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
-      - NEO4J_apoc_import_file_enabled=true
-      - NEO4J_apoc_export_file_enabled=true
-      - NEO4J_dbms_shell_enabled=true
 
   api:
     build: ./api
+    # image: solviofoundation/amos_api
+    # container_name: api
+    command: npm run start
     ports:
       - 4000:4000
       - 4001:4001
+    environment:
+      - NEO4J_URI=bolt://db:7687 
     links:
-    - neo4j
+    - db
     depends_on:
-    - neo4j
+    - db
+    volumes:
+      - ./api:/app # 
+      - /app/node_modules # data volume
 
   web:
     build: ./web
+    # image: solviofoundation/amos_web
     ports:
+      - 80:3000
       - 8080:8080
     links:
     - api
     depends_on:
     - api
+    volumes:
+      - ./web:/app
+      - /app/node_modules # data volume
+
+# volumes:
+  # api-nm:
+    # external: true

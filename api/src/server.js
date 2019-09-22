@@ -5,7 +5,7 @@ import middleware from './middleware'
 import {getDriver} from './bootstrap/neo4j'
 // import decode from './jwt/decode'
 import schema from './schema'
-import {R} from './common'
+import {R,path} from './common'
 import helmet from 'helmet'
 
 // check required configs and throw error
@@ -15,7 +15,6 @@ R.mapObjIndexed ((val, key) => val ? null : throw new Error(`ERROR: "${key}" env
 const driver = getDriver()
 
 const context = async ({req}) => {
-
   return {
     driver,
     // user,
@@ -33,14 +32,37 @@ const defaults = {
   tracing: !!CONFIG.DEBUG,
 }
 
+const CLIENT_BUILD_PATH = path.join(__dirname, `../../web/public`);
+
 const createServer = options => {
   const server = new ApolloServer (R.mergeAll ([defaults, options]))
 
   const app = express()
-  app.use (helmet())
+  // app.use (helmet())
 
-  server.applyMiddleware ({ app, path: `/` })
+  app.use (express.static (CLIENT_BUILD_PATH))
 
+  // app.get(`*`, (req, res) => {
+  //   res.sendFile (path.join (CLIENT_BUILD_PATH, `index.html`))
+  // })
+
+  app.get('/api', (req, res) => {
+    res.set('Content-Type', 'application/json');
+    let data = {
+      message: 'Hello world, Woooooeeeee!!!!'
+    };
+    res.send(JSON.stringify(data, null, 2));
+  });
+
+  
+  app.listen(process.env.PORT || 4001, `0.0.0.0`, () => console.log(`Server ready`));
+  
+  server.applyMiddleware ({ app, path: `/graphql` })
+  
+  // All remaining requests return the React app, so it can handle routing.
+  app.get('*', function(request, response) {
+    response.sendFile(path.join(CLIENT_BUILD_PATH, 'index.html'));
+  });
   return {server, app}
 }
 

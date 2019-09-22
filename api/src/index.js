@@ -1,11 +1,32 @@
+import 'regenerator-runtime/runtime'
 import createServer from './server'
 import CONFIG from './config'
-
 const {app} = createServer()
-app.listen({ port: CONFIG.GRAPHQL_PORT }, () => {
-  /* eslint-disable-next-line no-console */
-  console.log(`GraphQLServer ready at ${CONFIG.GRAPHQL_URI} 🚀`)
-})
+
+const port = CONFIG.GRAPHQL_PORT
+const path = `/graphql`;
+
+// app.use(express.static(`public`, {maxAge: `1d`}))
+
+// app.use(`*`, (req, res) => {
+//   fs.createReadStream(`./public/index.html`).pipe(res)
+// })
+
+// const server = http.Server(app)
+// const port = process.env.PORT || 3000
+
+// server.listen(port, () => {
+//   console.info(`🚀 Server ready at ${port}`)
+// })
+
+// app.get(``, )
+
+
+// app.listen({port, path}, () => {
+//   /* eslint-disable-next-line no-console */
+//   // console.log(`GraphQLServer ready at http://localhost:${port}${path} ... ${CONFIG.GRAPHQL_URI} 🚀`)
+//   console.log(`GraphQLServer ready  🚀`)
+// })
 
 // Execute a file
 // import './schema/user/resolvers'
