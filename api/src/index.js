@@ -5,7 +5,7 @@ import CONFIG from './config'
 const port = CONFIG.GRAPHQL_PORT
 
 const {app} = createServer()
-const PORT = process.env.PORT || 80;
+const PORT = process.env.GRAPHQL_PORT || process.env.PORT
 console.log(`PORT`, PORT)
 console.log(`NEO4J_USERNAME`, CONFIG.NEO4J_USERNAME)
 console.log(`NEO4J_PASSWORD`, CONFIG.NEO4J_PASSWORD)

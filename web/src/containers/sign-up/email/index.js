@@ -6,21 +6,24 @@ import Checkbox from 'components/checkbox'
 import Top_ from '../top.sc'
 import React, {useState, useMemo, useRef} from 'react'
 import AuthOptions from 'components/auth-options'
-import {path, pipe} from 'ramda'
+import * as R from 'ramda'
+import {useMutation} from '@apollo/react-hooks'
+import {gql} from 'apollo-boost'
 
-const getTargetValue = path([`target`, `value`])
-const pipeTValueTo = cb => pipe(getTargetValue, cb)
+const getTargetValue = R.path ([`target`, `value`])
+const pipeTValueTo = cb => R.pipe (getTargetValue, cb)
 
 const Email = ({login, ...rest}) => {
-  const [email, setEmailState] = useState(``)
-  const [password, setPasswordState] = useState(``)
-  const [repeatPass, setRepeatPassState] = useState(``)
-
-  const {setPassword, setEmail, setRepeatPass} = useMemo(() => ({
-    setPassword: pipeTValueTo(setPasswordState),
-    setEmail: pipeTValueTo(setEmailState),
-    setRepeatPass: pipeTValueTo(setRepeatPassState),
-  }), [])
+  const [username, setUsername] = useState (``)
+  const [email, setEmail] = useState (``)
+  const [password, setPassword] = useState (``)
+  const [repeatPassword, setRepeatPassword] = useState (``)
+  const SIGNUP = gql`
+    mutation {
+      signup(username: "hi", email: "hello", password: "how are you")
+    }
+  `
+  const [signup, {loading, data}] = useMutation (SIGNUP)
 
   const signupUser = event => {
     event.preventDefault()
@@ -29,35 +32,38 @@ const Email = ({login, ...rest}) => {
     console.log(`Signing up user`, userData)
   }
 
-  const repeatPassErr = useMemo(() => {
-    return password && repeatPass && password !== repeatPass && `Passwords must match`
-  }, [password, repeatPass])
+  const repeatPasswordErr = useMemo(() => {
+    return password && repeatPassword && password !== repeatPassword && `Passwords must match`
+  }, [password, repeatPassword])
 
   const form = useRef()
-  const validForm = form.current ? form.current.checkValidity() && !repeatPassErr : false
+  const validForm = form.current ? !repeatPasswordErr : false
 
   return (
     <Top_ {...rest}>
       <AmosChat>
-        Once you sign up, you'll be able to get reputation for your Reviews. And it's free!
+        Sign up to help me sort the world's learning resources. Did I say it's free? 😌
       </AmosChat>
       <form onSubmit={signupUser} ref={form}>
+        <Input type='username' onChange={setUsername} required>
+          Username
+        </Input>
         <Input type='email' onChange={setEmail} required>
           Email
         </Input>
         <Input type='password' onChange={setPassword} required minLength='6'>
           Password
         </Input>
-        <Input type='password' onChange={setRepeatPass} required minLength='6'>
+        <Input type='password' onChange={setRepeatPassword} required minLength='6'>
           Repeat password
         </Input>
-        {repeatPassErr && <AmosChat avatar='none'>
+        {repeatPasswordErr && <AmosChat avatar='none'>
           Hey, the passwords don't seem to match. Good we caught that now!
         </AmosChat>}
         <Checkbox>
           Subscribe to Solvio Monthly
         </Checkbox>
-        <Button primary onClick={login} width='150px' type='submit' disabled={!validForm}>
+        <Button primary onClick={signup} width='150px' type='submit' disabled={!validForm}>
           Sign up
         </Button>
       </form>
@@ -69,4 +75,5 @@ const Email = ({login, ...rest}) => {
   )
 }
 
-export default connect(Email)
+// export default connect(Email)
+export default Email

@@ -7,23 +7,23 @@ import AuthOptions from 'components/auth-options/top.sc'
 import styled from 'styled-components'
 
 const Top_ = styled(Panel)`
-  > ${Input} + ${Input} {
+  ${Input} + ${Input} {
     margin-top: 30px;
   }
 
-  > ${Input} + ${AmosChat} {
+  ${Input} + ${AmosChat} {
     margin-top: 30px;
   }
 
-  > ${Checkbox} {
+  ${Checkbox} {
     margin-top: 36px;
   }
 
-  > ${Button} {
+  ${Button} {
     margin-top: 30px;
   }
 
-  > ${AuthOptions} {
+  ${AuthOptions} {
     margin-top: 24px;
   }
 `
