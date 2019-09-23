@@ -1,6 +1,6 @@
 import * as R from 'ramda'
 import Guest from './guest'
-import LearnRequire from './learn-require'
+import Prerequisites from './prerequisites'
 import Links from './links'
 import React, {useState, useMemo, useContext, useEffect, useRef} from 'react'
 import Thanks from './thanks'
@@ -11,7 +11,7 @@ import {Switch, Redirect, Route} from 'react-router-dom'
 const initReview = {
   links: [],
   topics: [],
-  requirements: [],
+  prerequisites: [],
   done: false,
 }
 const ReviewContext = React.createContext(initReview)
@@ -33,7 +33,7 @@ const makeSetterF = ({prop, setReview, unmounted}) => (val, done = false) => {
   })
 }
 
-function Review(props) {
+const Review = props => {
 
   const [review, setReview] = useState(initReview)
 
@@ -64,7 +64,7 @@ function Review(props) {
         <Route path='/review' component={Guest} exact />
         <Route path='/review/links' component={Links} />
         <Route path='/review/topics' component={Topics} />
-        <Route path='/review/requirements' component={LearnRequire} />
+        <Route path='/review/prerequisites' component={Prerequisites} />
         <Route path='/review/thanks' component={Thanks} />
       </Switch>
     </ReviewContext.Provider>

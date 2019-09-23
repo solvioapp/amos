@@ -5,8 +5,8 @@ import store from 'store'
 import {Provider} from 'react-redux'
 import {Router} from 'react-router-dom'
 import {history} from 'common/history'
-import ApolloClient, {gql} from 'apollo-boost'
-import {ApolloProvider, useQuery, useMutation} from '@apollo/react-hooks'
+import ApolloClient from 'apollo-boost'
+import {ApolloProvider} from '@apollo/react-hooks'
 
 const uri = `${window._env_.CUSTOM_API_URL}/graphql`
 const client = new ApolloClient({uri})
