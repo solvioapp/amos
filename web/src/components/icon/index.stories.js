@@ -4,11 +4,11 @@ import {storiesOf} from '@storybook/react'
 
 storiesOf(`Icons`, module)
   .add(`Bell`, () => (
-    <Icon src="bell"/>
+    <Icon src='bell'/>
   ))
   .add(`Settings`, () => (
-    <Icon src="settings"/>
+    <Icon src='settings'/>
   ))
   .add(`User`, () => (
-    <Icon src="user"/>
+    <Icon src='user'/>
   ))

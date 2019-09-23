@@ -43,7 +43,7 @@ const RadioGroup = ({title, name, elements = [], checkedValue}) => {
         {elements.map(el => (
           <label key={el.value}>
             <input
-              type="radio"
+              type='radio'
               name={name}
               value={el.value}
               defaultChecked={el.value === checkedValue}

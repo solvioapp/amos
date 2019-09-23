@@ -55,17 +55,17 @@ function Review(props) {
   }), [review])
 
   if (redirect(props)) {
-    return <Redirect to="/review/links" />
+    return <Redirect to='/review/links' />
   }
 
   return (
     <ReviewContext.Provider value={contextValue}>
       <Switch>
-        <Route path="/review" component={Guest} exact />
-        <Route path="/review/links" component={Links} />
-        <Route path="/review/topics" component={Topics} />
-        <Route path="/review/requirements" component={LearnRequire} />
-        <Route path="/review/thanks" component={Thanks} />
+        <Route path='/review' component={Guest} exact />
+        <Route path='/review/links' component={Links} />
+        <Route path='/review/topics' component={Topics} />
+        <Route path='/review/requirements' component={LearnRequire} />
+        <Route path='/review/thanks' component={Thanks} />
       </Switch>
     </ReviewContext.Provider>
   )

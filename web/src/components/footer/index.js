@@ -6,11 +6,11 @@ const Footer = ({...rest}) => (
   <Top_  {...rest}>
     Built with ❤️ and ☕️ by
     {` `}
-    <Link target="_blank" href="http://solvio.org">
+    <Link target='_blank' href='http://solvio.org'>
       Solvio Foundation
     </Link>.
     {` `}
-    <Link target="_blank" href="https://github.com/solviofoundation/amos/wiki">
+    <Link target='_blank' href='https://github.com/solviofoundation/amos/wiki'>
       Help.
     </Link>
   </Top_>

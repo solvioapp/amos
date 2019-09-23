@@ -5,7 +5,7 @@ import React from 'react'
 const Checkbox = ({children, ...rest}) => (
   <Top_ {...rest}>
     <Checkbox_ checkboxSize={20} checkboxBorderSize={2}>
-      <input type="checkbox" defaultChecked/>
+      <input type='checkbox' defaultChecked/>
     </Checkbox_>
     {children}
   </Top_>

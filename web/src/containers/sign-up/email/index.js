@@ -42,22 +42,22 @@ const Email = ({login, ...rest}) => {
         Once you sign up, you'll be able to get reputation for your Reviews. And it's free!
       </AmosChat>
       <form onSubmit={signupUser} ref={form}>
-        <Input type="email" onChange={setEmail} required>
+        <Input type='email' onChange={setEmail} required>
           Email
         </Input>
-        <Input type="password" onChange={setPassword} required minLength="6">
+        <Input type='password' onChange={setPassword} required minLength='6'>
           Password
         </Input>
-        <Input type="password" onChange={setRepeatPass} required minLength="6">
+        <Input type='password' onChange={setRepeatPass} required minLength='6'>
           Repeat password
         </Input>
-        {repeatPassErr && <AmosChat avatar="none">
+        {repeatPassErr && <AmosChat avatar='none'>
           Hey, the passwords don't seem to match. Good we caught that now!
         </AmosChat>}
         <Checkbox>
           Subscribe to Solvio Monthly
         </Checkbox>
-        <Button primary onClick={login} width="150px" type="submit" disabled={!validForm}>
+        <Button primary onClick={login} width='150px' type='submit' disabled={!validForm}>
           Sign up
         </Button>
       </form>

@@ -6,9 +6,9 @@ import {Switch, Route} from 'react-router-dom'
 
 const SignUp = () => (
   <Switch>
-    <Route path="/sign-up" component={Guest} exact/>
-    <Route path="/sign-up/email" component={Email}/>
-    <Route path="/sign-up/success" component={Success}/>
+    <Route path='/sign-up' component={Guest} exact/>
+    <Route path='/sign-up/email' component={Email}/>
+    <Route path='/sign-up/success' component={Success}/>
   </Switch>
 )
 

@@ -10,19 +10,19 @@ const isLogin = R.pathEq([
 
 const NavMenu = ({isAuthenticated, ...props}) => (
   <Top_ {...props}>
-    <Link_ to="/review">
+    <Link_ to='/review'>
       Review
     </Link_>
-    <Link_ to="/search">
+    <Link_ to='/search'>
       Search
     </Link_>
-    <Link_ to="/notifications" hidden={true}>
+    <Link_ to='/notifications' hidden={true}>
       Notifications
     </Link_>
-    <Link_ to="/profile" hidden={!isAuthenticated}>
+    <Link_ to='/profile' hidden={!isAuthenticated}>
       Profile
     </Link_>
-    <Link_ to="/sign-up" hidden={isAuthenticated || isLogin(props)}>
+    <Link_ to='/sign-up' hidden={isAuthenticated || isLogin(props)}>
       Sign up
     </Link_>
     <Link_ to='/login' hidden={isAuthenticated || !isLogin(props)}>

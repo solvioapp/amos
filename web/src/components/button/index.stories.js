@@ -26,17 +26,17 @@ storiesOf(`Button`, module)
   )
   .add(`Icon & Text`, () =>
     <Panel>
-      <Button icon="user">
+      <Button icon='user'>
         Default
       </Button>
-      <Button primary icon="settings">
+      <Button primary icon='settings'>
         Primary
       </Button>
     </Panel>
   )
   .add(`Icon`, () =>
     <Panel>
-      <Button icon="user"/>
-      <Button primary icon="settings"/>
+      <Button icon='user'/>
+      <Button primary icon='settings'/>
     </Panel>
   )

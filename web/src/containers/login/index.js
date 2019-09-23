@@ -8,7 +8,7 @@ import Input from 'components/input'
 import Link from './link.sc'
 import React from 'react'
 import connect from './connect'
-import useForm from "react-hook-form"
+import useForm from 'react-hook-form'
 import {Redirect} from 'react-router-dom'
 
 const url = R.pathOr(`/`, [`state`, `from`])
@@ -47,21 +47,21 @@ function LogIn(props) {
       </AmosChat>
       <Input
         hasError={errors.email}
-        label="Email"
-        name="email"
-        placeholder="Email"
+        label='Email'
+        name='email'
+        placeholder='Email'
         ref={register({required: true})}
       />
       <Input
         hasError={errors.password}
-        label="Password"
-        name="password"
-        placeholder="Password"
-        type="password"
+        label='Password'
+        name='password'
+        placeholder='Password'
+        type='password'
         ref={register}
       />
-      <Link to="/forgot-password">Forgot password</Link>
-      <Button primary type="submit">
+      <Link to='/forgot-password'>Forgot password</Link>
+      <Button primary type='submit'>
         Log in
       </Button>
       <AuthOptions

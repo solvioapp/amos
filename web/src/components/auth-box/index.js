@@ -6,8 +6,8 @@ import React from 'react'
 
 const AuthBox = ({...rest}) => (
   <Top_ {...rest}>
-    <Button icon="facebook" width={'250px'}>Continue with Facebook</Button>
-    <Button icon="google" width={'250px'}>Continue with Google</Button>
+    <Button icon='facebook' width={'250px'}>Continue with Facebook</Button>
+    <Button icon='google' width={'250px'}>Continue with Google</Button>
     <AuthOptions/>
   </Top_>
 )

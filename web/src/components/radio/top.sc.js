@@ -6,7 +6,7 @@ const Top_ = styled.ul`
   background: #eef5fd;
   color: #545556;
   display: flex;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   justify-content: center;
   margin: 0;

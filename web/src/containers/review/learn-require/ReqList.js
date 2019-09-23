@@ -109,7 +109,7 @@ const RequirementInput = ({changeItem, item, index}) => {
       <RadioGroup {...knowledgeProps}/>
       <div>
         <RadioGroupHead>in:</RadioGroupHead>
-        <Input name="topic" defaultValue={item.topic}/>
+        <Input name='topic' defaultValue={item.topic}/>
       </div>
     </RequirementsForm>
   )

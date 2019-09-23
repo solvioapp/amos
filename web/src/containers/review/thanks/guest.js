@@ -22,8 +22,8 @@ const Guest = ({...rest}) => {
     goRoot()
   }, [submitReview])
 
-  return <Top_ columns="two" {...rest}>
-    <Top_ columns="left">
+  return <Top_ columns='two' {...rest}>
+    <Top_ columns='left'>
       <AmosChat callToAction={
         <Button primary onClick={submitAndGo}>
           Submit anonymously
