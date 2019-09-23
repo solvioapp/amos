@@ -1,8 +1,7 @@
-version: '3'
+version: '3.7'
 services:
   db:
-    # build: ./db
-    image: solviofoundation/amos_db
+    build: ./db
     ports:
       - 7473:7473
       - 7474:7474
@@ -10,9 +9,6 @@ services:
 
   api:
     build: ./api
-    # image: solviofoundation/amos_api
-    # container_name: api
-    command: npm run start
     ports:
       - 4000:4000
       - 4001:4001
@@ -28,7 +24,6 @@ services:
 
   web:
     build: ./web
-    # image: solviofoundation/amos_web
     ports:
       - 80:3000
       - 8080:8080
@@ -40,6 +35,6 @@ services:
       - ./web:/app
       - /app/node_modules # data volume
 
-# volumes:
-  # api-nm:
-    # external: true
+volumes:
+  api-nm:
+    external: true

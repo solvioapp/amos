@@ -5,9 +5,13 @@ import CONFIG from './config'
 const port = CONFIG.GRAPHQL_PORT
 
 const {app} = createServer()
-app.listen({port}, () => {
+const PORT = process.env.PORT || 80;
+console.log(`PORT`, PORT)
+console.log(`NEO4J_USERNAME`, CONFIG.NEO4J_USERNAME)
+console.log(`NEO4J_PASSWORD`, CONFIG.NEO4J_PASSWORD)
+app.listen(PORT, () => {
   console.log(`NEO4J_URI`, CONFIG.NEO4J_URI)
-  console.log(`GraphQL Server ready at ${port} 🚀`)
+  console.log(`GraphQL Server ready at ${PORT} 🚀`)
 })
 // const port = CONFIG.GRAPHQL_PORT
 // const path = `/graphql`;
