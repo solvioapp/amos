@@ -19,15 +19,13 @@ const parsed = parser (topics)
 const driver = neo4j.driver (uri, neo4j.auth.basic (username, password))
 const ses = driver.session()
 
-const run = async () => {
+export default async () => {
   console.log (`Running ${parsed}`)
   try {
     await ses.run (parsed)
     /* Can't log anything because query from amos-parser doesn't return anything */
     driver.close()
   } catch (e) {
-    console.log(`ERROR: ${e}`)
+    throw new Error (`ERROR: ${e}`)
   }
 }
-
-run()

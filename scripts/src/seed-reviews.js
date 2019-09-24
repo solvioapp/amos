@@ -24,7 +24,7 @@ const mutation = gql`
 // const createRange = arr => R.range (0) (R.length (arr))
 
 // TODO: rewrite better
-const run = async () => {
+export default async () => {
   for (let i = 0; i < reviews.length; i++) {
     const rev = reviews[i];
     try {
@@ -35,26 +35,7 @@ const run = async () => {
         prerequisites: reviews[i][3],
       }}})
     } catch (e) {
-      e |> console.log('e', #)
+      throw new Error (`ERROR: ${e}`)
     }
   }
 }
-
-run()
-
-// const run2 = async () => {
-//   try {
-//     await client.mutate ({mutation: reviewToMutation (), variables: {
-//       "input": {
-//         "type": "TOPIC",
-//         "links": ["https://www.cl.cam.ac.uk/teaching/1819/Algorithms/"],
-//         "topics": ["test"],
-//         "prerequisites": []
-//       }
-//     }})
-//   } catch (e) {
-//     e |> console.log('e', #)
-//   }
-// }
-
-// run2()
