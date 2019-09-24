@@ -2,8 +2,6 @@ import 'regenerator-runtime/runtime'
 import createServer from './server'
 import CONFIG from './config'
 
-const port = CONFIG.GRAPHQL_PORT
-
 const {app} = createServer()
 const PORT = process.env.GRAPHQL_PORT || process.env.PORT
 console.log(`PORT`, PORT)
