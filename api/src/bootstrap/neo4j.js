@@ -11,19 +11,19 @@ export const getDriver = (options = {}) => {
   } = options
   // if (!driver) {
     var driver = neo4j.driver(uri, neo4j.auth.basic(username, password))
-    // var session = driver.session()
-    // session
-    //     .run("CREATE (n {hello: 'World'}) RETURN n.name")
-    //     .then(function(result) {
-    //         result.records.forEach(function(record) {
-    //             console.log(record)
-    //         });
+    var session = driver.session()
+    session
+        .run("CREATE (n {hello: 'World'}) RETURN n.name")
+        .then(function(result) {
+            result.records.forEach(function(record) {
+                console.log(record)
+            });
 
-    //         session.close();
-    //     })
-    //     .catch(function(error) {
-    //         console.log(error);
-    //     });
+            session.close();
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
     
   // const driver = neo4j.driver(, neo4j.auth.basic(username, password))
   // }

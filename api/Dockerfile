@@ -7,8 +7,6 @@ COPY package.json .
 RUN npm install --quiet
 COPY . .
 
-ENV GRAPHQL_PORT=80
-
 EXPOSE 80 4000 4001
 
 RUN npm run build

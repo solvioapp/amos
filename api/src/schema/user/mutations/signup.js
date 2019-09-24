@@ -5,8 +5,12 @@ const signup = async (_, {username, email, password}, {driver}) => {
   const ses = driver.session()
   const _1a = 
   `MATCH (u:User) WHERE u.username = $username RETURN u`
-  const _1b = 
-  `MATCH (u:User) WHERE u.email = $email RETURN u`
+  const _1b = `
+  MATCH (la:LOCAL_ACCOUNT {email: $email})
+  RETURN la
+  `
+  // `MATCH (u:User)-[:AUTHENTICATED_WITH]->(la:LOCAL_ACCOUNT)
+  //  WHERE la.email = $email RETURN u`
 
   /* Check if username is free */
   const {records: recs1} = await ses.run (_1a, {username})      
