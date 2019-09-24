@@ -17,7 +17,7 @@ const signup = async (_, {username, email, password}, {driver}) => {
   H.assert (R.isEmpty (recs2)) (`a user with email ${email} already exists`)
 
   /* Hash password */
-  const hashedPassword = await bcrypt.hash(password, 12)
+  const hashedPassword = await bcrypt.hash (password, 12)
   const _2 = 
   `CREATE (u:User {username: $username})
   -[:AUTHENTICATED_WITH]->
@@ -28,7 +28,10 @@ const signup = async (_, {username, email, password}, {driver}) => {
   await ses.run (_2, {username, email, hashedPassword})
 
   /* Grant jwt */
-  return await A.createToken({user: {email}}, process.env.JWT_SECRET)
+  /* `dteiml` is admin (can add new topics) */
+  return username === `dteiml`
+    ? await A.createToken (process.env.JWT_SECRET, {roles: [`admin`]}) 
+    : await A.createToken (process.env.JWT_SECRET, {})
 }
 
 export default signup

@@ -8,7 +8,7 @@ import {history} from 'common/history'
 import ApolloClient from 'apollo-boost'
 import {ApolloProvider} from '@apollo/react-hooks'
 
-const uri = `${window._env_.CUSTOM_API_URL}/graphql`
+const uri = `${window._env_.CUSTOM_API_URL}`
 const client = new ApolloClient({uri})
 
 const App = () => (

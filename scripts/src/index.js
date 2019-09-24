@@ -1,4 +1,4 @@
-import amosParser from 'amos-parser'
-
-// amosTopics |> console.log('amosTopics', #)
-amosParser |> console.log('amosParser', #)
+/* Execute a file */
+import './clean-db'
+import './seed-topics'
+import './seed-reviews'

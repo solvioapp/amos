@@ -1,7 +1,7 @@
 # TODO: Move to union or interface types (once neo4j-graphql-js supports them)
 enum AmosGameType {
-  Topic
-  Prerequisite
+  TOPIC
+  PREREQUISITE
 }
 
 type AmosGame {
@@ -23,6 +23,13 @@ type FOR_TOPIC @relation(name: "FOR_TOPIC") {
   to: Topic!
 }
 
+input AddReviewInput {
+  type: ResourceType!
+  links: [String!]!
+  topics: [String!]!
+  prerequisites: [String!]!
+}
+
 extend type Mutation {
-  addReview: Boolean!
+  addReview (input: AddReviewInput!): Boolean!
 }

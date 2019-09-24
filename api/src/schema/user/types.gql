@@ -3,6 +3,11 @@ enum Role {
   admin
 }
 
+type AnonymousUser {
+  ip: String!
+  votes: [VOTED_ON!]!
+}
+
 type User {
   # Fields
   username: String!
@@ -19,6 +24,12 @@ type User {
 
 type VOTED_ON @relation(name: "VOTED_ON") {
   from: User!
+  to: AmosGame!
+  timestamp: DateTime!
+}
+
+type VOTED_ON_ANONYMOUS @relation(name: "VOTED_ON_ANONYMOUS") {
+  from: AnonymousUser!
   to: AmosGame!
   timestamp: DateTime!
 }

@@ -1,3 +1,3 @@
 import jwt from 'jsonwebtoken'
 
-export const createToken = async (user, secret) => await jwt.sign(user, secret, {expiresIn: `7d`})
+export const createToken = async (secret, user) => await jwt.sign(user, secret, {expiresIn: `90d`})

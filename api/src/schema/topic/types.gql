@@ -1,10 +1,12 @@
 type Topic {
   # id: ID!
   name: String!
-  children: [IS_PART_OF!]!
-  parents: [IS_PART_OF!]!
-  amosGames: [FOR_TOPIC!]!
-  # top
+  # children: [IS_PART_OF!]!
+  # parents: [IS_PART_OF!]!
+  # amosGames: [FOR_TOPIC!]!
+  getChildrenRec (level: Int!): [Path!]!
+  getMostCommonPrerequisites: [String!]!
+  getTopResources: [Resource!]!
 }
 
 type IS_PART_OF @relation (name: "IS_PART_OF") {
@@ -23,10 +25,9 @@ type Path {
 }
 
 extend type Query {
-  autocomplete (name: String!): [Path!]!
-  getChildrenRec (name: String!, level: Int!): [Path!]!
-  # search (topic: Topic!): [Resource!]!
-  getMostCommonPrerequisites (name: String!): [String!]!
+  # TODO: Change to [Path!]!
+  topic (name: String!): Topic!
+  autocomplete (name: String!): [String!]!
 }
 
 extend type Mutation {
