@@ -1,11 +1,6 @@
 import 'regenerator-runtime/runtime'
 import createServer from './server'
 import CONFIG from './config'
-import {fs} from './common'
-
-require.extensions[`.cypher`] = (module, filename) => {
-  module.exports = fs.readFileSync (filename, `utf8`)
-}
 
 const {app} = createServer()
 const PORT = process.env.GRAPHQL_PORT || process.env.PORT

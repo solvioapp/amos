@@ -2,7 +2,7 @@
 // import AuthBox from 'components/auth-box'
 // import Top_ from './top.sc'
 import React, {useRef} from 'react'
-import Input from 'components/Input'
+import Input from 'components/input'
 import {useMutation} from '@apollo/react-hooks'
 import * as R from 'ramda'
 import Button from 'components/button'

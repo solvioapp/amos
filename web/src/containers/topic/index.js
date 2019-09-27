@@ -1,5 +1,5 @@
 import React from 'react'
-import Input from 'components/Input'
+import Input from 'components/input'
 import {gql} from 'apollo-boost'
 import {useQuery} from '@apollo/react-hooks'
 import * as R from 'ramda'

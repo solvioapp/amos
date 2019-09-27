@@ -7,42 +7,35 @@ const SpritePlugin = require(`svg-sprite-loader/plugin`)
 const ErrorOverlayPlugin = require(`error-overlay-webpack-plugin`)
 const cdnResolvers = require(`./cdn-resolvers`)
 const path = require(`path`)
+const NamedExports = require(`named-exports`)
 
 const rootPath = dir => path.resolve(__dirname, dir)
 
 const common = {
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: [`babel-loader`],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/,
-        exclude: /node_modules/,
-        use: [{
-          loader: `file-loader`,
-          options: {
-            name: `[hash].[ext]`,
-          }
-        }],
-      },
-      {
-        test: /\.svg$/,
-        use: [
-          {
-            loader: `svg-sprite-loader`,
-            options: {extract: true}
-          },
-          `svgo-loader`,
-        ]
-      },
+    rules: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      use: [`babel-loader`],
+    }, {
+      test: /\.(png|jpe?g|gif)$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: `file-loader`,
+        options: {name: `[hash].[ext]`},
+      }],
+    }, {
+      test: /\.svg$/,
+      use: [{
+        loader: `svg-sprite-loader`,
+        options: {extract: true},
+      }, `svgo-loader`]
+    },
     ]
   },
   output: {
     filename: `bundle.js`,
-    publicPath: `/`
+    publicPath: `/`,
   },
   resolve: {
     alias: {
@@ -59,6 +52,7 @@ const common = {
     new HtmlWebPackPlugin({
       template: rootPath(`src/index.html`)
     }),
+    // new NamedExports({path: `src/components`}),
   ],
 }
 
@@ -80,7 +74,7 @@ const production = {
   mode: `production`,
   output: {
     filename: `[hash].js`,
-    path: rootPath(`public`),
+    path: rootPath (`public`),
   },
   plugins: [
     new DynamicCdnWebpackPlugin({
