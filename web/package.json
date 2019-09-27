@@ -4,7 +4,7 @@
   "description": "Web learning resources.",
   "scripts": {
     "build": "cross-env NODE_ENV=production node env.js && cross-env NODE_ENV=production webpack -p",
-    "start:prod": "cross-env NODE_ENV=production node env.js && node index",
+    "start:prod": "node index",
     "start": "cross-env NODE_ENV=development node env.js && cross-env NODE_ENV=development webpack-dev-server --open",
     "storybook": "start-storybook -p 9001 -c storybook"
   },
