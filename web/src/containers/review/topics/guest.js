@@ -1,12 +1,11 @@
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
-import Title from 'components/title'
+import {
+  React, 
+  AmosChat, Button, Title
+} from 'common'
 import Buttons from '../buttons.sc'
 import InputForm_ from '../input-form.sc'
 import Top_ from '../top.sc'
 import Topics from './TopicList'
-import React from 'react'
-
 import {useReqState} from './'
 
 const Guest = ({...rest}) => {

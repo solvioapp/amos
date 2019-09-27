@@ -1,14 +1,9 @@
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
+import {
+  React, useState, useMemo, useRef, R, useMutation, gql,
+  AmosChat, Button, Input, Checkbox, AuthOptions
+} from 'common'
 import connect from './connect'
-import Input from 'components/input'
-import Checkbox from 'components/checkbox'
 import Top_ from '../top.sc'
-import React, {useState, useMemo, useRef} from 'react'
-import AuthOptions from 'components/auth-options'
-import * as R from 'ramda'
-import {useMutation} from '@apollo/react-hooks'
-import {gql} from 'apollo-boost'
 
 const getTargetValue = R.path ([`target`, `value`])
 const pipeTValueTo = cb => R.pipe (getTargetValue, cb)

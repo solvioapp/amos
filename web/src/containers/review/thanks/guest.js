@@ -1,10 +1,9 @@
-import AmosChat from 'components/amos-chat'
-import AuthBox from 'components/auth-box'
-import Button from 'components/button'
+import {
+  React, useCallback,
+  AmosChat, AuthBox, Button
+} from 'common'
 import Top_ from '../top.sc'
-import React, {useCallback} from 'react'
 import {navto} from 'common/history'
-
 import {useReviewCtx} from '../'
 
 const goRoot = navto(`/`)

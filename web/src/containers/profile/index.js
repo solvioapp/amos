@@ -1,6 +1,7 @@
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
-import React from 'react'
+import {
+  React,
+  AmosChat, Button
+} from 'common'
 import Top_ from './top.sc'
 import connect from './connect'
 

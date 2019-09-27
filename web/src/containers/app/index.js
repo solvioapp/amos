@@ -1,12 +1,9 @@
+import {
+  React, store, Provider, Router, ApolloClient, ApolloProvider
+} from 'common'
 import PageLayout from './page-layout'
 import Routes from './routes'
-import React from 'react'
-import store from 'store'
-import {Provider} from 'react-redux'
-import {Router} from 'react-router-dom'
 import {history} from 'common/history'
-import ApolloClient from 'apollo-boost'
-import {ApolloProvider} from '@apollo/react-hooks'
 
 const uri = `${window._env_.CUSTOM_API_URL}`
 const client = new ApolloClient({uri})

@@ -1,7 +1,8 @@
-import Button from 'components/button'
+import {
+  React,
+  Button, Title
+} from 'common'
 import Panel from './panel.sc'
-import React from 'react'
-import Title from 'components/title'
 import connect from './connect'
 
 const Notifications = ({logout}) => (

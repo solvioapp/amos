@@ -1,8 +1,8 @@
-import AmosChat from 'components/amos-chat'
-import AuthBox from 'components/auth-box'
-import Button from 'components/button'
+import {
+  React,
+  AmosChat, AuthBox, Button
+} from 'common'
 import Top_ from './top.sc'
-import React from 'react'
 import {navto} from 'common/history'
 
 const Guest = ({...rest}) => (

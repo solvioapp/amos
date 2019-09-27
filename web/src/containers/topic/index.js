@@ -1,10 +1,7 @@
-import React from 'react'
-import Input from 'components/input'
-import {gql} from 'apollo-boost'
-import {useQuery} from '@apollo/react-hooks'
-import * as R from 'ramda'
-import * as H from 'common/helpers'
-import {Link} from 'react-router-dom'
+import {
+  React, gql, useQuery, R, H, Link,
+  Input
+} from 'common'
 
 const QUERY_TOPIC = gql`
   query GetResources ($name: String!) {

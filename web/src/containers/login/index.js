@@ -1,15 +1,10 @@
-import * as R from 'ramda'
-import * as yup from 'yup'
-import AmosChat from 'components/amos-chat'
-import AuthOptions from 'components/auth-options'
-import Button from 'components/button'
+import {
+  React, R, yup, useForm, Redirect,
+  AmosChat, AuthOptions, Button, Input
+} from 'common'
 import Form from './form.sc'
-import Input from 'components/input'
 import Link from './link.sc'
-import React from 'react'
 import connect from './connect'
-import useForm from 'react-hook-form'
-import {Redirect} from 'react-router-dom'
 
 const url = R.pathOr(`/`, [`state`, `from`])
 

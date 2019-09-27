@@ -1,13 +1,11 @@
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
-import Title from 'components/title'
+import {
+  React,
+  AmosChat, Button, Title
+} from 'common'
 import Top_ from '../top.sc'
 import InputForm_ from '../input-form.sc'
-
 import {useReqState} from './'
-
 import LinkURLS from './LinkURLs'
-import React from 'react'
 
 const Guest = ({...rest}) => {
   const {setLinks, initItems, goNext} = useReqState()
