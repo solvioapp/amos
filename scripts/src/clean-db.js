@@ -1,5 +1,8 @@
 import {v1 as neo4j} from 'neo4j-driver'
 import * as R from 'ramda'
+import fetch from 'node-fetch'
+
+global.Headers = fetch.Headers
 
 const [uri, username, password] = R.props 
   ([`NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`])

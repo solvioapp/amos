@@ -26,13 +26,13 @@ const mutation = gql`
 // TODO: rewrite better
 export default async () => {
   for (let i = 0; i < reviews.length; i++) {
-    const rev = reviews[i];
+    const rev = reviews[i]
     try {
       await client.mutate ({mutation, variables: {input: {
-        type: reviews[i][0],
-        links: reviews[i][1],
-        topics: reviews[i][2],
-        prerequisites: reviews[i][3],
+        type: rev[0],
+        links: rev[1],
+        topics: rev[2],
+        prerequisites: rev[3],
       }}})
     } catch (e) {
       throw new Error (`ERROR: ${e}`)

@@ -10,6 +10,7 @@ module.exports = api => {
       }],
       "@babel/plugin-proposal-optional-chaining",
       "@babel/plugin-proposal-throw-expressions",
+      ["@babel/plugin-transform-runtime", {"regenerator": true}]
     ],
     "sourceMaps": true,
   }
