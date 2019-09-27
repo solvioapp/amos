@@ -7,7 +7,6 @@ const SpritePlugin = require(`svg-sprite-loader/plugin`)
 const ErrorOverlayPlugin = require(`error-overlay-webpack-plugin`)
 const cdnResolvers = require(`./cdn-resolvers`)
 const path = require(`path`)
-const NamedExports = require(`named-exports`)
 
 const rootPath = dir => path.resolve(__dirname, dir)
 
@@ -52,7 +51,6 @@ const common = {
     new HtmlWebPackPlugin({
       template: rootPath(`src/index.html`)
     }),
-    // new NamedExports({path: `src/components`}),
   ],
 }
 
