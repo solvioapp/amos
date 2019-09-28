@@ -11,7 +11,7 @@ import {Redirect, Route, Switch} from 'react-router-dom'
 
 const Routes = () => (
   <Switch>
-    <Redirect from='/' to='/review' exact/>
+    <Redirect from='/' to='/search' exact/>
     <Route path='/review' component={Review}/>
     <Route path='/search' component={Search}/>
     <Route path='/login' component={LogIn}/>
