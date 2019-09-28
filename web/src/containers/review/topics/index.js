@@ -16,7 +16,7 @@ const filterEmptyArrays = filter(pipe(
   not,
 ))
 
-const goRequirements = navto(`/review/requirements`)
+const goRequirements = navto(`/review/prerequisites`)
 const goLinks = navto(`/review/links`)
 const goThanks = navto(`/review/thanks`)
 

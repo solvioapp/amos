@@ -9,7 +9,7 @@ import {useReqState} from './'
 import ReqList from './ReqList'
 
 const Guest = ({...rest}) => {
-  const {initItems, goFinish, goPrev, setRequirements} = useReqState()
+  const {initItems, goFinish, goPrev, setPrerequisites} = useReqState()
 
   return (
     <Top_ {...rest}>
@@ -18,8 +18,8 @@ const Guest = ({...rest}) => {
       Again, try to be as detailed as possible.
       </AmosChat>
       <InputForm_>
-        <Title>Learning requirements</Title>
-        <ReqList onUpdate={setRequirements} initItems={initItems}/>
+        <Title>Prerequisites</Title>
+        <ReqList onUpdate={setPrerequisites} initItems={initItems}/>
         <Buttons_>
           <Button onClick={goPrev}>
           Previous

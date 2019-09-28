@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Top_ = styled.ul`
   align-items: center;
-  background: #eef5fd;
+  background: white;
   color: #545556;
   display: flex;
   font-family: 'Open Sans', sans-serif;

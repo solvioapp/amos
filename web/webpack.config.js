@@ -34,6 +34,7 @@ const common = {
   },
   output: {
     filename: `[hash].js`,
+    publicPath: `/`,
     path: rootPath (`dist`),
   },
   resolve: {

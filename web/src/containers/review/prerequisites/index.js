@@ -6,7 +6,7 @@ import {navto} from 'common/history'
 import {filter, isEmpty, not, pipe} from 'ramda'
 import {useReviewCtx} from '../'
 
-const LearnRequire = ({isAuthenticated}) => (
+const Prerequisites = ({isAuthenticated}) => (
   isAuthenticated ? <Authorized/> : <Guest/>
 )
 
@@ -19,26 +19,26 @@ const goTopics = navto(`/review/topics`)
 const goThanks = navto(`/review/thanks`)
 
 export const useReqState = () => {
-  const {setRequirements, requirements: initItems} = useReviewCtx()
+  const {setPrerequisites, prerequisites: initItems} = useReviewCtx()
 
-  const [requirements, setReqs] = useState(initItems || [])
+  const [prerequisites, setPrereqs] = useState(initItems || [])
 
   const goPrev = useCallback(() => {
-    setRequirements(filterEmptyArrays(requirements))
+    setPrerequisites(filterEmptyArrays(prerequisites))
     goTopics()
-  }, [requirements, setRequirements])
+  }, [prerequisites, setPrerequisites])
 
   const goFinish = useCallback(() => {
-    setRequirements(filterEmptyArrays(requirements), true)
+    setPrerequisites(filterEmptyArrays(prerequisites), true)
     goThanks()
-  }, [requirements, setRequirements])
+  }, [prerequisites, setPrerequisites])
 
   return {
-    setRequirements: setReqs,
+    setPrerequisites: setPrereqs,
     goPrev,
     goFinish,
     initItems,
   }
 }
 
-export default connect(LearnRequire)
+export default connect(Prerequisites)

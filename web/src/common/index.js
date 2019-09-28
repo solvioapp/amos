@@ -1,8 +1,9 @@
 import * as R from 'ramda'
 import * as yup from 'yup'
 import * as H from './helpers'
-import React, {useState, useMemo, useRef, useCallback} from 'react'
-import {Link, Router} from 'react-router-dom'
+import styled from 'styled-components'
+import React, {useState, useContext, useEffect, useMemo, useRef, useCallback} from 'react'
+import {Link, Switch, Redirect, Router, Route} from 'react-router-dom'
 import store from 'store'
 import {Provider} from 'react-redux'
 import {history} from 'common/history'
@@ -11,7 +12,6 @@ import {gql} from 'apollo-boost'
 import ApolloClient from 'apollo-boost/lib/index'
 import {ApolloProvider, useQuery, useMutation} from '@apollo/react-hooks'
 import useForm from 'react-hook-form'
-import {Redirect} from 'react-router-dom'
 
 /* No dependencies */
 import AmosChat from 'components/amos-chat'
@@ -42,8 +42,9 @@ import PageLayout from 'components/page-layout'
 export {
   R, H,
   yup,
-  React, useState, useMemo, useRef, useCallback, // React
-  Link, Router, Redirect, // React Router DOM
+  styled,
+  React, useState, useMemo, useRef, useCallback, useContext, useEffect, // React
+  Link, Switch, Router, Redirect, Route, // React Router DOM
   store,
   Provider,
   history,

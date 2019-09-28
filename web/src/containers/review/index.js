@@ -1,12 +1,12 @@
-import * as R from 'ramda'
+import {
+  React, useState, useMemo, useContext, useEffect, useRef, R, Switch, Redirect, Route
+} from 'common'
 import Guest from './guest'
 import Prerequisites from './prerequisites'
 import Links from './links'
-import React, {useState, useMemo, useContext, useEffect, useRef} from 'react'
 import Thanks from './thanks'
 import Topics from './topics'
 import connect from './connect'
-import {Switch, Redirect, Route} from 'react-router-dom'
 
 const initReview = {
   links: [],
@@ -44,7 +44,7 @@ const Review = props => {
   const contextValue = useMemo(() => ({
     setLinks: makeSetterF({prop: `links`, setReview, unmounted}),
     setTopics: makeSetterF({prop: `topics`, setReview, unmounted}),
-    setRequirements: makeSetterF({prop: `requirements`, setReview, unmounted}),
+    setPrerequisites: makeSetterF({prop: `prerequisites`, setReview, unmounted}),
     submitReview: () => {
       // TODO: change alert for fetch-like logic
       alert(`Submitting review: ${JSON.stringify(review, null, 2)}`)

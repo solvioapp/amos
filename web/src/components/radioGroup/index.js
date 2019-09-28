@@ -1,5 +1,4 @@
-import React from 'react'
-import styled from 'styled-components'
+import {React, styled, Radio} from 'common'
 
 export const RadioList = styled.div`
     display: flex;
@@ -12,7 +11,7 @@ export const RadioList = styled.div`
         margin: 0.5rem;
     }
 
-    input {
+    /* input {
         appearance: none;
 
         border-radius: 50%;
@@ -27,7 +26,7 @@ export const RadioList = styled.div`
 
     input:checked {
         border: 6px solid #7f7f7f;
-    }
+    } */
 `
 
 export const RadioGroupHead = styled.div`
@@ -41,15 +40,15 @@ const RadioGroup = ({title, name, elements = [], checkedValue}) => {
       {title && <RadioGroupHead>{title}</RadioGroupHead>}
       <RadioList>
         {elements.map(el => (
-          <label key={el.value}>
-            <input
-              type='radio'
+          <Radio key={el.value}>
+            {/* <input
+              type='radio' */}
               name={name}
               value={el.value}
               defaultChecked={el.value === checkedValue}
-            />
+            {/* /> */}
             {el.text}
-          </label>
+          </Radio>
         ))}
       </RadioList>
     </div>
