@@ -50,6 +50,7 @@ const Review = props => {
       // TODO: change alert for fetch-like logic
       alert(`Submitting review: ${JSON.stringify(review, null, 2)}`)
       if (unmounted.current) return
+      /* Reset review */
       setReview(initReview)
     },
     ...review,

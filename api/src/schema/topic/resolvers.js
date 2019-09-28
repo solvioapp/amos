@@ -67,6 +67,6 @@ const autocomplete = async (_, {name}, {driver}) => {
 
 export default {
   Mutation: {},
-  Topic: getTopResources, getChildrenRec,
-  Query: Topic, autocomplete,
+  Topic: {getTopResources, getChildrenRec},
+  Query: {Topic, autocomplete},
 }

@@ -24,7 +24,7 @@ import Input from 'components/input'
 import NavMenu from 'components/nav-menu'
 import NotFound from 'components/not-found'
 import Radio from 'components/radio'
-import RadioGroup from 'components/radio-group'
+import RadioGroup from 'root/src/components/radio-group'
 import Title from 'components/title'
 
 /* Special */

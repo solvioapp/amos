@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react'
 import Input from 'components/input'
-import IncrementalInputs from 'components/incrementalInputs'
+import IncrementalInputs from 'root/src/components/incremental-inputs'
 
 const props = {
   initItems: [``],
