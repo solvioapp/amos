@@ -20,6 +20,7 @@ const context = async ({req}) => {
     driver,
     // user,
     headers: req.headers,
+    // TODO: Only for anonymous users
     ip: req.headers[`x-forwarded-for`] || req.connection.remoteAddress,
     cypherParams: {
       // currentUserId: user?.id,

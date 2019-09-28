@@ -19,6 +19,7 @@ MATCH (tTopic:Topic {name: $topics[0]})
 CREATE (aTopic)-[rel:FOR_TOPIC]->(tTopic)
 // CREATE (aPrerequisite)-[:FOR_TOPIC]->(tPrerequisite)
 // Merge AnonymousUser
+// TODO: Only for Anonymous users
 MERGE (u:AnonymousUser {ip: $ip})
 // Attach AnonymousUser to AmosGame's
 CREATE (u)-[:VOTED_ON_ANONYMOUS]->(aTopic)

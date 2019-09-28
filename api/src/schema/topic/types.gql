@@ -6,7 +6,7 @@ type Topic {
   # amosGames: [FOR_TOPIC!]!
   getChildrenRec (level: Int!): [Path!]!
   getMostCommonPrerequisites: [String!]!
-  getTopResources: [Resource!]!
+  getTopResources: [String!]!
 }
 
 type IS_PART_OF @relation (name: "IS_PART_OF") {

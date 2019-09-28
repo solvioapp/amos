@@ -16,6 +16,7 @@ const initReview = {
 }
 const ReviewContext = React.createContext(initReview)
 
+/* mapStateToProps equivalent */
 export const useReviewCtx = (mapping = R.identity) => mapping(useContext(ReviewContext))
 
 const redirect = R.both(
