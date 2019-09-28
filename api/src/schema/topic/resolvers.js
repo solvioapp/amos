@@ -19,7 +19,10 @@ const getTopResources = async ({name}, _, {driver}) => {
   // recs |> console.log('recs', #)
   // const objs = R.map (rec => rec.toObject()) (recs)
   // objs |> console.log('objs', #)
-  return R.map (rec => rec.get (`r`).properties) (recs)
+  recs |> console.log ('recs', #)
+  const toReturn = R.map (rec => rec.get (`r`).properties) (recs)
+  toReturn |> console.log ('toReturn', #)
+  return toReturn
   // rs |> console.log('rs', #)
   // const props = R.map (r => r.properties) (rs)
 }
@@ -74,5 +77,5 @@ const autocomplete = async (_, {string, first}, {driver}) => {
 export default {
   Mutation: {},
   Topic: {getTopResources, getChildrenRec},
-  Query: {autocomplete},
+  Query: {Topic, autocomplete},
 }

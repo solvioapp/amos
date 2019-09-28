@@ -2,7 +2,7 @@
 // import AuthBox from 'components/auth-box'
 // import Top_ from './top.sc'
 import {
-  React, useState, useLazyQuery, R, gql, navto,
+  React, useState, useQuery, R, gql, navto,
   Input
 } from 'common'
 
@@ -31,14 +31,15 @@ const QUERY_SEARCH = gql`
 
 const Guest = ({...rest}) => {
   const [input, setInputObj] = useState (``)
-  const [execQuery, {data}] = useLazyQuery (QUERY_SEARCH)
-  const setInput = ({target: {value: val}}) => {
-    execQuery ({variables: {string: val}})
-    setInputObj (val)
-  }
+  const {data} = useQuery (QUERY_SEARCH, {variables: {string: input}})
+  const setInput = ({target: {value: val}}) => setInputObj (val)
+
+  /* If data is undefined or input is empty, return null */
   const results = data
-    ? R.map (r => ({name: r.topic.name, text: r.name})) (data.autocomplete)
-    : null
+    ? (R.isEmpty (input)
+      ? null
+      : R.map (r => ({name: r.topic.name, text: r.name})) (data.autocomplete)
+    ) : null
 
   // /* Can't use point-free coding because it would bind it to inputEl (see closures) */
   const handleSearch = navto (`/t/${input}`)

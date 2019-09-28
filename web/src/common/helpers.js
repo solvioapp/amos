@@ -25,3 +25,9 @@ export const applyAndReturn = fn1 => fn2 => R.converge (R.prop (`1`)) ([fn1, fn2
  * @param Arb Arbitrary number of params
  */
 export const debug = applyAndReturn (console.log)
+
+export const mapIfNotNil = fn => obj => (
+  R.isNil (obj)
+    ? null
+    : R.map (fn) (obj)
+)

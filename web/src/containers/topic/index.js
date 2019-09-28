@@ -15,7 +15,7 @@ const QUERY_TOPIC = gql`
 `
 
 const Topic = ({match: {params: {name}}}) => {
-  const {loading, error, data} = useQuery(QUERY_TOPIC, {variables: {name}})
+  const {loading, error, data} = useQuery (QUERY_TOPIC, {variables: {name}})
 
   loading |> console.log('loading', #)
   error |> console.log('error', #)

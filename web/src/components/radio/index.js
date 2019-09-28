@@ -10,16 +10,25 @@ const Radio = ({children, ...rest}) => {
       <div className='containerOuter'>
         <div className='container'>
           <input type='radio' className='hidden' id='input1' name='inputs'/>
-          <label className='entry' htmlFor='input1'><div className='circle'></div><div className='entry-label'>Kingdom</div></label>
+          <label className='entry' htmlFor='input1'>
+            <div className='circle'></div>
+            <div className='entry-label'>Kingdom</div>
+          </label>
           <input type='radio' className='hidden' id='input2' name='inputs'/>
-          <label className='entry' htmlFor='input2'><div className='circle'></div><div className='entry-label'>Horse</div></label>
+          <label className='entry' htmlFor='input2'>
+            <div className='circle'></div>
+            <div className='entry-label'>Horse</div>
+          </label>
           <input type='radio' className='hidden' id='input3' name='inputs'/>
-          <label className='entry' htmlFor='input3'><div className='circle'></div><div className='entry-label'>Computer</div></label>
+          <label className='entry' htmlFor='input3'>
+            <div className='circle'></div>
+            <div className='entry-label'>Computer</div>
+          </label>
           <div className='highlight'></div>
           <div className='overlay'></div>
         </div>
       </div>
-      <svg width='0' height='0' viewBox='0 0 40 140'>
+      {/* <svg width='0' height='0' viewBox='0 0 40 140'>
         <defs>
           <mask id='holes'>
             <rect x='0' y='0' width='100' height='140' fill='white' />
@@ -28,7 +37,7 @@ const Radio = ({children, ...rest}) => {
             <circle r='12' cx='20' cy='120' fill='black'/>
           </mask>
         </defs>
-      </svg>
+      </svg> */}
     </Top_>
   )
 }

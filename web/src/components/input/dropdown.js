@@ -1,35 +1,28 @@
 import {
-  React, useState, Route, Link
+  React, useState, Route, Link, H
 } from 'common'
 
-import {Dropdown_, Select_} from './dropdown.sc.js'
+import {Dropdown_} from './dropdown.sc.js'
 
 const Dropdown = ({results}) => {
-  const renderDropdownResources = () => {
-    if (!results) return
-    return results.map((result) => {
-      const {name,text} = result
-      console.log(result)
-      return (
-        <Link to={`/t/${name}`}>
-          <label className="option">
-            <span className="dropdown-title animated fadeIn">
-              {/* <span className="label-bordered">
-                <i className={faicon}></i> {(result.type == "topic") ? "Learn" : "Inspect Resource" }
-              </span> */}
-              {text}
-            </span>
-          </label>
-        </Link>
-      )
-    })
+  const renderResult = (result) => {
+    const {name,text} = result
+    console.log(result)
+    return (
+      <Link to={`/t/${name}`}>
+        <label className="option">
+          <span className="dropdown-title fadeIn">
+            {text}
+          </span>
+        </label>
+      </Link>
+    )
   }
 
-  // results =
   return (
     <Dropdown_>
-      <div className='aoyue-select animated zoomIn'>
-        {renderDropdownResources ()}
+      <div className='aoyue-select zoomIn'>
+        {H.mapIfNotNil (renderResult) (results)}
       </div>
     </Dropdown_>
   )

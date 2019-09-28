@@ -103,6 +103,8 @@ const RequirementInput = ({changeItem, item, index}) => {
     [item[`necessity-level`]]
   )
 
+  necessityProps |> console.log ('necessityProps', #)
+
   return (
     <RequirementsForm onChange={onChange} ref={formRef}>
       <RadioGroup {...necessityProps}/>

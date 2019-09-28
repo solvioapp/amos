@@ -39,17 +39,17 @@ const RadioGroup = ({title, name, elements = [], checkedValue}) => {
     <div>
       {title && <RadioGroupHead>{title}</RadioGroupHead>}
       <RadioList>
-        {elements.map(el => (
-          <Radio key={el.value}>
-            {/* <input
-              type='radio' */}
-              name={name}
-              value={el.value}
-              defaultChecked={el.value === checkedValue}
-            {/* /> */}
-            {el.text}
-          </Radio>
-        ))}
+        {/* {elements.map(el => ( */}
+        <Radio key={el.value}>
+          {/* <input
+            type='radio' */}
+            name={name}
+            value={el.value}
+            defaultChecked={el.value === checkedValue}
+          {/* /> */}
+          {el.text}
+        </Radio>
+        {/* ))} */}
       </RadioList>
     </div>
   )
