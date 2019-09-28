@@ -1,10 +1,9 @@
-import React, {useCallback, useEffect, useRef, useMemo} from 'react'
-import Input from 'components/input'
-import IncrementalInputs from 'root/src/components/incremental-inputs'
-import RadioGroup, {RadioGroupHead} from 'root/src/components/radio-group'
-import {fromPairs, isEmpty, map, prop} from 'ramda'
-import {object, string} from 'yup'
-import styled from 'styled-components'
+import {
+  React, useCallback, useEffect, useRef, useMemo, yup as Y, R,
+  Input, IncrementalInputs, RadioGroup
+} from 'common'
+import {RadioGroupHead_} from 'components/radio-group'
+import Top_ from './top.sc'
 
 const radioNecessity = {
   title: `I:`,
@@ -33,57 +32,45 @@ const makeNecessityProps = checkedValue => ({
 const radioKnowledge = {
   title: `for people to be at least:`,
   name: `knowledge-level`,
-  elements: [
-    {
-      value: `beginner`,
-      text: `beginner`,
-    },
-    {
-      value: `intermediate`,
-      text: `intermediate`,
-    },
-    {
-      value: `advanced`,
-      text: `advanced`,
-    },
-    {
-      value: `expert`,
-      text: `domain expert`,
-    },
+  elements: [{
+    value: `beginner`,
+    text: `beginner`,
+  }, {
+    value: `intermediate`,
+    text: `intermediate`,
+  }, {
+    value: `advanced`,
+    text: `advanced`,
+  }, {
+    value: `expert`,
+    text: `domain expert`,
+  },
   ]
 }
+
 const makeKnowledgeProps = checkedValue => ({
   ...radioKnowledge,
   checkedValue,
 })
 
-const reqSchema = object().shape({
-  'necessity-level': string().oneOf(map(prop(`value`), radioNecessity.elements)).required(),
-  'knowledge-level': string().oneOf(map(prop(`value`), radioKnowledge.elements)).required(),
-  topic: string().required()
+const reqSchema = Y.object().shape({
+  'necessity-level': Y.string().oneOf(R.map(R.prop(`value`), radioNecessity.elements)).required(),
+  'knowledge-level': Y.string().oneOf(R.map(R.prop(`value`), radioKnowledge.elements)).required(),
+  topic: Y.string().required()
 })
 
 const props = {
   initItems: [{}],
   makeNewItem: () => ({}),
-  isItemEmpty: isEmpty,
+  isItemEmpty: R.isEmpty,
   // eslint-disable-next-line no-sync
   isItemComplete: data => reqSchema.isValidSync(data),
 }
 
-export const RequirementsForm = styled.form`
-    padding: 0.5em 1em;
-    margin-top: 1em;
-
-    &:nth-of-type(1n+2) {
-        border-top: 1px solid gray;
-    }
-`
-
 const RequirementInput = ({changeItem, item, index}) => {
   const onChange = useCallback(e => {
     const formData = new FormData(e.currentTarget)
-    const data = fromPairs(Array.from(formData.entries()))
+    const data = R.fromPairs(Array.from(formData.entries()))
     changeItem(data)
   }, [changeItem])
 
@@ -106,14 +93,14 @@ const RequirementInput = ({changeItem, item, index}) => {
   necessityProps |> console.log ('necessityProps', #)
 
   return (
-    <RequirementsForm onChange={onChange} ref={formRef}>
+    <Top_ onChange={onChange} ref={formRef}>
       <RadioGroup {...necessityProps}/>
       <RadioGroup {...knowledgeProps}/>
       <div>
-        <RadioGroupHead>in:</RadioGroupHead>
+        <RadioGroupHead_>in:</RadioGroupHead_>
         <Input name='topic' defaultValue={item.topic}/>
       </div>
-    </RequirementsForm>
+    </Top_>
   )
 }
 

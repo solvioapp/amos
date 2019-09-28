@@ -13,7 +13,7 @@ const NavMenu = ({isAuthenticated, ...props}) => (
     <Link_ to='/review'>
       Review
     </Link_>
-    <Link_ to='/'>
+    <Link_ to='/' exact>
       Search
     </Link_>
     <Link_ to='/notifications' hidden={true}>
@@ -22,10 +22,10 @@ const NavMenu = ({isAuthenticated, ...props}) => (
     <Link_ to='/profile' hidden={!isAuthenticated}>
       Profile
     </Link_>
-    <Link_ to='/sign-up' hidden={isAuthenticated || isLogin(props)}>
+    <Link_ to='/sign-up' hidden={isAuthenticated || isLogin (props)}>
       Sign up
     </Link_>
-    <Link_ to='/login' hidden={isAuthenticated || !isLogin(props)}>
+    <Link_ to='/login' hidden={isAuthenticated || !isLogin (props)}>
       Log in
     </Link_>
   </Top_>

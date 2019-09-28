@@ -1,58 +1,34 @@
-import {React, styled, Radio} from 'common'
+import {React, styled} from 'common'
+import Top_ from './top.sc'
+import RadioGroupHead_ from './radio-group-head.sc'
+import RadioList_ from './radio-list.sc'
 
-export const RadioList = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-left: 1rem;
+const makeTitle = title => (
+  title
+    ? <RadioGroupHead_>{title}</RadioGroupHead_>
+    : null
+)
 
-    > * {
-        display: flex;
-        align-items: center;
-        margin: 0.5rem;
-    }
+// const makeRadios = => ()
 
-    /* input {
-        appearance: none;
-
-        border-radius: 50%;
-        width: 1.5em;
-        height: 1.5em;
-
-        border: 2px solid #999;
-        transition: 0.1s border linear;
-        outline: none;
-        margin-right: 0.5em;
-    }
-
-    input:checked {
-        border: 6px solid #7f7f7f;
-    } */
-`
-
-export const RadioGroupHead = styled.div`
-    font-size: 1.1em;
-    margin: 0.5em;
-`
-
-const RadioGroup = ({title, name, elements = [], checkedValue}) => {
-  return (
-    <div>
-      {title && <RadioGroupHead>{title}</RadioGroupHead>}
-      <RadioList>
-        {/* {elements.map(el => ( */}
-        <Radio key={el.value}>
-          {/* <input
-            type='radio' */}
+const RadioGroup = ({title, name, elements, checkedValue}) => (
+  <Top_>
+    {makeTitle (title)}
+    <RadioList_>
+      {elements.map(el => (
+        <label key={el.value}>
+          <input
+            type='radio'
             name={name}
             value={el.value}
             defaultChecked={el.value === checkedValue}
-          {/* /> */}
+          />
           {el.text}
-        </Radio>
-        {/* ))} */}
-      </RadioList>
-    </div>
-  )
-}
+        </label>
+      ))}
+    </RadioList_>
+  </Top_>
+)
 
+export {RadioGroupHead_}
 export default RadioGroup
