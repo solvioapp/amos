@@ -10,8 +10,11 @@ import {history} from 'common/history'
 import {gql} from 'apollo-boost'
 // Hack, see https://github.com/apollographql/apollo-client/issues/4843#issuecomment-495585495
 import ApolloClient from 'apollo-boost/lib/index'
-import {ApolloProvider, useQuery, useMutation} from '@apollo/react-hooks'
+import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react-hooks'
 import useForm from 'react-hook-form'
+
+/* /common */
+import {navto} from 'common/history'
 
 /* No dependencies */
 import AmosChat from 'components/amos-chat'
@@ -49,8 +52,10 @@ export {
   Provider,
   history,
   ApolloClient, gql, // Apollo Client
-  ApolloProvider, useQuery, useMutation, // Apollo React Hooks
+  ApolloProvider, useQuery, useLazyQuery, useMutation, // Apollo React Hooks
   useForm,
+  /* /common */
+  navto,
   /* Components */
   AmosChat,
   Icon,

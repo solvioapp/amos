@@ -1,5 +1,5 @@
 import {
-  React, 
+  React,
   Title, AmosChat, Button
 } from 'common'
 import Buttons_ from '../buttons.sc'

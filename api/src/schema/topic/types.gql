@@ -6,7 +6,7 @@ type Topic {
   # amosGames: [FOR_TOPIC!]!
   getChildrenRec (level: Int!): [Path!]!
   getMostCommonPrerequisites: [String!]!
-  getTopResources: [Resource!]!
+  getTopResources: [Resource]
 }
 
 type IS_PART_OF @relation (name: "IS_PART_OF") {
@@ -24,10 +24,15 @@ type Path {
   list: [String!]!
 }
 
+type AutocompleteResult {
+  name: String!
+  topic: Topic!
+}
+
 extend type Query {
   # TODO: Change to [Path!]!
   topic (name: String!): Topic!
-  autocomplete (name: String!): [String!]!
+  autocomplete (string: String!, first: Int): [AutocompleteResult!]!
 }
 
 extend type Mutation {

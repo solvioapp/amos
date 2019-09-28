@@ -1,14 +1,10 @@
 // import AmosChat from 'components/amos-chat'
 // import AuthBox from 'components/auth-box'
 // import Top_ from './top.sc'
-import React, {useRef} from 'react'
-import Input from 'components/input'
-import {useMutation} from '@apollo/react-hooks'
-import * as R from 'ramda'
-import Button from 'components/button'
-import {gql} from 'apollo-boost'
-// import {Redirect} from 'react-router-dom'
-import {navto} from 'common/history'
+import {
+  React, useState, useLazyQuery, R, gql, navto,
+  Input
+} from 'common'
 
 // const messages = [
 //   `👋 I'm Amos. I was created to be 'the best learning mentor in the world'.`,
@@ -16,35 +12,40 @@ import {navto} from 'common/history'
 //   `So I need your help! Create an account and submit reviews for your favorite learning resources. Vamos, amigo! 🤗`,
 // ]
 
-// const SEARCH = gql`
-//   query {
-//     Topic(name: $name) {
-//       search()
-//     }
-//   }
-// `
+// const debug = fn => R.converge (R.prop (`1`), [console.log, fn])
+
+// R.pipe
+//   e |> console.log ('e', #) && fn (e)
+// }
+
+const QUERY_SEARCH = gql`
+  query Autocomplete($string: String!) {
+    autocomplete (string: $string, first: 3) {
+      name
+      topic {
+        name
+      }
+    }
+  }
+`
 
 const Guest = ({...rest}) => {
-  // const [search, other] = useMutation (SEARCH)
-  // other |> console.log('other', #)
-
-  const inputEl = useRef (null)
-
-  const handleSearch = () => {
-    navto (`/t/${inputEl.current.value}`) ()
+  const [input, setInputObj] = useState (``)
+  const [execQuery, {data}] = useLazyQuery (QUERY_SEARCH)
+  const setInput = ({target: {value: val}}) => {
+    execQuery ({variables: {string: val}})
+    setInputObj (val)
   }
-  
-  /**
-   * @description Allow to handle submissions with Enter key
-   */
-  const onPress = R.when (R.propEq (`key`) (`Enter`)) (handleSearch)
-  
+  const results = data
+    ? R.map (r => ({name: r.topic.name, text: r.name})) (data.autocomplete)
+    : null
+
+  // /* Can't use point-free coding because it would bind it to inputEl (see closures) */
+  const handleSearch = navto (`/t/${input}`)
+
   return (
     <>
-      <Input onKeyPress={e => onPress(e)} ref={inputEl} {...rest} />
-      <Button onClick={handleSearch}>
-        Search
-      </Button>
+      <Input onChange={setInput} onEnt={handleSearch} results={results} {...rest} />
     </>
   )
 }

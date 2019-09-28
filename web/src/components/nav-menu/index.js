@@ -13,7 +13,7 @@ const NavMenu = ({isAuthenticated, ...props}) => (
     <Link_ to='/review'>
       Review
     </Link_>
-    <Link_ to='/search'>
+    <Link_ to='/'>
       Search
     </Link_>
     <Link_ to='/notifications' hidden={true}>
