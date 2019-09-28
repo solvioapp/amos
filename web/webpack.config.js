@@ -33,8 +33,8 @@ const common = {
     ]
   },
   output: {
-    filename: `bundle.js`,
-    publicPath: `/`,
+    filename: `[hash].js`,
+    path: rootPath (`dist`),
   },
   resolve: {
     alias: {
@@ -51,6 +51,9 @@ const common = {
     new HtmlWebPackPlugin({
       template: rootPath(`src/index.html`)
     }),
+    new CopyPlugin([{
+      from: rootPath(`public`)
+    }]),
   ],
 }
 
@@ -61,19 +64,12 @@ const develop = {
     historyApiFallback: true,
   },
   plugins: [
-    new CopyPlugin([{
-      from: rootPath(`public`)
-    }]),
     new ErrorOverlayPlugin(),
   ],
 }
 
 const production = {
   mode: `production`,
-  output: {
-    filename: `[hash].js`,
-    path: rootPath (`public`),
-  },
   plugins: [
     new DynamicCdnWebpackPlugin({
       env: `production`,
@@ -87,6 +83,8 @@ const production = {
 }
 
 const makeConfigs = R.mergeDeepWith(R.concat, common)
+
+console.log(`process.env.NODE_ENV`, process.env.NODE_ENV)
 
 const config = (
   process.env.NODE_ENV === `production`

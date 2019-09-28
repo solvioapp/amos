@@ -14,7 +14,7 @@ app.use(`*`, (req, res) => {
   fs.createReadStream (HTML_FILE).pipe (res)
 })
 
-const server = http.createServer(app)
+const server = http.Server(app)
 const port = process.env.PORT || 3000
 
 server.listen(port, () => {
