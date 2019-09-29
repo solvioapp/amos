@@ -1,12 +1,8 @@
-import * as R from 'ramda'
+import {React, R, withRouter} from 'common'
 import Top_ from './top.sc'
 import Link_ from './link.sc'
-import React from 'react'
-import {withRouter} from 'react-router-dom'
 
-const isLogin = R.pathEq([
-  `history`, `location`, `pathname`
-], `/login`)
+const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
 const NavMenu = ({isAuthenticated, ...props}) => (
   <Top_ {...props}>

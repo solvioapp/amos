@@ -6,6 +6,8 @@ import * as R from 'ramda'
  */
 export const isNotNil = R.complement (R.isNil)
 
+export const notEquals = R.complement (R.equals)
+
 /**
  * @description Like R.map but you get (val, key)!
  * @param cb

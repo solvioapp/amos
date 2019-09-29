@@ -1,45 +1,61 @@
 import {
-  React, useState, useMemo, useRef, R, useMutation, gql,
+  React, useState, useMemo, useRef, R, useMutation, gql, H,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
-import connect from './connect'
 import Top_ from '../top.sc'
 
 const getTargetValue = R.path ([`target`, `value`])
 const pipeTValueTo = cb => R.pipe (getTargetValue, cb)
 
+const SIGNUP = gql`
+  mutation Signup ($username: String!, $email: String!, $password: String!) {
+    signup (username: $username, email: $email, password: $password)
+  }
+`
+
 const Email = ({login, ...rest}) => {
-  const [username, setUsername] = useState (``)
-  const [email, setEmail] = useState (``)
-  const [password, setPassword] = useState (``)
-  const [repeatPassword, setRepeatPassword] = useState (``)
-  const SIGNUP = gql`
-    mutation {
-      signup(username: "hi", email: "hello", password: "how are you")
-    }
-  `
-  const [signup, {loading, data}] = useMutation (SIGNUP)
+  const [username, setUsernameObj] = useState (``)
+  const setUsername = ({target: {value: val}}) => setUsernameObj (val)
+  const [email, setEmailObj] = useState (``)
+  const setEmail = ({target: {value: val}}) => setEmailObj (val)
+  const [password, setPasswordObj] = useState (``)
+  const setPassword = ({target: {value: val}}) => setPasswordObj (val)
+  const [repeatPassword, setRepeatPasswordObj] = useState (``)
+  const setRepeatPassword = ({target: {value: val}}) => setRepeatPasswordObj (val)
 
-  const signupUser = event => {
-    event.preventDefault()
+  const [signupAux, {loading, data}] = useMutation (SIGNUP)
 
-    const userData = {email, password}
-    console.log(`Signing up user`, userData)
+  username |> console.log ('username', #)
+  const signup = e => {
+    e.preventDefault()
+    e |> console.log ('e', #)
+    signupAux ({variables: {username, email, password}})
   }
 
-  const repeatPasswordErr = useMemo(() => {
-    return password && repeatPassword && password !== repeatPassword && `Passwords must match`
-  }, [password, repeatPassword])
+  // const repeatPasswordErr = useMemo(() => password && repeatPassword && password !== repeatPassword && `Passwords must match`,
+  //  [password, repeatPassword])
+
+  const repeatPasswordErr = () => R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'>
+          Hey, the passwords don't seem to match. Good we caught that now!
+        </AmosChat>
 
   const form = useRef()
-  const validForm = form.current ? !repeatPasswordErr : false
+  // const validForm = form.current ? !repeatPasswordErr : false
+  const validForm = true 
+
+  // TODO: save credentials
+  // TODO: repeatPass only for >= length
+  // TODO: Validation (yup)
+  // TODO: signup button disabled
+  // TODO: Merge 
+  // TODO: extract constants
 
   return (
     <Top_ {...rest}>
       <AmosChat>
         Sign up to help me sort the world's learning resources. Did I say it's free? 😌
       </AmosChat>
-      <form onSubmit={signupUser} ref={form}>
+      <form onSubmit={signup} ref={form}>
         <Input type='username' onChange={setUsername} required>
           Username
         </Input>
@@ -52,13 +68,11 @@ const Email = ({login, ...rest}) => {
         <Input type='password' onChange={setRepeatPassword} required minLength='6'>
           Repeat password
         </Input>
-        {repeatPasswordErr && <AmosChat avatar='none'>
-          Hey, the passwords don't seem to match. Good we caught that now!
-        </AmosChat>}
+        {repeatPasswordErr()}
         <Checkbox>
           Subscribe to Solvio Monthly
         </Checkbox>
-        <Button primary onClick={signup} width='150px' type='submit' disabled={!validForm}>
+        <Button primary width='150px' type='submit' disabled={!validForm}>
           Sign up
         </Button>
       </form>
@@ -70,5 +84,4 @@ const Email = ({login, ...rest}) => {
   )
 }
 
-// export default connect(Email)
 export default Email
