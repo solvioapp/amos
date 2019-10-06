@@ -1,25 +1,11 @@
-/* This file just exports everything from ./queries and ./mutations */
+/* This file just exports everything from ./Query and ./Mutation */
 
-import {H,R,requireContext} from '../../common'
+import {H,R} from 'common'
 
-requireContext()
-const queries = require.context(`.`, true, /\.\/queries\/(\.|\w)+\.js$/)
-const mutations = require.context(`.`, true, /\.\/mutations\/(\.|\w)+\.js$/)
-
-const queriesCache = []
-const mutationsCache = []
-
-const importAll = cache => req => {
-  req.keys().forEach(key => cache.push(req(key)))
-}
-
-importAll (queriesCache) (queries)
-importAll (mutationsCache) (mutations)
-
-const queriesDefaultsRemoved = R.map (v => R.propOr (v) (`default`) (v)) (queriesCache)
-const mutationsDefaultsRemoved = R.map (v => R.propOr (v) (`default`) (v)) (mutationsCache)
+const queries = H.req (__dirname) (`.`) (/\.\/Query\/(\.|\w)+\.js$/) (true)
+const mutations = H.req (__dirname) (`.`) (/\.\/Mutation\/(\.|\w)+\.js$/) (true)
 
 export default {
-  Query: H.arrayOfFnsToObject (queriesDefaultsRemoved),
-  Mutation: H.arrayOfFnsToObject (mutationsDefaultsRemoved),
+  Query: H.arrayOfFnsToObject (queries),
+  Mutation: H.arrayOfFnsToObject (mutations),
 }

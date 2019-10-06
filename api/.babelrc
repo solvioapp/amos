@@ -10,7 +10,9 @@
     // "@babel/plugin-proposal-private-methods",
     "require-context-hook",
     "@babel/plugin-proposal-optional-chaining",
-    "@babel/plugin-proposal-throw-expressions"
+    "@babel/plugin-proposal-throw-expressions",
+    ["module-resolver", {"root": ["./src"]}],
   ],
-  "sourceMaps": true
+  "sourceMaps": true,
+  "retainLines": true
 }

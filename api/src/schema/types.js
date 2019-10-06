@@ -1,8 +1,7 @@
-import {H,R,requireContext} from '../common'
+import {H,R} from 'common'
 import {mergeTypes} from 'merge-graphql-schemas'
 
-requireContext()
-const req = require.context(`.`, true, /\.gql$/)
-const all = R.map (H.read (__dirname)) (req.keys())
+const cache = H.req (__dirname) (`.`) (/.gql$/) (false)
+const all = R.map (H.read (__dirname)) (cache)
 
 export default mergeTypes (all)

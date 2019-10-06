@@ -1,6 +1,6 @@
 enum Role {
-  user
-  admin
+  USER
+  ADMIN
 }
 
 type AnonymousUser {
@@ -8,8 +8,12 @@ type AnonymousUser {
   votes: [VOTED_ON!]!
 }
 
+"""
+Testing descr
+"""
 type User {
   # Fields
+  "Does this work?"
   username: String!
   createdAt: DateTime!
 
@@ -42,7 +46,7 @@ type PROFICIENCY @relation (name: "PROFICIENCY") {
 extend type Query {
   login (usernameOrEmail: String!, password: String!): String!
   currentUser (name: String): String
-  users: [User!] @hasRole (roles: [admin])
+  users: [User!] @hasRole (roles: [ADMIN])
     @cypher(
       statement: "MATCH (u:User) WITH { username: u.username, id: u.id, email: u.email} as User RETURN User"
     )

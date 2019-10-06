@@ -2,7 +2,7 @@
 // Create resource
 CREATE (r:Resource {name: $title, urls: $links})
 // Create AmosGames
-CREATE (aTopic:AmosGame {type: "TOPIC"})
+CREATE (aTopic:AmosGame {type: "TOPIC", _id: $_id})
 // CREATE (aPrerequisite:AmosGame {
 //   type: "PREREQUISITE",
 //   level: $prerequisites[0].level,

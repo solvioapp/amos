@@ -1,4 +1,4 @@
-import {H, R,dotenv} from '../common'
+import {H, R,dotenv} from 'common'
 
 dotenv.config()
 

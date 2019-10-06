@@ -1,4 +1,4 @@
-import {H,bcrypt} from '../../../common'
+import {H,bcrypt} from 'common'
 
 const updatePassword = async (_, {email, password, _new}, {driver, user}) => {
   /* Setup */

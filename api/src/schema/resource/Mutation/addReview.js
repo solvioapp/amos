@@ -1,12 +1,12 @@
-import {H} from '../../common'
-const _1 = H.read (__dirname) (`./neo4j-query.cypher`)
+import {H} from 'common'
+const _1 = H.read (__dirname) (`./addReview.cypher`)
 const metascraper = require('metascraper')([
   require('metascraper-title')()
 ])
 
 import got from 'got'
 
-const addReview = async (_, {input: {type, links, topics, prerequisites}}, {driver, ip}) => {
+const addReview = async (_, {input: {type, links, topics, prerequisites, _id}}, {driver, ip}) => {
   // Assuming no other resource exists with at least one such link
   // Assuming reviews are anonymous
 
@@ -21,12 +21,9 @@ const addReview = async (_, {input: {type, links, topics, prerequisites}}, {driv
 
   // TODO: also prerequisites
   // TODO: topics
-  await ses.run (_1, {ip, title, type, links, topics, prerequisites})
+  await ses.run (_1, {ip, title, type, links, topics, prerequisites, _id})
 
   return true
 }
 
-export default {
-  Query: {},
-  Mutation: {addReview}
-}
+export default addReview

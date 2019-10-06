@@ -1,4 +1,4 @@
-import {A,H} from '../../../common'
+import {A,H} from 'common'
 
 const login = async (_, {email, password}, {driver}) => {
   /* Setup */

@@ -1,41 +1,37 @@
-import * as R from 'ramda'
-import ApolloClient from 'apollo-client'
-import gql from 'graphql-tag'
-import fetch from 'node-fetch'
-import {HttpLink} from 'apollo-link-http'
-import {InMemoryCache} from 'apollo-cache-inmemory'
-import reviews from '@solviofoundation/amos-reviews'
+import {R, ApolloClient, gql, fetch, HttpLink, InMemoryCache, Promise, reviews} from './common'
 
-const [uri] = R.props 
+const
+
+{hackprague, others} = reviews,
+
+[uri] = R.props 
   ([`API_URL`])
-  (process.env)
+  (process.env),
 
-const client = new ApolloClient ({
+client = new ApolloClient ({
   link: new HttpLink ({uri, fetch}),
   cache: new InMemoryCache()
-})
+}),
 
-const mutation = gql`
+mutation = gql`
   mutation AddReview($input: AddReviewInput!) {
     addReview(input: $input)
   }
-`
+`,
 
-// const createRange = arr => R.range (0) (R.length (arr))
+createReview = async (rev) => {
+  await client.mutate ({mutation, variables: {input: rev}})
+}
 
-// TODO: rewrite better
 export default async () => {
-  for (let i = 0; i < reviews.length; i++) {
-    const rev = reviews[i]
-    try {
-      await client.mutate ({mutation, variables: {input: {
-        type: rev[0],
-        links: rev[1],
-        topics: rev[2],
-        prerequisites: rev[3],
-      }}})
-    } catch (e) {
-      throw new Error (`ERROR: ${e}`)
-    }
-  }
+  console.log (`Creating HackPrague reviews`)
+  await Promise.mapSeries (hackprague, createReview)
+  console.log (`Successfully created HackPrague reviews`)
+  console.log (`Creating Other reviews`)
+  await Promise.mapSeries (others, createReview)
+  console.log (`Successfully created Other reviews`)
+  // console.log (`Creating Goodreads reviews`)
+  // await Promise.mapSeries (goodreads, createReview)
+  // console.log (`Successfully created Godoreads reviews`)
+
 }

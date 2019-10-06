@@ -1,5 +1,4 @@
-import "core-js/stable"
-import 'regenerator-runtime/runtime'
+import {coreJs, regenerator} from './common'
 import cleanDb from './clean-db'
 import seedTopics from './seed-topics'
 import seedReviews from './seed-reviews'
@@ -24,12 +23,12 @@ if (typeof atob === 'undefined') {
 global.fetch = require("node-fetch")
 
 const run = async () => {
-  console.log (`clean-db`)
+  console.log (`cleaning db`)
   await cleanDb()
-  console.log (`seed-topics`)
+  console.log (`seeding topics`)
   await seedTopics()
-  console.log (`seed-reviews`)
-  await seedReviews()
+  // console.log (`seeding reviews`)
+  // await seedReviews()
 }
 
 run()

@@ -1,31 +1,44 @@
-import fs from 'fs'
-import parser from '@solviofoundation/amos-parser'
-import {v1 as neo4j} from 'neo4j-driver'
-import * as R from 'ramda'
+import {R, ApolloClient, gql, fetch, HttpLink, InMemoryCache, Promise, parser, topics} from './common'
 
-require.extensions[`.amos`] = (module, filename) => {
-  module.exports = fs.readFileSync (filename, `utf8`)
+const
+
+[uri] = R.props 
+  ([`API_URL`])
+  (process.env),
+
+client = new ApolloClient ({
+  link: new HttpLink ({uri, fetch}),
+  cache: new InMemoryCache()
+}),
+
+createTopicMutation = gql`
+  mutation CreateTopic($name: String!, $names: [String!]!) {
+    createTopic(name: $name, names: $names)
+  }
+`,
+
+createRelationMutation = gql`
+  query CreateRelation($source: String!, $target: String!) {
+    Topic (name: $source) {
+      createLink (name: $target)
+    }
+  }
+`,
+
+// const createRange = arr => R.range (0) (R.length (arr))
+
+createTopic = async ({metadata: {names}}) => {
+  await client.mutate ({mutation: createTopicMutation, variables: {name: names[0], names}})
+},
+
+createRelation = async ({source, target}) => {
+  await client.mutate ({mutation: createRelationMutation, variables: {source, target}})
 }
 
-// TODO: migrate to apollo-client
-
-const topics = require (`@solviofoundation/amos-topics`)
-
-const [uri, username, password] = R.props 
-  ([`NEO4J_URI`, `NEO4J_USERNAME`, `NEO4J_PASSWORD`])
-  (process.env)
-
-const parsed = parser (topics)
-const driver = neo4j.driver (uri, neo4j.auth.basic (username, password))
-const ses = driver.session()
-
 export default async () => {
-  console.log (`Running ${parsed}`)
-  try {
-    await ses.run (parsed)
-    /* Can't log anything because query from amos-parser doesn't return anything */
-    driver.close()
-  } catch (e) {
-    throw new Error (`ERROR: ${e}`)
-  }
+  const parsed = parser (topics)
+  await Promise.mapSeries (parsed.graph.nodes, createTopic)
+  console.log (`Successfully seeded nodes`)
+  await Promise.mapSeries (parsed.graph.edges, createRelation)
+  console.log (`Successfully seeded relations`)
 }

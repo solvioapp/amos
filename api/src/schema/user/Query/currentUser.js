@@ -1,4 +1,4 @@
-import {H} from '../../../common'
+import {H} from 'common'
 
 const currentUser = async (_, __, {driver, user}) => {
   /* Setup */

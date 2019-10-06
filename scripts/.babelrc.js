@@ -13,5 +13,6 @@ module.exports = api => {
       ["@babel/plugin-transform-runtime", {"regenerator": true}]
     ],
     "sourceMaps": true,
+    "retainLines": true,
   }
 }

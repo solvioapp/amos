@@ -1,4 +1,4 @@
-import {R} from '../common'
+import {R} from 'common'
 import {makeAugmentedSchema} from 'neo4j-graphql-js'
 import applyDirectives from '../bootstrap/directives'
 import applyScalars from '../bootstrap/scalars'

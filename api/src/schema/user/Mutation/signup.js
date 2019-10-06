@@ -1,8 +1,8 @@
-import {A,H,R,bcrypt} from '../../../common'
+import {A,H,R,bcrypt} from 'common'
 
-const signup = async (_, {username, email, password}, {driver}) => {
+const signup = async (_, {username, email, password}, {ses}) => {
   /* Setup */
-  const ses = driver.session()
+  // const ses = driver.session()
   const _1a = 
   `MATCH (u:User) WHERE u.username = $username RETURN u`
   const _1b = `
@@ -32,9 +32,9 @@ const signup = async (_, {username, email, password}, {driver}) => {
   await ses.run (_2, {username, email, hashedPassword})
 
   /* Grant jwt */
-  /* `dteiml` is admin (can add new topics) */
+  /* `dteiml` is ADMIN (can add new topics) */
   return username === `dteiml`
-    ? await A.createToken (process.env.JWT_SECRET, {roles: [`admin`]}) 
+    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`]}) 
     : await A.createToken (process.env.JWT_SECRET, {})
 }
 

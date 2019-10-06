@@ -1,9 +1,54 @@
 type Resource {
   name: String
-  urls: [String!]!
   amosGames: [FOR_RESOURCE!]!
 }
 
 enum ResourceType {
+  BOOK
   LECTURE_NOTES
+  ONLINE_COURSE
+}
+
+# TODO: Move to union or interface types (once neo4j-graphql-js supports them)
+enum AmosGameType {
+  TOPIC
+  PREREQUISITE
+}
+
+type AmosGame {
+  type: AmosGameType!
+  resource: FOR_RESOURCE!
+  topic: FOR_TOPIC!
+  votes: [VOTED_ON]!
+  level: Int! # only for Prerequisite
+  strength: Int! # only for Prerequisite
+}
+
+type FOR_RESOURCE @relation(name: "FOR_RESOURCE") {
+  from: AmosGame!
+  to: Resource!
+}
+
+type FOR_TOPIC @relation(name: "FOR_TOPIC") {
+  from: AmosGame!
+  to: Topic!
+}
+
+input AddReviewInput {
+  link: String!
+  # One of (topics, prerequisites) is mandatory
+  topics: [ID!]!
+  prerequisites: [String!]!
+}
+
+input AddReviewHydrationInput {
+  type: String!
+  name: String!
+
+}
+
+extend type Mutation {
+  addReview (input: AddReviewInput!): Boolean!
+  # For hydration
+  addReviewHydration (input: AddReviewHydrationInput!): Boolean!
 }

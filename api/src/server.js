@@ -5,7 +5,7 @@ import middleware from './middleware'
 import {getDriver} from './bootstrap/neo4j'
 // import decode from './jwt/decode'
 import schema from './schema'
-import {R,path} from './common'
+import {R,path} from 'common'
 import helmet from 'helmet'
 
 // check required configs and throw error
@@ -15,9 +15,10 @@ R.mapObjIndexed ((val, key) => val ? null : throw new Error(`ERROR: "${key}" env
 const driver = getDriver()
 
 const context = async ({req}) => {
-
+  const ses = driver.session()
   return {
     driver,
+    ses,
     // user,
     headers: req.headers,
     // TODO: Only for anonymous users

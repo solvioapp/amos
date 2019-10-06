@@ -1,6 +1,4 @@
-import {v1 as neo4j} from 'neo4j-driver'
-import * as R from 'ramda'
-import fetch from 'node-fetch'
+import {neo4j, R, fetch} from './common'
 
 global.Headers = fetch.Headers
 

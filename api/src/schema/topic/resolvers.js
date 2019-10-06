@@ -1,81 +1,13 @@
-import {R} from '../../common'
+/* This file just exports everything from ./Query, ./Mutation and ./Topic */
 
-const getTopResources = async ({name}, _, {driver}) => {
-  // tops |> console.log('tops', #)
-  // const name = tops[0].name
-  name |> console.log('name', #)
-  const ses = driver.session()
-  // TODO: remove imperative
-  const _1 = `
-  match (t {name: $name})
-  <-[:FOR_TOPIC]->
-  (a:AmosGame)-[:FOR_RESOURCE]->(r:Resource)
-  return r
-  `
+import {H} from 'common'
 
-  const {records: recs} = await ses.run (_1, {name})
-
-  /* recs is an array of weird stuff */
-  // recs |> console.log('recs', #)
-  // const objs = R.map (rec => rec.toObject()) (recs)
-  // objs |> console.log('objs', #)
-  recs |> console.log ('recs', #)
-  const toReturn = R.map (rec => rec.get (`r`).properties) (recs)
-  toReturn |> console.log ('toReturn', #)
-  return toReturn
-  // rs |> console.log('rs', #)
-  // const props = R.map (r => r.properties) (rs)
-}
-
-const getChildrenRec = async (_, {name, level}, {driver}) => {
-  const ses = driver.session()
-  const _1 = 
-  `MATCH (t:Topic {name: $name})
-  <-[:IS_PART_OF*1..$level]-
-  (t:Topic)
-  RETURN `
-
-  // await ses.run()
-}
-
-/* Need to override this resolver bc o/w can't return [Resource!]! */
-const Topic = async (_, {name}, {driver}) => {
-  const ses = driver.session()
-  const _1 = `
-  match (t:Topic {name: $name})
-  return t
-  `
-
-  const {records: recs} = await ses.run (_1, {name})
-
-  const toReturn = R.map (rec => rec.get (`t`).properties) (recs)
-  // const toReturn = recs[0].get (`t`).properties
-  toReturn |> console.log('toReturn', #)
-  return toReturn
-}
-
-const autocomplete = async (_, {string, first}, {driver}) => {
-  const ses = driver.session()
-  const _1 = `
-  match (t:Topic)
-  unwind t.names as name
-  with t,name
-  where name contains $string
-  return t,name
-  limit $first`
-
-  const {records: recs} = await ses.run (_1, {string, first})
-
-  const toReturn = recs.map (rec => ({
-    topic: rec.get (`t`).properties,
-    name: rec.get (`name`),
-  }))
-  toReturn |> console.log ('toReturn', #)
-  return toReturn
-}
+const queries = H.req (__dirname) (`.`) (/\.\/Query\/(\.|\w)+\.js$/) (true)
+const mutations = H.req (__dirname) (`.`) (/\.\/Mutation\/(\.|\w)+\.js$/) (true)
+const topics = H.req (__dirname) (`.`) (/\.\/Topic\/(\.|\w)+\.js$/) (true)
 
 export default {
-  Mutation: {},
-  Topic: {getTopResources, getChildrenRec},
-  Query: {Topic, autocomplete},
+  Query: H.arrayOfFnsToObject (queries),
+  Mutation: H.arrayOfFnsToObject (mutations),
+  Topic: H.arrayOfFnsToObject (topics),
 }

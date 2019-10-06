@@ -1,5 +1,5 @@
 type Topic {
-  # id: ID!
+  _id: String!
   name: String!
   # children: [IS_PART_OF!]!
   # parents: [IS_PART_OF!]!
@@ -7,6 +7,7 @@ type Topic {
   getChildrenRec (level: Int!): [Path!]!
   getMostCommonPrerequisites: [String!]!
   getTopResources: [Resource!]!
+  createLink (name: String!): String!
 }
 
 type IS_PART_OF @relation (name: "IS_PART_OF") {
@@ -36,6 +37,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  # createTopic (input: CreateTopicInput!): Topic! @hasRole (roles: [admin])
-  createTopic (name: String!): Topic!
+  # createTopic (input: CreateTopicInput!): Topic! @hasRole (roles: [ADMIN])
+  createTopic (name: String!, names: [String!]!, _id: String): Topic!
 }
