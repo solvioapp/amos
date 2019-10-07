@@ -1,5 +1,5 @@
 import {
-  React, useState, useMemo, useRef, useForm, R, useMutation, gql, H,
+  React, useForm, R, useMutation, gql, H,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
 import Top_ from '../top.sc'
@@ -19,19 +19,21 @@ const Email = ({login, ...rest}) => {
 
   const onSubmit = input => {
     input |> console.log ('input', #)
-    signupAux ({variables: {input}})
+    signupAux ({variables: {input: R.props ([`username`, `email`, `password`]) (input)}})
   }
 
   // const repeatPasswordErr = useMemo(() => password && repeatPassword && password !== repeatPassword && `Passwords must match`,
   //  [password, repeatPassword])
 
-  const repeatPasswordErr = () => R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat>
-          Hey, the passwords don't seem to match. Good we caught that now!
-        </AmosChat>
+  // const repeatPasswordErr = () => R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat>
+  //         Hey, the passwords don't seem to match. Good we caught that now!
+  //       </AmosChat>
+
+  const repeatPasswordErr = () => null
 
   // const form = useRef()
   // const validForm = form.current ? !repeatPasswordErr : false
-  const validForm = true;
+  const validForm = true
 
   // TODO: save credentials
   // TODO: repeatPass only for >= length
