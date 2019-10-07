@@ -1,12 +1,20 @@
 type Topic {
-  _id: String!
-  name: String!
+  # id: ID!
+  _id: ID!
+  names: [String!]!
   # children: [IS_PART_OF!]!
   # parents: [IS_PART_OF!]!
   # amosGames: [FOR_TOPIC!]!
-  getChildrenRec (level: Int!): [Path!]!
+  # getChildrenRec (level: Int!): [Path!]!
+  getChildrenRec (level: Int!): [String!]!
   getMostCommonPrerequisites: [String!]!
-  getTopResources: [Resource!]!
+  getTopResources: [Resource!]! @cypher (statement:
+    """
+    match (this)
+    <-[:FOR_TOPIC]->(a:AmosGame)-[:FOR_RESOURCE]->(r:Resource)
+    with r return r
+    """
+  )
   createLink (name: String!): String!
 }
 
@@ -16,14 +24,17 @@ type IS_PART_OF @relation (name: "IS_PART_OF") {
 }
 
 input CreateTopicInput {
-  name: String!
-  children: [String!]!
-  parents: [String!]!
+  names: [String!]!
 }
 
-type Path {
-  list: [String!]!
+input AddIsPartOfInput {
+  parent: ID!
+  child: ID!
 }
+
+# type Path {
+#   list: [String!]!
+# }
 
 type AutocompleteResult {
   name: String!
@@ -32,11 +43,13 @@ type AutocompleteResult {
 
 extend type Query {
   # TODO: Change to [Path!]!
-  topic (name: String!): Topic!
+  # topic (name: String!): Topic!
   autocomplete (string: String!, first: Int): [AutocompleteResult!]!
 }
 
 extend type Mutation {
   # createTopic (input: CreateTopicInput!): Topic! @hasRole (roles: [ADMIN])
-  createTopic (name: String!, names: [String!]!, _id: String): Topic!
+  createTopic (input: CreateTopicInput!): Boolean!
+  addIsPartOf (input: AddIsPartOfInput!): Boolean!
+  # addIsPartOf (name: String!, names: [String!]!, _id: String): Topic!
 }

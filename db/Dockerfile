@@ -17,9 +17,11 @@
 
 # CMD ["neo4j"]
 
-FROM neo4j:latest
+FROM neo4j:3.5.11
 
 ENV NEO4J_AUTH=neo4j/letmein
+
+ENV NEO4JLABS_PLUGINS '["apoc", "graph-algorithms"]'
 
 EXPOSE 7474 7473 7687
 

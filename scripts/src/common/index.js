@@ -1,4 +1,5 @@
 import * as R from 'ramda'
+import * as H from './helpers'
 import {v1 as neo4j} from 'neo4j-driver'
 import fetch from 'node-fetch'
 import ApolloClient from 'apollo-client'
@@ -15,6 +16,7 @@ import reviews from '@solviofoundation/amos-reviews'
 
 export {
   R,
+  H,
   neo4j,
   ApolloClient,
   gql,

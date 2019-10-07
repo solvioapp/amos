@@ -65,3 +65,11 @@ req = dirBase => dirRel => regExp => requireAlso => {
     return R.map (val => R.propOr (val) (`default`) (val)) (cache)
   })()
 }
+
+// getOne = async (cypher, _, params, {session}) => {
+//   const {records: recs} = await session.run (cypher, params)
+
+//   const toReturn = R.nth (0) (R.map (rec => rec.get (`t`).properties) (recs))
+//   toReturn |> console.log ('toReturn', #)
+//   return toReturn
+// }

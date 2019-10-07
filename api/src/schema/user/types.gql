@@ -3,14 +3,9 @@ enum Role {
   ADMIN
 }
 
-type AnonymousUser {
-  ip: String!
-  votes: [VOTED_ON!]!
-}
-
-"""
-Testing descr
-"""
+# """
+# Testing descr
+# """
 type User {
   # Fields
   "Does this work?"
@@ -26,6 +21,11 @@ type User {
   search (topic: String!): [Resource!]!
 }
 
+type AnonymousUser {
+  ip: String!
+  votes: [VOTED_ON_ANONYMOUS!]!
+}
+
 type VOTED_ON @relation(name: "VOTED_ON") {
   from: User!
   to: AmosGame!
@@ -34,8 +34,12 @@ type VOTED_ON @relation(name: "VOTED_ON") {
 
 type VOTED_ON_ANONYMOUS @relation(name: "VOTED_ON_ANONYMOUS") {
   from: AnonymousUser!
-  to: AmosGame!
-  timestamp: DateTime!
+  to: Foo!
+  # timestamp: DateTime!
+}
+
+type Foo {
+  bar: String!
 }
 
 type PROFICIENCY @relation (name: "PROFICIENCY") {

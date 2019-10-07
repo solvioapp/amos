@@ -15,10 +15,10 @@ R.mapObjIndexed ((val, key) => val ? null : throw new Error(`ERROR: "${key}" env
 const driver = getDriver()
 
 const context = async ({req}) => {
-  const ses = driver.session()
+  const session = driver.session()
   return {
     driver,
-    ses,
+    session,
     // user,
     headers: req.headers,
     // TODO: Only for anonymous users

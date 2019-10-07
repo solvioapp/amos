@@ -6,7 +6,7 @@ import {Dropdown_} from './dropdown.sc.js'
 
 const Dropdown = ({results}) => {
   const renderResult = (result) => {
-    const {name,text} = result
+    const {name, text} = result
     console.log(result)
     return (
       <Link to={`/t/${name}`}>

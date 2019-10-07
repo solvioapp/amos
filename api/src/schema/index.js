@@ -15,18 +15,18 @@ export default {
       isAuthenticated: true,
       hasRole: true,
     },
-    // query: true,
+    query: true,
     // query: false,
-    query: {
-      exclude: [
-        // `AmosGame`,
-        `Response`,
-        `Path`,
-        // `autocomplete`,
-      ],
-    },
-    // mutation: true,
-    mutation: false,
+    // query: {
+    //   exclude: [
+    //     // `AmosGame`,
+    //     `Response`,
+    //     `Path`,
+    //     // `autocomplete`,
+    //   ],
+    // },
+    // mutation: false,
+    mutation: true,
     // mutation: {
     //   exclude: [
     //     `Topic`,

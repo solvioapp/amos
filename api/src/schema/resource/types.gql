@@ -1,4 +1,17 @@
 type Resource {
+  type: String
+  url_main: String
+  url_goodreads: String
+  url_download_pdf: String
+  url_download_epub: String
+  url_download_mobi: String
+  typeSpecific_authors: [String!]
+  typeSpecific_goodreadsAvgRating: String
+  typeSpecific_goodreadsNoRatings: String
+  typeSpecific_pages: String
+  typeSpecific_datePublished: String
+  typeSpecific_isbn: [String!]
+  typeSpecific_dewey: [String!]
   name: String
   amosGames: [FOR_RESOURCE!]!
 }
@@ -19,7 +32,7 @@ type AmosGame {
   type: AmosGameType!
   resource: FOR_RESOURCE!
   topic: FOR_TOPIC!
-  votes: [VOTED_ON]!
+  # votes: [VOTED_ON]!
   level: Int! # only for Prerequisite
   strength: Int! # only for Prerequisite
 }
@@ -42,9 +55,21 @@ input AddReviewInput {
 }
 
 input AddReviewHydrationInput {
-  type: String!
-  name: String!
-
+  type: String
+  name: String
+  topics: [String!]
+  url_main: String
+  url_goodreads: String
+  url_download_pdf: String
+  url_download_epub: String
+  url_download_mobi: String
+  typeSpecific_authors: [String!]
+  typeSpecific_goodreadsAvgRating: String
+  typeSpecific_goodreadsNoRatings: String
+  typeSpecific_datePublished: String
+  typeSpecific_pages: String
+  typeSpecific_isbn: [String!]
+  typeSpecific_dewey: [String!]
 }
 
 extend type Mutation {

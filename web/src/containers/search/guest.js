@@ -22,9 +22,6 @@ const QUERY_SEARCH = gql`
   query Autocomplete($string: String!) {
     autocomplete (string: $string, first: 3) {
       name
-      topic {
-        name
-      }
     }
   }
 `
@@ -38,7 +35,7 @@ const Guest = ({...rest}) => {
   const results = data
     ? (R.isEmpty (input)
       ? null
-      : R.map (r => ({name: r.topic.name, text: r.name})) (data.autocomplete)
+      : R.map (r => ({name: r.name, text: r.name})) (data.autocomplete)
     ) : null
 
   // /* Can't use point-free coding because it would bind it to inputEl (see closures) */

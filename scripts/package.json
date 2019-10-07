@@ -14,7 +14,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.6.2",
-    "@solviofoundation/amos-parser": "^1.2.0",
+    "@solviofoundation/amos-parser": "^1.2.4",
     "@solviofoundation/amos-reviews": "^1.0.0",
     "@solviofoundation/amos-topics": "^1.5.4",
     "apollo-cache-inmemory": "^1.6.3",

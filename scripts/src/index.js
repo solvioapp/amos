@@ -27,8 +27,8 @@ const run = async () => {
   await cleanDb()
   console.log (`seeding topics`)
   await seedTopics()
-  // console.log (`seeding reviews`)
-  // await seedReviews()
+  console.log (`seeding reviews`)
+  await seedReviews()
 }
 
 run()

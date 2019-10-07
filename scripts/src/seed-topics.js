@@ -11,28 +11,29 @@ client = new ApolloClient ({
   cache: new InMemoryCache()
 }),
 
+  // createTopic (input: CreateTopicInput!): Boolean!
+  // addIsPartOf (input: AddIsPartOfInput!): Boolean!
+
 createTopicMutation = gql`
-  mutation CreateTopic($name: String!, $names: [String!]!) {
-    createTopic(name: $name, names: $names)
+  mutation CreateTopic ($input: CreateTopicInput!) {
+    createTopic (input: $input)
   }
 `,
 
-createRelationMutation = gql`
-  query CreateRelation($source: String!, $target: String!) {
-    Topic (name: $source) {
-      createLink (name: $target)
-    }
+addIsPartOfMutation = gql`
+  mutation AddIsPartOf ($input: AddIsPartOfInput!) {
+    addIsPartOf (input: $input)
   }
 `,
 
 // const createRange = arr => R.range (0) (R.length (arr))
 
 createTopic = async ({metadata: {names}}) => {
-  await client.mutate ({mutation: createTopicMutation, variables: {name: names[0], names}})
+  await client.mutate ({mutation: createTopicMutation, variables: {input: {names}}})
 },
 
-createRelation = async ({source, target}) => {
-  await client.mutate ({mutation: createRelationMutation, variables: {source, target}})
+createRelation = async ({child, parent}) => {
+  await client.mutate ({mutation: addIsPartOfMutation, variables: {input: {child, parent}}})
 }
 
 export default async () => {
