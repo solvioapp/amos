@@ -1,5 +1,7 @@
 import {createBrowserHistory} from 'history'
 
-export const history = createBrowserHistory()
+export const
 
-export const navto = url => () => history.push(url)
+history = createBrowserHistory(),
+
+navto = url => () => history.push(url)

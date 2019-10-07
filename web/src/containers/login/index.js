@@ -1,5 +1,5 @@
 import {
-  React, R, yup, useForm, Redirect,
+  React, R, yup, useForm, Redirect, CONST,
   AmosChat, AuthOptions, Button, Input
 } from 'common'
 import Form from './form.sc'
@@ -9,11 +9,11 @@ import connect from './connect'
 const url = R.pathOr(`/`, [`state`, `from`])
 
 const defMessage = ({isSubmitted}) => (
-  isSubmitted ? `It looks okey, let's login!` : `Welcome back! 🎊`
+  isSubmitted ? `Looks good, let's get started!` : `Welcome back! 🎊`
 )
 
 const validationSchema = yup.object().shape({
-  email: yup.string().email().required(),
+  email: yup.string().email(CONST.email).required(),
   password: yup.string().min(6).required(),
 })
 
@@ -22,7 +22,7 @@ function LogIn(props) {
   const {register, errors, formState, handleSubmit} = useForm({validationSchema})
 
   const getMessages = R.pipe(
-    R.merge(props.errors),
+    // R.merge(props.errors),
     R.values,
     R.pluck(`message`),
     R.when(
@@ -55,7 +55,7 @@ function LogIn(props) {
         type='password'
         ref={register}
       />
-      <Link to='/forgot-password'>Forgot password</Link>
+      {/* <Link to='/forgot-password'>Forgot password</Link> */}
       <Button primary type='submit'>
         Log in
       </Button>

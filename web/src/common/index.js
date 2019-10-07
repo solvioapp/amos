@@ -15,6 +15,7 @@ import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react
 
 /* /common */
 import {navto} from 'common/history'
+import * as CONST from './constants'
 
 /* No dependencies */
 import AmosChat from 'components/amos-chat'
@@ -54,6 +55,7 @@ export {
   ApolloClient, gql, // Apollo Client
   ApolloProvider, useQuery, useLazyQuery, useMutation, // Apollo React Hooks
   /* /common */
+  CONST,
   navto,
   /* Components */
   AmosChat,

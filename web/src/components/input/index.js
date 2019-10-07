@@ -6,16 +6,16 @@ import Dropdown from './dropdown'
 
 const Input = ({label, results, name, type, onChange, onEnt, children, ...props}, ref) => {
   // @param e Event
-  // const onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt)
+  const onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt)
   ref |> console.log ('ref', #)
   return (
     <Top_>
       <Label_>{label}</Label_>
       <Input_
-        // placeholder={R.is (String) (children) ? children : ``}
-        // placeholder={children}
-        // onChange={onChange}
-        // onKeyPress={onKeyPress}
+        placeholder={R.is (String) (children) ? children : ``}
+        placeholder={children}
+        onChange={onChange}
+        onKeyPress={onKeyPress}
         type={type}
         name={name}
         ref={ref}

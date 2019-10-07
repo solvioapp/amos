@@ -28,7 +28,8 @@
     "eqeqeq": "error",
     "generator-star-spacing": ["error", "after"],
     "indent": ["error", 2, {
-      "SwitchCase": 1
+      "SwitchCase": 1,
+      "VariableDeclarator": 0
     }],
     "key-spacing": ["error", {
       "beforeColon": false,
