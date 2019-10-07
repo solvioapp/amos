@@ -1,34 +1,56 @@
 import * as R from 'ramda'
 
+export const
+
+lens = R.ifElse(
+  R.is(String),
+  R.lensProp,
+  R.lensPath
+),
+
+set = R.curry((path, value, state) => R.set(lens(path), value, state)),
+
+ifProp = (prop, a, b) => R.ifElse(
+  R.propEq(prop, true),
+  R.always(a),
+  R.always(b),
+),
+
+prop = (name, defValue) => R.ifElse(
+  R.has(name),
+  R.prop(name),
+  R.always(defValue),
+),
+
 /**
  * @description Tests whether function is not `null` or `undefined`
  * @param val
  */
-export const isNotNil = R.complement (R.isNil)
+isNotNil = R.complement (R.isNil),
 
-export const notEquals = R.complement (R.equals)
+notEquals = R.complement (R.equals),
 
 /**
  * @description Like R.map but you get (val, key)!
  * @param cb
  * @param obj
  */
-export const mapIndexed = R.addIndex (R.map)
+mapIndexed = R.addIndex (R.map),
 
 /**
  * @description Apply two functions and return result of second one
  * @param Arb Arbitrary number of params
  */
 
-export const applyAndReturn = fn1 => fn2 => R.converge (R.prop (`1`)) ([fn1, fn2])
+applyAndReturn = fn1 => fn2 => R.converge (R.prop (`1`)) ([fn1, fn2]),
 
 /**
  * @description Wrap any function with debug to log its arguments
  * @param Arb Arbitrary number of params
  */
-export const debug = applyAndReturn (console.log)
+debug = applyAndReturn (console.log),
 
-export const mapIfNotNil = fn => obj => (
+mapIfNotNil = fn => obj => (
   R.isNil (obj)
     ? null
     : R.map (fn) (obj)
