@@ -49,15 +49,15 @@ type PROFICIENCY @relation (name: "PROFICIENCY") {
 
 extend type Query {
   login (usernameOrEmail: String!, password: String!): String!
-  currentUser (name: String): String
-  users: [User!] @hasRole (roles: [ADMIN])
-    @cypher(
-      statement: "MATCH (u:User) WITH { username: u.username, id: u.id, email: u.email} as User RETURN User"
-    )
+  # currentUser (name: String): String
+  # users: [User!] @hasRole (roles: [ADMIN])
+  #   @cypher(
+  #     statement: "MATCH (u:User) WITH { username: u.username, id: u.id, email: u.email} as User RETURN User"
+  #   )
 }
 
 extend type Mutation {
   signup (username: String!, email: String!, password: String!): String!
-  updatePassword (email: String!, password: String!, _new: String!): String!
-  selfAttest (topic: String!): Boolean!
+  # updatePassword (email: String!, password: String!, _new: String!): String!
+  # selfAttest (topic: String!): Boolean!
 }

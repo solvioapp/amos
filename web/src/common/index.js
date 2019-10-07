@@ -6,12 +6,12 @@ import React, {useState, useContext, useEffect, useMemo, useRef, useCallback} fr
 import {Link, Switch, Redirect, Router, Route, withRouter} from 'react-router-dom'
 import store from 'store'
 import {Provider} from 'react-redux'
+import useForm from 'react-hook-form'
 import {history} from 'common/history'
 import {gql} from 'apollo-boost'
 // Hack, see https://github.com/apollographql/apollo-client/issues/4843#issuecomment-495585495
 import ApolloClient from 'apollo-boost/lib/index'
 import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react-hooks'
-import useForm from 'react-hook-form'
 
 /* /common */
 import {navto} from 'common/history'
@@ -49,10 +49,10 @@ export {
   Link, Switch, Router, Redirect, Route, withRouter, // React Router DOM
   store,
   Provider,
+  useForm,
   history,
   ApolloClient, gql, // Apollo Client
   ApolloProvider, useQuery, useLazyQuery, useMutation, // Apollo React Hooks
-  useForm,
   /* /common */
   navto,
   /* Components */
