@@ -47,8 +47,13 @@ type PROFICIENCY @relation (name: "PROFICIENCY") {
   to: Topic!
 }
 
+input LoginInput {
+  usernameOrEmail: String!
+  password: String!
+}
+
 extend type Query {
-  login (usernameOrEmail: String!, password: String!): String!
+  login (input: LoginInput!): String!
   # currentUser (name: String): String
   # users: [User!] @hasRole (roles: [ADMIN])
   #   @cypher(
@@ -56,8 +61,14 @@ extend type Query {
   #   )
 }
 
+input SignupInput {
+  username: String!
+  email: String!
+  password: String!
+}
+
 extend type Mutation {
-  signup (username: String!, email: String!, password: String!): String!
+  signup (input: SignupInput!): String!
   # updatePassword (email: String!, password: String!, _new: String!): String!
   # selfAttest (topic: String!): Boolean!
 }

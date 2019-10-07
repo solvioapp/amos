@@ -8,8 +8,8 @@ const getTargetValue = R.path ([`target`, `value`])
 const pipeTValueTo = cb => R.pipe (getTargetValue, cb)
 
 const SIGNUP = gql`
-  mutation Signup ($username: String!, $email: String!, $password: String!) {
-    signup (username: $username, email: $email, password: $password)
+  mutation Signup ($input: SignupInput!) {
+    signup (input: $input)
   }
 `
 
@@ -17,20 +17,21 @@ const Email = ({login, ...rest}) => {
   const {register, handleSubmit, errors} = useForm() // initialise the hook
   const [signupAux, {loading, data}] = useMutation (SIGNUP)
 
-  const onSubmit = data => {
-    signupAux ({variables: {username, email, password}})
+  const onSubmit = input => {
+    input |> console.log ('input', #)
+    signupAux ({variables: {input}})
   }
 
   // const repeatPasswordErr = useMemo(() => password && repeatPassword && password !== repeatPassword && `Passwords must match`,
   //  [password, repeatPassword])
 
-  const repeatPasswordErr = () => R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'>
+  const repeatPasswordErr = () => R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat>
           Hey, the passwords don't seem to match. Good we caught that now!
         </AmosChat>
 
   // const form = useRef()
   // const validForm = form.current ? !repeatPasswordErr : false
-  const validForm = true 
+  const validForm = true;
 
   // TODO: save credentials
   // TODO: repeatPass only for >= length
