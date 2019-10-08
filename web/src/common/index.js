@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import * as R from 'ramda'
 import * as yup from 'yup'
 import * as H from './helpers'
@@ -14,7 +15,7 @@ import ApolloClient from 'apollo-boost/lib/index'
 import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react-hooks'
 
 /* /apollo */
-import * as con from 'apollo/connect'
+import * as connect from 'apollo/connect'
 
 /* /common */
 import {navto} from './history'
@@ -58,7 +59,7 @@ export {
   ApolloClient, gql, // Apollo Client
   ApolloProvider, useQuery, useLazyQuery, useMutation, // Apollo React Hooks
   /* /apollo */
-  con,
+  connect,
   /* /common */
   navto,
   CONST,

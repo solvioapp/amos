@@ -1,43 +1,38 @@
 import {
-  React,
-  AmosChat, AuthOptions
+  R, H, React, useForm, connect, yup
 } from 'common'
-import Form from './form'
-import Top_ from '../top.sc'
-import connect from './connect'
+import _Form from './form'
 
-const Email = ({login, ...rest}) => {
-  // data |> console.log ('data', #)
-  // error |> console.log ('error', #)
+const defMessage = ({isSubmitted}) => (
+  isSubmitted ? `Looks good, let's get started!` : `Welcome back! 🎊`
+)
 
-  // const repeatPasswordErr = () => R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat> R.equals (password) (repeatPassword) ? null : <AmosChat avatar='none'></AmosChat>
-  //         Hey, the passwords don't seem to match. Good we caught that now!
-  //       </AmosChat>
+const validationSchema = yup.object().shape({
+  username: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(6).required(),
+})
 
-  const repeatPasswordErr = () => null
+const Form = ({signup: [signup, {data}]}) => {
+  const {handleSubmit, register, formState, errors: formErrors} = useForm ({validationSchema})
 
-  // const form = useRef()
-  // const validForm = form.current ? !repeatPasswordErr : false
+  const onSubmit = handleSubmit (input => {
+    const variables = {input: (R.pick ([`username`, `email`, `password`]) (input))}
+    signup ({variables})
+  })
 
-  // TODO: save credentials
-  // TODO: repeatPass only for >= length
-  // TODO: Validation (yup)
-  // TODO: signup button disabled
-  // TODO: Merge 
-  // TODO: extract constants
+  const validForm = true
+
+  const queryError = data && (data.success ? {} : {query: {message: data.signup.message}})
+  const errors = R.merge (formErrors) (queryError)
+
+  errors |> console.log ('errors', #)
+
+  const messages = H.getMessages (defMessage (formState)) (errors)
 
   return (
-    <Top_ {...rest}>
-      <AmosChat>
-        Sign up to help me sort the world's learning resources. Did I say it's free? 😌
-      </AmosChat>
-      <Form />
-      <AuthOptions first={{
-        link: `/signup`,
-        text: `Use social`
-      }} />
-    </Top_>
+    <_Form {...{onSubmit, messages, register, errors, validForm}} />
   )
 }
 
-export default connect (Email)
+export default connect.SIGNUP (Form)

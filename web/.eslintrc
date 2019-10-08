@@ -111,6 +111,6 @@
     "use-isnan": "error",
     "valid-jsdoc": "error",
     "valid-typeof": "error",
-    "max-lines": ["error", {"max": 50, "skipBlankLines": false, "skipComments": false}]
+    "max-lines": ["error", {"max": 65, "skipBlankLines": false, "skipComments": false}]
   }
 }

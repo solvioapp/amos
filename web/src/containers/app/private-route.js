@@ -1,5 +1,5 @@
 import {
-  React, Redirect, Route, con
+  React, Redirect, Route, connect
 } from 'common'
 
 const destUrl = props => ({
@@ -13,4 +13,4 @@ const PrivateRoute = ({isAuthenticated: auth, component: C, ...rest}) => (
   )}/>
 )
 
-export default con.GET_AUTH (PrivateRoute)
+export default connect.GET_AUTH (PrivateRoute)

@@ -54,8 +54,22 @@ applyAndReturn = fn1 => fn2 => R.converge (R.prop (`1`)) ([fn1, fn2]),
  */
 debug = applyAndReturn (console.log),
 
+log = items => {
+  console.log (`H.log`, items)
+  return items
+},
+
 mapIfNotNil = fn => obj => (
   R.isNil (obj)
     ? null
     : R.map (fn) (obj)
+),
+
+getMessages = def => R.pipe (
+  R.values,
+  R.pluck (`message`),
+  R.when (
+    R.isEmpty,
+    R.append (def),
+  )
 )

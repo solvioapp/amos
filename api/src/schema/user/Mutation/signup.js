@@ -1,4 +1,4 @@
-import {A,H,R,bcrypt} from 'common'
+import {A,H,R,bcrypt,CONST} from 'common'
 
 const _1a = `
   MATCH (u:User) WHERE u.username = $username RETURN u
@@ -16,13 +16,13 @@ const _2 = `
 `
 
 const signup = async (_, {input: {username, email, password}}, {session}) => {
-  /* Check if username is free */
-  const {records: recs1} = await session.run (_1a, {username})      
-  H.assert (R.isEmpty (recs1)) (`a user with username ${username} already exists`)
-
   /* Check if email is free */
   const {records: recs2} = await session.run (_1b, {email})      
-  H.assert (R.isEmpty (recs2)) (`a user with email ${email} already exists`)
+  H.assert (R.isEmpty (recs2)) (CONST.email_taken (email))
+
+  /* Check if username is free */
+  const {records: recs1} = await session.run (_1a, {username})      
+  H.assert (R.isEmpty (recs1)) (CONST.username_taken (username))
 
   /* Hash password */
   const hashedPassword = await bcrypt.hash (password, 12)
