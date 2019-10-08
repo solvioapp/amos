@@ -26,8 +26,6 @@ const enhance = _Form => ({signup: [signup, {data}]}) => {
   const queryError = data && (data.success ? {} : {query: {message: data.signup.message}})
   const errors = R.merge (formErrors) (queryError)
 
-  errors |> console.log ('errors', #)
-
   const messages = H.getMessages (defMessage (formState)) (errors)
 
   return (
@@ -35,4 +33,4 @@ const enhance = _Form => ({signup: [signup, {data}]}) => {
   )
 }
 
-export default connect.SIGNUP (enhance (Form))
+export default R.compose (connect.SIGNUP, enhance) (Form)

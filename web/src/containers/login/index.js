@@ -30,4 +30,4 @@ const enhance = _Form => ({login: [login, {data}]}) => {
   )
 }
 
-export default connect.LOGIN (enhance (Form))
+export default R.compose (connect.LOGIN, enhance) (Form)
