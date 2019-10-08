@@ -12,7 +12,7 @@ const validationSchema = yup.object().shape ({
   password: yup.string().min(6).required(),
 })
 
-const Login = ({login: [login, {data}]}) => {
+const enhance = _Form => ({login: [login, {data}]}) => {
   const {register, errors: formErrors, formState, handleSubmit} = useForm ({validationSchema})
 
   const onSubmit = handleSubmit (input => {
@@ -26,8 +26,8 @@ const Login = ({login: [login, {data}]}) => {
   const messages = H.getMessages (defMessage (formState)) (errors)
 
   return (
-    <Form {...{onSubmit, messages, register, errors}}/>
+    <_Form {...{onSubmit, messages, register, errors}}/>
   )
 }
 
-export default connect.LOGIN (Login)
+export default connect.LOGIN (enhance (Form))

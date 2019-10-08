@@ -1,7 +1,7 @@
 import {
   R, H, React, useForm, connect, yup
 } from 'common'
-import _Form from './form'
+import Form from './form'
 
 const defMessage = ({isSubmitted}) => (
   isSubmitted ? `Looks good, let's get started!` : `Welcome back! 🎊`
@@ -13,7 +13,7 @@ const validationSchema = yup.object().shape({
   password: yup.string().min(6).required(),
 })
 
-const Form = ({signup: [signup, {data}]}) => {
+const enhance = _Form => ({signup: [signup, {data}]}) => {
   const {handleSubmit, register, formState, errors: formErrors} = useForm ({validationSchema})
 
   const onSubmit = handleSubmit (input => {
@@ -35,4 +35,4 @@ const Form = ({signup: [signup, {data}]}) => {
   )
 }
 
-export default connect.SIGNUP (Form)
+export default connect.SIGNUP (enhance (Form))
