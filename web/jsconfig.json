@@ -17,11 +17,8 @@
             "containers/*": [
                 "./src/containers/*"
             ],
-            "store/*": [
-                "./src/store/*"
-            ],
-            "constants/*": [
-                "./src/constants/*"
+            "apollo/*": [
+                "./src/apollo/*"
             ]
         }
     },

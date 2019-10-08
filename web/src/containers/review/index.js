@@ -73,4 +73,4 @@ const Review = props => {
   )
 }
 
-export default connect(Review)
+export default (Review)

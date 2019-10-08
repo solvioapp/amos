@@ -1,7 +1,6 @@
+import {styled, css, H} from 'common'
 import Icon from 'components/icon/top.sc'
 import Text_ from './text.sc'
-import styled, {css} from 'styled-components'
-import {ifProp, prop} from 'common/style'
 
 const primary = css`
   background-color: #0066FF;
@@ -31,10 +30,10 @@ const Top_ = styled.button`
   color: black;
   cursor: pointer;
   font-size: 15px;
-  height: ${prop(`height`, `40px`)};
+  height: ${H.prop(`height`, `40px`)};
   padding: 0 20px;
   user-select: none;
-  width: ${prop(`width`, `auto`)};
+  width: ${H.prop(`width`, `auto`)};
 
   &:disabled {
     background-color: grey;
@@ -67,8 +66,8 @@ const Top_ = styled.button`
     outline: none;
   }
 
-  ${ifProp(`primary`, primary)}
-  ${ifProp(`iconOnly`, iconOnly)}
+  ${H.ifProp(`primary`, primary)}
+  ${H.ifProp(`iconOnly`, iconOnly)}
 `
 
 export default Top_

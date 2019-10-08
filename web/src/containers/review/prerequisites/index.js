@@ -41,4 +41,4 @@ export const useReqState = () => {
   }
 }
 
-export default connect(Prerequisites)
+export default (Prerequisites)

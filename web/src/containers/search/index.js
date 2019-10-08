@@ -7,4 +7,4 @@ const Search = ({isAuthenticated}) => (
   isAuthenticated ? <Authorized/> : <Guest/>
 )
 
-export default connect(Search)
+export default (Search)

@@ -1,23 +1,20 @@
 import {
-  React, store, Provider, Router, ApolloClient, ApolloProvider
+  React, CookiesProvider, history, Router, ApolloProvider
 } from 'common'
 import PageLayout from './page-layout'
 import Routes from './routes'
-import {history} from 'common/history'
-
-const uri = `${window._env_.CUSTOM_API_URL}`
-const client = new ApolloClient({uri})
+import client from './client'
 
 const App = () => (
-  <ApolloProvider client={client}>
-    <Provider store={store}>
+  <CookiesProvider>
+    <ApolloProvider client={client}>
       <Router history={history}>
         <PageLayout>
           <Routes/>
         </PageLayout>
       </Router>
-    </Provider>
-  </ApolloProvider>
+    </ApolloProvider>
+  </CookiesProvider>
 )
 
 export default App

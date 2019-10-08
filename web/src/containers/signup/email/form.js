@@ -1,11 +1,15 @@
 import {
-  R, gql, React, useForm, useMutation, yup,
+  R, H, gql, React, useForm, useMutation, useCookies, yup,
   Button, Input, Checkbox
 } from 'common'
 
 const SIGNUP = gql`
   mutation Signup ($input: SignupInput!) {
-    signup (input: $input)
+    signup (input: $input) {
+      success
+      message
+      login @client
+    }
   }
 `
 
@@ -40,15 +44,26 @@ const validationSchema = yup.object().shape({
 })
 
 const connect = C => () => {
-  const {register, handleSubmit, errors} = useForm({validationSchema}) // initialise the hook
-  const [signupAux, {data, error}] = useMutation (SIGNUP)
+  const {register, handleSubmit, errors} = useForm ({validationSchema}) // initialise the hook
+  const [signupAux, {data, error, client}] = useMutation (SIGNUP)
+  data |> console.log ('data form', #)
+  error |> console.log ('error form', #)
+  // const [cookies, setCookie] = useCookies ([`auth`])
+  // cookies |> console.log ('cookies', #)
+
+  // data && (() => {
+  //   data |> console.log ('data', #)
+  //   H.isNotEmpty (R.prop (`auth`) (cookies)) && (() => {
+  //     setCookie (`auth`, R.prop (`signup`) (data))
+  //   })()
+  //   client.writeData ({data: {isAuthenticated: true}})
+  // })()
 
   const onSubmit = handleSubmit (input => {
     const variables = R.objOf (`input`) (R.pick ([`username`, `email`, `password`]) (input))
     signupAux ({variables})
   })
 
-  data |> console.log ('data', #)
   const validForm = true
 
   return (

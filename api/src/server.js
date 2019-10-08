@@ -16,6 +16,7 @@ const driver = getDriver()
 
 const context = async ({req}) => {
   const session = driver.session()
+  // req.headers |> console.log ('req.headers', #)
   return {
     driver,
     session,

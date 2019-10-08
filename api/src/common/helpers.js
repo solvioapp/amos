@@ -16,7 +16,7 @@ mergeDeepAll = R.reduce (R.mergeDeepRight) ({}),
 assert = pr => st => {
   pr
     ? null
-    : throw new Error(`ERROR: ${st}.`)
+    : throw new Error (st)
 },
 
 isNotEmpty = R.complement(R.isEmpty),
@@ -64,6 +64,20 @@ req = dirBase => dirRel => regExp => requireAlso => {
     /* Accept default exports */
     return R.map (val => R.propOr (val) (`default`) (val)) (cache)
   })()
+},
+
+wrapInResponse = fn => {
+  const _fn = async (...args) => {
+    try {
+      const message = await fn (...args)
+      return {success: true, message}
+    } catch ({message}) {
+      return {success: false, message}
+    }
+  }
+  /* Name function */
+  Object.defineProperty (_fn, `name`, R.objOf (`value`) (fn.name))
+  return _fn
 }
 
 // getOne = async (cypher, _, params, {session}) => {

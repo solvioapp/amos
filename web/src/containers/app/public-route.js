@@ -7,10 +7,10 @@ const destUrl = props => ({
   state: {from: props.location.pathname}
 })
 
-const PrivateRoute = ({isAuthenticated: auth, component: C, ...rest}) => (
+const PublicRoute = ({isAuthenticated: auth, component: C, ...rest}) => (
   <Route {...rest} render={props => (
-    auth ? <C {...props}/> : <Redirect to={destUrl (props)}/>
+    auth ? <Redirect to={destUrl (props)}/> : <C {...props}/>
   )}/>
 )
 
-export default con.GET_AUTH (PrivateRoute)
+export default con.GET_AUTH (PublicRoute)

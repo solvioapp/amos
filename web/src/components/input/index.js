@@ -6,7 +6,7 @@ import Dropdown from './dropdown'
 
 const Input = ({label, results, name, type, onChange, onEnt, children, ...props}, ref) => {
   // @param e Event
-  const onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt)
+  // const onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt)
   ref |> console.log ('ref', #)
   return (
     <Top_>
@@ -15,7 +15,7 @@ const Input = ({label, results, name, type, onChange, onEnt, children, ...props}
         placeholder={R.is (String) (children) ? children : ``}
         placeholder={children}
         onChange={onChange}
-        onKeyPress={onKeyPress}
+        // onKeyPress={onKeyPress}
         type={type}
         name={name}
         ref={ref}

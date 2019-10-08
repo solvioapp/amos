@@ -9,6 +9,8 @@ import util from 'util'
 import metascraper from 'metascraper'
 import neo4jgraphql from 'neo4j-graphql-js'
 
+import * as CONST from './constants'
+
 export {
   A, H, R, dotenv, fs,
   bcrypt,
@@ -16,4 +18,5 @@ export {
   metascraper,
   util,
   neo4jgraphql,
+  CONST,
 }

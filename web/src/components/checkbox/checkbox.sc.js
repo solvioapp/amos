@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import {prop} from 'common/style'
-import React from 'react'
 
 const Checkbox_ = styled.span`
 

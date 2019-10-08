@@ -1,5 +1,4 @@
-import styled, {css} from 'styled-components'
-import {ifProp, prop} from 'common/style'
+import {styled, css} from 'common'
 import {AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE} from './constants'
 
 const none = css`

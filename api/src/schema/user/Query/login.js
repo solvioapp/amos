@@ -1,25 +1,37 @@
-import {A,H} from 'common'
+import {A,H,R,CONST,bcrypt} from 'common'
 
-const login = async (_, {email, password}, {driver}) => {
-  /* Setup */
-  const ses = driver.session()
-  const _1 = 
-  `MATCH (u:User {email: $email})
+const _1 = `
+  match (u:User)
   -[:AUTHENTICATED_WITH]->
-  (l:LOCAL_ACCOUNT {email: $email}) 
-  RETURN l.hashedPassword as hashedPassword`
+  (l:LocalAccount {email: $email}) 
+  return l.hashedPassword as hashedPassword
+`
+
+const _2 = `
+  match (u:User {username: $username})
+  -[:AUTHENTICATED_WITH]->
+  (l:LocalAccount)
+  return l.hashedPassword as hashedPassword
+`
+
+const login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
+  const email = R.includes (`@`) (usernameOrEmail) 
+  const args = email
+    ? [_1, {email: usernameOrEmail}]
+    : [_2, {username: usernameOrEmail}]
 
   /* Get user's hashed password */
-  const {records: recs} = await ses.run (_1, {email})
+  const {records: recs} = await session.run (...args)
 
   /* Check if user exists */
-  H.assert (H.isNotEmpty (recs)) (`no user with email ${email}`)
+  H.assert (H.isNotEmpty (recs)) (CONST.cant_find_user (email) (usernameOrEmail))
 
   /* Check if password is correct */
-  H.assert (bcrypt.compare(password, recs[0].get (`hashedPassword`))) (`incorrect password`)
+  const correctPassword = await bcrypt.compare (password, recs[0].get (`hashedPassword`))
+  H.assert (correctPassword) (CONST.incorrect_password)
 
   /* Grant jwt */
-  return await A.createToken({user: {email}}, process.env.JWT_SECRET)
+  return await A.createToken (process.env.JWT_SECRET, {})
 }
 
-export default login
+export default H.wrapInResponse (login)

@@ -1,18 +1,18 @@
 import {A,H,R,bcrypt} from 'common'
 
 const _1a = `
-MATCH (u:User) WHERE u.username = $username RETURN u
+  MATCH (u:User) WHERE u.username = $username RETURN u
 `
 
 const _1b = `
-MATCH (la:LOCAL_ACCOUNT {email: $email})
-RETURN la
+  MATCH (la:LocalAccount {email: $email})
+  RETURN la
 `
 const _2 = `
-CREATE (u:User {username: $username})
--[:AUTHENTICATED_WITH]->
-(l:LOCAL_ACCOUNT {hashedPassword: $hashedPassword, email: $email})
-RETURN u
+  CREATE (u:User {username: $username})
+  -[:AUTHENTICATED_WITH]->
+  (l:LocalAccount {hashedPassword: $hashedPassword, email: $email})
+  RETURN u
 `
 
 const signup = async (_, {input: {username, email, password}}, {session}) => {
@@ -37,4 +37,4 @@ const signup = async (_, {input: {username, email, password}}, {session}) => {
     : await A.createToken (process.env.JWT_SECRET, {})
 }
 
-export default signup
+export default H.wrapInResponse (signup)

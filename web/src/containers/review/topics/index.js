@@ -49,4 +49,4 @@ export const useReqState = () => {
   }
 }
 
-export default connect(Topics)
+export default (Topics)

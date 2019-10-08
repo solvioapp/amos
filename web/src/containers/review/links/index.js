@@ -31,4 +31,4 @@ export const useReqState = () => {
   }
 }
 
-export default connect(Links)
+export default (Links)

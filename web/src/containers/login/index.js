@@ -1,5 +1,5 @@
 import {
-  React, R, yup, useForm, Redirect, CONST,
+  React, R, yup, useForm, Redirect, CONST, gql, useLazyQuery,
   AmosChat, AuthOptions, Button, Input
 } from 'common'
 import Form from './form.sc'
@@ -12,40 +12,58 @@ const defMessage = ({isSubmitted}) => (
   isSubmitted ? `Looks good, let's get started!` : `Welcome back! 🎊`
 )
 
-const validationSchema = yup.object().shape({
-  email: yup.string().email(CONST.email).required(),
+const validationSchema = yup.object().shape ({
+  // email: yup.string().email(CONST.email).required(),
   password: yup.string().min(6).required(),
 })
 
-function LogIn(props) {
-  const {location, isAuthenticated, authorize} = props
-  const {register, errors, formState, handleSubmit} = useForm({validationSchema})
+const LOGIN = gql`
+  query Login ($input: LoginInput!) {
+    login (input: $input) {
+      success
+      message
+      login @client
+    }
+  }
+`
+
+const Login = (props) => {
+  const {location, isAuthenticated} = props
+  const {register, errors, formState, handleSubmit} = useForm ({validationSchema})
+
+  const [loginAux, {data, error}] = useLazyQuery (LOGIN)
+  const onSubmit = handleSubmit (input => {
+    const variables = R.objOf (`input`) (R.pick ([`usernameOrEmail`, `password`]) (input))
+    loginAux ({variables})
+  })
+  data |> console.log ('data login', #)
+  error |> console.log ('error login', #)
 
   const getMessages = R.pipe(
     // R.merge(props.errors),
     R.values,
-    R.pluck(`message`),
-    R.when(
+    R.pluck (`message`),
+    R.when (
       R.isEmpty,
-      R.append(defMessage(formState)),
+      R.append(defMessage (formState)),
     )
   )
 
   if (isAuthenticated) {
-    return <Redirect to={url(location)}/>
+    return <Redirect to={url (location)}/>
   }
 
   return (
-    <Form onSubmit={handleSubmit(authorize)}>
+    <Form onSubmit={onSubmit}>
       <AmosChat>
         {getMessages(errors)}
       </AmosChat>
       <Input
         hasError={errors.email}
-        label='Email'
-        name='email'
-        placeholder='Email'
-        ref={register({required: true})}
+        label='Username or email'
+        name='usernameOrEmail'
+        placeholder='Username or email'
+        ref={register ({required: true})}
       />
       <Input
         hasError={errors.password}
@@ -61,11 +79,11 @@ function LogIn(props) {
       </Button>
       <AuthOptions
         first={{
-          link: `/sign-up`,
+          link: `/signup`,
           text: `Use social`
         }}
         second={{
-          link: `/sign-up/email`,
+          link: `/signup/email`,
           text: `Sign up`
         }}
       />
@@ -73,4 +91,4 @@ function LogIn(props) {
   )
 }
 
-export default connect(LogIn)
+export default Login

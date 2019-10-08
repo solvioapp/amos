@@ -4,6 +4,7 @@ import {
 } from 'common'
 import Form from './form'
 import Top_ from '../top.sc'
+import connect from './connect'
 
 const Email = ({login, ...rest}) => {
   // data |> console.log ('data', #)
@@ -32,11 +33,11 @@ const Email = ({login, ...rest}) => {
       </AmosChat>
       <Form />
       <AuthOptions first={{
-        link: `/sign-up`,
+        link: `/signup`,
         text: `Use social`
       }} />
     </Top_>
   )
 }
 
-export default Email
+export default connect (Email)

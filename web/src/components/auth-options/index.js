@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 const AuthOptions = ({
   first = {
-    link: '/sign-up/email',
+    link: '/signup/email',
     text: 'Sign up'
   }, 
   second = {

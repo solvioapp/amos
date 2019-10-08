@@ -53,7 +53,7 @@ input LoginInput {
 }
 
 extend type Query {
-  login (input: LoginInput!): String!
+  login (input: LoginInput!): Response!
   # currentUser (name: String): String
   # users: [User!] @hasRole (roles: [ADMIN])
   #   @cypher(
@@ -68,7 +68,7 @@ input SignupInput {
 }
 
 extend type Mutation {
-  signup (input: SignupInput!): String!
+  signup (input: SignupInput!): Response!
   # updatePassword (email: String!, password: String!, _new: String!): String!
   # selfAttest (topic: String!): Boolean!
 }

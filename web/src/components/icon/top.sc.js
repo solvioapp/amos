@@ -1,9 +1,8 @@
-import styled from 'styled-components'
-import {prop} from 'common/style'
+import {styled, H} from 'common'
 
 const Top_ = styled.svg`
   display: inline-block;
-  height: ${prop(`height`, `24px`)};
+  height: ${H.prop(`height`, `24px`)};
   vertical-align: middle;
 `
 

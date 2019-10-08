@@ -1,9 +1,9 @@
-import {connect} from 'react-redux'
-import {createStructuredSelector} from 'reselect'
-import {selectIsAuthenticated} from 'store/auth/selectors'
+// import {connect} from 'react-redux'
+// import {createStructuredSelector} from 'reselect'
+// import {selectIsAuthenticated} from 'store/auth/selectors'
 
-const props = createStructuredSelector({
-  isAuthenticated: selectIsAuthenticated,
-})
+// const props = createStructuredSelector({
+//   isAuthenticated: selectIsAuthenticated,
+// })
 
-export default connect(props)
+// export default connect(props)

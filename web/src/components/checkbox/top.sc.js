@@ -1,5 +1,4 @@
-import styled from 'styled-components'
-import {prop} from 'common/style'
+import {styled} from 'common'
 
 const Top_ = styled.div`
   display: flex;

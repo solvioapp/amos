@@ -7,4 +7,4 @@ const Thanks = ({isAuthenticated}) => (
   isAuthenticated ? <Authorized/> : <Guest/>
 )
 
-export default connect(Thanks)
+export default (Thanks)

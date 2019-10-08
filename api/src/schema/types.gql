@@ -4,7 +4,7 @@ scalar Time
 
 type Response {
   success: Boolean!
-  message: StringList
+  message: String
 }
 
 type Query

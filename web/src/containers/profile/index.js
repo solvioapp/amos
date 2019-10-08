@@ -1,14 +1,9 @@
 import {
-  React,
+  React, CONST,
   AmosChat, Button
 } from 'common'
 import Top_ from './top.sc'
 import connect from './connect'
-
-const messages = [
-  `Unfortunately I can't show your profile just yet.`,
-  `Don't leave there's work to do 🧐`
-]
 
 const Profile = ({logout}) => (
   <Top_>
@@ -16,9 +11,9 @@ const Profile = ({logout}) => (
       <Button primary onClick={logout}>
         Logout
       </Button>}>
-      {messages}
+      {CONST.profile}
     </AmosChat>
   </Top_>
 )
 
-export default connect(Profile)
+export default connect (Profile)

@@ -1,22 +1,24 @@
-import LogIn from 'containers/login'
-import NotFound from 'components/not-found'
-import PrivateRoute from './private-route'
+import {
+  React, Redirect, Route, Switch,
+  NotFound
+} from 'common'
+import Login from 'containers/login'
 import Profile from 'containers/profile'
-import React from 'react'
 import Review from 'containers/review'
 import Search from 'containers/search'
-import SignUp from 'containers/sign-up'
+import Signup from 'containers/signup'
 import Topic from 'containers/topic'
-import {Redirect, Route, Switch} from 'react-router-dom'
+import PublicRoute from './public-route'
+import PrivateRoute from './private-route'
 
 const Routes = () => (
   <Switch>
-    <Route path='/' component={Search} exact/>
+    <Route path='/' exact component={Search}/>
     <Route path='/review' component={Review}/>
-    <Route path='/login' component={LogIn}/>
-    <Route path='/sign-up' component={SignUp}/>
-    <Route path='/forgot-password' component={NotFound}/>
-    <Route path='/t/:name' component={Topic}/>
+    <Route path='/t' component={Topic}/>
+    <PublicRoute path='/login' component={Login}/>
+    <PublicRoute path='/signup' component={Signup}/>
+    {/* <Route path='/forgot-password' component={NotFound}/> */}
     <PrivateRoute path='/profile' component={Profile}/>
     <Route component={NotFound}/>
   </Switch>

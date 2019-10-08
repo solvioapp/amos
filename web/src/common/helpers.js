@@ -26,9 +26,13 @@ prop = (name, defValue) => R.ifElse(
  * @description Tests whether function is not `null` or `undefined`
  * @param val
  */
-isNotNil = R.complement (R.isNil),
 
 notEquals = R.complement (R.equals),
+
+isNotNil = R.complement (R.isNil),
+isNotEmpty = R.complement (R.isEmpty),
+
+isNotNilOrEmpty = R.both (isNotNil, isNotEmpty),
 
 /**
  * @description Like R.map but you get (val, key)!

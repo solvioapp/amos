@@ -18,7 +18,7 @@ const NavMenu = ({isAuthenticated, ...props}) => (
     <Link_ to='/profile' hidden={!isAuthenticated}>
       Profile
     </Link_>
-    <Link_ to='/sign-up' hidden={isAuthenticated || isLogin (props)}>
+    <Link_ to='/signup' hidden={isAuthenticated || isLogin (props)}>
       Sign up
     </Link_>
     <Link_ to='/login' hidden={isAuthenticated || !isLogin (props)}>
