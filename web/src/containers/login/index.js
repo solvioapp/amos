@@ -8,7 +8,7 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.login
 )
 
-const Form = ({onSubmit, messages, register, errors}) => (
+const Form = ({onSubmit, messages, register, errors, foo = (() => errors |> console.log ('errors', #))()}) => (
   <Form_ onSubmit={onSubmit}>
     <AmosChat>
       {messages}
