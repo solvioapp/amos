@@ -6,6 +6,7 @@ import styled, {css} from 'styled-components'
 import React, {useState, useContext, useEffect, useMemo, useRef, useCallback} from 'react'
 import {Link, NavLink, Switch, Redirect, Router, Route, withRouter} from 'react-router-dom'
 import useForm from 'react-hook-form'
+import {myUseForm} from './hooks'
 import {Cookies, CookiesProvider, useCookies} from 'react-cookie'
 import {history} from 'common/history'
 import {InMemoryCache} from 'apollo-cache-inmemory'
@@ -20,6 +21,7 @@ import * as connect from 'apollo/connect'
 /* /common */
 import {navto, redirect} from './history'
 import * as CONST from './constants'
+import * as validation from './validation'
 
 /* No dependencies */
 import AmosChat from 'components/amos-chat'
@@ -53,6 +55,7 @@ export {
   React, useState, useMemo, useRef, useCallback, useContext, useEffect, // React
   Link, NavLink, Switch, Router, Redirect, Route, withRouter, // React Router DOM
   useForm,
+  myUseForm,
   Cookies, CookiesProvider, useCookies,
   history,
   InMemoryCache,
@@ -63,6 +66,7 @@ export {
   /* /common */
   navto, redirect,
   CONST,
+  validation,
   /* Components */
   AmosChat,
   Icon,

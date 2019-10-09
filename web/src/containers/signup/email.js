@@ -1,10 +1,13 @@
 import {
-  React,
+  React, R, connect, myUseForm, CONST, validation,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
-// import connect from './connect'
 
-const Form = ({onSubmit, messages, register, errors, validForm}) => (
+const message = ({isSubmitted}) => (
+  isSubmitted ? CONST.lets_go : CONST.signup
+)
+
+const Form = ({onSubmit, messages, register, errors}) => (
   <form onSubmit={onSubmit}>
     <AmosChat>
       {messages}
@@ -39,7 +42,7 @@ const Form = ({onSubmit, messages, register, errors, validForm}) => (
     <Checkbox>
       Subscribe to Solvio Monthly
     </Checkbox>
-    <Button primary width='150px' type='submit' disabled={!validForm}>
+    <Button primary width='150px' type='submit'>
       Sign up
     </Button>
     <AuthOptions first={{
@@ -49,4 +52,7 @@ const Form = ({onSubmit, messages, register, errors, validForm}) => (
   </form>
 )
 
-export default Form
+export default R.compose (
+  connect.SIGNUP,
+  myUseForm ({validationSchema: validation.signup, message})
+) (Form)

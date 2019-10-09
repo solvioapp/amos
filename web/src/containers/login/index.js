@@ -1,33 +1,49 @@
 import {
-  React, R, yup, useForm, connect, CONST, H
+  React, R, connect, CONST, validation, myUseForm,
+  AmosChat, Input, Button, AuthOptions
 } from 'common'
-import Form from './form'
+import Form_ from './form.sc'
 
-const defMessage = ({isSubmitted}) => (
-  isSubmitted ? `Looks good, let's get started!` : `Welcome back! 🎊`
+const message = ({isSubmitted}) => (
+  isSubmitted ? CONST.lets_go : CONST.login
 )
 
-const validationSchema = yup.object().shape ({
-  usernameOrEmail: yup.string().required(),
-  password: yup.string().min(6).required(),
-})
+const Form = ({onSubmit, messages, register, errors}) => (
+  <Form_ onSubmit={onSubmit}>
+    <AmosChat>
+      {messages}
+    </AmosChat>
+    <Input
+      errors={errors}
+      label='Username or email'
+      name='usernameOrEmail'
+      ref={register}
+    />
+    <Input
+      errors={errors}
+      label='Password'
+      name='password'
+      type='password'
+      ref={register}
+    />
+    {/* <Link to='/forgot-password'>Forgot password</Link> */}
+    <Button primary type='submit'>
+      Log in
+    </Button>
+    <AuthOptions
+      first={{
+        link: `/signup`,
+        text: `Use social`
+      }}
+      second={{
+        link: `/signup/email`,
+        text: `Sign up`
+      }}
+    />
+  </Form_>
+)
 
-const enhance = _Form => ({login: [login, {data}]}) => {
-  const {register, errors: formErrors, formState, handleSubmit} = useForm ({validationSchema})
-
-  const onSubmit = handleSubmit (input => {
-    const variables = {input: R.pick ([`usernameOrEmail`, `password`]) (input)}
-    login ({variables})
-  })
-
-  const queryError = data && (data.success ? {} : {query: {message: data.login.message}})
-  const errors = R.merge (formErrors) (queryError)
-
-  const messages = H.getMessages (defMessage (formState)) (errors)
-
-  return (
-    <_Form {...{onSubmit, messages, register, errors}}/>
-  )
-}
-
-export default R.compose (connect.LOGIN, enhance) (Form)
+export default R.compose (
+  connect.LOGIN,
+  myUseForm ({validationSchema: validation.login, message})
+) (Form)

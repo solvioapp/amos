@@ -32,7 +32,7 @@ LOGIN = C => ({...rest}) => {
   const login = useLazyQuery (LOGIN_GQL)
 
   return (
-    <C login={login} {...rest}/>
+    <C login={login} onSubmit={login} {...rest}/>
   )
 },
 
@@ -50,6 +50,6 @@ SIGNUP = C => ({...rest}) => {
   const signup = useMutation (SIGNUP_GQL)
 
   return (
-    <C signup={signup} {...rest}/>
+    <C signup={signup} onSubmit={signup} {...rest}/>
   )
 }
