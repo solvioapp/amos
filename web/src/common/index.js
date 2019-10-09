@@ -18,8 +18,8 @@ import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react
 import * as connect from 'apollo/connect'
 
 /* /common */
-import {navto} from './history'
-import * as CONST from './const'
+import {navto, redirect} from './history'
+import * as CONST from './constants'
 
 /* No dependencies */
 import AmosChat from 'components/amos-chat'
@@ -61,7 +61,7 @@ export {
   /* /apollo */
   connect,
   /* /common */
-  navto,
+  navto, redirect,
   CONST,
   /* Components */
   AmosChat,

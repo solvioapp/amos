@@ -20,6 +20,7 @@
     // "warning",
     // 2
     // ],
+    "no-empty-pattern": "off",
     "max-len": [
       "error",
       {

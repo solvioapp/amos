@@ -5,20 +5,20 @@ import {
 
 export const
 
-_GET_AUTH = gql`
+GET_AUTH_GQL = gql`
   query {
     isAuthenticated @client
   }
 `,
 
 GET_AUTH = C => ({...rest}) => {
-  const {data} = useQuery (_GET_AUTH)
+  const {data} = useQuery (GET_AUTH_GQL)
   return (
     <C {...data} {...rest}/>
   )
 },
 
-_LOGIN = gql`
+LOGIN_GQL = gql`
   query Login ($input: LoginInput!) {
     login (input: $input) {
       success
@@ -29,14 +29,14 @@ _LOGIN = gql`
 `,
 
 LOGIN = C => ({...rest}) => {
-  const login = useLazyQuery (_LOGIN)
+  const login = useLazyQuery (LOGIN_GQL)
 
   return (
     <C login={login} {...rest}/>
   )
 },
 
-_SIGNUP = gql`
+SIGNUP_GQL = gql`
   mutation Signup ($input: SignupInput!) {
     signup (input: $input) {
       success
@@ -47,7 +47,7 @@ _SIGNUP = gql`
 `,
 
 SIGNUP = C => ({...rest}) => {
-  const signup = useMutation (_SIGNUP)
+  const signup = useMutation (SIGNUP_GQL)
 
   return (
     <C signup={signup} {...rest}/>

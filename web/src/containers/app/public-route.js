@@ -1,15 +1,10 @@
 import {
-  React, Redirect, Route, connect
+  React, Redirect, Route, redirect, connect
 } from 'common'
-
-const destUrl = props => ({
-  pathname: `/`,
-  state: {from: props.location.pathname}
-})
 
 const PublicRoute = ({isAuthenticated: auth, component: C, ...rest}) => (
   <Route {...rest} render={props => (
-    auth ? <Redirect to={destUrl (props)}/> : <C {...props}/>
+    auth ? <Redirect to={redirect (props)}/> : <C {...props}/>
   )}/>
 )
 

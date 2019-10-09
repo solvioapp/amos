@@ -4,4 +4,9 @@ export const
 
 history = createBrowserHistory(),
 
-navto = url => () => history.push(url)
+navto = url => () => history.push(url),
+
+redirect = ({location: {pathname: from}}) => ({
+  pathname: `/`,
+  state: {from}
+})

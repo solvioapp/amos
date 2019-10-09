@@ -3,7 +3,7 @@ import {
 } from 'common'
 import PageLayout from './page-layout'
 import Routes from './routes'
-import client from './client'
+import client from 'apollo/client'
 
 const App = () => (
   <CookiesProvider>

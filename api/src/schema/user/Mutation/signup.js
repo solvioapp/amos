@@ -16,19 +16,21 @@ const _2 = `
 `
 
 const signup = async (_, {input: {username, email, password}}, {session}) => {
+  const
+
   /* Check if email is free */
-  const {records: recs2} = await session.run (_1b, {email})      
-  H.assert (R.isEmpty (recs2)) (CONST.email_taken (email))
+  {records: recs2} = await session.run (_1b, {email}),
+  {} = H.assert (R.isEmpty (recs2)) (CONST.email_taken (email)),
 
   /* Check if username is free */
-  const {records: recs1} = await session.run (_1a, {username})      
-  H.assert (R.isEmpty (recs1)) (CONST.username_taken (username))
+  {records: recs1} = await session.run (_1a, {username}),
+  {} = H.assert (R.isEmpty (recs1)) (CONST.username_taken (username)),
 
   /* Hash password */
-  const hashedPassword = await bcrypt.hash (password, 12)
+  hashedPassword = await bcrypt.hash (password, 12),
 
   /* Save user to db! */
-  await session.run (_2, {username, email, hashedPassword})
+  {} = await session.run (_2, {username, email, hashedPassword})
 
   /* Grant jwt */
   /* `dteiml` is ADMIN (can add new topics) */
