@@ -37,8 +37,8 @@ const signup = async (_, {input}, {session}) => {
   [] = [await session.run (_2, {username, email, hashedPassword})]
 
   /* Grant jwt */
-  /* `dteiml` is ADMIN (can add new topics) */
-  return username === `dteiml`
+  /* `amos` is ADMIN (can add new topics) */
+  return username === `amos`
     ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`]}) 
     : await A.createToken (process.env.JWT_SECRET, {})
 }
