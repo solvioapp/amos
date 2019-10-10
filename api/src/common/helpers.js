@@ -71,7 +71,7 @@ wrapInResponse = fn => {
     try {
       const message = await fn (...args)
       return {success: true, message}
-    } catch ({message}) {
+    } catch ({message: _message, errors: message = [_message]}) {
       return {success: false, message}
     }
   }

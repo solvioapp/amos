@@ -8,8 +8,10 @@ import path from 'path'
 import util from 'util'
 import metascraper from 'metascraper'
 import neo4jgraphql from 'neo4j-graphql-js'
+import * as yup from 'yup'
 
 import * as CONST from './constants'
+import * as validation from './validation'
 
 export {
   A, H, R, dotenv, fs,
@@ -18,5 +20,7 @@ export {
   metascraper,
   util,
   neo4jgraphql,
+  yup,
   CONST,
+  validation,
 }

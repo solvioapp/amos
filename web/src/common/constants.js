@@ -11,4 +11,6 @@ signup = `Foo`,
 
 login = `Welcome back! 🎊`,
 
-lets_go = `Let's go!`
+lets_go = `Let's go!`,
+
+passwords_dont_match = `Bar`

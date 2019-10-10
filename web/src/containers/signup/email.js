@@ -54,5 +54,5 @@ const Form = ({onSubmit, messages, register, errors}) => (
 
 export default R.compose (
   connect.SIGNUP,
-  myUseForm ({validationSchema: validation.signup, message})
+  myUseForm ({validationSchema: validation.signupAux, message})
 ) (Form)

@@ -1,6 +1,6 @@
 /* Note: Until this logic is lifted, all changes here
  * should be mirrored in /api/common/validation! */
-import {R, yup, CONST} from 'common'
+import {R, yup} from 'common'
 
 const
 
@@ -59,15 +59,9 @@ usernameOrEmail = yup
 export
 
 {username, email}
-
+  
 export const
 
 signup = yup.object().shape ({username, email, password}),
-
-/* Extend signup */
-signupAux = signup.shape ({
-  username, email, password,
-  repeatPassword: yup.string().oneOf([yup.ref(`password`)], CONST.passwords_dont_match),
-}),
 
 login = yup.object().shape ({usernameOrEmail, password})

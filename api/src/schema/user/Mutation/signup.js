@@ -1,4 +1,4 @@
-import {A,H,R,bcrypt,CONST} from 'common'
+import {A,H,R,bcrypt,CONST,validation} from 'common'
 
 const _1a = `
   MATCH (u:User) WHERE u.username = $username RETURN u
@@ -15,8 +15,12 @@ const _2 = `
   RETURN u
 `
 
-const signup = async (_, {input: {username, email, password}}, {session}) => {
+const signup = async (_, {input}, {session}) => {
   const
+
+  /* Validation */
+  [] = [await validation.signup.validate (input, {abortEarly: false})],
+  {username, email, password} = input,
 
   /* Check if email is free */
   {records: recs2} = await session.run (_1b, {email}),

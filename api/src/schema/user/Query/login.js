@@ -1,4 +1,6 @@
-import {A,H,R,CONST,bcrypt} from 'common'
+import {
+  A,H,CONST,bcrypt, validation
+} from 'common'
 
 const _1 = `
   match (u:User)
@@ -15,20 +17,30 @@ const _2 = `
 `
 
 const login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
-  const email = R.includes (`@`) (usernameOrEmail) 
-  const args = email
-    ? [_1, {email: usernameOrEmail}]
-    : [_2, {username: usernameOrEmail}]
+  const 
+  
+  /* Is valid email? */
+  isEmail = await validation.email.isValid (usernameOrEmail),
+  
+  /* Get cypher args */
+  args = isEmail 
+    && [_1, {email: {usernameOrEmail}}]
+    || await (async () => {
+      await validation.username.validate (usernameOrEmail, {abortEarly: false})
+      return [_2, {username: usernameOrEmail}]
+    })(),
+
+  /* Don't validate password */
 
   /* Get user's hashed password */
-  const {records: recs} = await session.run (...args)
+  {records: recs} = await session.run (...args),
 
   /* Check if user exists */
-  H.assert (H.isNotEmpty (recs)) (CONST.cant_find_user (email) (usernameOrEmail))
+  [] = [H.assert (H.isNotEmpty (recs)) (CONST.cant_find_user (isEmail) (usernameOrEmail))],
 
   /* Check if password is correct */
-  const correctPassword = await bcrypt.compare (password, recs[0].get (`hashedPassword`))
-  H.assert (correctPassword) (CONST.incorrect_password)
+  correctPassword = await bcrypt.compare (password, recs[0].get (`hashedPassword`)),
+  [] = [H.assert (correctPassword) (CONST.incorrect_password)]
 
   /* Grant jwt */
   return await A.createToken (process.env.JWT_SECRET, {})
