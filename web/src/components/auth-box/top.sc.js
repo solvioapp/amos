@@ -1,20 +1,22 @@
-import Button from 'components/button/top.sc'
-import AuthOptions from 'components/auth-options/top.sc'
-import styled, {css} from 'styled-components'
-import {AVATAR_SIZE_LARGE, AVATAR_SIZE_REGULAR} from 'components/amos-chat/constants';
+import {styled, css, CSS_CONST, AuthOptions_} from 'common'
+import Button_ from 'components/button'
+
+const
+
+{AVATAR_SIZE_LARGE, AVATAR_SIZE_REGULAR} = CSS_CONST
 
 const Top_ = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7+ (AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px;
+  margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7 + (AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px;
 
-  > ${Button} + ${Button} {
+  > ${Button_} + ${Button_} {
     margin-top: 20px;
   }
 
-  > ${AuthOptions} {
+  > ${AuthOptions_} {
     margin-top: 20px;
   }
 `

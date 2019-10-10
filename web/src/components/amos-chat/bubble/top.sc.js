@@ -1,5 +1,8 @@
-import styled, {css} from 'styled-components'
-import {AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE} from '../constants'
+import {styled, css, CSS_CONST} from 'common'
+
+const
+
+{AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE} = CSS_CONST
 
 const Top_ = styled.div`
   background-color: white;

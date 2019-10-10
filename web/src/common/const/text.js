@@ -13,4 +13,6 @@ login = `Welcome back! 🎊`,
 
 lets_go = `Let's go!`,
 
-passwords_dont_match = `Bar`
+passwords_dont_match = `Bar`,
+
+coming_soon = `Coming soon 🥳`

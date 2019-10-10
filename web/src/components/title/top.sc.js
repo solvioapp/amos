@@ -1,5 +1,4 @@
-import {AVATAR_SIZE_REGULAR} from 'components/amos-chat/constants'
-import styled from 'styled-components'
+import {styled} from 'common'
 
 const Top_ = styled.h1`
   font-size: 24px;
