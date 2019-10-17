@@ -12,7 +12,7 @@ addOnClick = C => (props) => {
 
   /* eslint-disable no-shadow */
   addOnClick = field => ({currentTarget: {textContent: t}}) => {
-    form.setValue (fields[field], t)
+    form.setValue (field, t)
   },
 
   onClick = R.map (addOnClick) (fields),

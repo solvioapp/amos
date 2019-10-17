@@ -2,12 +2,11 @@ import {
   React, R, W,
   AmosChat, Button, Title, Input
 } from 'common'
-// import Inputs from './inputs'
 import Buttons from '../buttons.sc'
 import InputForm_ from '../input-form.sc'
 import Top_ from '../top.sc'
 
-const Topics = ({results, messages, topic, isValid, times = 3,
+const Topics = ({results, messages, topic, isValid, times,
   onSubmit, onClick, form, ...rest}) => (
   <Top_ {...rest}>
     <AmosChat>

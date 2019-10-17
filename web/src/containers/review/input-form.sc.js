@@ -1,5 +1,8 @@
-import Button from 'components/button'
-import styled from 'styled-components'
+import {
+  styled,
+  Button
+} from 'common'
+import Input from 'components/Input/top.sc'
 
 const InputForm_ = styled.div`
   display: flex;
@@ -9,6 +12,10 @@ const InputForm_ = styled.div`
   > ${Button} {
     align-self: center;
     margin-top: 30px;
+  }
+
+  ${Input} {
+    margin-top: 24px;
   }
 `
 

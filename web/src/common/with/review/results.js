@@ -22,10 +22,15 @@ results = C => (props) => {
 
   {form} = props,
 
-  /* Returns an array */
+  /* Returns an array of values */
   topics = form.watch (`topic`, []),
 
   skip = R.all (H.isNilOrEmpty) (topics),
+  /*
+    This commented out solution for input is better but we lose the indices
+    Leaving this for now, it's a TODO:
+  */
+  // input = R.reduce ((acc, str) => H.isNilOrEmpty (str) ? acc : ({str, first: 3})) ([]) (topics),
   input = R.map (str => ({str, first: 3})) (topics),
   {data, loading} = useQuery (QUERY_SEARCH, {variables: {input}, skip}),
 

@@ -84,4 +84,8 @@ importContext = req => {
   const _cache = R.map (val => R.propOr (val) (`default`) (val)) (cache)
   /* Wrap defaultly exported functions in an object */
   return R.map (R.when (fn => fn instanceof Function) (fn => ({[fn.name]: fn}))) (_cache)
-}
+},
+
+reduce = R.addIndex (R.reduce),
+
+atleast = min => val => val < min ? min : val

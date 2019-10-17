@@ -1,7 +1,6 @@
 import Label_ from './label.sc'
 import styled from 'styled-components'
 
-
 const Top_ = styled.div`
   display: flex;
   align-items: flex-start;
