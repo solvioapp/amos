@@ -16,7 +16,7 @@ const Input = ({
   return (
     <Top_>
       <Label_>{label}</Label_>
-      <Input_
+      <Input_ autoComplete='off'
         {...{placeholder, onKeyPress, ref,
           name, type, hasError, ...rest}}
       />

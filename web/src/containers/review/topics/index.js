@@ -1,29 +1,31 @@
 import {
-  React, W, R, H,
+  React, R, W,
   AmosChat, Button, Title, Input
 } from 'common'
-import Buttons from './buttons.sc'
-import InputForm_ from './input-form.sc'
-import Top_ from './top.sc'
+// import Inputs from './inputs'
+import Buttons from '../buttons.sc'
+import InputForm_ from '../input-form.sc'
+import Top_ from '../top.sc'
 
-const Topics = ({results, messages, topic, isValid,
-  loading, onSubmit, onClick, form, errors, ...rest}) => (
+const Topics = ({results, messages, topic, isValid, times = 3,
+  onSubmit, onClick, form, ...rest}) => (
   <Top_ {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
     <InputForm_>
       <Title>Topics</Title>
-      <form autocomplete='off'>
+      {R.times (key => (
         <Input
-          name='topics'
+          name={`topic[${key}]`}
           ref={form.register}
+          key={key}
           link={false}
           errors={form.errors}
           dropdown={!isValid}
-          {...{results, topic, onClick}}
+          {...{results, onClick}}
         />
-      </form>
+      )) (times)}
       <Buttons>
         <form onSubmit={onSubmit.previous}>
           <Button type='submit'>

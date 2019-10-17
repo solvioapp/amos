@@ -12,6 +12,7 @@ const form =
   {useContext, message} = opts,
 
   /* Get methods */
+  /* eslint-disable no-shadow */
   form = useContext
     ? useFormContext (formOpts)
     : useForm (formOpts),
