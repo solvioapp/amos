@@ -15,17 +15,20 @@ const Topics = ({results, messages, topic, isValid, times = 3,
     </AmosChat>
     <InputForm_>
       <Title>Topics</Title>
-      {R.times (key => (
-        <Input
-          name={`topic[${key}]`}
-          ref={form.register}
-          key={key}
-          link={false}
-          errors={form.errors}
-          dropdown={!isValid}
-          {...{results, onClick}}
-        />
-      )) (times)}
+      {R.times (
+        (key,
+          name = `topic[${key}]`) => (
+          <Input
+            name={name}
+            ref={form.register}
+            key={key}
+            link={false}
+            errors={form.errors.name}
+            dropdown={!isValid}
+            results={results}
+            onClick={onClick}
+          />
+        )) (times)}
       <Buttons>
         <form onSubmit={onSubmit.previous}>
           <Button type='submit'>

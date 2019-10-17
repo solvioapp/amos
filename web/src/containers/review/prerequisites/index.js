@@ -4,7 +4,7 @@ import {
 } from 'common'
 import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
-import InputForm_ from '../input-form.sc'
+import InputForm_ from '../input-form.sc' 
 
 const Prerequisites = ({results, messages, topic, isValid,
   onSubmit, onClick, form, ...rest}) => (
