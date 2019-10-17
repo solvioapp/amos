@@ -69,7 +69,7 @@ const Top_ = css`
     outline: none;
   }
 
-  ${H.ifProp (`primary`) (primary)}
+  ${H.ifProp (`primary`, primary)}
   ${props => console.log(`hi`, props)}
 `
   // ${({icon, children}) => icon && !children && iconOnly}

@@ -17,18 +17,6 @@ set = R.curry ((path, val, obj) => R.set (lens (path, obj), val, obj)),
 
 over = R.curry ((path, cb, obj) => R.over (lens (path, obj), cb, obj)),
 
-ifProp = (prop, a, b) => R.ifElse(
-  R.propEq(prop, true),
-  R.always(a),
-  R.always(b),
-),
-
-prop = (name, defValue) => R.ifElse(
-  R.has(name),
-  R.prop(name),
-  R.always(defValue),
-),
-
 /**
  * @description Tests whether function is not `null` or `undefined`
  * @param val
