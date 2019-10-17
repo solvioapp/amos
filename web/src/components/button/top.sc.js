@@ -1,9 +1,9 @@
-import {styled,css, H} from 'common'
+import {styled, css, H} from 'common'
 import Icon_ from 'components/icon/top.sc'
 import Text_ from './text.sc'
 
+  // ${'' /* ${props=>console.log(`primary!`, props)} */}
 const primary = css`
-  ${'' /* ${props=>console.log(`primary!`, props)} */}
   background-color: #0066FF;
   border: 1px solid #0066FF;
   color: white;
@@ -69,8 +69,10 @@ const Top_ = css`
     outline: none;
   }
 
-  ${H.ifProp(`primary`, primary)}
-  ${({icon,children}) => { if (icon && !children) return iconOnly}}
+  ${H.ifProp (`primary`) (primary)}
+  ${props => console.log(`hi`, props)}
 `
+  // ${({icon, children}) => icon && !children && iconOnly}
+// ${({icon, children}) => {if (icon && !children) return iconOnly}}
 
 export default Top_

@@ -10,8 +10,8 @@ const Dropdown = ({results, onClick, link}) => {
     console.log(result)
 
     const label = (
-      <label className='option' onClick={onClick}>
-        <span className='dropdown-title fadeIn'>
+      <label className='dropdown' onClick={onClick}>
+        <span>
           {text}
         </span>
       </label>
@@ -30,7 +30,7 @@ const Dropdown = ({results, onClick, link}) => {
 
   return (
     <Dropdown_>
-      <div className='aoyue-select zoomIn'>
+      <div className='dropdown'>
         {H.mapIfNotNil (renderResult) (results)}
       </div>
     </Dropdown_>

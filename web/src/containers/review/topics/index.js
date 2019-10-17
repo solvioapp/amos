@@ -7,7 +7,7 @@ import InputForm_ from '../input-form.sc'
 import Top_ from '../top.sc'
 
 const Topics = ({results, messages, topic, isValid, times,
-  onSubmit, onClick, form, ...rest}) => (
+  onSubmit, onClick, form, loading, onEnt, ...rest}) => (
   <Top_ {...rest}>
     <AmosChat>
       {messages}
@@ -26,6 +26,7 @@ const Topics = ({results, messages, topic, isValid, times,
             dropdown={!isValid[key]}
             results={results?.[key]}
             onClick={onClick[key]}
+            // onEnt={onEnt}
           />
         )) (times)}
       <Buttons>
