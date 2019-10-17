@@ -4,7 +4,7 @@ import {multiForm} from '../form'
 import hydrateOnMount from './hydrate-on-mount'
 import onClick from './on-click'
 import onSubmit from './on-submit'
-import withReviewSearch from './search'
+import results from './results'
 import validation from './validation'
 
 const
@@ -54,7 +54,7 @@ withReviewTopics = name => (
   R.pipe (
     onClick,
     validation,
-    withReviewSearch,
+    results,
     withReview (name),
   )
 )

@@ -10,9 +10,13 @@ addOnClick = C => (props) => {
 
   {topic, form, fields} = props,
 
-  onClick = ({currentTarget: {textContent: t}}) => {
-    form.setValue (fields[0], t)
+  /* eslint-disable no-shadow */
+  addOnClick = field => ({currentTarget: {textContent: t}}) => {
+    form.setValue (fields[field], t)
   },
+
+  onClick = R.map (addOnClick) (fields),
+
   onEnt = H.navto (`/t/${topic}`),
   forwardProps = R.merge ({onClick, onEnt}) (props)
 

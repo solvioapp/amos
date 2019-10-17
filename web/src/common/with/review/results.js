@@ -2,27 +2,28 @@ import {R, H, React, useQuery, gql} from 'common'
 
 const
 
-QUERY_SEARCH = gql`
+QUERY_SEARCH = topics => gql([`
   query Autocomplete($str: String!) {
     autocomplete (str: $str, first: 3) {
       name
     }
   }
-`,
+`]),
 
 /**
  * @description Sets up Query for Search
  */
-withReviewSearch = C => (props) => {
+results = C => (props) => {
   const
 
   {form, fields} = props,
 
-  topic = form.watch()[fields[0]],
+  topics = form.watch()[fields],
 
-  skip = R.complement (H.isNotNilOrEmpty) (topic),
+  skip = H.isNilOrEmpty (topic),
   {data, loading} = useQuery (QUERY_SEARCH, {variables: {str: topic}, skip}),
 
+  /* eslint-disable no-shadow */
   results = data
     ? R.map (r => ({name: r.name, text: r.name})) (data.autocomplete)
     : null,
@@ -32,4 +33,4 @@ withReviewSearch = C => (props) => {
   return <C {...forwardProps} />
 }
 
-export default withReviewSearch
+export default results

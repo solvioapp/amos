@@ -1,3 +1,5 @@
+import {H, Promise} from 'common'
+
 // const _1 = `
 // match (t:Topic)
 // unwind t.names as name
@@ -9,6 +11,7 @@
 // return t,name
 // limit $first
 // `
+
 const _1 = `
 match (t:Topic)
 unwind t.names as name
@@ -18,22 +21,23 @@ return t,name
 limit $first
 `
 
+const autocomplete = async (_, {input}, {session}) => {
 
-const autocomplete = async (_, {str, first}, {driver}) => {
-  const ses = driver.session()
+  input |> console.log ('input', #)
+  const
 
-  const {records: recs} = await ses.run (_1, {str, first})
+  /* eslint-disablen no-shadow */
+  autocomplete = async (el) => {
+    const {records: recs} = await session.run (_1, el)
+    const results = recs.map (rec => ({
+      topic: {...rec.get (`t`).properties, _id: rec.get (`t`).identity.low},
+      name: rec.get (`name`),
+    }))
+    return {results}
+  }
 
-  recs |> console.log ('recs', #)
-  recs[0] |> console.log ('recs[0]', #)
-  recs[0].get(`t`) |> console.log ('recs[0].get(`t`)', #)
-
-  const toReturn = recs.map (rec => ({
-    topic: {...rec.get (`t`).properties, _id: rec.get (`t`).identity.low},
-    name: rec.get (`name`),
-  }))
-  toReturn |> console.log ('toReturn', #)
-  return toReturn
+  const results = await Promise.mapSeries (input, autocomplete)
+  return {results}
 }
 
-export default autocomplete
+export default H.wrapInResponse (autocomplete)

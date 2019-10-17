@@ -35,16 +35,32 @@ input AddIsPartOfInput {
 # type Path {
 #   list: [String!]!
 # }
+input AutocompleteInput {
+  str: String!
+  first: Int!
+}
 
 type AutocompleteResult {
   name: String!
   topic: Topic!
 }
 
+type AutocompleteResults {
+  # foo must be there otherwise graphql complains :/
+  foo: Boolean
+  results: [AutocompleteResult!]!
+}
+
+type AutocompleteResponse {
+  success: Boolean!
+  message: String
+  results: [AutocompleteResults!]
+}
+
 extend type Query {
   # TODO: Change to [Path!]!
   # topic (name: String!): Topic!
-  autocomplete (str: String!, first: Int): [AutocompleteResult!]!
+  autocomplete (input: [AutocompleteInput!]!): AutocompleteResponse!
 }
 
 extend type Mutation {

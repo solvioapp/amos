@@ -60,8 +60,8 @@ req = dirBase => dirRel => regExp => requireAlso => {
 wrapInResponse = fn => {
   const _fn = async (...args) => {
     try {
-      const message = await fn (...args)
-      return {success: true, message}
+      const result = await fn (...args)
+      return R.merge (result) ({success: true})
     } catch ({message: _message, errors: message = [_message]}) {
       return {success: false, message}
     }

@@ -40,10 +40,11 @@ const login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
 
   /* Check if password is correct */
   correctPassword = await bcrypt.compare (password, recs[0].get (`hashedPassword`)),
-  [] = [H.assert (correctPassword) (CONST.incorrect_password)]
+  [] = [H.assert (correctPassword) (CONST.incorrect_password)],
 
   /* Grant jwt */
-  return await A.createToken (process.env.JWT_SECRET, {})
+  message = await A.createToken (process.env.JWT_SECRET, {})
+  return {message}
 }
 
 export default H.wrapInResponse (login)

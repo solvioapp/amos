@@ -23,10 +23,10 @@ const Topics = ({results, messages, topic, isValid, times = 3,
             ref={form.register}
             key={key}
             link={false}
-            errors={form.errors.name}
-            dropdown={!isValid}
-            results={results}
-            onClick={onClick}
+            errors={form.errors[name]}
+            dropdown={!isValid[key]}
+            results={results[key]}
+            onClick={onClick[key]}
           />
         )) (times)}
       <Buttons>

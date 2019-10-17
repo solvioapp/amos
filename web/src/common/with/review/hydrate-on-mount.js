@@ -25,8 +25,6 @@ addHydrationOnMount = C => (props) => {
   // TODO: Change to false
   {data: {review}} = useQuery (GET_REVIEW_CLIENT_GQL, {returnPartialData: true}),
 
-  [] = [review |> console.log ('review', #)],
-
   [] = [H.useMount(() => {
     R.mapObjIndexed
       (R.pipe (

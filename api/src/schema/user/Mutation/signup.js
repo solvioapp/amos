@@ -34,13 +34,15 @@ const signup = async (_, {input}, {session}) => {
   hashedPassword = await bcrypt.hash (password, 12),
 
   /* Save user to db! */
-  [] = [await session.run (_2, {username, email, hashedPassword})]
+  [] = [await session.run (_2, {username, email, hashedPassword})],
 
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
-  return username === `amos`
+  message = username === `amos`
     ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`]}) 
     : await A.createToken (process.env.JWT_SECRET, {})
+
+  return {message}
 }
 
 export default H.wrapInResponse (signup)
