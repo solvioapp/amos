@@ -2,13 +2,17 @@ import {R, H, React, useQuery, gql} from 'common'
 
 const
 
-QUERY_SEARCH = topics => gql([`
-  query Autocomplete($str: String!) {
-    autocomplete (str: $str, first: 3) {
-      name
+QUERY_SEARCH = gql`
+  query Autocomplete($input: [AutocompleteInput!]!) {
+    autocomplete (input: $input) {
+      results {
+        results {
+          name
+        }
+      }
     }
   }
-`]),
+`,
 
 /**
  * @description Sets up Query for Search
@@ -16,19 +20,21 @@ QUERY_SEARCH = topics => gql([`
 results = C => (props) => {
   const
 
-  {form, fields} = props,
+  {form} = props,
 
-  topics = form.watch()[fields],
+  /* Returns an array */
+  topics = form.watch (`topic`, []),
 
-  skip = H.isNilOrEmpty (topic),
-  {data, loading} = useQuery (QUERY_SEARCH, {variables: {str: topic}, skip}),
+  skip = R.all (H.isNilOrEmpty) (topics),
+  input = R.map (str => ({str, first: 3})) (topics),
+  {data, loading} = useQuery (QUERY_SEARCH, {variables: {input}, skip}),
 
-  /* eslint-disable no-shadow */
-  results = data
-    ? R.map (r => ({name: r.name, text: r.name})) (data.autocomplete)
-    : null,
+  /* eslint-disable no-shadow, indent */
+  results = data && R.map
+    (res => R.map (_res => ({name: _res.name, text: _res.name})) (res.results))
+    (data.autocomplete.results),
 
-  forwardProps = R.merge ({results, topic, loading}) (props)
+  forwardProps = R.merge ({results, topics, loading}) (props)
 
   return <C {...forwardProps} />
 }
