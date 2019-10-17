@@ -1,8 +1,10 @@
 /* Note: Until this logic is lifted, all changes here
  * should be mirrored in /api/common/validation! */
-import {R, yup} from 'common'
+import {R, yup, CONST} from 'common'
 
-const
+const {string, number, object, array} = yup
+
+export const
 
 RESERVED_PATHS = [
   `profile`, `review`, `reviews`, `signup`, `login`, `topic`, `topics`, `topic-graph`,
@@ -14,8 +16,7 @@ RESERVED_PATHS = [
 
 noAt = R.complement (R.includes (`@`)),
 
-username = yup
-  .string()
+username = string()
   .min(3)
   .max(16)
   .notOneOf(RESERVED_PATHS)
@@ -23,14 +24,12 @@ username = yup
   .label(`Username`)
   .required(),
 
-email = yup
-  .string()
+email = string()
   .email()
   .label(`Email`)
   .required(),
 
-password = yup
-  .string()
+password = string()
   .min(6)
   .label(`Password`)
   .required(),
@@ -50,18 +49,30 @@ validateUsernameOrEmail = async function (str) {
   }
 },
 
-usernameOrEmail = yup
-  .string()
+usernameOrEmail = string()
   /* We don't need name and message (first two args)
     because we'll be creating an error in `validateUsernameOrEmail` */
-  .test (``, ``, validateUsernameOrEmail)
+  .test (``, ``, validateUsernameOrEmail),
 
-export
+/* Extend signup */
+signup = object().shape ({
+  username, email, password,
+  repeatPassword: string().oneOf([yup.ref(`password`)], CONST.passwords_dont_match),
+}),
 
-{username, email}
-  
-export const
+login = object().shape ({usernameOrEmail, password}),
 
-signup = yup.object().shape ({username, email, password}),
+/* Add review */
+// links = array().of (string().url().required()).required(),
+links = object().shape ({links: string()}),
+// links = string().required(),
+topics = string(),
+// topics = array().of (string().required()),
+prerequisites = string(),
+// prerequisites = array().of (object().shape ({
+//   strength: number().oneOf ([1, 2, 3]).required(),
+//   level: number().oneOf ([1, 2, 3, 4]).required(),
+//   topic: string().required(),
+// })),
 
-login = yup.object().shape ({usernameOrEmail, password})
+addReview = object().shape ({links, topics, prerequisites})

@@ -109,7 +109,7 @@
     "spaced-comment": ["error", "always"],
     "template-curly-spacing": ["error", "never"],
     "use-isnan": "error",
-    "valid-jsdoc": "error",
+    // "valid-jsdoc": "error",
     "valid-typeof": "error",
     "max-lines": ["error", {"max": 65, "skipBlankLines": false, "skipComments": false}]
   }

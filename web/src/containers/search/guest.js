@@ -1,8 +1,5 @@
-// import AmosChat from 'components/amos-chat'
-// import AuthBox from 'components/auth-box'
-// import Top_ from './top.sc'
 import {
-  React, useState, useQuery, R, gql, navto,
+  React, W,
   Input
 } from 'common'
 
@@ -12,41 +9,45 @@ import {
 //   `So I need your help! Create an account and submit reviews for your favorite learning resources. Vamos, amigo! 🤗`,
 // ]
 
-// const debug = fn => R.converge (R.prop (`1`), [console.log, fn])
+const Guest = ({onEnt, results, register, ...rest}) => (
+  <form autocomplete='off'>
+    <Input
+      onEnt={onEnt}
+      results={results}
+      name='str'
+      ref={register}
+      {...rest}
+    />
+  </form>
+)
 
-// R.pipe
-//   e |> console.log ('e', #) && fn (e)
+export default W.withSearch (Guest)
+
+
+// const Guest = ({...rest}) => {
+//   const [input, setInputObj] = useState (``)
+//   const {data} = useQuery (QUERY_SEARCH, {variables: {string: input}})
+//   const setInput = ({target: {value: val}}) => setInputObj (val)
+
+//   /* If data is undefined or input is empty, return null */
+//   const results = data
+//     ? (R.isEmpty (input)
+//       ? null
+//       // : R.map (r => ({name: r.name, text: r.name})) (data.autocomplete)
+//       : R.map (r => ({name: r.name, text: r.name})) (data.autocomplete)
+//     ) : null
+
+//   const handleSearch = navto (`/t/${input}`)
+
+//   return (
+//     <Input
+//       onChange={setInput}
+//       onEnt={handleSearch}
+//       results={results}
+//       {...rest}
+//     />
+//   )
 // }
-
-const QUERY_SEARCH = gql`
-  query Autocomplete($string: String!) {
-    autocomplete (string: $string, first: 3) {
-      name
-    }
-  }
-`
-
-const Guest = ({...rest}) => {
-  const [input, setInputObj] = useState (``)
-  const {data} = useQuery (QUERY_SEARCH, {variables: {string: input}})
-  const setInput = ({target: {value: val}}) => setInputObj (val)
-
-  /* If data is undefined or input is empty, return null */
-  const results = data
-    ? (R.isEmpty (input)
-      ? null
-      : R.map (r => ({name: r.name, text: r.name})) (data.autocomplete)
-    ) : null
-
-  // /* Can't use point-free coding because it would bind it to inputEl (see closures) */
-  const handleSearch = navto (`/t/${input}`)
-
-  return (
-    <>
-      <Input onChange={setInput} onEnt={handleSearch} results={results} {...rest} />
-    </>
-  )
-}
 
 // <Top_ columns={'two'} {...rest}>
 //   <AmosChat avatar={'large'}>
@@ -54,5 +55,3 @@ const Guest = ({...rest}) => {
 //   </AmosChat>
 //   <AuthBox/>
 // </Top_>
-
-export default Guest

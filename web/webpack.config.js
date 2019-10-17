@@ -39,7 +39,6 @@ const common = {
   },
   resolve: {
     alias: {
-      root: rootPath(`.`),
       common: rootPath(`src/common`),
       components: rootPath(`src/components`),
       containers: rootPath(`src/containers`),

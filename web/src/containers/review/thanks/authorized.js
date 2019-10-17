@@ -1,12 +1,10 @@
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
+import {
+  H, React, useCallback,
+  AmosChat, Button
+} from 'common'
 import Top_ from '../top.sc'
-import {navto} from 'common/history'
-import React, {useCallback} from 'react'
 
-import {useReviewCtx} from '../'
-
-const goLinks = navto(`/review/links`)
+const goLinks = H.navto (`/review/links`)
 
 const messages = [
   () => <span>

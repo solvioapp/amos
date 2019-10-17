@@ -1,13 +1,12 @@
-import {InMemoryCache, H, R, Cookies} from 'common'
+import {H, R, Cookies} from 'common'
 
-const _cache = () => {
+const initCache = client => {
   const
 
-  cache = new InMemoryCache(),
-
   /* Default data */
+  {cache} = client,
   defaultData = {isAuthenticated: false},
-  onResetStore = () => cache.writeData ({data: defaultData}),
+  [] = [client.onResetStore = () => cache.writeData ({data: defaultData})],
 
   /* Initial Data */
   auth = (new Cookies()).get (`auth`),
@@ -18,8 +17,6 @@ const _cache = () => {
   initialData = R.merge (defaultData) (initialDataFragment)
 
   cache.writeData ({data: initialData})
-
-  return [onResetStore, cache]
 }
 
-export default _cache
+export default initCache

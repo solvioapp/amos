@@ -4,18 +4,27 @@ import {
 
 import {Dropdown_} from './dropdown.sc.js'
 
-const Dropdown = ({results}) => {
+const Dropdown = ({results, onClick, link}) => {
   const renderResult = (result) => {
     const {name, text} = result
     console.log(result)
+
+    const label = (
+      <label className='option' onClick={onClick}>
+        <span className='dropdown-title fadeIn'>
+          {text}
+        </span>
+      </label>
+    )
+
+    const optionallyWrap = (wrap) => (
+      wrap ? <Link to={`/t/${name}`}> {label} </Link> : label
+    )
+
     return (
-      <Link to={`/t/${name}`}>
-        <label className="option">
-          <span className="dropdown-title fadeIn">
-            {text}
-          </span>
-        </label>
-      </Link>
+      <>
+        {optionallyWrap (link)}
+      </>
     )
   }
 

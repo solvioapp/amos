@@ -1,12 +1,10 @@
 import {
-  React, useCallback,
+  H, React, useCallback,
   AmosChat, AuthBox, Button
 } from 'common'
 import Top_ from '../top.sc'
-import {navto} from 'common/history'
-import {useReviewCtx} from '../'
 
-const goRoot = navto(`/`)
+const goRoot = H.navto (`/review`)
 
 const messages = [
   `Thanks for the review!`,

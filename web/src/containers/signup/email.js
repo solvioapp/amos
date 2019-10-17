@@ -1,5 +1,5 @@
 import {
-  React, R, connect, myUseForm, CONST, validation,
+  React, R, W, CONST, validation,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
 
@@ -7,7 +7,7 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 )
 
-const Form = ({onSubmit, messages, register, errors}) => (
+const Form = ({onSubmit, messages, form: {register}, errors}) => (
   <form onSubmit={onSubmit}>
     <AmosChat>
       {messages}
@@ -53,6 +53,6 @@ const Form = ({onSubmit, messages, register, errors}) => (
 )
 
 export default R.compose (
-  connect.SIGNUP,
-  myUseForm ({validationSchema: validation.signupAux, message})
+  W.SIGNUP,
+  W.form ({validationSchema: validation.signup}) ({message})
 ) (Form)

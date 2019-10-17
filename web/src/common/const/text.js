@@ -15,4 +15,6 @@ lets_go = `Let's go!`,
 
 passwords_dont_match = `Bar`,
 
-coming_soon = `Coming soon 🥳`
+coming_soon = `Coming soon 🥳`,
+
+err_topics = `Topic Must be a valid Topic.`

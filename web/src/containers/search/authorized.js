@@ -1,8 +1,8 @@
+import {
+  H, React,
+  AmosChat, Button
+} from 'common'
 import Top_ from './top.sc'
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
-import {navto} from 'common/history'
-import React from 'react'
 
 const messages = [
   `Hi again.`,
@@ -14,9 +14,9 @@ const messages = [
 const Authorized = ({...rest}) => (
   <Top_ {...rest}>
     <AmosChat callToAction={
-        <Button primary onClick={navto(`/review`)}>
-          Submit a Review
-        </Button>}>
+      <Button primary onClick={H.navto (`/review`)}>
+        Submit a Review
+      </Button>}>
       {messages}
     </AmosChat>
   </Top_>

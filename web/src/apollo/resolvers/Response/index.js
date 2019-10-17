@@ -10,12 +10,4 @@ const login = async ({success, message}, _, {cache}) => {
   }
 }
 
-const logout = (_, args, {client}) => {
-  (new Cookies()).remove (`auth`)
-  client.resetStore()
-}
-
-export default {
-  Mutation: {logout},
-  Response: {login},
-}
+export default login

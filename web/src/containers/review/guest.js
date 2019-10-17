@@ -1,15 +1,14 @@
 import {
-  React,
+  React, H,
   AmosChat, AuthBox, Button
 } from 'common'
 import Top_ from './top.sc'
-import {navto} from 'common/history'
 
 const Guest = ({...rest}) => (
   <Top_ columns={'two'} {...rest}>
     <Top_ columns={'left'}>
       <AmosChat avatar={'large'} callToAction={
-        <Button primary onClick={navto(`/review/links`)}>
+        <Button primary onClick={H.navto (`/review/links`)}>
           Submit anonymously
         </Button>
       }>

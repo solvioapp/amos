@@ -2,35 +2,35 @@
  * should be mirrored in /api/common/validation! */
 import {R, yup, CONST} from 'common'
 
-const
+const {string, number, object, array} = yup
+
+export const
 
 RESERVED_PATHS = [
   `profile`, `review`, `reviews`, `signup`, `login`, `topic`, `topics`, `topic-graph`,
   `resource`, `resources`, `admin`, `bot`, `amos`, `solvio`, `solviofoundation`,
   `home`, `callback`, `success`, `thanks`, `settings`, `help`, `news`, `newsfeed`,
   `feed`, `search`, `discover`, `explore`, `proposals`, `proposal`, `dashboard`,
-  `terms`, `privacy`, `sponsors`, `about`, `school`, `schools`, `courses`, `logout`
+  `terms`, `privacy`, `sponsors`, `about`, `school`, `schools`, `courses`, `logout`,
+  `bootcamp`, `bootcamps`, `api`, `forum`, `new`, `groups`, `rules`, `user`, 
 ],
 
 noAt = R.complement (R.includes (`@`)),
 
-username = yup
-  .string()
+username = string()
   .min(3)
   .max(16)
-  .notOneOf(RESERVED_PATHS)
+  .notOneOf (RESERVED_PATHS, `That username is a reserved path 😕`)
   .test(``, `This is not a valid email and username can't have '@'.`, noAt)
   .label(`Username`)
   .required(),
 
-email = yup
-  .string()
+email = string()
   .email()
   .label(`Email`)
   .required(),
 
-password = yup
-  .string()
+password = string()
   .min(6)
   .label(`Password`)
   .required(),
@@ -50,24 +50,41 @@ validateUsernameOrEmail = async function (str) {
   }
 },
 
-usernameOrEmail = yup
-  .string()
+usernameOrEmail = string()
   /* We don't need name and message (first two args)
     because we'll be creating an error in `validateUsernameOrEmail` */
-  .test (``, ``, validateUsernameOrEmail)
-
-export
-
-{username, email}
-
-export const
-
-signup = yup.object().shape ({username, email, password}),
+  .test (``, ``, validateUsernameOrEmail),
 
 /* Extend signup */
-signupAux = signup.shape ({
+signup = object().shape ({
   username, email, password,
-  repeatPassword: yup.string().oneOf([yup.ref(`password`)], CONST.passwords_dont_match),
+  repeatPassword: string().oneOf([yup.ref(`password`)], CONST.passwords_dont_match),
 }),
 
-login = yup.object().shape ({usernameOrEmail, password})
+login = object().shape ({usernameOrEmail, password}),
+
+/* Add review */
+// links = array().of (string().url().required()).required(),
+// _links = string().url(),
+
+// links = object().shape ({links: _links})
+_links = string().url().required(),
+links = object().shape ({links: _links}),
+_topics = string(),
+topics = object().shape ({topic: _topics})
+
+// topics = array().of (string().required()),
+// prerequisites = string(),
+// prerequisites = array().of (object().shape ({
+//   strength: number().oneOf ([1, 2, 3]).required(),
+//   level: number().oneOf ([1, 2, 3, 4]).required(),
+//   topic: string().required(),
+// })),
+
+// review = {
+//   links: object().shape ({links}),
+  // topics: object().shape ({topics}),
+  // prererequisites: object().shape ({prerequisites}),
+// }
+
+// review = object().shape ({links, topics, prerequisites})

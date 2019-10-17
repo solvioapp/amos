@@ -3,7 +3,7 @@ import Icon_ from 'components/icon/top.sc'
 import Text_ from './text.sc'
 
 const primary = css`
-  ${props=>console.log(`primary!`, props)}
+  ${'' /* ${props=>console.log(`primary!`, props)} */}
   background-color: #0066FF;
   border: 1px solid #0066FF;
   color: white;
@@ -15,7 +15,7 @@ const primary = css`
 `
 
 const iconOnly = css`
-  ${props=>console.log(`iconOnly!`, props)}
+  ${'' /* ${props=>console.log(`iconOnly!`, props)} */}
   font-size: 0;
   padding: 0;
   width: 40px;
@@ -26,7 +26,7 @@ const iconOnly = css`
 `
 
 const Top_ = css`
-  ${props => console.log(`props Top_`, props)}
+  ${'' /* ${props => console.log(`props Top_`, props)} */}
   background-color: white;
   border-radius: 8px;
   border: 1.3px solid #959595;

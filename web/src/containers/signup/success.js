@@ -1,8 +1,8 @@
-import AmosChat from 'components/amos-chat'
-import Button from 'components/button'
+import {
+  H, React,
+  AmosChat, Button
+} from 'common'
 import Top_ from './top.sc'
-import React from 'react'
-import {navto} from 'common/history'
 
 const messages = [
   `Nice to meet you too 😴`,
@@ -12,7 +12,7 @@ const messages = [
 const Success = ({...rest}) => (
   <Top_ {...rest}>
     <AmosChat>{messages}</AmosChat>
-    <Button primary onClick={navto(`/review`)}>
+    <Button primary onClick={H.navto (`/review`)}>
       Submit a Review
     </Button>
   </Top_>

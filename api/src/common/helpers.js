@@ -28,15 +28,6 @@ isNotNil = R.complement(R.isNil),
  * @param {Array} - array of fns
  */
 arrayOfFnsToObject = R.reduce ((acc, val) => R.set (R.lensProp (val.name)) (val) (acc)) ({}),
-importRegex = (dir = `.`, useSubdirs = true, regex = /^\.\/.*$/, mode = `sync`) => {
-  const req = require.context(dir, useSubdirs, regex, mode)
-  const cache = {}
-  const importAll = req => {
-    req.keys().forEach(key => cache[key] = req(key))
-  }
-  importAll(req)
-  return cache
-},
 
 // mergeDeepWithKeyAll = 
 

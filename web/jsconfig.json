@@ -1,28 +1,13 @@
 {
-    "compilerOptions": {
-        "baseUrl": ".",
-        "paths": {
-            "ClientApp/*": [
-                "./ClientApp/*"
-            ],
-            "root/*": [
-                "./*"
-            ],
-            "common/*": [
-                "./src/common/*"
-            ],
-            "components/*": [
-                "./src/components/*"
-            ],
-            "containers/*": [
-                "./src/containers/*"
-            ],
-            "apollo/*": [
-                "./src/apollo/*"
-            ]
-        }
-    },
-    "include": [
-        "./src/**/*"
-    ]
+  "compilerOptions": {
+  "baseUrl": ".",
+  "paths": {
+    "ClientApp/*": ["./ClientApp/*"],
+    "common/*": ["./src/common/*"],
+    "components/*": ["./src/components/*"],
+    "containers/*": ["./src/containers/*"],
+    "apollo/*": ["./src/apollo/*"]
+  }
+},
+  "include": ["./src/**/*"]
 }

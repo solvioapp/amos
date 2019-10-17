@@ -44,7 +44,7 @@ type AutocompleteResult {
 extend type Query {
   # TODO: Change to [Path!]!
   # topic (name: String!): Topic!
-  autocomplete (string: String!, first: Int): [AutocompleteResult!]!
+  autocomplete (str: String!, first: Int): [AutocompleteResult!]!
 }
 
 extend type Mutation {

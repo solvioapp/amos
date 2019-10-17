@@ -2,13 +2,20 @@ import * as R from 'ramda'
 
 export const
 
-lens = R.ifElse(
-  R.is(String),
-  R.lensProp,
-  R.lensPath
-),
+/**
+ * @description Universal lens
+ * @param path
+ * @param obj
+ */
+lens = R.cond ([
+  [R.is (String), R.lensProp],
+  [R.is (Number), R.lensIndex],
+  [R.T, R.lensPath]
+]),
 
-set = R.curry((path, value, state) => R.set(lens(path), value, state)),
+set = R.curry ((path, val, obj) => R.set (lens (path, obj), val, obj)),
+
+over = R.curry ((path, cb, obj) => R.over (lens (path, obj), cb, obj)),
 
 ifProp = (prop, a, b) => R.ifElse(
   R.propEq(prop, true),
@@ -32,7 +39,9 @@ notEquals = R.complement (R.equals),
 isNotNil = R.complement (R.isNil),
 isNotEmpty = R.complement (R.isEmpty),
 
+isNilOrEmpty = R.either (R.isNil) (R.isEmpty),
 isNotNilOrEmpty = R.both (isNotNil, isNotEmpty),
+
 
 /**
  * @description Like R.map but you get (val, key)!
@@ -42,23 +51,17 @@ isNotNilOrEmpty = R.both (isNotNil, isNotEmpty),
 mapIndexed = R.addIndex (R.map),
 
 /**
- * @description Apply two functions and return result of second one
+ * @description Apply two functions and return result of the second
  * @param Arb Arbitrary number of params
  */
 
-applyAndReturn = fn1 => fn2 => R.converge (R.prop (`1`)) ([fn1, fn2]),
+intercept = cb => fn => R.converge (R.nthArg (0)) ([fn, cb]),
 
 /**
  * @description Wrap any function with debug to log its arguments
  * @param Arb Arbitrary number of params
  */
-debug = applyAndReturn (console.log),
-
-log = items => {
-  console.log (`H.log`, items)
-  return items
-},
-
+debug = intercept (console.log),
 mapIfNotNil = fn => obj => (
   R.isNil (obj)
     ? null
@@ -73,4 +76,12 @@ getMessages = def => R.pipe (
     R.isEmpty,
     R.append (def),
   )
-)
+),
+
+importContext = req => {
+  const cache = R.reduce ((acc, key) => R.append (req (key)) (acc)) ([]) (req.keys())
+  /* Accept default exports */
+  const _cache = R.map (val => R.propOr (val) (`default`) (val)) (cache)
+  /* Wrap defaultly exported functions in an object */
+  return R.map (R.when (fn => fn instanceof Function) (fn => ({[fn.name]: fn}))) (_cache)
+}

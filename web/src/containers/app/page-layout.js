@@ -1,5 +1,5 @@
 import {
-  PageLayout, connect
+  PageLayout, W
 } from 'common'
 
-export default connect.GET_AUTH (PageLayout)
+export default W.GET_AUTH (PageLayout)

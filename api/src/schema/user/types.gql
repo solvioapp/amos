@@ -65,6 +65,7 @@ input SignupInput {
   username: String!
   email: String!
   password: String!
+  repeatPassword: String!
 }
 
 extend type Mutation {

@@ -1,4 +1,4 @@
-import Button from 'components/button/top.sc'
+import Button from 'components/button'
 import styled from 'styled-components'
 
 const InputForm_ = styled.div`

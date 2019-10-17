@@ -1,4 +1,7 @@
-import {React, AmosChat, AuthBox} from 'common'
+import {
+  React,
+  AmosChat, AuthBox
+} from 'common'
 // import Title from 'components/title'
 import Top_ from './top.sc'
 
