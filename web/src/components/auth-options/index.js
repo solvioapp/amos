@@ -1,27 +1,23 @@
+import {H, React, Link} from 'common'
 import Top_ from './top.sc'
-import React from 'react'
-import {Link} from 'react-router-dom'
 
 const AuthOptions = ({
   first = {
-    link: '/signup/email',
-    text: 'Sign up'
-  }, 
+    link: `/signup/email`,
+    text: `Sign up`
+  },
   second = {
-    link: '/login',
-    text: 'Log in'
-  }
-}, ...rest) => {
+    link: `/login`,
+    text: `Log in`
+  }, ...rest}) => (
 
-  return (
-    <Top_ {...rest}>
-      <Link to={first.link}>{first.text}</Link>
-      &nbsp;
-      {` • `}
-      &nbsp;
-      <Link to={second.link}>{second.text}</Link>
-    </Top_>
-  )
-}
+  <div {...rest}>
+    <Link to={first.link}>{first.text}</Link>
+    &nbsp;
+    {` • `}
+    &nbsp;
+    <Link to={second.link}>{second.text}</Link>
+  </div>
+)
 
-export default AuthOptions
+export default H.style (AuthOptions) (Top_)

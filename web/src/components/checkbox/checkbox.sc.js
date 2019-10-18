@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import {styled} from 'common'
 
 const Checkbox_ = styled.span`
 

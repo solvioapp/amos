@@ -1,16 +1,16 @@
 import {
-  React, CONST,
+  H, React, CONST,
   Button, AuthOptions, ReactTooltip
 } from 'common'
 import Top_ from './top.sc'
 
 const AuthBox = ({...rest}) => (
-  <Top_ {...rest}>
+  <div {...rest}>
     <ReactTooltip effect='solid'/>
     <Button data-tip={CONST.coming_soon} icon='facebook' width={`250px`}>Continue with Facebook</Button>
     <Button data-tip={CONST.coming_soon} icon='google' width={`250px`}>Continue with Google</Button>
     <AuthOptions/>
-  </Top_>
+  </div>
 )
 
-export default AuthBox
+export default H.style (AuthBox) (Top_)

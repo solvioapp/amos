@@ -1,7 +1,8 @@
-import Button from 'components/button/top.sc'
-import Panel from 'components/panel/top.sc'
+import {
+  styled, css,
+  Button, Panel
+} from 'common'
 import InputForm_ from './input-form.sc'
-import styled, {css} from 'styled-components'
 
 const two = css``
 

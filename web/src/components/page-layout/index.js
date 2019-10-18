@@ -1,15 +1,16 @@
-import NavMenu from 'components/nav-menu'
-import Footer from 'components/footer'
+import {
+  H, React,
+  NavMenu, Footer
+} from 'common'
 import Content_ from './content.sc'
 import Top_ from './top.sc'
-import React from 'react'
 
 const PageLayout = ({isAuthenticated, children, ...rest}) => (
-  <Top_ {...rest}>
+  <div {...rest}>
     <NavMenu isAuthenticated={isAuthenticated}/>
     <Content_>{children}</Content_>
     <Footer/>
-  </Top_>
+  </div>
 )
 
-export default PageLayout
+export default H.style (PageLayout) (Top_)

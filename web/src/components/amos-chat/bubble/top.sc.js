@@ -4,7 +4,7 @@ const
 
 {AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE} = CSS_CONST
 
-const Top_ = styled.div`
+const Top_ = css`
   background-color: white;
   border-radius: 12px;
   border: 1.3px solid black;

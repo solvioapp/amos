@@ -1,6 +1,4 @@
-import styled from 'styled-components'
-import Panel from 'components/panel/top.sc'
-import Button from 'components/button/top.sc'
+import {styled, Panel, Button} from 'common'
 
 const Top_ = styled(Panel)`
   > ${Button} {

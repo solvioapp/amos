@@ -1,7 +1,7 @@
+import {css} from 'common'
 import Link from './link.sc'
-import styled from 'styled-components'
 
-const Top_ = styled.footer`
+const Top_ = css`
   bottom: 0;
   color: black;
   font-size: 1rem;

@@ -28,42 +28,32 @@ import ReactTooltip from 'react-tooltip'
 
 /* No dependencies */
 import Icon from 'components/icon'
-import Icon_ from 'components/icon/top.sc'
 import AuthOptions from 'components/auth-options'
-import AuthOptions_ from 'components/auth-options/top.sc'
 import Checkbox from 'components/checkbox'
-import Checkbox_ from 'components/checkbox/top.sc'
 import Footer from 'components/footer'
-import Footer_ from 'components/footer/top.sc'
 import Input from 'components/input'
 import Input_ from 'components/input/top.sc'
 import NavMenu from 'components/nav-menu'
 import NavMenu_ from 'components/nav-menu/top.sc'
 import NotFound from 'components/not-found'
-import NotFound_ from 'components/not-found/top.sc'
 import RadioGroup from 'components/radio-group'
 import RadioGroup_ from 'components/radio-group/top.sc'
 import Title from 'components/title'
-import Title_ from 'components/title/top.sc'
 
 /* Special */
-// import Panel from 'components/panel'
+import Panel from 'components/panel/top.sc'
 
 /* Icon */
 import Button from 'components/button'
-import Button_ from 'components/button/top.sc'
 
 /* Button */
 import AmosChat from 'components/amos-chat'
-import AmosChat_ from 'components/amos-chat/top.sc'
 
 /* AuthOptions, Button */
 import AuthBox from 'components/auth-box'
-import AuthBox_ from 'components/auth-box/top.sc'
 
 /* NavMenu, Footer */
 import PageLayout from 'components/page-layout'
-import PageLayout_ from 'components/page-layout/top.sc'
 
 export {
   R,
@@ -89,29 +79,20 @@ export {
   ReactTooltip,
   /* Components */
   Icon,
-  Icon_,
   AuthOptions,
-  AuthOptions_,
   Checkbox,
-  Checkbox_,
   Footer,
-  Footer_,
   Input,
   Input_,
   NavMenu,
   NavMenu_,
   NotFound,
-  NotFound_,
   RadioGroup,
   RadioGroup_,
   Title,
-  Title_,
+  Panel,
   Button,
-  Button_,
   AmosChat,
-  AmosChat_,
   AuthBox,
-  AuthBox_,
   PageLayout,
-  PageLayout_,
 }

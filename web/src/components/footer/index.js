@@ -1,9 +1,9 @@
+import {H, React} from 'common'
 import Top_ from './top.sc'
 import Link from './link.sc'
-import React from 'react'
 
 const Footer = ({...rest}) => (
-  <Top_  {...rest}>
+  <footer  {...rest}>
     Built with ❤️ and ☕️ by
     {` `}
     <Link target='_blank' href='http://solvio.org'>
@@ -13,7 +13,7 @@ const Footer = ({...rest}) => (
     <Link target='_blank' href='https://github.com/solviofoundation/amos/wiki'>
       Help.
     </Link>
-  </Top_>
+  </footer>
 )
 
-export default Footer
+export default H.style (Footer) (Top_)

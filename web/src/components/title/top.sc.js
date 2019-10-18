@@ -1,6 +1,6 @@
-import {styled} from 'common'
+import {css} from 'common'
 
-const Top_ = styled.h1`
+const Top_ = css`
   font-size: 24px;
   font-weight: 300;
   align-self: flex-start;

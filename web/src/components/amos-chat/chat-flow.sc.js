@@ -1,5 +1,7 @@
-import {styled, Button, H, CSS_CONST, css} from 'common'
-import Bubble_ from './bubble/top.sc'
+import {
+  H, styled, CSS_CONST, css,
+  Button, Bubble
+} from 'common'
 
 const
 
@@ -30,7 +32,7 @@ ChatFlow_ = styled.div`
     align-self: center;
   }
 
-  > ${Bubble_} + ${Bubble_} {
+  > ${Bubble} + ${Bubble} {
     margin-top: 16px;
   }
 

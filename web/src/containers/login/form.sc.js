@@ -1,7 +1,7 @@
-import AuthOptions from 'components/auth-options/top.sc'
-import Button from 'components/button/top.sc'
-import Input from 'components/input/top.sc'
-import styled from 'styled-components'
+import {
+  styled,
+  AuthOptions, Button, Input
+} from 'common'
 
 const Form = styled.form`
   align-items: center;

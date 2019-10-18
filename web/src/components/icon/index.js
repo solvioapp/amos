@@ -1,17 +1,17 @@
-import React from 'react'
+import {H, React} from 'common'
 import Top_ from './top.sc'
 import iconsList from './svg'
 
-function Icon ({src, ...props}) {
+function Icon ({src, ...rest}) {
   const svg = typeof src === `string` ? iconsList[src] : src
   if (!svg) {
     throw new Error(`No icon found: '${src}'`)
   }
   return (
-    <Top_ viewBox={svg.viewBox} {...props}>
+    <svg viewBox={svg.viewBox} {...rest}>
       <use xlinkHref={svg.url}/>
-    </Top_>
+    </svg>
   )
 }
 
-export default Icon
+export default H.style (Icon) (Top_)

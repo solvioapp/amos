@@ -25,7 +25,7 @@ large: css`
 `,
 },
 
-Avatar_ = styled.img`
+Top_ = css`
   /* background-color: #f3f3f3;
   border-radius: 50%;
   border: 1px black solid; */
@@ -33,4 +33,4 @@ Avatar_ = styled.img`
   ${props => options[props.size]};
 `
 
-export default Avatar_
+export default Top_

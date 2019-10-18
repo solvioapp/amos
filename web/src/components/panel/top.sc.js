@@ -1,5 +1,4 @@
-import Title from 'components/title/top.sc'
-import styled, {css} from 'styled-components'
+import {css, styled, Title} from 'common'
 
 const one = css`
   display: flex;

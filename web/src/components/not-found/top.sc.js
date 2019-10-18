@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import {css} from 'common'
 
-const Top_ = styled.div`
+const Top_ = css`
 `
 
 export default Top_

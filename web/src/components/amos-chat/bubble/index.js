@@ -1,12 +1,12 @@
+import {H, React} from 'common'
 import Top_ from './top.sc'
 import Tail_ from './tail.sc'
-import React from 'react'
 
-const Bubble = ({children}) => (
-  <Top_>
+const Bubble = ({children, ...rest}) => (
+  <div {...rest}>
     <Tail_/>
     {children}
-  </Top_>
+  </div>
 )
 
-export default Bubble
+export default H.style (Bubble) (Top_)

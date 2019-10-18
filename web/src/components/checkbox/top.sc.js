@@ -1,6 +1,6 @@
-import {styled} from 'common'
+import {css} from 'common'
 
-const Top_ = styled.div`
+const Top_ = css`
   display: flex;
   align-items: center;
   flex-direction: row;

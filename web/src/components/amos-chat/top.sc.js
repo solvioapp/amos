@@ -1,7 +1,7 @@
+import {css} from 'common'
 import ChatFlow_ from './chat-flow.sc'
-import styled from 'styled-components'
 
-const Top_ = styled.div`
+const Top_ = css`
   align-items: flex-start;
   display: flex;
   max-width: fit-content;

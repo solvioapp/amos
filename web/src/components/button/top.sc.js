@@ -1,5 +1,7 @@
-import {styled, css, H} from 'common'
-import Icon_ from 'components/icon/top.sc'
+import {
+  css, H,
+  Icon
+} from 'common'
 import Text_ from './text.sc'
 
   // ${'' /* ${props=>console.log(`primary!`, props)} */}
@@ -47,7 +49,7 @@ const Top_ = css`
     }
   }
 
-  > ${Icon_} {
+  > ${Icon} {
     height: 15px;
   }
 
@@ -55,7 +57,7 @@ const Top_ = css`
     vertical-align: middle;
   }
 
-  > ${Icon_} + ${Text_} {
+  > ${Icon} + ${Text_} {
     margin-left: 8px;
   }
 
