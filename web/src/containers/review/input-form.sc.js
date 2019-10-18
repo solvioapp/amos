@@ -1,8 +1,7 @@
 import {
   styled,
-  Button
+  Button, Input
 } from 'common'
-import Input_ from 'components/input/top.sc'
 
 const InputForm_ = styled.div`
   display: flex;
@@ -14,7 +13,7 @@ const InputForm_ = styled.div`
     margin-top: 30px;
   }
 
-  ${Input_} + ${Input_} {
+  ${Input} + ${Input} {
     margin-top: 54px;
   }
 `

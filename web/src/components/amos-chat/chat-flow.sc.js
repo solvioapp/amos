@@ -1,7 +1,8 @@
 import {
   H, styled, CSS_CONST, css,
-  Button, Bubble
+  Button,
 } from 'common'
+import Bubble from './bubble'
 
 const
 

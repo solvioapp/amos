@@ -1,14 +1,15 @@
 import {
-  React, R, W, CONST, validation,
+  R, W, H, React, CONST, validation,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
+import Top_ from './top.sc'
 
 const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 )
 
-const Form = ({onSubmit, messages, form: {register}, errors}) => (
-  <form onSubmit={onSubmit}>
+const Form = ({onSubmit, messages, form: {register}, errors, ...rest}) => (
+  <form onSubmit={onSubmit} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -52,7 +53,7 @@ const Form = ({onSubmit, messages, form: {register}, errors}) => (
   </form>
 )
 
-export default R.compose (
-  W.SIGNUP,
-  W.form ({validationSchema: validation.signup}) ({message})
-) (Form)
+export default Form
+|> W.form ({validationSchema: validation.signup}) ({message}) (#)
+|> W.SIGNUP
+|> H.style (#) (Top_)

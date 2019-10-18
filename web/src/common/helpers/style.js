@@ -1,4 +1,4 @@
-import {R, styled} from 'common'
+import {R, React, styled} from 'common'
 
 export const
 
@@ -14,4 +14,8 @@ prop = (name, defValue) => R.ifElse(
   R.always (defValue),
 ),
 
-style = C => css => styled (C) `${css};`
+style = C => css => styled (C) `${css};`,
+
+styleAndForwardRef = C => css => (
+  style (React.forwardRef (C)) (css)
+)

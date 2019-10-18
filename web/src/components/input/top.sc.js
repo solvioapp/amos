@@ -1,7 +1,7 @@
+import {css} from 'common'
 import Label_ from './label.sc'
-import styled from 'styled-components'
 
-const Top_ = styled.div`
+const Top_ = css`
   display: flex;
   align-items: flex-start;
   flex-direction: column;

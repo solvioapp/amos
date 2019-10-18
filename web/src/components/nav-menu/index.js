@@ -1,11 +1,11 @@
-import {React, R, withRouter} from 'common'
+import {H, React, R, withRouter} from 'common'
 import Top_ from './top.sc'
 import Link_ from './link.sc'
 
 const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
 const NavMenu = ({isAuthenticated, ...props}) => (
-  <Top_ {...props}>
+  <div {...props}>
     <Link_ to='/review'>
       Review
     </Link_>
@@ -24,7 +24,9 @@ const NavMenu = ({isAuthenticated, ...props}) => (
     <Link_ to='/login' hidden={isAuthenticated || !isLogin (props)}>
       Log in
     </Link_>
-  </Top_>
+  </div>
 )
 
-export default withRouter(NavMenu)
+export default NavMenu
+  |> H.style (#) (Top_)
+  |> withRouter

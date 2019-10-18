@@ -1,16 +1,11 @@
 import {
-  styled,
-  Panel, AmosChat, Checkbox, Button, AuthOptions
+  styled, css,
+  Panel, AmosChat, Checkbox, Button, AuthOptions, Input
 } from 'common'
-import Input from 'components/input/top.sc'
 
-const Top_ = styled(Panel)`
-  ${Input} + ${Input} {
-    margin-top: 30px;
-  }
-
-  ${Input} + ${AmosChat} {
-    margin-top: 30px;
+const Top_ = css`
+  ${Input} {
+    margin-top: 24px;
   }
 
   ${Checkbox} {
@@ -22,7 +17,8 @@ const Top_ = styled(Panel)`
   }
 
   ${AuthOptions} {
-    margin-top: 24px;
+    margin: 0 auto;
+    ${'' /* margin-top: 24px; */}
   }
 `
 

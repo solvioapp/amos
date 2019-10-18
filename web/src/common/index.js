@@ -32,12 +32,9 @@ import AuthOptions from 'components/auth-options'
 import Checkbox from 'components/checkbox'
 import Footer from 'components/footer'
 import Input from 'components/input'
-import Input_ from 'components/input/top.sc'
 import NavMenu from 'components/nav-menu'
-import NavMenu_ from 'components/nav-menu/top.sc'
 import NotFound from 'components/not-found'
 import RadioGroup from 'components/radio-group'
-import RadioGroup_ from 'components/radio-group/top.sc'
 import Title from 'components/title'
 
 /* Special */
@@ -83,12 +80,9 @@ export {
   Checkbox,
   Footer,
   Input,
-  Input_,
   NavMenu,
-  NavMenu_,
   NotFound,
   RadioGroup,
-  RadioGroup_,
   Title,
   Panel,
   Button,

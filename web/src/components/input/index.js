@@ -1,12 +1,12 @@
-import {R, React} from 'common'
+import {R, H, React} from 'common'
 import Input_ from './input.sc'
 import Label_ from './label.sc'
 import Top_ from './top.sc'
 import Dropdown from './dropdown'
 
 const Input = ({
-  label, results, name, type,
-  onEnt, link, onClick, dropdown,
+  label, results, name, type, _ref,
+  onEnt, link, onClick, dropdown, className,
   placeholder = label, errors, loading,
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
@@ -23,15 +23,17 @@ const Input = ({
   }
 
   return (
-    <Top_>
+    <div className={className}>
       <Label_>{label}</Label_>
-      <Input_ autoComplete='off'
-        {...{placeholder, onKeyPress, ref,
+      <Input_ autoComplete='off' ref={ref}
+        {...{placeholder, onKeyPress,
           name, type, hasError, ...rest}}
       />
       {dropdown && <Dropdown {...{results, onClick}} />}
-    </Top_>
+    </div>
   )
 }
 
-export default React.forwardRef (Input)
+export default H.styleAndForwardRef (Input) (Top_)
+// export default H.styleAndForwardRef ( (Input)) (Top_)
+// export default H.style (Input) (Top_)
