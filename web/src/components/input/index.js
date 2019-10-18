@@ -35,5 +35,3 @@ const Input = ({
 }
 
 export default H.styleAndForwardRef (Input) (Top_)
-// export default H.styleAndForwardRef ( (Input)) (Top_)
-// export default H.style (Input) (Top_)

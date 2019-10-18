@@ -4,6 +4,7 @@ import {
 } from 'common'
 
 const Top_ = css`
+  ${Panel}
   ${Input} {
     margin-top: 24px;
   }
@@ -17,8 +18,7 @@ const Top_ = css`
   }
 
   ${AuthOptions} {
-    margin: 0 auto;
-    ${'' /* margin-top: 24px; */}
+    margin-top: 24px;
   }
 `
 

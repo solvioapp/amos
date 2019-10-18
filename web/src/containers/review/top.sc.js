@@ -12,7 +12,8 @@ const left = css`
   } */
 `
 
-const Top_ = styled(Panel)`
+const Top_ = css `
+  ${Panel}
   /* ${({columns}) => eval(columns)} */
   > ${InputForm_} {
     margin-top: 30px;

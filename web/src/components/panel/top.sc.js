@@ -36,8 +36,12 @@ const left = css`
   }
 `
 
-const Top_ = styled.div`
-  ${({columns = 'one'}) => eval(columns)}
+const options = {
+  one, two, left
+}
+
+const Top_ = css`
+  ${({columns = 'one'}) => options[columns]}
   > ${Title} {
     margin-bottom: 24px
   }

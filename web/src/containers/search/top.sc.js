@@ -1,6 +1,7 @@
-import {styled, Panel, Button} from 'common'
+import {css, styled, Panel, Button} from 'common'
 
-const Top_ = styled(Panel)`
+const Top_ = css`
+  ${Panel}
   > ${Button} {
     margin-top: 30px;
   }
