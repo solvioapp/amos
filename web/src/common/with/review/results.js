@@ -23,7 +23,8 @@ results = C => (props) => {
   {form} = props,
 
   /* Returns an array of values */
-  topics = form.watch (`topic`, []),
+  // topics = form.watch (`topic`, []),
+  const onChange = 
 
   skip = R.all (H.isNilOrEmpty) (topics),
   /*

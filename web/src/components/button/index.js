@@ -6,7 +6,7 @@ import Top_ from './top.sc'
 import Text_ from './text.sc'
 
 const Button = ({icon, children, primary, ...rest}) => (
-  <button {...rest} primary="true">
+  <button {...rest} foo='foo'>
     {icon && <Icon src={icon}/>}
     {children && <Text_>{children}</Text_>}
   </button>

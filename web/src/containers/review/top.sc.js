@@ -12,12 +12,12 @@ const left = css`
   } */
 `
 
-const Top_ = css `
+const Top_ = css`
   ${Panel}
   /* ${({columns}) => eval(columns)} */
-  > ${InputForm_} {
+  ${'' /* > ${InputForm_} {
     margin-top: 30px;
-  }
+  } */}
 `
 
 export default Top_

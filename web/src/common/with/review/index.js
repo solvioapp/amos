@@ -1,12 +1,13 @@
 /* eslint-disable max-lines */
 import {React, gql, R, CONST, useMutation, validation} from 'common'
 import {multiForm} from '../form'
-import hydrateOnMount from './hydrate-on-mount'
-import onClick from './on-click'
-import onSubmit from './on-submit'
-import results from './results'
-import isValid from './is-valid'
 import times from './times'
+import onSelect from './on-select'
+import isValid from './is-valid'
+import results from './results'
+import onChange from './on-change'
+import hydrateOnMount from './hydrate-on-mount'
+import onSubmit from './on-submit'
 
 const
 
@@ -54,9 +55,10 @@ withReview = name => (
 withReviewTopics = name => (
   R.pipe (
     times,
-    onClick,
+    onSelect,
     isValid,
     results,
+    // onChange,
     withReview (name),
   )
 )

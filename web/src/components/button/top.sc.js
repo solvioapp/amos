@@ -28,6 +28,7 @@ const iconOnly = css`
 `
 
 const Top_ = css`
+  ${props => console.log(`props button`, props)}
   ${'' /* ${props => console.log(`props Top_`, props)} */}
   background-color: white;
   border-radius: 8px;
@@ -72,7 +73,6 @@ const Top_ = css`
   }
 
   ${H.ifProp (`primary`, primary)}
-  ${props => console.log(`hi`, props)}
 `
   // ${({icon, children}) => icon && !children && iconOnly}
 // ${({icon, children}) => {if (icon && !children) return iconOnly}}

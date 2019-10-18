@@ -41,6 +41,7 @@ const options = {
 }
 
 const Top_ = css`
+  ${props => console.log(`props Panel`, props)}
   ${({columns = 'one'}) => options[columns]}
   > ${Title} {
     margin-bottom: 24px

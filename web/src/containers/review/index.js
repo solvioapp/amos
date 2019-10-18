@@ -12,6 +12,8 @@ const redirect = R.both(
   R.pathEq([`location`, `pathname`], `/review`)
 )
 
+// const createGuest = props => 
+
 const Review = (props) => (
   <Switch>
     <Route path='/review' exact component={Guest} />

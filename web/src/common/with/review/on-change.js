@@ -3,19 +3,19 @@ import {R, H, React} from 'common'
 const
 
 /**
- * @description adds onClick and onEnt
+ * @description adds onChange
  */
-addOnClick = C => (props) => {
+onChange = C => (props) => {
   const
 
   {topic, form, fields} = props,
 
   /* eslint-disable no-shadow */
-  addOnClick = field => ({currentTarget: {textContent: t}}) => {
+  onChange = field => ({currentTarget: {textContent: t}}) => {
     form.setValue (field, t)
   },
 
-  onClick = R.map (addOnClick) (fields),
+  onClick = R.map (onChange) (fields),
 
   onEnt = H.navto (`/t/${topic}`),
   forwardProps = R.merge ({onClick, onEnt}) (props)
@@ -23,4 +23,4 @@ addOnClick = C => (props) => {
   return <C {...forwardProps} />
 }
 
-export default addOnClick
+export default onChange
