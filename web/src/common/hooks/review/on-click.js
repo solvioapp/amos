@@ -16,7 +16,7 @@ addOnClick = (props) => {
     setOneValid (key) (true)
   },
 
-  onClick = H.mapIndexed (addOnClick) (fields),
+  onClick = H.map (addOnClick) (fields),
 
   onEnt = H.navto (`/t/${topic}`)
   return R.merge ({onClick, onEnt}) (props)

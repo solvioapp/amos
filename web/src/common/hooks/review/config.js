@@ -27,7 +27,7 @@ onChange = (props) => {
   },
 
   /* eslint-disable no-shadow */
-  onChange = H.mapIndexed (createOnChange) (fields)
+  onChange = H.map (createOnChange) (fields)
   return R.merge ({config, onChange}) (props)
 
   // {topic, form, fields} = props,

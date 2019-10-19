@@ -14,7 +14,6 @@ const isValid = (props) => {
 
   // [] = [topics |> console.log ('topics is-valid.js', #)],
 
-
   /* eslint-disable no-shadow */
   setOneValid = key => isValid => {
     setValid (H.update (key) (isValid) (valid))
@@ -31,8 +30,9 @@ const isValid = (props) => {
     fn (_results) (e)
   },
 
-  onChange = H.mapIndexed (createOnChange) (props.onChange),
+  onChange = H.map (createOnChange) (props.onChange),
 
+  topics = form.watch (`topic`, []),
   // TODO: generalize
   invalidFields = H.reduce ((acc, _, i) => R.append (`topic[${i}]`) (acc)) ([]) (valid),
   // isAllValid = R.all (R.identity) (isValid),

@@ -45,7 +45,7 @@ const Topic = ({match: {params: {name}}}) => {
   return (
     <div>
       {data
-        ? H.mapIndexed (renderResource) (data.Topic[0].getTopResources)
+        ? H.map (renderResource) (data.Topic[0].getTopResources)
         : null
       }
     </div>

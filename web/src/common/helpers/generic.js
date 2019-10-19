@@ -36,7 +36,7 @@ isNotNilOrEmpty = R.both (isNotNil, isNotEmpty),
  * @param cb
  * @param obj
  */
-mapIndexed = R.addIndex (R.map),
+map = R.addIndex (R.map),
 
 /**
  * @description Apply two functions and return result of the second
