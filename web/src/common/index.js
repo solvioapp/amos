@@ -19,6 +19,7 @@ import H from './helpers'
 import * as CONST from './const/text'
 import * as validation from './validation'
 import hooks from './hooks'
+import * as W from './with'
 import * as CSS_CONST from './const/css'
 
 /* /apollo */
@@ -71,6 +72,7 @@ export {
   CONST,
   validation,
   hooks,
+  W,
   CSS_CONST,
   /* External */
   ReactTooltip,

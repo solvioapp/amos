@@ -1,5 +1,5 @@
 import {
-  PageLayout, hooks,
+  PageLayout, W,
 } from 'common'
 
-export default hooks.GET_AUTH (PageLayout)
+export default W.GET_AUTH (PageLayout)

@@ -1,4 +1,4 @@
-import {H, React} from 'common'
+import {H, R, React} from 'common'
 import Bubble from './bubble'
 import Top_ from './top.sc'
 import Avatar from './avatar'
@@ -15,12 +15,12 @@ const toBubble = (child, key) => (
 const AmosChat = ({avatar = `regular`, children, callToAction, ...rest}) => {
   if (typeof children !== `object`) {
     // children is either a string or a function, not an array
-    children = [children]
+    children = R.of (children)
   }
 
   return (
     <div {...rest}>
-      {avatar !== `none` && <Avatar size={avatar}/>}
+      {avatar !== `none` && <Avatar size={avatar} timeout={2400}/>}
       <ChatFlow_ size={avatar}>
         <Bubble>{toText (children[0])}</Bubble>
         {children.slice(1).map (toBubble)}
