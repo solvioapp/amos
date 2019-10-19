@@ -9,7 +9,7 @@ const isValid = (props) => {
 
   const
 
-  {topics, results, loading, form} = props,
+  {results, loading, form} = props,
   [valid, setValid] = React.useState ([]),
 
   // [] = [topics |> console.log ('topics is-valid.js', #)],
@@ -22,11 +22,10 @@ const isValid = (props) => {
 
   createOnChange = (fn, key) => _results => (e) => {
     const {target: {value}} = e,
-    // [] = [results |> console.log ('results is-valid.js', #)],
-    // [] = [results.topics[key] |> console.log ('results.topics[key] is-valid.js', #)],
-    isValid = results.topics[key] && (!loading) && R.includes (value) (R.pluck (`text`) (results.topics[key]))
-    // isValid |> console.log ('isValid is-valid.js', #)
-    /* If field is valid, set it in state */
+    res = results.topics[key],
+    /* to be valid, value must be among results */
+    isValid = res && (!loading) && R.includes (value) (R.pluck (`text`) (res))
+    /* Set validity in state */
     isValid ? setOneValid (key) (true) : setOneValid (key) (false)
     /* In any case run parent (which updates queryConfig) */
     fn (_results) (e)

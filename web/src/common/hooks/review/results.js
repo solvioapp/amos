@@ -14,6 +14,8 @@ QUERY_SEARCH = gql`
   }
 `,
 
+defResults = {topics: []},
+
 /**
  * @description Sets up Query for Search
  */
@@ -21,9 +23,8 @@ results = (props) => {
   const
 
   /* eslint-disable no-shadow */
-  [results, setResults] = React.useState ({topics: []}),
-  {config, form} = props,
-  topics = form.watch (`topic`, []),
+  [results, setResults] = React.useState (defResults),
+  {config} = props,
 
   parseResults = data => {
     const _results = data && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results[0].results)
@@ -31,11 +32,12 @@ results = (props) => {
   },
 
   onCompleted = R.pipe (parseResults, setResults),
-  _config = {...config, onCompleted},
-  // [] = [results |> console.log ('results results.js', #)],
 
+  _config = {...config, onCompleted},
   {loading} = useQuery (QUERY_SEARCH, _config)
-  return R.merge ({results, loading, topics}) (props)
+
+  config.skip && H.neq (results) (defResults) && setResults (defResults)
+  return R.merge ({results, loading}) (props)
 }
 
 export default results

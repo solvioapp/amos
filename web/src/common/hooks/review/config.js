@@ -16,12 +16,14 @@ onChange = (props) => {
   // let config = {skip: true}
   [config, setConfig] = React.useState ({skip: true})
   const createOnChange = (field, key) => results => ({target: {name, value}}) => {
-    setConfig ({
-      key,
-      field: name,
-      variables: {input: [{str: value, first: 3}]},
-      skip: false
-    })
+    value |> H.isNotNilOrEmpty
+      ? setConfig ({
+        key,
+        field: name,
+        variables: {input: [{str: value, first: 3}]},
+        skip: false
+      })
+      : setConfig ({skip: true})
   },
 
   /* eslint-disable no-shadow */
