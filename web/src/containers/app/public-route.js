@@ -1,5 +1,5 @@
 import {
-  React, Redirect, Route, H, W
+  React, Redirect, Route, H, hooks,
 } from 'common'
 
 const PublicRoute = ({isAuthenticated: auth, component: C, ...rest}) => (
@@ -8,4 +8,4 @@ const PublicRoute = ({isAuthenticated: auth, component: C, ...rest}) => (
   )}/>
 )
 
-export default W.GET_AUTH (PublicRoute)
+export default hooks.GET_AUTH (PublicRoute)

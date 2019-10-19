@@ -1,5 +1,5 @@
 import {
-  React, R, W, CONST, validation,
+  React, R, hooks, CONST, validation,
   AmosChat, Input, Button, AuthOptions
 } from 'common'
 import Form_ from './form.sc'
@@ -43,7 +43,8 @@ const Form = ({onSubmit, messages, form: {register, errors}}) => (
   </Form_>
 )
 
-export default R.compose (
-  W.LOGIN,
-  W.form ({validationSchema: validation.login}) ({message})
-) (Form)
+// export default R.compose (
+//   hooks.LOGIN,
+//   hooks.form ({validationSchema: validation.login}) ({message})
+// ) (Form)
+export default Form

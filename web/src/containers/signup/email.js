@@ -1,5 +1,5 @@
 import {
-  R, W, H, React, CONST, validation,
+  R, hooks, H, React, CONST, validation,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
 import Top_ from './top.sc'
@@ -54,5 +54,5 @@ const Form = ({onSubmit, messages, form: {register}, errors, ...rest}) => (
 )
 
 export default Form
-|> W.form ({validationSchema: validation.signup}) ({message}) (#)
-|> W.SIGNUP
+// |> hooks.form ({validationSchema: validation.signup}) ({message}) (#)
+// |> hooks.SIGNUP

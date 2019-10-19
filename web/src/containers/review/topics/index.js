@@ -1,14 +1,19 @@
 import {
-  React, R, W,
+  React, R, hooks,
   AmosChat, Button, Title, Input
 } from 'common'
 import Buttons from '../buttons.sc'
 import InputForm_ from '../input-form.sc'
 import Top_ from '../top.sc'
 
-const Topics = ({results, messages, topic, isValid, times, onChange,
-  onSubmit, onClick, form, loading, onEnt, foo = (() => results |> console.log ('results', #))(), ...rest}) => (
-  <div css={Top_}>
+const Topics = (props) => {
+  const
+
+  {
+    results, messages, times, onChange,
+    onSubmit, onClick, form, onEnt
+  } = hooks.useReviewTopics (`topics`) (props)
+  return <div css={Top_} {...props}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -28,7 +33,7 @@ const Topics = ({results, messages, topic, isValid, times, onChange,
             onClick={onClick[key]}
             onChange={e => onChange[key] (res) (e)}
             onEnt={onEnt}
-            {...rest}
+            {...props}
           />
         )) (times)}
       <Buttons>
@@ -50,6 +55,7 @@ const Topics = ({results, messages, topic, isValid, times, onChange,
       </Buttons>
     </InputForm_>
   </div>
-)
+}
 
-export default W.withReviewTopics (`topics`) (Topics)
+// export default hooks.withReviewTopics (`topics`) (Topics)
+export default Topics

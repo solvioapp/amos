@@ -1,5 +1,5 @@
 import {
-  React, W,
+  React, hooks,
   AmosChat, Button, Title, Input
 } from 'common'
 import Top_ from './top.sc'
@@ -26,4 +26,5 @@ const Links = ({onSubmit, messages, form, errors, ...rest}) => (
   </div>
 )
 
-export default W.withReview (`links`) (Links)
+// export default hooks.withReview (`links`) (Links)
+export default Links

@@ -1,5 +1,5 @@
 import {
-  React, W,
+  React, hooks,
   AmosChat, Button, Title, Input
 } from 'common'
 import Buttons from '../buttons.sc'
@@ -39,4 +39,5 @@ const Prerequisites = ({results, messages, topic, isValid,
   </div>
 )
 
-export default W.withReviewTopics (`prerequisites`) (Prerequisites)
+// export default hooks.withReviewTopics (`prerequisites`) (Prerequisites)
+export default Prerequisites

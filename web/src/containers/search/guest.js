@@ -1,5 +1,5 @@
 import {
-  React, W,
+  React, hooks,
   Input
 } from 'common'
 
@@ -21,7 +21,7 @@ const Guest = ({onEnt, results, register, ...rest}) => (
   </form>
 )
 
-export default W.withSearch (Guest)
+export default hooks.withSearch (Guest)
 
 
 // const Guest = ({...rest}) => {
