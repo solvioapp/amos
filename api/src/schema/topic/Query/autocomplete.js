@@ -22,21 +22,11 @@ limit $first
 `
 
 const autocomplete = async (_, {input}, {session}) => {
-
-  input |> console.log ('input', #)
-  const
-
-  /* eslint-disablen no-shadow */
-  autocomplete = async (el) => {
-    const {records: recs} = await session.run (_1, el)
-    const results = recs.map (rec => ({
-      topic: {...rec.get (`t`).properties, _id: rec.get (`t`).identity.low},
-      name: rec.get (`name`),
-    }))
-    return {results}
-  }
-
-  const results = await Promise.mapSeries (input, autocomplete)
+  const {records: recs} = await session.run (_1, input)
+  const results = recs.map (rec => ({
+    topic: {...rec.get (`t`).properties, _id: rec.get (`t`).identity.low},
+    name: rec.get (`name`),
+  }))
   return {results}
 }
 

@@ -45,22 +45,16 @@ type AutocompleteResult {
   topic: Topic!
 }
 
-type AutocompleteResults {
-  # foo must be there otherwise graphql complains :/
-  foo: Boolean
-  results: [AutocompleteResult!]!
-}
-
 type AutocompleteResponse {
   success: Boolean!
   message: String
-  results: [AutocompleteResults!]
+  results: [AutocompleteResult!]
 }
 
 extend type Query {
   # TODO: Change to [Path!]!
   # topic (name: String!): Topic!
-  autocomplete (input: [AutocompleteInput!]!): AutocompleteResponse!
+  autocomplete (input: AutocompleteInput!): AutocompleteResponse!
 }
 
 extend type Mutation {

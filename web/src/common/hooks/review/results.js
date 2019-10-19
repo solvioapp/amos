@@ -3,12 +3,10 @@ import {R, H, React, useQuery, gql} from 'common'
 const
 
 QUERY_SEARCH = gql`
-  query Autocomplete($input: [AutocompleteInput!]!) {
+  query Autocomplete($input: AutocompleteInput!) {
     autocomplete (input: $input) {
       results {
-        results {
-          name
-        }
+        name
       }
     }
   }
@@ -27,7 +25,8 @@ results = (props) => {
   {config} = props,
 
   parseResults = data => {
-    const _results = data && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results[0].results)
+    const _results = data
+      && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results)
     return {topics: H.update (config.key) (_results) ([])}
   },
 
