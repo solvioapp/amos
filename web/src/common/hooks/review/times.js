@@ -5,10 +5,7 @@ const times = (props) => {
 
   /* eslint-disable no-shadow */
   [times, setTimes] = React.useState (1),
-  {topics, valid} = props,
-
-
-  // [] = [valid |> console.log ('valid times.js', #)],
+  {valid} = props,
 
   lastIndex = R.findLastIndex (R.identity) (valid),
 

@@ -1,8 +1,9 @@
-import {R, H, React, styled} from 'common'
+import {R, H, React, styled, Icon} from 'common'
 import Input_ from './input.sc'
 import Label_ from './label.sc'
 import Top_ from './top.sc'
 import Dropdown from './dropdown'
+import icon from './icon.sc'
 
 const Input = ({
   label, results, name, type, _ref,
@@ -17,7 +18,7 @@ const Input = ({
   [dropdown, setDropdown] = React.useState (false),
   [valid, setValid] = React.useState (false),
 
-  [] = [H.neq (valid) (isValid) && !valid && (() => {
+  [] = [!valid && isValid && (() => {
     setValid (isValid)
     setDropdown (!dropdown)
   })()],
@@ -33,6 +34,7 @@ const Input = ({
         {...{placeholder, onBlur, onKeyPress,
           name, type, hasError, ...rest}}
       />
+      {isValid && <Icon src='checkmark' css={icon}/>}
       {dropdown && <Dropdown {...{results, onClick}}/>}
     </div>
   )
