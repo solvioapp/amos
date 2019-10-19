@@ -22,7 +22,7 @@ over = R.curry ((path, cb, obj) => R.over (lens (path, obj), cb, obj)),
  * @param val
  */
 
-notEquals = R.complement (R.equals),
+neq = R.complement (R.equals),
 
 isNotNil = R.complement (R.isNil),
 isNotEmpty = R.complement (R.isEmpty),

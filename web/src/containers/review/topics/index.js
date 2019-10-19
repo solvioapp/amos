@@ -10,8 +10,8 @@ const Topics = (props) => {
   const
 
   {
-    results, messages, times, onChange,
-    onSubmit, onClick, form, onEnt
+    results, messages, times, onChange, loading,
+    onSubmit, onClick, form, onEnt, valid
   } = hooks.useReviewTopics (`topics`) (props)
   return <div css={Top_} {...props}>
     <AmosChat>
@@ -28,9 +28,11 @@ const Topics = (props) => {
             ref={form.register}
             key={key}
             link={false}
+            loading={loading}
             errors={form.errors[name]}
             results={res}
             onClick={onClick[key]}
+            valid={valid[key]}
             onChange={e => onChange[key] (res) (e)}
             onEnt={onEnt}
             {...props}
