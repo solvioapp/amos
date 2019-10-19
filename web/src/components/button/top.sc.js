@@ -28,7 +28,7 @@ const iconOnly = css`
 `
 
 const Top_ = css`
-  ${props => console.log(`props button`, props)}
+  ${'' /* ${props => console.log(`props button`, props)} */}
   ${'' /* ${props => console.log(`props Top_`, props)} */}
   background-color: white;
   border-radius: 8px;

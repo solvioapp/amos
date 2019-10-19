@@ -7,7 +7,10 @@ export const Dropdown_ = styled.div`
     display: block;
     overflow: hidden;
     z-index: 2;
-    width: 100%;
+    width: 350px;
+    background-color: white;
+    border: 1px solid #dbdbdb;
+
     /*  transition: all 1s ease-out;*/
   }
 
@@ -32,5 +35,5 @@ export const Dropdown_ = styled.div`
     color: #777 !important;
   }
 
-  .show {display: block;}
+  /* .show {display: block;} */
 `

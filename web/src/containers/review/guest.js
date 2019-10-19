@@ -7,7 +7,7 @@ import Top_ from './top.sc'
 const Panel_ = styled.div`${Panel}`
 
 const Guest = ({...rest}) => (
-  <div css={Top_} columns='two'>
+  <div css={Top_} {...rest} columns='two'>
     <Panel_ columns='left'>
       <AmosChat avatar='large' callToAction={
         <Button primary onClick={H.navto (`/review/links`)}>
@@ -27,4 +27,4 @@ Guest |> console.log ('Guest', #)
 
 // export default H.style (Guest) (Top_)
 // const returning = (H.style (Guest) (Top_)).attrs({columns: 'two'})
-export default Guest
+export default styled (Guest) ``

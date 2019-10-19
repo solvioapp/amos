@@ -9,7 +9,7 @@ const message = ({isSubmitted}) => (
 )
 
 const Form = ({onSubmit, messages, form: {register}, errors, ...rest}) => (
-  <form onSubmit={onSubmit} {...rest}>
+  <form css={Top_} onSubmit={onSubmit} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -56,4 +56,3 @@ const Form = ({onSubmit, messages, form: {register}, errors, ...rest}) => (
 export default Form
 |> W.form ({validationSchema: validation.signup}) ({message}) (#)
 |> W.SIGNUP
-|> H.style (#) (Top_)

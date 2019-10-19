@@ -14,7 +14,7 @@ prop = (name, defValue) => R.ifElse(
   R.always (defValue),
 ),
 
-style = C => css => styled (C) `${css};`,
+style = C => (css, attrs) => styled (C).attrs (attrs) `${css};`,
 
 styleAndForwardRef = C => css => (
   style (React.forwardRef (C)) (css)

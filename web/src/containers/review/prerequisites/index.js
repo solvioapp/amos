@@ -8,7 +8,7 @@ import InputForm_ from '../input-form.sc'
 
 const Prerequisites = ({results, messages, topic, isValid,
   onSubmit, onClick, form, ...rest}) => (
-  <Top_ {...rest}>
+  <div css={Top_} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -36,7 +36,7 @@ const Prerequisites = ({results, messages, topic, isValid,
         </form>
       </Buttons>
     </InputForm_>
-  </Top_>
+  </div>
 )
 
 export default W.withReviewTopics (`prerequisites`) (Prerequisites)

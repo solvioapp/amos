@@ -6,9 +6,9 @@ import Buttons from '../buttons.sc'
 import InputForm_ from '../input-form.sc'
 import Top_ from '../top.sc'
 
-const Topics = ({results, messages, topic, isValid, times,
-  onSubmit, onClick, form, loading, onEnt, ...rest}) => (
-  <Top_ {...rest}>
+const Topics = ({results, messages, topic, isValid, times, onChange,
+  onSubmit, onClick, form, loading, onEnt, foo = (() => onChange |> console.log ('onChange', #))(), ...rest}) => (
+  <div css={Top_}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -16,7 +16,8 @@ const Topics = ({results, messages, topic, isValid, times,
       <Title>Topics</Title>
       {R.times (
         (key,
-          name = `topic[${key}]`) => (
+          name = `topic[${key}]`,
+          res = results?.[key]) => (
           <Input
             name={name}
             ref={form.register}
@@ -24,9 +25,11 @@ const Topics = ({results, messages, topic, isValid, times,
             link={false}
             errors={form.errors[name]}
             dropdown={!isValid[key]}
-            results={results?.[key]}
+            results={res}
             onClick={onClick[key]}
-            // onEnt={onEnt}
+            onChange={e => onChange[key] (res) (e)}
+            onEnt={onEnt}
+            {...rest}
           />
         )) (times)}
       <Buttons>
@@ -47,7 +50,7 @@ const Topics = ({results, messages, topic, isValid, times,
         </form>
       </Buttons>
     </InputForm_>
-  </Top_>
+  </div>
 )
 
 export default W.withReviewTopics (`topics`) (Topics)

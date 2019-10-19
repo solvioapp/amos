@@ -20,11 +20,20 @@ QUERY_SEARCH = gql`
 results = C => (props) => {
   const
 
-  {form} = props,
+  {form, fields} = props,
 
   /* Returns an array of values */
-  // topics = form.watch (`topic`, []),
-  const onChange = 
+  topics = form.watch (`topic`, [])
+  /* First time using let in 2 months :) */
+  let config
+  const createOnChange = key => results => ({target: {name, value}}) => {
+    name |> console.log ('name', #)
+    value |> console.log ('value', #)
+  },
+
+  [] = [fields |> console.log ('fields results', #)],
+
+  onChange = R.map (createOnChange) (fields),
 
   skip = R.all (H.isNilOrEmpty) (topics),
   /*
@@ -35,12 +44,14 @@ results = C => (props) => {
   input = R.map (str => ({str, first: 3})) (topics),
   {data, loading} = useQuery (QUERY_SEARCH, {variables: {input}, skip}),
 
+  [] = [data |> console.log ('data', #)],
+
   /* eslint-disable no-shadow, indent */
   results = data && R.map
     (res => R.map (_res => ({name: _res.name, text: _res.name})) (res.results))
     (data.autocomplete.results),
 
-  forwardProps = R.merge ({results, topics, loading}) (props)
+  forwardProps = R.merge ({results, topics, onChange, loading}) (props)
 
   return <C {...forwardProps} />
 }

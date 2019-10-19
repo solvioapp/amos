@@ -13,6 +13,7 @@ const left = css`
 `
 
 const Top_ = css`
+  ${props => props |> console.log ('Review Top', #)}
   ${Panel}
   /* ${({columns}) => eval(columns)} */
   ${'' /* > ${InputForm_} {

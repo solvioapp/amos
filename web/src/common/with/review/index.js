@@ -2,7 +2,7 @@
 import {React, gql, R, CONST, useMutation, validation} from 'common'
 import {multiForm} from '../form'
 import times from './times'
-import onSelect from './on-select'
+import onClick from './on-click'
 import isValid from './is-valid'
 import results from './results'
 import onChange from './on-change'
@@ -55,7 +55,7 @@ withReview = name => (
 withReviewTopics = name => (
   R.pipe (
     times,
-    onSelect,
+    onClick,
     isValid,
     results,
     // onChange,

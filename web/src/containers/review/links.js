@@ -6,7 +6,7 @@ import Top_ from './top.sc'
 import InputForm_ from './input-form.sc'
 
 const Links = ({onSubmit, messages, form, errors, ...rest}) => (
-  <Top_ {...rest}>
+  <div css={Top_} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -23,7 +23,7 @@ const Links = ({onSubmit, messages, form, errors, ...rest}) => (
         </Button>
       </form>
     </InputForm_>
-  </Top_>
+  </div>
 )
 
 export default W.withReview (`links`) (Links)

@@ -4,8 +4,8 @@ import Link_ from './link.sc'
 
 const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
-const NavMenu = ({isAuthenticated, ...props}) => (
-  <div {...props}>
+const NavMenu = ({isAuthenticated, className, ...rest}) => (
+  <div className={className}>
     <Link_ to='/review'>
       Review
     </Link_>
@@ -18,10 +18,10 @@ const NavMenu = ({isAuthenticated, ...props}) => (
     <Link_ to='/profile' hidden={!isAuthenticated}>
       Profile
     </Link_>
-    <Link_ to='/signup' hidden={isAuthenticated || isLogin (props)}>
+    <Link_ to='/signup' hidden={isAuthenticated || isLogin (rest)}>
       Sign up
     </Link_>
-    <Link_ to='/login' hidden={isAuthenticated || !isLogin (props)}>
+    <Link_ to='/login' hidden={isAuthenticated || !isLogin (rest)}>
       Log in
     </Link_>
   </div>
