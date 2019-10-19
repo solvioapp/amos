@@ -7,7 +7,7 @@ import InputForm_ from '../input-form.sc'
 import Top_ from '../top.sc'
 
 const Topics = ({results, messages, topic, isValid, times, onChange,
-  onSubmit, onClick, form, loading, onEnt, foo = (() => onChange |> console.log ('onChange', #))(), ...rest}) => (
+  onSubmit, onClick, form, loading, onEnt, foo = (() => results |> console.log ('results', #))(), ...rest}) => (
   <div css={Top_}>
     <AmosChat>
       {messages}
@@ -17,14 +17,13 @@ const Topics = ({results, messages, topic, isValid, times, onChange,
       {R.times (
         (key,
           name = `topic[${key}]`,
-          res = results?.[key]) => (
+          res = results?.topics?.[key]) => (
           <Input
             name={name}
             ref={form.register}
             key={key}
             link={false}
             errors={form.errors[name]}
-            dropdown={!isValid[key]}
             results={res}
             onClick={onClick[key]}
             onChange={e => onChange[key] (res) (e)}

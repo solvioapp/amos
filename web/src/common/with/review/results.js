@@ -20,38 +20,21 @@ QUERY_SEARCH = gql`
 results = C => (props) => {
   const
 
-  {form, fields} = props,
+  /* eslint-disable no-shadow */
+  [results, setResults] = React.useState ({topics: []}),
+  {config, form} = props,
+  topics = form.watch (`topic`, []),
 
-  /* Returns an array of values */
-  topics = form.watch (`topic`, [])
-  /* First time using let in 2 months :) */
-  let config
-  const createOnChange = key => results => ({target: {name, value}}) => {
-    name |> console.log ('name', #)
-    value |> console.log ('value', #)
+  parseResults = data => {
+    const _results = data && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results[0].results)
+    return {topics: H.update (config.key) (_results) ([])}
   },
 
-  [] = [fields |> console.log ('fields results', #)],
+  onCompleted = R.pipe (parseResults, setResults),
+  _config = {...config, onCompleted},
 
-  onChange = R.map (createOnChange) (fields),
-
-  skip = R.all (H.isNilOrEmpty) (topics),
-  /*
-    This commented out solution for input is better but we lose the indices
-    Leaving this for now, it's a TODO:
-  */
-  // input = R.reduce ((acc, str) => H.isNilOrEmpty (str) ? acc : ({str, first: 3})) ([]) (topics),
-  input = R.map (str => ({str, first: 3})) (topics),
-  {data, loading} = useQuery (QUERY_SEARCH, {variables: {input}, skip}),
-
-  [] = [data |> console.log ('data', #)],
-
-  /* eslint-disable no-shadow, indent */
-  results = data && R.map
-    (res => R.map (_res => ({name: _res.name, text: _res.name})) (res.results))
-    (data.autocomplete.results),
-
-  forwardProps = R.merge ({results, topics, onChange, loading}) (props)
+  {loading} = useQuery (QUERY_SEARCH, _config),
+  forwardProps = R.merge ({results, loading, topics}) (props)
 
   return <C {...forwardProps} />
 }

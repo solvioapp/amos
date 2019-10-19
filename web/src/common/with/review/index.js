@@ -58,7 +58,7 @@ withReviewTopics = name => (
     onClick,
     isValid,
     results,
-    // onChange,
+    onChange,
     withReview (name),
   )
 )

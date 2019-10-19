@@ -76,4 +76,13 @@ importContext = req => {
 
 reduce = R.addIndex (R.reduce),
 
-atleast = min => val => val < min ? min : val
+atleast = min => val => val < min ? min : val,
+
+/**
+ * @description Ramda's `update` doesn't work if the index doesn't exist
+ */
+update = R.curry((idx, val, arr) => {
+  const _arr = [...arr]
+  _arr[idx] = val
+  return _arr
+})

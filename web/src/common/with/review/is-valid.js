@@ -16,7 +16,10 @@ const isValid = C => (props) => {
   ),
 
   /* eslint-disable no-shadow */
-  isValid = R.zipWith (createIsValid) (results || []) (topics),
+  [] = [topics |> console.log ('topics', #)],
+  isValid = R.zipWith (createIsValid) (results.topics) (topics),
+
+  [] = [isValid |> console.log ('isValid', #)],
 
   // TODO: generalize
   invalidFields = H.reduce ((acc, _, i) => R.append (`topic[${i}]`) (acc)) ([]) (isValid),

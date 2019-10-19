@@ -4,13 +4,17 @@ import {
 
 import {Dropdown_} from './dropdown.sc.js'
 
-const Dropdown = ({results, onClick, link}) => {
+export default ({results, onClick, link}) => {
   const renderResult = (result) => {
     const {name, text} = result
     console.log(result)
 
     const label = (
-      <label className='dropdown' onClick={onClick}>
+      /*
+       * Using onMouseDown here, otherwise onBlur interferes
+       * See https://stackoverflow.com/questions/44142273/react-ul-with-onblur-event-is-preventing-onclick-from-firing-on-li
+      */
+      <label className='dropdown' onMouseDown={onClick}>
         <span>
           {text}
         </span>
@@ -36,5 +40,3 @@ const Dropdown = ({results, onClick, link}) => {
     </Dropdown_>
   )
 }
-
-export default Dropdown
