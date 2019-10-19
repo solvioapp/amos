@@ -33,8 +33,16 @@ const isValid = (props) => {
   onChange = H.map (createOnChange) (props.onChange),
 
   topics = form.watch (`topic`, []),
+  
   // TODO: generalize
-  invalidFields = H.reduce ((acc, _, i) => R.append (`topic[${i}]`) (acc)) ([]) (valid),
+  getInvalidField = (acc, val, i) => {
+    const test = !val && H.isNotNilOrEmpty (topics[i])
+    return test ? R.append (`topic[${i}]`) (acc) : acc
+  },
+  invalidFields = H.reduce (getInvalidField) ([]) (valid),
+
+  [] = [invalidFields |> console.log ('invalidFields', #)],
+  
   // isAllValid = R.all (R.identity) (isValid),
   isAllValid = R.length (invalidFields) === 0,
 
