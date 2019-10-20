@@ -16,7 +16,7 @@ GET_REVIEW_CLIENT_GQL = gql`
 /**
  * @description Hydrates inputs on mount
  */
-addHydrationOnMount = (props) => {
+hydrate = (props) => {
 
   const
 
@@ -34,7 +34,9 @@ addHydrationOnMount = (props) => {
       (review)
   })]
 
+  review |> console.log ('review', #)
+
   return R.merge ({review}) (props)
 }
 
-export default addHydrationOnMount
+export default hydrate

@@ -5,8 +5,12 @@ import {
 import Top_ from './top.sc'
 import InputForm_ from './input-form.sc'
 
-const Links = ({onSubmit, messages, form, errors, ...rest}) => (
-  <div css={Top_} {...rest}>
+const Links = (props) => {
+  const {
+    onSubmit, messages, form, errors, valid, ...rest
+  } = hooks.useReview (`links`) (props)
+
+  return <div css={Top_} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -16,6 +20,7 @@ const Links = ({onSubmit, messages, form, errors, ...rest}) => (
         name='links'
         ref={form.register}
         errors={errors}
+        valid={valid}
       />
       <form onSubmit={onSubmit.next}>
         <Button primary type='submit'>
@@ -24,7 +29,7 @@ const Links = ({onSubmit, messages, form, errors, ...rest}) => (
       </form>
     </InputForm_>
   </div>
-)
+}
 
 // export default hooks.withReview (`links`) (Links)
 export default Links

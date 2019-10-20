@@ -6,9 +6,13 @@ import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
 import InputForm_ from '../input-form.sc' 
 
-const Prerequisites = ({results, messages, topic, isValid,
-  onSubmit, onClick, form, ...rest}) => (
-  <div css={Top_} {...rest}>
+const Prerequisites = (props) => {
+  const {
+    results, messages, isValid,
+    onSubmit, onClick, form, ...rest
+  } = hooks.useReviewTopics (`prerequisites`) (props)
+
+  return <div css={Top_} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -37,7 +41,7 @@ const Prerequisites = ({results, messages, topic, isValid,
       </Buttons>
     </InputForm_>
   </div>
-)
+}
 
 // export default hooks.withReviewTopics (`prerequisites`) (Prerequisites)
 export default Prerequisites

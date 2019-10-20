@@ -6,7 +6,7 @@ import onClick from './on-click'
 import isValid from './is-valid'
 import results from './results'
 import config from './config'
-import hydrateOnMount from './hydrate-on-mount'
+import hydrate from './hydrate'
 import onSubmit from './on-submit'
 
 const
@@ -48,7 +48,7 @@ useReview = name => (
   R.pipe (
     onSubmit,
     multiForm (formOpts (name)) (opts (name)),
-    hydrateOnMount
+    hydrate
   )
 ),
 
