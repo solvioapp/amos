@@ -11,6 +11,7 @@
     "@babel/plugin-proposal-optional-chaining",
     "@babel/plugin-proposal-throw-expressions",
     ["module-resolver", {"root": ["./src"]}],
+    "@babel/plugin-proposal-do-expressions"
   ],
   "sourceMaps": true,
   "retainLines": true

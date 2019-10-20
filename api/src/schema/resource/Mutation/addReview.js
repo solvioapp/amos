@@ -105,18 +105,18 @@ const addReview = async (_, {input}, {session, ip, user}) => {
   
   /* Condtionally create Topic AmosGame */
   topicGames = H.isNotNilOrEmpty (topics)
-    ? await (async () => {
+    ? do {
       const {records} = await session.run (amosGameTopics, {resourceId, topics})
-      return R.map (r => r.get (`g`).identity.low) (records)
-    })()
+      R.map (r => r.get (`g`).identity.low) (records)
+    }
     : [],
 
   /* Condtionally create Prerequisite AmosGame */
   prerequisiteGames = H.isNotNilOrEmpty (prerequisites)
-    ? await (async () => {
+    ? do {
       const {records} = await session.run (amosGamePrerequisites, {resourceId, prerequisites})
-      return R.map (r => r.get (`g`).identity.low) (records)
-    })()
+      R.map (r => r.get (`g`).identity.low) (records)
+    }
     : [],
   games = {topicGames, prerequisiteGames}
 
