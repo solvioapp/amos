@@ -8,8 +8,11 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 )
 
-const Form = ({onSubmit, messages, form: {register}, errors, ...rest}) => (
-  <form css={Top_} onSubmit={onSubmit} {...rest}>
+const Form = (props) => {
+  const {
+    onSubmit, messages, form: {register}, errors, ...rest
+  } = hooks.form ({validationSchema: validation.signup}) ({message}) (props)
+  return <form css={Top_} onSubmit={onSubmit} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -51,8 +54,8 @@ const Form = ({onSubmit, messages, form: {register}, errors, ...rest}) => (
       text: `Use social`
     }} />
   </form>
-)
+}
 
 export default Form
 // |> hooks.form ({validationSchema: validation.signup}) ({message}) (#)
-// |> hooks.SIGNUP
+|> hooks.SIGNUP

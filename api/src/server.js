@@ -15,15 +15,16 @@ R.mapObjIndexed ((val, key) => val ? null : throw new Error(`ERROR: "${key}" env
 const driver = getDriver()
 
 const context = async ({req}) => {
-  const session = driver.session()
-  // req.headers |> console.log ('req.headers', #)
+  const session = driver.session(),
+  {headers} = req,
+  ip = headers[`x-forwarded-for`] || req.connection.remoteAddress
+
   return {
     driver,
     session,
     // user,
-    headers: req.headers,
-    // TODO: Only for anonymous users
-    ip: req.headers[`x-forwarded-for`] || req.connection.remoteAddress,
+    headers,
+    ...(headers.authorization ? null : {ip}),
     cypherParams: {
       // currentUserId: user?.id,
     },

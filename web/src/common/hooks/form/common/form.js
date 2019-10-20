@@ -7,6 +7,8 @@ const form =
 
   const
 
+  [] = [formOpts |> console.log ('formOpts', #)],
+
   {validationSchema: schema} = formOpts,
   {useContext, message} = opts,
 

@@ -10,6 +10,7 @@ import metascraper from 'metascraper'
 import neo4jgraphql from 'neo4j-graphql-js'
 import * as yup from 'yup'
 import Promise from 'bluebird'
+import normalizeUrl from 'normalize-url'
 
 import * as CONST from './constants'
 import * as validation from './validation'
@@ -23,6 +24,7 @@ export {
   neo4jgraphql,
   yup,
   Promise,
+  normalizeUrl,
   CONST,
   validation,
 }

@@ -1,4 +1,4 @@
-import {H} from 'common'
+import {H, normalizeUrl} from 'common'
 const _1 = H.read (__dirname) (`./addReview.cypher`)
 const metascraper = require('metascraper')([
   require('metascraper-title')()
@@ -9,6 +9,8 @@ import got from 'got'
 const addReview = async (_, {input: {type, links, topics, prerequisites, _id}}, {driver, ip}) => {
   // Assuming no other resource exists with at least one such link
   // Assuming reviews are anonymous
+
+  ip |> console.log ('ip', #)
 
   topics |> console.log('topics', #)
   prerequisites |> console.log('prerequisites', #)
