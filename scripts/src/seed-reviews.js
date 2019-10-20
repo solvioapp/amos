@@ -15,17 +15,19 @@ client = new ApolloClient ({
 
 mutation = gql`
   mutation AddReview($input: AddReviewHydrationInput!) {
-    addReviewHydration(input: $input)
+    addReviewHydration(input: $input) {
+      success
+    }
   }
 `,
 
 createReview = async (rev) => {
-  JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
+  // JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
   await client.mutate ({mutation, variables: {input: rev}})
 },
 
 createHackPragueReview = async (rev) => {
-  JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
+  // JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
   const _rev = R.omit ([`prerequisites`]) (H.renameKeys ({urls: `url_main`}) (rev))
   await client.mutate ({mutation, variables: {input: _rev}})  
 }

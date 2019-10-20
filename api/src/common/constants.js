@@ -8,4 +8,6 @@ incorrect_password = `That password doesn't seem to be correct. 🤨`,
 
 email_taken = email => `We've met already! 😊 Go  ahead and log in with email ${email}.`,
 
-username_taken = username => `Username ${username} is already taken. 😕`
+username_taken = username => `Username ${username} is already taken. 😕`,
+
+no_topic_or_prerequisite = `I need at least one topic or prerequisite..`

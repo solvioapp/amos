@@ -16,13 +16,17 @@ client = new ApolloClient ({
 
 createTopicMutation = gql`
   mutation CreateTopic ($input: CreateTopicInput!) {
-    createTopic (input: $input)
+    createTopic (input: $input) {
+      success
+    }
   }
 `,
 
 addIsPartOfMutation = gql`
   mutation AddIsPartOf ($input: AddIsPartOfInput!) {
-    addIsPartOf (input: $input)
+    addIsPartOf (input: $input) {
+      success
+    }
   }
 `,
 

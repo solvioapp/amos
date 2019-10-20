@@ -3,7 +3,6 @@ import fs from 'fs'
 import path from 'path'
 
 export const 
-neq = R.complement (R.equals),
 
 read = dir => file => fs.readFileSync (path.join (dir, file), {encoding: `utf8`}),
 
@@ -19,9 +18,13 @@ assert = pr => st => {
     : throw new Error (st)
 },
 
-isNotEmpty = R.complement(R.isEmpty),
+neq = R.complement (R.equals),
 
-isNotNil = R.complement(R.isNil),
+isNotNil = R.complement (R.isNil),
+isNotEmpty = R.complement (R.isEmpty),
+
+isNilOrEmpty = R.either (R.isNil) (R.isEmpty),
+isNotNilOrEmpty = R.both (isNotNil, isNotEmpty),
 
 /**
  * @description Turns an array of named functions to object with keys corresponding to those names

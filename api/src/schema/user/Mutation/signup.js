@@ -34,8 +34,8 @@ const signup = async (_, {input}, {session}) => {
   hashedPassword = await bcrypt.hash (password, 12),
 
   /* Save user to db! */
-  {records: users} = await session.run (_2, {username, email, hashedPassword}),
-  id = users[0].get (`u`).identity.low,
+  {records: [user]} = await session.run (_2, {username, email, hashedPassword}),
+  id = user.get (`u`).identity.low,
 
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */

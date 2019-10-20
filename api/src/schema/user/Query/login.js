@@ -33,16 +33,16 @@ const login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   /* Don't validate password */
 
   /* Get user */
-  {records: users} = await session.run (...args),
+  {records: [user]} = await session.run (...args),
 
   /* Check if user exists */
-  [] = [H.assert (H.isNotEmpty (users)) (CONST.cant_find_user (isEmail) (usernameOrEmail))],
+  [] = [H.assert (H.isNotNil (user)) (CONST.cant_find_user (isEmail) (usernameOrEmail))],
 
   /* Check if password is correct */
-  correctPassword = await bcrypt.compare (password, users[0].get (`hashedPassword`)),
+  correctPassword = await bcrypt.compare (password, user.get (`hashedPassword`)),
   [] = [H.assert (correctPassword) (CONST.incorrect_password)],
 
-  id = users[0].get (`u`).identity.low,
+  id = user.get (`u`).identity.low,
 
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
