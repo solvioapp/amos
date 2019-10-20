@@ -8,8 +8,11 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.login
 )
 
-const Form = ({onSubmit, messages, form: {register, errors}}) => (
-  <Form_ onSubmit={onSubmit}>
+const Form = (props) => {
+  const {
+    onSubmit, messages, form: {register, errors}
+  } = hooks.form ({validationSchema: validation.login}) ({message}) (props)
+  return <Form_ onSubmit={onSubmit}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -41,10 +44,6 @@ const Form = ({onSubmit, messages, form: {register, errors}}) => (
       }}
     />
   </Form_>
-)
+}
 
-// export default R.compose (
-//   hooks.LOGIN,
-//   hooks.form ({validationSchema: validation.login}) ({message})
-// ) (Form)
-export default Form
+export default hooks.LOGIN (Form)

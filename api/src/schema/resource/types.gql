@@ -47,11 +47,17 @@ type FOR_TOPIC @relation(name: "FOR_TOPIC") {
   to: Topic!
 }
 
+input PrerequisiteInput {
+  level: Int!
+  strength: Int!
+  topic: ID!
+}
+
 input AddReviewInput {
-  link: String!
+  links: [String!]!
   # One of (topics, prerequisites) is mandatory
-  topics: [ID!]!
-  prerequisites: [String!]!
+  topics: [ID!]
+  prerequisites: [PrerequisiteInput!]
 }
 
 input AddReviewHydrationInput {

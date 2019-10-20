@@ -23,24 +23,25 @@ const signup = async (_, {input}, {session}) => {
   {username, email, password} = input,
 
   /* Check if email is free */
-  {records: recs2} = await session.run (_1b, {email}),
-  [] = [H.assert (R.isEmpty (recs2)) (CONST.email_taken (email))],
+  {records: emails} = await session.run (_1b, {email}),
+  [] = [H.assert (R.isEmpty (emails)) (CONST.email_taken (email))],
 
   /* Check if username is free */
-  {records: recs1} = await session.run (_1a, {username}),
-  [] = [H.assert (R.isEmpty (recs1)) (CONST.username_taken (username))],
+  {records: usernames} = await session.run (_1a, {username}),
+  [] = [H.assert (R.isEmpty (usernames)) (CONST.username_taken (username))],
 
   /* Hash password */
   hashedPassword = await bcrypt.hash (password, 12),
 
   /* Save user to db! */
-  [] = [await session.run (_2, {username, email, hashedPassword})],
+  {records: users} = await session.run (_2, {username, email, hashedPassword}),
+  id = users[0].get (`u`).identity.low,
 
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
   message = username === `amos`
-    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`]}) 
-    : await A.createToken (process.env.JWT_SECRET, {})
+    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id}) 
+    : await A.createToken (process.env.JWT_SECRET, {sub: id})
 
   return {message}
 }
