@@ -28,13 +28,15 @@ createResource = `
 
 amosGameTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
-  unwind $topics as topic
-  match (t: Topic) where id (t) = toInteger (topic)
+  unwind $topics as topicId
+  match (t: Topic) where id (t) = toInteger (topicId)
   with r, t
   merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {type: "TOPIC"})-[:FOR_TOPIC]->(t)
   with g, t
-  match (u:User)-[:VOTED_ON]->(g)
-  return g, count (u) as noVotes, t
+  optional match (u:User)-[:VOTED_ON]->(g)
+  optional match (a:AnonymousUser)-[:VOTED_ON_ANONYMOUS]->(g)
+  with g, t, count (u) as noVotesAuthorized, count (a) as noVotesAnonymous
+  return g, t, noVotesAuthorized + noVotesAnonymous as noVotes
 `,
 /* Doesn't work :( */
   // on match return 1
@@ -51,8 +53,10 @@ amosGamePrerequisites = `
     strength: toInteger (p.strength)
   })-[:FOR_TOPIC]->(t)
   with g
-  match (u:User)-[:VOTED_ON]->(g)
-  return g, count (u) as noVotes
+  optional match (u:User)-[:VOTED_ON]->(g)
+  optional match (a:AnonymousUser)-[:VOTED_ON_ANONYMOUS]->(g)
+  with g, count (u) as noVotesAuthorized, count (a) as noVotesAnonymous
+  return g, noVotesAuthorized + noVotesAnonymous as noVotes
 `,
 
 authorized = `
@@ -69,7 +73,7 @@ authorized = `
   merge (u)-[:VOTED_ON]->(prerequisiteGame)
     on create
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
-      return r
+  return r
 `,
       // topicGame.noVotes = topicGame.noVotes + 1
 
@@ -89,7 +93,7 @@ guest = `
   merge (u)-[:VOTED_ON_ANONYMOUS]->(prerequisiteGame)
     on create
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
-      return r
+  return r
 `,
       // prerequisiteGame.noVotes = prerequisiteGame.noVotes + 1
 
@@ -97,14 +101,14 @@ updateTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedTopicIds as topicId
   match (t: Topic) where id (t) = topicId
-  merge (r)-[HAS_TOPIC]->(t)
+  merge (r)-[:HAS_TOPIC]->(t)
 `,
 
 updatePrerequisites = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedPrerequisiteIds as prerequisiteId
   match (g: AmosGame) where id (g) = prerequisiteId
-  merge (r)-[HAS_PREREQUISITE]->(g)
+  merge (r)-[:HAS_PREREQUISITE]->(g)
 `
 
 const addReview = async (_, {input}, {session, ip, user}) => {
@@ -136,9 +140,7 @@ const addReview = async (_, {input}, {session, ip, user}) => {
     /* Get title from html page */
     const {title} = await metascraper ({html, url})
     /* Create resource */
-    console.log (`creating`)
     const {records: [resource]} = await session.run (createResource, {link, title})
-    console.log (`created`)
     return resource.get (`r`).identity.low
   },
 
@@ -180,7 +182,6 @@ const addReview = async (_, {input}, {session, ip, user}) => {
     : await session.run (guest, {ip, ...gamesIds, resourceId}),
   
   {noVotesTopics, noVotesPrerequisites} = resource.get (`r`).properties,
-
   /* 
    * cool word! 
    * (comes from `consensus` :-))
