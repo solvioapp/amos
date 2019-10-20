@@ -3,32 +3,33 @@ const metascraper = require (`metascraper`)([
   require (`metascraper-title`)()
 ])
 
-const match = `
-  match (r:Resource {link: $link}) return r
-`
+import got from 'got'
 
-const createResource = `
+export const 
+
+match = `
+  match (r:Resource {link: $link}) return r
+`,
+
+createResource = `
   create (r: Resource {link: $link, title: $title})
   with r
   return r 
-`
+`,
 
-const amosGameTopics = `
+amosGameTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $topics as topic
   match (t: Topic) where id (t) = toInteger (topic)
   with r, t
   merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {type: "TOPIC"})-[:FOR_TOPIC]->(t)
-  with g
-  match (u: User) where id (u) = toInteger ($userId)
-  with u, g
-  merge (u)-[voted:VOTED_ON]->(g)
-`
+  return g
+`,
 /* Doesn't work :( */
   // on match return 1
   // on create return 0
     
-const amosGamePrerequisites = `
+amosGamePrerequisites = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $prerequisites as p
   match (t: Topic) where id (t) = toInteger (p.topic)
@@ -38,13 +39,32 @@ const amosGamePrerequisites = `
     level: toInteger (p.level),
     strength: toInteger (p.strength)
   })-[:FOR_TOPIC]->(t)
-  with g
-  match (u: User) where id (u) = toInteger ($userId)
-  with u, g
-  merge (u)-[voted:VOTED_ON]->(g)
-`
+  return g
+`,
 
-import got from 'got'
+authorized = `
+  match (u: User) where id (u) = toInteger ($userId)
+  unwind $topicGames as topicGameId
+  match (topicGame: AmosGame) where id (topicGame) = topicGameId
+  merge (u)-[:VOTED_ON]->(topicGame)
+  with u
+  unwind $prerequisiteGames as prerequisiteGameId
+  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = prerequisiteGameId
+  merge (u)-[:VOTED_ON]->(prerequisiteGame)
+`,
+
+guest = `
+  merge (u:AnonymousUser {ip: $ip})
+  with u
+  unwind $topicGames as topicGameId
+  // Attach AnonymousUser to AmosGame's
+  match (topicGame: AmosGame) where id (topicGame) = topicGameId
+  merge (u)-[:VOTED_ON_ANONYMOUS]->(topicGame)
+  with u
+  unwind $prerequisiteGames as prerequisiteGameId
+  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = prerequisiteGameId
+  merge (u)-[:VOTED_ON_ANONYMOUS]->(prerequisiteGame)
+`
 
 const addReview = async (_, {input}, {session, ip, user}) => {
   // TODO: Add validation
@@ -70,9 +90,8 @@ const addReview = async (_, {input}, {session, ip, user}) => {
 
   /* See if resource exists */
   {records: resources} = await session.run (match, {link}),
-  isNew = R.isEmpty (resources),
 
-  newResource = async () => {
+  createResource = async () => {
     /* Get title from html page */
     const {title} = await metascraper ({html, url}),
     /* Create resource */
@@ -80,15 +99,30 @@ const addReview = async (_, {input}, {session, ip, user}) => {
     return resource.get (`r`).identity.low
   },
 
-  resourceId = isNew ? await newResource() : resources[0].get (`r`).identity.low
+  resourceId = R.isEmpty (resources)
+    ? await createResource()
+    : resources[0].get (`r`).identity.low,
   
   /* Condtionally create Topic AmosGame */
-  H.isNotNilOrEmpty (topics) 
-    && await session.run (amosGameTopics, {resourceId, topics, userId})
+  topicGames = H.isNotNilOrEmpty (topics)
+    ? await (async () => {
+      const {records} = await session.run (amosGameTopics, {resourceId, topics})
+      return R.map (r => r.get (`g`).identity.low) (records)
+    })()
+    : [],
 
   /* Condtionally create Prerequisite AmosGame */
-  H.isNotNilOrEmpty (prerequisites)
-    && await session.run (amosGamePrerequisites, {resourceId, prerequisites, userId})
+  prerequisiteGames = H.isNotNilOrEmpty (prerequisites)
+    ? await (async () => {
+      const {records} = await session.run (amosGamePrerequisites, {resourceId, prerequisites})
+      return R.map (r => r.get (`g`).identity.low) (records)
+    })()
+    : [],
+  games = {topicGames, prerequisiteGames}
+
+  userId
+    ? await session.run (authorized, {userId, ...games})
+    : await session.run (guest, {ip, ...games})
 }
 
 export default H.wrapInResponse (addReview)
