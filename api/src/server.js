@@ -17,7 +17,7 @@ const driver = getDriver()
 const context = async ({req}) => {
   const session = driver.session(),
   {headers} = req,
-  user = await decode(driver, headers.authorization),
+  user = await decode (driver, headers.authorization),
   ip = headers[`x-forwarded-for`] || req.connection.remoteAddress
 
   return {

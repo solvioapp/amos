@@ -63,8 +63,11 @@ req = dirBase => dirRel => regExp => requireAlso => {
 wrapInResponse = fn => {
   const _fn = async (...args) => {
     try {
-      const result = await fn (...args)
+      const _result = await fn (...args),
+      /* If message is undefined set it to null (otherwise GraphQL complains) */
+      result = R.over (R.lensProp (`message`)) (m => m || null) (_result)
       return R.merge (result) ({success: true})
+    // } catch (e) {
     } catch ({message: _message, errors: message = [_message]}) {
       return {success: false, message}
     }

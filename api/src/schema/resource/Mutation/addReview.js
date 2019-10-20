@@ -1,76 +1,94 @@
 import {H, R, normalizeUrl, CONST} from 'common'
-// const _2 = H.read (__dirname) (`./newResource.cypher`)
-// const _3 = H.read (__dirname) (`./oldResource.cypher`)
 const metascraper = require (`metascraper`)([
   require (`metascraper-title`)()
 ])
 
-const _1 = `
+const match = `
   match (r:Resource {link: $link}) return r
 `
 
-const _2 = `
+const createResource = `
   create (r: Resource {link: $link, title: $title})
   with r
   return r 
 `
 
-const _3 = `
-  match (r: Resource) where id (r) = $id
-  with r
-  create (g:AmosGame {type: "TOPIC"})
-  create (g)-[:FOR_RESOURCE]->(r)
-  with g, r
+const amosGameTopics = `
+  match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $topics as topic
-  with g, r, topic
-  match (t: Topic) where topic in t.names
-  create (g)-[rel:FOR_TOPIC]->(t)
-  with g, r, t,
-  match (u: User) where id (u) = $id
-  with g, r, t, u
-  merge (u)-[voted:VOTED_ON]->g
+  match (t: Topic) where id (t) = toInteger (topic)
+  with r, t
+  merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {type: "TOPIC"})-[:FOR_TOPIC]->(t)
+  with g
+  match (u: User) where id (u) = toInteger ($userId)
+  with u, g
+  merge (u)-[voted:VOTED_ON]->(g)
+`
+/* Doesn't work :( */
+  // on match return 1
+  // on create return 0
+    
+const amosGamePrerequisites = `
+  match (r: Resource) where id (r) = toInteger ($resourceId)
+  unwind $prerequisites as p
+  match (t: Topic) where id (t) = toInteger (p.topic)
+  with r, t, p
+  merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {
+    type: "PREREQUSIITE",
+    level: toInteger (p.level),
+    strength: toInteger (p.strength)
+  })-[:FOR_TOPIC]->(t)
+  with g
+  match (u: User) where id (u) = toInteger ($userId)
+  with u, g
+  merge (u)-[voted:VOTED_ON]->(g)
 `
 
 import got from 'got'
 
 const addReview = async (_, {input}, {session, ip, user}) => {
+  // TODO: Add validation
 
   const
   {topics, prerequisites} = input,
+  /* Check either topics or prerequisites are provided */
   [] = [
     H.assert
     (H.isNotNilOrEmpty (topics) || H.isNotNilOrEmpty (prerequisites))
     (CONST.no_topic_or_prerequisite)
   ],
-  id = user?.id,
+  userId = user?.id,
 
+  /* Normalize url */
   links = R.map (x => normalizeUrl (x, {stripWWW: false})) (input.links),
   // TODO: Generalize
-  link = links[0],
+  _link = links[0],
+  /* Get html page with HTTP request */
+  {body: html, url} = await got (_link),
+  /* Again normalize new url */
+  link = normalizeUrl (url, {stripWWW: false}),
 
-  {records: resources} = await session.run (_1, {link}),
+  /* See if resource exists */
+  {records: resources} = await session.run (match, {link}),
   isNew = R.isEmpty (resources),
 
   newResource = async () => {
-    console.log (`new Resource`)
-    const {body: html, url} = await got (link),
-    {title} = await metascraper ({html, url}),
-    {records: [resource]} = await session.run (_2, {link, title}),
-    id = resource.get (`r`).identity.low
-    H.isNotNilOrEmpty (topics) && await session.run (_3, {topics, id})
-    // H.isNotNilOrEmpty (prerequisites) && await session.run (_4, {prerequisites, id})
+    /* Get title from html page */
+    const {title} = await metascraper ({html, url}),
+    /* Create resource */
+    {records: [resource]} = await session.run (createResource, {link, title})
+    return resource.get (`r`).identity.low
   },
-  oldResource = async () => {},
 
-  [] = [isNew ? await newResource() : await oldResource()]
-
-  /* If ip then review is anonymous */
+  resourceId = isNew ? await newResource() : resources[0].get (`r`).identity.low
   
-  // TODO: generalize
-  // TODO: don't choose first link
+  /* Condtionally create Topic AmosGame */
+  H.isNotNilOrEmpty (topics) 
+    && await session.run (amosGameTopics, {resourceId, topics, userId})
 
-  // TODO: also prerequisites
-  // TODO: topics
+  /* Condtionally create Prerequisite AmosGame */
+  H.isNotNilOrEmpty (prerequisites)
+    && await session.run (amosGamePrerequisites, {resourceId, prerequisites, userId})
 }
 
 export default H.wrapInResponse (addReview)
