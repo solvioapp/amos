@@ -1,5 +1,5 @@
 import {
-  R, hooks, H, React, CONST, validation,
+  R, hooks, H, React, CONST, validation, useQueryParam, NumberParam
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
 import Top_ from './top.sc'
@@ -9,7 +9,9 @@ const message = ({isSubmitted}) => (
 )
 
 const Username = (props) => {
-  const {
+  const [code] = useQueryParam (`code`, NumberParam),
+  
+  {
     onSubmit, messages, form: {register}, errors, ...rest
   } = hooks.form ({validationSchema: validation.usernameOnly}) ({message}) (props)
   return <form css={Top_} onSubmit={onSubmit} {...rest}>

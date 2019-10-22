@@ -12,6 +12,7 @@ import {gql} from 'apollo-boost'
 // TODO: Migrate to ApolloClient@3.0.0 (will be released in Nov 19)
 import ApolloClient from 'apollo-boost/lib/index'
 import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react-hooks'
+import {useQueryParam, NumberParam} from 'use-query-params'
 
 /* /common */
 import H from './helpers'
@@ -66,6 +67,7 @@ export {
   InMemoryCache,
   ApolloClient, gql, // Apollo Client
   ApolloProvider, useQuery, useLazyQuery, useMutation, // Apollo React Hooks
+  useQueryParam, NumberParam, // useQueryParams
   /* /apollo */
   /* /common */
   H,
