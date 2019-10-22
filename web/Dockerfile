@@ -14,7 +14,7 @@ EXPOSE 3000
 # RUN apk add --no-cache bash
 
 # Make our shell script executable
-RUN chmod +x env.sh
+# RUN chmod +x env.sh
 
 # Start Nginx server
 # CMD ["/bin/bash", "-c", "/app/env.sh &&  -g \"daemon off;\""]
