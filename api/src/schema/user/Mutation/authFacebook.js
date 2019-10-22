@@ -5,10 +5,8 @@ const _1 = `
   return fb
 `
 
-const authFacebook = async (_, {input}, {session}) => {
+const authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
   const
-
-  {fbAccessToken} = input,
 
   {data: {user_id: userFbId}} = await rp (
     `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.APP_ID}|${process.env.APP_SECRET}`
