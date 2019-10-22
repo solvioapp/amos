@@ -11,6 +11,7 @@ import neo4jgraphql from 'neo4j-graphql-js'
 import * as yup from 'yup'
 import Promise from 'bluebird'
 import normalizeUrl from 'normalize-url'
+import rp from 'request-promise'
 
 import * as CONST from './constants'
 import * as validation from './validation'
@@ -25,6 +26,7 @@ export {
   yup,
   Promise,
   normalizeUrl,
+  rp,
   CONST,
   validation,
 }

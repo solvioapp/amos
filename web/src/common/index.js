@@ -25,7 +25,7 @@ import * as CSS_CONST from './const/css'
 /* /apollo */
 
 /* External */
-import ReactTooltip from 'react-tooltip'
+// import ReactTooltip from 'react-tooltip'
 
 /* No dependencies */
 import Icon from 'components/icon'
@@ -75,7 +75,7 @@ export {
   W,
   CSS_CONST,
   /* External */
-  ReactTooltip,
+  // ReactTooltip,
   /* Components */
   Icon,
   AuthOptions,

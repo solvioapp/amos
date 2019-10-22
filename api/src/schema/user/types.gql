@@ -68,8 +68,19 @@ input SignupInput {
   repeatPassword: String!
 }
 
+input AuthFacebookInput {
+  accessToken: String!
+}
+
+input SignupFacebookInput {
+  accessToken: String!
+  username: String!
+}
+
 extend type Mutation {
   signup (input: SignupInput!): Response!
+  authFacebook (input: AuthFacebookInput!): Response!
+  signupFacebook (input: SignupFacebookInput): Response!
   # updatePassword (email: String!, password: String!, _new: String!): String!
   # selfAttest (topic: String!): Boolean!
 }

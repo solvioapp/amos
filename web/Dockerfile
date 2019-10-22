@@ -25,4 +25,4 @@ EXPOSE 3000
 # CMD ["npm", "start", "--", "--host", "0.0.0.0"]
 # CMD /app/env.sh && npm run build && npm run server
 RUN npm run build
-CMD npm run start:production
+CMD npm run start:prod
