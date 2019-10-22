@@ -8,6 +8,10 @@ const InputForm_ = styled.div`
   flex-direction: column;
   align-content: flex-start;
 
+  ${Input} {
+    margin-top: 18px;
+  }
+
   form {
     display: flex;
     justify-content: center;

@@ -8,7 +8,7 @@ const Input_ = styled.input`
   box-sizing: border-box;
   color: #363636;
   font-size: 1em;
-  height: 2.5em;
+  height: 3em;
   padding: 4px 10px;
   width: ${H.prop (`width`, `350px`)};
 
