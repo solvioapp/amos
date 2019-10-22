@@ -17,7 +17,7 @@ const onClick = (authFacebook) => () => {
 
 const AuthBox = ({authFacebook, ...rest}) => (
   <div {...rest}>
-    <Button icon='google' width={`250px`}>Continue with Google</Button>
+    <Button icon='github' width={`250px`}>Continue with Github</Button>
     <Button
       icon='facebook'
       width={`250px`}
