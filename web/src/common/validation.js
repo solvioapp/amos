@@ -25,6 +25,11 @@ username = string()
   .label(`Username`)
   .required(),
 
+usernameOnly = object()
+  .shape ({
+    username
+  }),
+
 email = string()
   .email()
   .label(`Email`)

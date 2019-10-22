@@ -69,11 +69,11 @@ input SignupInput {
 }
 
 input AuthFacebookInput {
-  accessToken: String!
+  fbAccessToken: String!
 }
 
 input SignupFacebookInput {
-  accessToken: String!
+  fbAccessToken: String!
   username: String!
 }
 

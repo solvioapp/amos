@@ -1,4 +1,4 @@
-import {R, React, gql, useQuery, useMutation} from 'common'
+import {R, H, React, gql, useQuery, useMutation} from 'common'
 
 export const
 
@@ -20,27 +20,18 @@ AUTH_FACEBOOK_GQL = gql`
     authFacebook (input: $input) {
       success
       message
+      saveFbAccessToken @client
     }
   }
 `,
 
-SIGNUP_FACEBOOK_GQL = gql`
-  mutation SignupFacebok ($inut: SignupFacebokInut!) {
-    signupFacebok (input: $input) {
-      success
-      message
-      saveAccessToken @client
-    }
-  }
-`
-
 FACEBOOK = C => (props) => {
   const
-  
-  onCompleted = ({authFacebook: {success, message}}) => {
-    success && navto (`/signup/username`) ()
+
+  onCompleted = ({authFacebook: {success}}) => {
+    success && H.navto (`/signup/username`) ()
   },
-  
+
   [authFacebook, {data}] = useMutation (AUTH_FACEBOOK_GQL, {onCompleted}),
 
   forwardProps = R.merge ({authFacebook, data}) (props)

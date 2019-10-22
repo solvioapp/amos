@@ -8,10 +8,10 @@ const _1 = `
 const authFacebook = async (_, {input}, {session}) => {
   const
 
-  {accessToken} = input,
+  {fbAccessToken} = input,
 
   {data: {user_id: userFbId}} = await rp (
-    `https://graph.facebook.com/debug_token?input_token=${accessToken}&access_token=${process.env.APP_ID}|${process.env.APP_SECRET}`
+    `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.APP_ID}|${process.env.APP_SECRET}`
     ) |> JSON.parse,
     
     {records: [fbAccount]} = await session.run (_1, {userFbId}),
@@ -23,7 +23,7 @@ const authFacebook = async (_, {input}, {session}) => {
       const userId = fbAccount.get (`fb`).identity.low
       await A.createToken (process.env.JWT_SECRET, {sub: userId})
     }
-    : accessToken
+    : fbAccessToken
 
   return {message}
 }

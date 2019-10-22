@@ -4,9 +4,9 @@ import {
 } from 'common'
 import Top_ from './top.sc'
 
-const fbLogin = (authFacebook) => ({status, authResponse: {accessToken}}) => (
+const fbLogin = (authFacebook) => ({status, authResponse: {accessToken: fbAccessToken}}) => (
   R.equals (status, `connected`) && do {
-    authFacebook ({variables: {input: {accessToken}}})
+    authFacebook ({variables: {input: {fbAccessToken}}})
   }
 )
 

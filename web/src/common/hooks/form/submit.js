@@ -1,15 +1,21 @@
-import {R} from 'common'
+import {H, R} from 'common'
 
 const submit = (props) => {
   const
 
-  {form} = props,
+  {form, input} = props,
 
-  [] = [form |> console.log ('form submit', #)],
+  // [] = [form |> console.log ('form submit', #)],
 
-  onSubmit = form.handleSubmit (input => {
+  onSubmit = form.handleSubmit (_input => {
     // const variables = {input: (R.pick (fields) (input))}
-    props.onSubmit[0] ({variables: {input}})
+    input |> console.log ('input', #)
+    _input |> console.log ('_input', #)
+    const variables = H.isNilOrEmpty (input)
+      ? {input: _input}
+      : {input: R.mergeDeepRight (_input) (input)}
+    variables |> console.log ('variables', #)
+    props.onSubmit[0] ({variables})
   })
 
   /* Override onSubmit */
