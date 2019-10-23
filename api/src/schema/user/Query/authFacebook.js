@@ -18,10 +18,13 @@ const authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
 
   message = H.isNotNilOrEmpty (fbAccount)
     ? do {
-      const userId = fbAccount.get (`fb`).identity.low
-      await A.createToken (process.env.JWT_SECRET, {sub: userId})
+      const userId = fbAccount.get (`fb`).identity.low,
+      token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+      /* Fsr this fails unless it's named first */
+      const res = [`token`, token]
+      res
     }
-    : fbAccessToken
+    : [`fbAccessToken`, fbAccessToken]
 
   return {message}
 }

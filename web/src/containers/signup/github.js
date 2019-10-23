@@ -8,9 +8,8 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 )
 
-const Username = (props) => {
-  const [code] = useQueryParam (`code`, NumberParam),
-
+const Github = (props) => {
+  const
   {
     onSubmit, messages, form: {register}, errors, ...rest
   } = hooks.form ({validationSchema: validation.usernameOnly}) ({message}) (props)
@@ -34,5 +33,5 @@ const Username = (props) => {
   </form>
 }
 
-export default Username
-|> hooks.USERNAME
+export default Github
+|> hooks.GITHUB

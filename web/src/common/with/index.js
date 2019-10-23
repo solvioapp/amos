@@ -1,4 +1,4 @@
-import {R, H, React, gql, useQuery, useMutation} from 'common'
+import {R, H, React, gql, useQuery, useLazyQuery} from 'common'
 
 export const
 
@@ -16,11 +16,11 @@ GET_AUTH = C => ({...rest}) => {
 },
 
 AUTH_FACEBOOK_GQL = gql`
-  mutation AuthFacebook ($input: AuthFacebookInput!) {
+  query AuthFacebook ($input: AuthFacebookInput!) {
     authFacebook (input: $input) {
       success
       message
-      saveFbAccessToken @client
+      handleFacebook @client
     }
   }
 `,
@@ -28,11 +28,11 @@ AUTH_FACEBOOK_GQL = gql`
 FACEBOOK = C => (props) => {
   const
 
-  onCompleted = ({authFacebook: {success}}) => {
-    success && H.navto (`/signup/username`) ()
+  onCompleted = ({authFacebook: {success, message}}) => {
+    success && message[0] === `fbAccessToken` && H.navto (`/signup/facebook`) ()
   },
 
-  [authFacebook, {data}] = useMutation (AUTH_FACEBOOK_GQL, {onCompleted}),
+  [authFacebook, {data}] = useLazyQuery (AUTH_FACEBOOK_GQL, {onCompleted}),
 
   forwardProps = R.merge ({authFacebook, data}) (props)
 

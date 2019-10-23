@@ -52,8 +52,18 @@ input LoginInput {
   password: String!
 }
 
+input AuthFacebookInput {
+  fbAccessToken: String!
+}
+
+input AuthGithubInput {
+  code: String!
+}
+
 extend type Query {
   login (input: LoginInput!): Response!
+  authFacebook (input: AuthFacebookInput!): Response!
+  authGithub (input: AuthGithubInput!): Response!
   # currentUser (name: String): String
   # users: [User!] @hasRole (roles: [ADMIN])
   #   @cypher(
@@ -68,14 +78,6 @@ input SignupInput {
   repeatPassword: String!
 }
 
-input AuthFacebookInput {
-  fbAccessToken: String!
-}
-
-input AuthGithubInput {
-  code: String!
-}
-
 input SignupFacebookInput {
   fbAccessToken: String!
   username: String!
@@ -88,8 +90,6 @@ input SignupGithubInput {
 
 extend type Mutation {
   signup (input: SignupInput!): Response!
-  authFacebook (input: AuthFacebookInput!): Response!
-  authGithub (input: AuthGithubInput!): Response!
   signupFacebook (input: SignupFacebookInput!): Response!
   signupGithub (input: SignupGithubInput!): Response!
   # updatePassword (email: String!, password: String!, _new: String!): String!

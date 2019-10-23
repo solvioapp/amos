@@ -12,7 +12,7 @@ const fbLogin = (authFacebook) => ({status, authResponse: {accessToken: fbAccess
 
 const onClick = (authFacebook) => () => {
   /* eslint-disable no-undef */
-  FB.login(fbLogin (authFacebook), {scope: [`public_profile`, `email`]})
+  FB.login (fbLogin (authFacebook), {scope: [`public_profile`, `email`]})
 }
 
 const AuthBox = ({authFacebook, ...rest}) => (
@@ -22,7 +22,7 @@ const AuthBox = ({authFacebook, ...rest}) => (
         icon='github'
         width={`250px`}
       >
-          Continue with Github
+        Continue with Github
       </Button>
     </a>
     <Button

@@ -1,10 +1,15 @@
-import {H, React, gql, useQuery, useMutation} from 'common'
+import {
+  H, React, gql, useQuery, useMutation, useQueryParam, NumberParam,
+} from 'common'
 
 export const
 
-GET_FB_ACCESS_TOKEN = gql`
-  {
-    fbAccessToken @client
+AUTH_GITHUB = gql`
+  query AuthGithub ($input: AuthGithubInput!) {
+    authGithub (input: $input) {
+      success
+      messsage
+    }
   }
 `,
 
@@ -18,11 +23,13 @@ SIGNUP_FACEBOOK_GQL = gql`
   }
 `,
 
-USERNAME = C => ({...rest}) => {
+GITHUB = C => ({...rest}) => {
   const
 
-  {data} = useQuery (GET_FB_ACCESS_TOKEN),
-  fbAccessToken = data?.fbAccessToken,
+  [code] = useQueryParam (`code`, NumberParam),
+  
+  {data} = useQuery (AUTH_GITHUB, {variables: {input: {code}}}),
+
   skip = H.isNilOrEmpty (fbAccessToken),
   input = {fbAccessToken},
   signupFacebook = useMutation (SIGNUP_FACEBOOK_GQL, {skip})
