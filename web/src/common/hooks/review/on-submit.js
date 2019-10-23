@@ -33,7 +33,6 @@ onSubmit = (props) => {
 
   /* Mutation */
   [exec] = useMutation (ADD_REVIEW_CLIENT_GQL),
-  // exec = () => {},
 
   /* create onSubmit */
   obj = structure[page],

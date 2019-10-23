@@ -101,14 +101,6 @@ const isValid = (props) => {
   onSubmit.next = addValidation (props.onSubmit.next)
   onSubmit.finish = addValidation (props.onSubmit.finish)
 
-  // onSubmit.previous = e => {
-  //   // form.handleSubmit (_input => {
-  //     const input = {topic: R.filter (H.isNotNilOrEmpty) (_input.topic)}
-  //     props.onSubmit.previous |> console.log ('props.onSubmit.previous', #)
-  //     props.onSubmit.previous ({variables: {input}})
-  //   // })
-  // }
-
   /* Override valid, onChange and onSubmit */
   return R.mergeAll ([{setOneValid, setValid}, props, {valid, onChange, onSubmit}])
 }
