@@ -1,60 +1,52 @@
 import {R,A,H,rp} from 'common'
 
 const _1 = `
-  match (fb:GhAccount {userFbId: $userFbId})
-  return fb
+  match (gh:GhAccount {userGhId: $userGhId})
+  return gh
 `
 
-const authGithub = async (_, {input: {code}}, {session}) => {
+const authGithub = async (_, {input: {ghCode}}, {session}) => {
   const
 
   qs = {
     client_id: process.env.GITHUB_CLIENT_ID,
     client_secret: process.env.GITHUB_CLIENT_SECRET,
-    code
+    code: ghCode
   },
 
-  options = {
+  getGhAccessToken = {
     uri: `https://github.com/login/oauth/access_token`,
     method: `POST`,
     qs,
     json: true
   },
 
-  data = await rp (options),
-  [] = [data |> console.log ('data', #)],
+  data = await rp (getGhAccessToken),
   ghAccessToken = data?.access_token,
 
-  options2 = {
+  getUser = {
     uri: `https://api.github.com/user`,
     headers: {
       'Authorization': `token ${ghAccessToken}`,
       'User-Agent': `Request-Promise`
-    }
-  }
+    },
+    json: true
+  },
   
-  const res = await rp (options2)
+  user = await rp (getUser),
+  userGhId = user?.id,
 
-  res |> console.log ('res', #)
-
-  const options3 = R.mergeRight (options2) ({
-    'uri': `https://api.github.com/user/emails`,
-  })
-
-  const emails = await rp (options3)
-
-  emails |> console.log ('emails', #)
-  
-    // {records: [fbAccount]} = await session.run (_1, {userFbId}),
-    
   // TODO: Check if user has LocalAccount
-
-  message = H.isNotNilOrEmpty (fbAccount)
+  {records: [ghAccount]} = await session.run (_1, {userGhId}),
+  message = H.isNotNilOrEmpty (ghAccount)
     ? do {
-      const userId = fbAccount.get (`fb`).identity.low
-      await A.createToken (process.env.JWT_SECRET, {sub: userId})
+      const userId = ghAccount.get (`gh`).identity.low,
+      token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+      /* Fsr this fails unless it's named first */
+      const res = [`token`, token]
+      res
     }
-    : fbAccessToken
+    : [`ghAccessToken`, ghAccessToken]
 
   return {message}
 }

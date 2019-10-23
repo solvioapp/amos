@@ -28,13 +28,9 @@ AUTH_FACEBOOK_GQL = gql`
 FACEBOOK = C => (props) => {
   const
 
-  onCompleted = ({authFacebook: {success, message}}) => {
-    success && message[0] === `fbAccessToken` && H.navto (`/signup/facebook`) ()
-  },
+  [authFacebook] = useLazyQuery (AUTH_FACEBOOK_GQL),
 
-  [authFacebook, {data}] = useLazyQuery (AUTH_FACEBOOK_GQL, {onCompleted}),
-
-  forwardProps = R.merge ({authFacebook, data}) (props)
+  forwardProps = R.merge ({authFacebook}) (props)
 
   return <C {...forwardProps} />
 }

@@ -7,8 +7,14 @@ const _1a = `
 const _1b = `
   create (u:User {username: $username})
   -[:AUTHENTICATED_WITH]->
-  (fb:FbAccount {userFbId: $userFbId, email: $email})
+  (fb:FbAccount {userFbId: $userFbId})
   return u
+`
+
+const attachEmail = `
+  match (fb: FbAccount {userFbId: $userFbId}
+  with fb
+  fb.email = $email
 `
 
 
@@ -31,12 +37,14 @@ const signupFacebook = async (_, {input}, {session}) => {
     `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.APP_ID}|${process.env.APP_SECRET}`
   ) |> JSON.parse,
 
+  {records: [user]} = await session.run (_1b, {userFbId, username}),
+  userId = user.get (`u`).identity.low,
+
   {email} = await rp (
     `https://graph.facebook.com/me/?access_token=${fbAccessToken}&fields=email`
   ) |> JSON.parse,
 
-  {records: [user]} = await session.run (_1b, {userFbId, username, email}),
-  userId = user.get (`u`).identity.low,
+  [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {userFbId, email})],
 
   message = await A.createToken (process.env.JWT_SECRET, {sub: userId})
 

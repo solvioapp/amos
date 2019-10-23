@@ -57,7 +57,7 @@ input AuthFacebookInput {
 }
 
 input AuthGithubInput {
-  code: String!
+  ghCode: String!
 }
 
 extend type Query {
@@ -84,7 +84,7 @@ input SignupFacebookInput {
 }
 
 input SignupGithubInput {
-
+  ghAccessToken: String!
   username: String!
 }
 

@@ -12,7 +12,7 @@ const authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
     `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.APP_ID}|${process.env.APP_SECRET}`
     ) |> JSON.parse,
     
-    {records: [fbAccount]} = await session.run (_1, {userFbId}),
+  {records: [fbAccount]} = await session.run (_1, {userFbId}),
     
   // TODO: Check if user has LocalAccount
 

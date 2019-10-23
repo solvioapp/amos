@@ -1,21 +1,22 @@
 import {
-  H, React, gql, useQuery, useMutation, useQueryParam, NumberParam,
+  H, React, gql, useQuery, useMutation, useQueryParam, StringParam,
 } from 'common'
 
 export const
 
-AUTH_GITHUB = gql`
+AUTH_GITHUB_GQL = gql`
   query AuthGithub ($input: AuthGithubInput!) {
     authGithub (input: $input) {
       success
-      messsage
+      message
+      handleGithub @client
     }
   }
 `,
 
-SIGNUP_FACEBOOK_GQL = gql`
-  mutation SignupFacebook ($input: SignupFacebookInput!) {
-    signupFacebook (input: $input) {
+SIGNUP_GITHUB_GQL = gql`
+  mutation SignupGithub ($input: SignupGithubInput!) {
+    signupGithub (input: $input) {
       success
       message
       login @client
@@ -23,18 +24,19 @@ SIGNUP_FACEBOOK_GQL = gql`
   }
 `,
 
-GITHUB = C => ({...rest}) => {
+GITHUB = C => ({match, ...rest}) => {
   const
 
-  [code] = useQueryParam (`code`, NumberParam),
-  
-  {data} = useQuery (AUTH_GITHUB, {variables: {input: {code}}}),
+  [ghCode] = useQueryParam (`code`, StringParam),
 
-  skip = H.isNilOrEmpty (fbAccessToken),
-  input = {fbAccessToken},
-  signupFacebook = useMutation (SIGNUP_FACEBOOK_GQL, {skip})
+  {data} = useQuery (AUTH_GITHUB_GQL, {variables: {input: {ghCode}}}),
+  [] = [data |> console.log ('data', #)],
+  ghAccessToken = data?.authGithub?.handleGithub,
+  skip = H.isNilOrEmpty (ghAccessToken),
+  input = {ghAccessToken},
+  signupGithub = useMutation (SIGNUP_GITHUB_GQL, {skip})
 
   return (
-    <C onSubmit={signupFacebook} {...{input}} {...rest}/>
+    <C onSubmit={signupGithub} {...{input}} {...rest}/>
   )
 }

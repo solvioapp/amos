@@ -15,9 +15,11 @@ const onClick = (authFacebook) => () => {
   FB.login (fbLogin (authFacebook), {scope: [`public_profile`, `email`]})
 }
 
+const github = 'https://github.com/login/oauth/authorize?client_id=72be28a7ee64c7cd1948&scope=user:email'
+
 const AuthBox = ({authFacebook, ...rest}) => (
   <div {...rest}>
-    <a href='https://github.com/login/oauth/authorize?client_id=72be28a7ee64c7cd1948&scope=user:email'>
+    <a href={github}>
       <Button
         icon='github'
         width={`250px`}
