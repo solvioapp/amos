@@ -22,7 +22,7 @@ const Topics = (props) => {
       {R.times (
         (key,
           name = `topic[${key}]`,
-          res = results?.topics?.[key]) => (
+          res = results?.topic?.[key]) => (
           <Input
             name={name}
             ref={form.register}

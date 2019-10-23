@@ -75,8 +75,8 @@ login = object().shape ({usernameOrEmail, password}),
 // links = object().shape ({links: _links})
 _links = string().url().required(),
 links = object().shape ({links: _links}),
-_topics = string(),
-topics = object().shape ({topic: _topics})
+_topics = string()
+// topics = object().shape ({topic: _topics})
 
 // topics = array().of (string().required()),
 // prerequisites = string(),

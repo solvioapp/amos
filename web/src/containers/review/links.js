@@ -6,9 +6,12 @@ import Top_ from './top.sc'
 import InputForm_ from './input-form.sc'
 
 const Links = (props) => {
+  
   const {
-    onSubmit, messages, form, errors, valid, ...rest
-  } = hooks.useReview (`links`) (props)
+    onSubmit, messages, form, errors, valid, onChange, ...rest
+  } = hooks.useReviewLinks (`links`) (props)
+  onChange |> console.log ('onChange', #)
+  valid |> console.log ('valid', #)
 
   return <div css={Top_} {...rest}>
     <AmosChat>
@@ -21,6 +24,7 @@ const Links = (props) => {
         ref={form.register}
         errors={errors}
         valid={valid}
+        onChange={onChange}
       />
       <form onSubmit={onSubmit.next}>
         <Button primary type='submit'>

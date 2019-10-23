@@ -13,6 +13,7 @@ import {gql} from 'apollo-boost'
 import ApolloClient from 'apollo-boost/lib/index'
 import {ApolloProvider, useQuery, useLazyQuery, useMutation} from '@apollo/react-hooks'
 import {useQueryParam, NumberParam, StringParam} from 'use-query-params'
+import {flatten} from 'flattenjs'
 
 /* /common */
 import H from './helpers'
@@ -68,6 +69,7 @@ export {
   ApolloClient, gql, // Apollo Client
   ApolloProvider, useQuery, useLazyQuery, useMutation, // Apollo React Hooks
   useQueryParam, NumberParam, StringParam, // useQueryParams
+  flatten,
   /* /apollo */
   /* /common */
   H,

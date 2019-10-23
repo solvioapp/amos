@@ -4,12 +4,12 @@ import {
 } from 'common'
 import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
-import InputForm_ from '../input-form.sc' 
+import InputForm_ from '../input-form.sc'
 
 const Prerequisites = (props) => {
   const {
     results, messages, isValid,
-    onSubmit, onClick, form, ...rest
+    onSubmit, onClick, form, onChange, ...rest
   } = hooks.useReviewTopics (`prerequisites`) (props)
 
   return <div css={Top_} {...rest}>
@@ -21,10 +21,10 @@ const Prerequisites = (props) => {
       <Input
         name='prerequisites'
         ref={form.register}
-        results={results}
         link={false}
         errors={form.errors}
         dropdown={!isValid}
+        onChange={onChange[0]}
         {...{results, onClick}}
       />
       <Buttons>

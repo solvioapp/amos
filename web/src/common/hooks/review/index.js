@@ -8,6 +8,7 @@ import results from './results'
 import config from './config'
 import hydrate from './hydrate'
 import onSubmit from './on-submit'
+import onChange from './on-change'
 
 const
 
@@ -33,7 +34,7 @@ message = ({isSubmitted}) => (
 ),
 
 formOpts = name => ({
-  ...({validationSchema: validation[name]}),
+  ...(validation[name] && {validationSchema: validation[name]}),
   // mode: `onBlur`
 }),
 
@@ -46,19 +47,30 @@ export const
 
 useReview = name => (
   R.pipe (
-    onSubmit,
+    onSubmit, // adds onSubmit
+    /* Adds {fields, messages, form, schema}
+      Overrides onSubmit */
     multiForm (formOpts (name)) (opts (name)),
-    hydrate
+    hydrate, // adds Review
+  )
+),
+
+useReviewLinks = name => (
+  R.pipe (
+    useReview (name), // see above
+    onChange, // adds onChange, valid
   )
 ),
 
 useReviewTopics = name => (
   R.pipe (
     useReview (name),
-    config,
-    results,
+    config, // adds config, onChange
+    results, // adds results, loading
+    /* Adds {valid, setOneValid, setValid}
+      Overrides onChange, onSubmit */
     isValid,
-    onClick,
-    times
+    onClick, // adds onClick, onEnt
+    times // adds times
   )
 )

@@ -12,7 +12,7 @@ QUERY_SEARCH = gql`
   }
 `,
 
-defResults = {topics: []},
+defResults = {topic: []},
 
 /**
  * @description Sets up Query for Search
@@ -27,7 +27,9 @@ results = (props) => {
   parseResults = data => {
     const _results = data
       && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results)
-    return {topics: H.update (config.key) (_results) ([])}
+    return config.skip // test whether user deleted input
+      ? {topic: H.update (config.key) ([]) (results.topic)}
+      : {topic: H.update (config.key) (_results) (results.topic)}
   },
 
   onCompleted = R.pipe (parseResults, setResults),
@@ -35,7 +37,7 @@ results = (props) => {
   _config = {...config, onCompleted},
   {loading} = useQuery (QUERY_SEARCH, _config)
 
-  config.skip && H.neq (results) (defResults) && setResults (defResults)
+  results |> console.log ('results results.js', #)
   return R.merge ({results, loading}) (props)
 }
 

@@ -4,6 +4,7 @@ const addReview = (_, {input}, {cache}) => {
   // const review = input
   cache.data.data |> console.log ('cache.data.data', #)
   cache.writeData ({data: {review}})
+  // const  test= cache.read
   console.log (`addReviewLinks returning`)
   // return {success: 5, __typename: `foo__typename`}
 }
