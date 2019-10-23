@@ -33,7 +33,7 @@ const Topics = (props) => {
             results={res}
             onClick={onClick[key]}
             valid={valid[key]}
-            onChange={e => onChange[key] (res) (e)}
+            onChange={onChange[key]}
             onEnt={onEnt}
             {...props}
           />

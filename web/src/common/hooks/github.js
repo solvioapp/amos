@@ -30,7 +30,6 @@ GITHUB = C => ({match, ...rest}) => {
   [ghCode] = useQueryParam (`code`, StringParam),
 
   {data} = useQuery (AUTH_GITHUB_GQL, {variables: {input: {ghCode}}}),
-  [] = [data |> console.log ('data', #)],
   ghAccessToken = data?.authGithub?.handleGithub,
   skip = H.isNilOrEmpty (ghAccessToken),
   input = {ghAccessToken},

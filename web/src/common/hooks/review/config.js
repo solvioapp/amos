@@ -11,7 +11,7 @@ onChange = (props) => {
   {fields} = props,
 
   [config, setConfig] = React.useState ({skip: true})
-  const createOnChange = (field, key) => results => ({target: {name, value}}) => {
+  const createOnChange = (field, key) => ({target: {name, value}}) => {
     value |> H.isNotNilOrEmpty
       ? setConfig ({
         key,
