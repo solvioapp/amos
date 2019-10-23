@@ -12,17 +12,14 @@ const isValid = (props) => {
   {results, loading, review, form} = props,
   [valid, setValid] = React.useState ([]),
 
-  /* Set times on hydration */
+  /*
+    Set valid on hydration
+    Here we're assuming that anything that was in review was in store
+    and anything that is in store is valid
+  */
   [] = [review?.topic
     && (R.length (review.topic) > R.length (valid))
     && (setValid (R.repeat (true) (R.length (review.topic))))],
-        /*
-      Here we're assuming that anything that was in review was in store
-      and anything that is in store is valid
-    */
-    // review?.topic && H.map ((val, key) => setOneValid (key) (true)) (review.topic)
-    // review?.topic && form.triggerValidation()
-    // && (R.length (review.topic) |> setTimes)],
 
   /* eslint-disable no-shadow */
   setOneValid = key => isValid => {
@@ -46,27 +43,35 @@ const isValid = (props) => {
 
   // TODO: generalize
   getInvalidField = (acc, val, i) => {
+    /* Empty is considered vallid */
     const test = !val && H.isNotNilOrEmpty (topics[i])
     return test ? R.append (`topic[${i}]`) (acc) : acc
   },
   invalidFields = H.reduce (getInvalidField) ([]) (valid),
 
   [] = [invalidFields |> console.log ('invalidFields', #)],
-  
-  // isAllValid = R.all (R.identity) (isValid),
+
   isAllValid = R.length (invalidFields) === 0,
 
+  /* After submission */
   [] = [form.formState.isSubmitted && (() => {
     isAllValid
       ? R.not (form.formState.isValid) && form.clearError ()
       : setErrors (form) (invalidFields)
   })()],
 
-  _addValidation = cb => (
+  addValidation = cb => (
     isAllValid
       ? cb
       : form.handleSubmit (setErrors (form) (invalidFields))
   ),
+
+  previousValidation = cb => (...args) => do {
+    const defValues = R.repeat (``) (R.length (invalidFields))
+      |> R.zipObj (invalidFields) (#)
+    form.reset (defValues)
+    cb (...args)
+  },
 
   // validate = R.pipe (
   //   R.pick (VALIDATE),
@@ -80,9 +85,29 @@ const isValid = (props) => {
   //   [R.pipe , ]
   // )
 
-  onSubmit = R.map (_addValidation) (props.onSubmit)
+  // partition = (val, key) => R.includes (VALIDATE) (key)
 
-  valid |> console.log ('valid', #)
+  // part = R.partition (R.flip (R.includes) (VALIDATE)) (R.keys (props.onSubmit)),
+
+  // onSubmit = R.map (_addValidation) (props.onSubmit)
+
+  // onSubmit |> console.log ('onSubmit', #)
+
+  // valid |> console.log ('valid2', #)
+
+  onSubmit = {}
+
+  onSubmit.previous = previousValidation (props.onSubmit.previous)
+  onSubmit.next = addValidation (props.onSubmit.next)
+  onSubmit.finish = addValidation (props.onSubmit.finish)
+
+  // onSubmit.previous = e => {
+  //   // form.handleSubmit (_input => {
+  //     const input = {topic: R.filter (H.isNotNilOrEmpty) (_input.topic)}
+  //     props.onSubmit.previous |> console.log ('props.onSubmit.previous', #)
+  //     props.onSubmit.previous ({variables: {input}})
+  //   // })
+  // }
 
   /* Override valid, onChange and onSubmit */
   return R.mergeAll ([{setOneValid, setValid}, props, {valid, onChange, onSubmit}])

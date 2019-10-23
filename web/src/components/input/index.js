@@ -25,13 +25,7 @@ const Input = ({
 
   onBlur = () => setDropdown (false),
 
-  _onClick = () => {
-    console.log (`onClick`)
-    results |> console.log ('results', #)
-    dropdown |> console.log ('dropdown', #)
-    setDropdown (!dropdown)
-    dropdown |> console.log ('dropdown2', #)
-  }
+  _onClick = () => setDropdown (!dropdown)
 
   return (
     <div className={className}>

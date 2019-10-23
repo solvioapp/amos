@@ -20,7 +20,6 @@ onChange = (props) => {
 
   /* We are loading from store */
   [] = [review?.links && do {
-    review |> console.log ('review2', #)
     onChange ({target: {
       name: `links`,
       value: review.links

@@ -24,7 +24,7 @@ ADD_REVIEW_CLIENT_GQL = gql`
 /**
  * @description creates onSubmit
  */
-addOnSubmit = (props) => {
+onSubmit = (props) => {
   const
 
   /* Setup */
@@ -33,6 +33,7 @@ addOnSubmit = (props) => {
 
   /* Mutation */
   [exec] = useMutation (ADD_REVIEW_CLIENT_GQL),
+  // exec = () => {},
 
   /* create onSubmit */
   obj = structure[page],
@@ -40,8 +41,9 @@ addOnSubmit = (props) => {
   next = H.intercept (H.navto (`/review/${obj.next}`)) (exec) |> R.of,
   finish = [H.navto (`/review/thanks`)],
 
+  /* eslint-disable no-shadow */
   onSubmit = {previous, next, finish}
   return R.merge ({onSubmit}) (props)
 }
 
-export default addOnSubmit
+export default onSubmit
