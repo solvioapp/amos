@@ -1,6 +1,9 @@
+import {R, H} from 'common'
+
 const addReview = (_, {input}, {cache}) => {
   input |> console.log ('input addReview Resolver', #)
-  const review = {__typename: `review`, ...input}
+  const _input = {topic: R.filter (H.isNotNilOrEmpty) (input.topic)}
+  const review = {__typename: `review`, ..._input}
   // const review = input
   cache.data.data |> console.log ('cache.data.data', #)
   cache.writeData ({data: {review}})

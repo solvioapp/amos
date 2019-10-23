@@ -27,7 +27,9 @@ hydrate = (props) => {
   {data: {review}} = useQuery (GET_REVIEW_CLIENT_GQL, {returnPartialData: true})
 
   H.useMount(() => {
-    review && (review |> flatten |> R.mapObjIndexed ((val, key) => form.setValue (key, val)) (#))
+    review && (review |> flatten |> R.mapObjIndexed ((val, key) => {
+      H.isNotNilOrEmpty (val) && form.setValue (key, val)
+    }) (#))
   })
 
   return R.merge ({review}) (props)
