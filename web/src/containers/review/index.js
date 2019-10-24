@@ -1,5 +1,5 @@
 import {
-  React, R, Switch, Route
+  React, H, gql, useMutation, Switch, Route
 } from 'common'
 import Guest from './guest'
 import Links from './links'
@@ -8,15 +8,18 @@ import Prerequisites from './prerequisites'
 import Confirm from './confirm'
 import Thanks from './thanks'
 
-const redirect = R.both(
-  R.propEq(`isAuthenticated`, true),
-  R.pathEq([`location`, `pathname`], `/review`)
-)
+const RESET_REVIEW_GQL = gql`
+  mutation ResetReview {
+    resetReview @client
+  }
+`
 
-// const createGuest = props => 
+const Review = () => {
+  const [resetReview] = useMutation (RESET_REVIEW_GQL)
 
-const Review = (props) => (
-  <Switch>
+  H.useUnmount(() => resetReview())
+
+  return <Switch>
     <Route path='/review' exact component={Guest} />
     <Route path='/review/links' component={Links} />
     <Route path='/review/topics' component={Topics} />
@@ -24,6 +27,6 @@ const Review = (props) => (
     <Route path='/review/confirm' component={Confirm} />
     <Route path='/review/thanks' component={Thanks} />
   </Switch>
-)
+}
 
 export default (Review)

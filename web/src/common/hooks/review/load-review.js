@@ -20,9 +20,9 @@ loadReview = (props) => {
 
   const
 
-  onCompleted = review => {
+  onCompleted = ({review}) => {
     review |> console.log ('review loadReview', #)
-    review.link || props.match.url === `/review/links` || H.navto (`/review`) ()
+    review?.link || props.match.url === `/review/links` || H.navto (`/review`) ()
   },
 
   // TODO: Change to false
