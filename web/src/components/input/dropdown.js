@@ -5,10 +5,11 @@ import {
 import {Dropdown_} from './dropdown.sc.js'
 
 export default ({results, onClick, link, name, active, _key, onEnt}) => {
+  link |> console.log ('link dropdown', #)
   const [_active, _setActive] = useState (active),
 
   onKeyPress = useCallback (({key}) => {
-    key === `Enter` && onEnt && onEnt (name) (_key) (results?.[_active]?.text)
+    key === `Enter` && onEnt && results && onEnt (name) (_key) (results?.[_active]?.text)
   }, [results, _active])
 
   useEffect(() => {

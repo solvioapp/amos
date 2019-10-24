@@ -15,7 +15,7 @@ QUERY_SEARCH = gql`
 withSearch = C => ({...rest}) => {
   const
 
-  {watch, register} = useForm(),
+  {watch, register, handleSubmit} = useForm(),
   {str} = watch(),
 
   skip = R.complement (H.isNotNilOrEmpty) (str),
@@ -26,9 +26,11 @@ withSearch = C => ({...rest}) => {
     ? R.map (r => ({name: r.name, text: r.name})) (data.autocomplete.results)
     : null,
 
-  onEnt = H.navto (`/t/${str}`)
+  onEnt = () => () => (text) => H.navto (`/t/${text}`) (),
+
+  onSubmit = handleSubmit(() => {})
 
   return (
-    <C {...rest} {...{onEnt, results, register}} />
+    <C {...rest} {...{onEnt, results, register, onSubmit}} />
   )
 }

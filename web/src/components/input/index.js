@@ -15,7 +15,7 @@ const Input = ({
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
   const
-
+  
   [dropdown, setDropdown] = useState (true),
   [valid, setValid] = useState (false),
 
@@ -27,8 +27,10 @@ const Input = ({
   onKeyPress = useCallback (({key}) => {
     /* Use this if there is no dropdown or if it's disabled
     (otherwise use <Dropdown>'s onKeyPress */
-    (!dropdown || noDropdown) 
-      && key === `Enter` && onEnt && onEnt () () (`SUBMIT`)
+    if (!dropdown || noDropdown) {
+      console.log (`onKeyPress input`)
+      key === `Enter` && onEnt && onEnt () () (`SUBMIT`)
+    }
   }, [dropdown, noDropdown, onEnt])
 
   useEffect(() => {
@@ -89,7 +91,7 @@ const Input = ({
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
-      {!noDropdown && dropdown && <Dropdown {...{results, onClick, onEnt, name, _key, active}}/>}
+      {!noDropdown && dropdown && <Dropdown {...{results, onClick, link, onEnt, name, _key, active}}/>}
     </div>
   )
 }

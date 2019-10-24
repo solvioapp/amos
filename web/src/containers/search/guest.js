@@ -9,8 +9,8 @@ import {
 //   `So I need your help! Create an account and submit reviews for your favorite learning resources. Vamos, amigo! 🤗`,
 // ]
 
-const Guest = ({onEnt, results, register, ...rest}) => (
-  <form autocomplete='off'>
+const Guest = ({onEnt, results, register, onSubmit, ...rest}) => (
+  <form autocomplete='off' onSubmit={onSubmit}>
     <Input
       name='str'
       link={true}
