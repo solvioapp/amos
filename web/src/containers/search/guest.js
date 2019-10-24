@@ -12,9 +12,10 @@ import {
 const Guest = ({onEnt, results, register, ...rest}) => (
   <form autocomplete='off'>
     <Input
+      name='str'
+      link={true}
       onEnt={onEnt}
       results={results}
-      name='str'
       ref={register}
       {...rest}
     />
