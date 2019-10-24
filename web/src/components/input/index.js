@@ -62,19 +62,19 @@ const Input = ({
 
   /* Using pattern described in
   https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks */
-  const handleUserKeyPress = useCallback (({key}) => {
-    inputRef.current === document.activeElement |> console.log ('inputRef.current === document.activeElement', #)
-    results |> console.log ('results', #)
-    inputRef.current === document.activeElement && results && key === `ArrowUp`
-      && (console.log (`arrowup`) || setActive (R.pipe (R.dec, R.max (0))))
-    inputRef.current === document.activeElement && results && key === `ArrowDown`
-      && (console.log (`arrowdown`) || setActive (R.pipe (R.inc, R.min (R.length (results) - 1))))
+  const handleUserKeyPress = useCallback ((e) => {
+    inputRef.current === document.activeElement && results && e.key === `ArrowUp`
+      && (e.preventDefault() || setActive (R.pipe (R.dec, R.max (0))))
+    inputRef.current === document.activeElement && results && e.key === `ArrowDown`
+      && (e.preventDefault() || setActive (R.pipe (R.inc, R.min (R.length (results) - 1))))
   }, [results])
 
   useEffect(() => {
-    inputRef.current.addEventListener (`keyup`, handleUserKeyPress)
+    /* Using keydown here
+    bc w/ keyup preventDefault doesn't work */
+    inputRef.current.addEventListener (`keydown`, handleUserKeyPress)
 
-    return () => inputRef.current.removeEventListener (`keyup`, handleUserKeyPress)
+    return () => inputRef.current.removeEventListener (`keydown`, handleUserKeyPress)
   }, [handleUserKeyPress])
 
   active |> console.log ('active', #)

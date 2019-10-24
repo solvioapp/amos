@@ -10,7 +10,7 @@ const Topics = (props) => {
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid
-  } = hooks.useReviewTopics (`topics`) (props)
+  } = hooks.useReviewTopics (`prerequisites`) (props)
 
   return <div css={Top_} {...props}>
     <AmosChat>
