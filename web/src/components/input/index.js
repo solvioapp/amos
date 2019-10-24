@@ -27,9 +27,9 @@ const Input = ({
   onKeyPress = useCallback (({key}) => {
     /* Use this if there is no dropdown or if it's disabled
     (otherwise use <Dropdown>'s onKeyPress */
-    (!dropdown || noDropdown)
+    (!dropdown || noDropdown) 
       && key === `Enter` && onEnt && onEnt () () (`SUBMIT`)
-  }, [dropdown, noDropdown])
+  }, [dropdown, noDropdown, onEnt])
 
   useEffect(() => {
     document.addEventListener (`keyup`, onKeyPress)

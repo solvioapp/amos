@@ -22,6 +22,7 @@ onClick = (props) => {
       form.setValue (field, t) || setOneValid (key) (true)
     }
 
+    /* So weird that this code doesn't work, maybe a babel bug? */
     // (t === `SUBMIT` || field && H.isNilOrEmpty (val[field]))
     //   ? onSubmit.next
     //     ? onSubmit.next()
