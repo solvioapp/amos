@@ -22,6 +22,18 @@ const Prerequisites = (props) => {
     </AmosChat>
     <InputForm_>
       <Title>Prerequisites</Title>
+      <Buttons>
+        <form onSubmit={onSubmit.previous}>
+          <Button type='submit'>
+            Previous
+          </Button>
+        </form>
+        <form onSubmit={onSubmit.finish}>
+          <Button type='submit'>
+            Finish
+          </Button>
+        </form>
+      </Buttons>
       {R.times (
         (key,
           name = `prerequisite[${key}]`,
@@ -42,18 +54,6 @@ const Prerequisites = (props) => {
             {...props}
           />
         )) (times)}
-      <Buttons>
-        <form onSubmit={onSubmit.previous}>
-          <Button type='submit'>
-            Previous
-          </Button>
-        </form>
-        <form onSubmit={onSubmit.finish}>
-          <Button type='submit'>
-            Finish
-          </Button>
-        </form>
-      </Buttons>
     </InputForm_>
   </div>
 }

@@ -18,6 +18,23 @@ const Topics = (props) => {
     </AmosChat>
     <InputForm_>
       <Title>Topics</Title>
+      <Buttons>
+        <form onSubmit={onSubmit.previous}>
+          <Button type='submit'>
+            Previous
+          </Button>
+        </form>
+        <form onSubmit={onSubmit.next}>
+          <Button primary type='submit'>
+            Next
+          </Button>
+        </form>
+        <form onSubmit={onSubmit.finish}>
+          <Button type='submit'>
+            Finish
+          </Button>
+        </form>
+      </Buttons>
       {R.times (
         (key,
           name = `topic[${key}]`,
@@ -38,23 +55,6 @@ const Topics = (props) => {
             {...props}
           />
         )) (times)}
-      <Buttons>
-        <form onSubmit={onSubmit.previous}>
-          <Button type='submit'>
-            Previous
-          </Button>
-        </form>
-        <form onSubmit={onSubmit.next}>
-          <Button primary type='submit'>
-            Next
-          </Button>
-        </form>
-        <form onSubmit={onSubmit.finish}>
-          <Button type='submit'>
-            Finish
-          </Button>
-        </form>
-      </Buttons>
     </InputForm_>
   </div>
 }

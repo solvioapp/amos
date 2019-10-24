@@ -3,6 +3,7 @@ import {
   AmosChat, Button, Title, Input
 } from 'common'
 import Top_ from './top.sc'
+import Buttons_ from './buttons.sc'
 import InputForm_ from './input-form.sc'
 
 const Links = (props) => {
@@ -17,6 +18,13 @@ const Links = (props) => {
     </AmosChat>
     <InputForm_>
       <Title>Links</Title>
+      <Buttons_>
+        <form onSubmit={onSubmit.next}>
+          <Button primary type='submit'>
+            Next
+          </Button>
+        </form>
+      </Buttons_>
       <Input
         name='link[0]'
         errors={form.errors[name]}
@@ -27,11 +35,6 @@ const Links = (props) => {
         valid={valid}
         onChange={onChange}
       />
-      <form onSubmit={onSubmit.next}>
-        <Button primary type='submit'>
-          Next
-        </Button>
-      </form>
     </InputForm_>
   </div>
 }

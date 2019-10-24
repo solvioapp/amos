@@ -8,16 +8,25 @@ const
 onClick = (props) => {
   const
 
-  {form, setOneValid, onSubmit} = props,
+  {form, setOneValid, onSubmit} = props
 
-  // onEnt = H.navto (`/t/${topic}`)
-  onEnt = (field) => (key) => (t) => {
-    const val = form && form.getValues (field)
-    t === `SUBMIT` || R.isEmpty (val[field])
-      ? onSubmit.next
+  const onEnt = (field) => (key) => (t) => {
+    const val = form.getValues()
+
+    if (t === `SUBMIT` || field && H.isNilOrEmpty (val[field])) {
+      onSubmit.next
         ? onSubmit.next()
         : onSubmit.finish()
-      : form.setValue (field, t) || setOneValid (key) (true)
+    }
+    else {
+      form.setValue (field, t) || setOneValid (key) (true)
+    }
+
+    // (t === `SUBMIT` || field && H.isNilOrEmpty (val[field]))
+    //   ? onSubmit.next
+    //     ? onSubmit.next()
+    //     : onSubmit.finish()
+    //   : (form.setValue (field, t) || setOneValid (key) (true))
   }
 
   return R.merge ({onEnt}) (props)

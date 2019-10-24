@@ -1,6 +1,6 @@
 import {
   styled,
-  Button, Input
+  Button, Input, Title
 } from 'common'
 
 const InputForm_ = styled.div`
@@ -12,13 +12,17 @@ const InputForm_ = styled.div`
     margin-top: 18px;
   }
 
+  ${Title} {
+    margin-top: 18px;
+  }
+
   form {
     display: flex;
     justify-content: center;
   }
 
   form > ${Button} {
-    margin-top: 30px;
+    /* margin-top: 30px; */
   }
 `
 
