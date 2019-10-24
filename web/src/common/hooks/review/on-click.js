@@ -8,7 +8,7 @@ const
 addOnClick = (props) => {
   const
 
-  {form, fields, setOneValid} = props,
+  {form, fields, setOneValid, onSubmit} = props,
 
   /* eslint-disable no-shadow */
   addOnClick = (field, key) => ({currentTarget: {textContent: t}}) => {
@@ -19,9 +19,13 @@ addOnClick = (props) => {
   onClick = H.map (addOnClick) (fields),
 
   // onEnt = H.navto (`/t/${topic}`)
-  onEnt = (field) => (value) => {
-    form.setValue (field, value)
-    setOneValid (field) (true)
+  onEnt = (field) => (key) => (t) => {
+    const val = form.getValues (field)
+    R.isEmpty (val[field])
+      ? onSubmit.next
+        ? onSubmit.next()
+        : onSubmit.finish()
+      : form.setValue (field, t) || setOneValid (key) (true)
   }
   return R.merge ({onClick, onEnt}) (props)
 }

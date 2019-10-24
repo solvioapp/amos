@@ -26,6 +26,7 @@ const Topics = (props) => {
             name={name}
             ref={form.register}
             key={key}
+            _key={key}
             link={false}
             loading={loading}
             errors={form.errors[name]}

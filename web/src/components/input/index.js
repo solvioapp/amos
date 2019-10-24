@@ -11,7 +11,7 @@ import icon from './icon.sc'
 const Input = ({
   label, results, name, type,
   onEnt, link, onClick, className, valid: isValid = false,
-  placeholder = label, errors, loading, key,
+  placeholder = label, errors, loading, _key,
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
   const
@@ -87,7 +87,7 @@ const Input = ({
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
-      {dropdown && <Dropdown {...{results, onClick, onEnt, name, active}}/>}
+      {dropdown && <Dropdown {...{results, onClick, onEnt, name, _key, active}}/>}
     </div>
   )
 }
