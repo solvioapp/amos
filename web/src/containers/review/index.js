@@ -2,10 +2,11 @@ import {
   React, R, Switch, Route
 } from 'common'
 import Guest from './guest'
-import Prerequisites from './prerequisites'
 import Links from './links'
-import Thanks from './thanks'
 import Topics from './topics'
+import Prerequisites from './prerequisites'
+import Confirm from './confirm'
+import Thanks from './thanks'
 
 const redirect = R.both(
   R.propEq(`isAuthenticated`, true),
@@ -20,6 +21,7 @@ const Review = (props) => (
     <Route path='/review/links' component={Links} />
     <Route path='/review/topics' component={Topics} />
     <Route path='/review/prerequisites' component={Prerequisites} />
+    <Route path='/review/confirm' component={Confirm} />
     <Route path='/review/thanks' component={Thanks} />
   </Switch>
 )

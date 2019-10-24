@@ -14,6 +14,7 @@ const Input = ({
   placeholder = label, errors, loading, _key,
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
+  isValid |> console.log ('isValid Input', #)
   const
 
   [dropdown, setDropdown] = useState (true),
@@ -25,17 +26,11 @@ const Input = ({
   })()],
 
   _onClick = (e) => {
+    // console.log (`_onClick`)
     e.stopPropagation()
     e.nativeEvent.stopImmediatePropagation()
     setDropdown (R.not)
   }
-
-  // window.keydown(function (e) {
-  //   var code = (e.keyCode ? e.keyCode : e.which);
-  //   if (code == 9) {
-  //     alert('I was tabbed!');
-  //   }
-  // })
 
   const inputRef = useRef()
 
@@ -57,9 +52,6 @@ const Input = ({
 
   const [active, setActive] = useState (0)
 
-  // @param e Event
-  // onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt),
-
   /* Using pattern described in
   https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks */
   const handleUserKeyPress = useCallback ((e) => {
@@ -76,8 +68,6 @@ const Input = ({
 
     return () => inputRef.current.removeEventListener (`keydown`, handleUserKeyPress)
   }, [handleUserKeyPress])
-
-  active |> console.log ('active', #)
 
   return (
     <div className={className}>

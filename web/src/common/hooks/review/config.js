@@ -20,7 +20,10 @@ config = (props) => {
         variables: {input: {str: value, first: 3}},
         skip: false
       })
-      : setConfig ({skip: true})
+      : setConfig ({
+        key,
+        skip: true
+      })
   },
 
   onChange = H.map (createOnChange) (fields)

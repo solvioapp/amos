@@ -27,17 +27,25 @@ results = (props) => {
   parseResults = data => {
     const _results = data
       && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results)
-    return config.skip // test whether user deleted input
-      ? {topic: H.update (config.key) ([]) (results.topic)}
-      : {topic: H.update (config.key) (_results) (results.topic)}
+    return {topic: H.update (config.key) (_results) (results.topic)}
   },
+
+  /* If input is empty (signified by config.skip) set results to empty array */
+  [] = [
+    config.skip && H.isNotNilOrEmpty (results?.topic?.[config.key])
+      && setResults ({topic: H.update (config.key) ([]) (results.topic)})
+  ],
 
   onCompleted = R.pipe (parseResults, setResults),
 
-  _config = {...config, onCompleted},
+  _config = {
+    /* Pick only those keys that apollo cares about */
+    ...R.pick ([`variables`, `skip`]) (config),
+    /* ...And add onCompleted */
+    onCompleted
+  },
   {loading} = useQuery (QUERY_SEARCH, _config)
 
-  results |> console.log ('results results.js', #)
   return R.merge ({results, loading}) (props)
 }
 

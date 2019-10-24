@@ -5,6 +5,7 @@ import {
 import {Dropdown_} from './dropdown.sc.js'
 
 export default ({results, onClick, link, name, active, _key, onEnt}) => {
+  onEnt |> console.log ('onEnt', #)
   const [_active, _setActive] = useState (active),
 
   onKeyPress = useCallback (({key}) => {

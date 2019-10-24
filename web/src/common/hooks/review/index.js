@@ -12,23 +12,6 @@ import onChange from './on-change'
 
 const
 
-ADD_REVIEW_GQL = gql`
-  mutation AddReview ($input: AddReviewInput!) {
-    addOnSubmit (input: $input) {
-      success
-      message
-    }
-  }
-`,
-
-ADD_REVIEW = C => ({...rest}) => {
-  const addOnSubmit = useMutation (ADD_REVIEW_GQL)
-
-  return (
-    <C addOnSubmit={addOnSubmit} onSubmit={addOnSubmit} {...rest}/>
-  )
-},
-
 message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 ),

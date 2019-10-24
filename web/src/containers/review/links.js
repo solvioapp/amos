@@ -8,10 +8,8 @@ import InputForm_ from './input-form.sc'
 const Links = (props) => {
   
   const {
-    onSubmit, messages, form, errors, valid, onChange, ...rest
+    onSubmit, messages, form, errors, valid, onChange, onEnt, ...rest
   } = hooks.useReviewLinks (`links`) (props)
-  onChange |> console.log ('onChange', #)
-  valid |> console.log ('valid', #)
 
   return <div css={Top_} {...rest}>
     <AmosChat>
@@ -21,6 +19,15 @@ const Links = (props) => {
       <Title>Links</Title>
       <Input
         name='links'
+            link={false}
+            loading={loading}
+            errors={form.errors[name]}
+            results={res}
+            onClick={onClick[key]}
+            valid={valid[key]}
+            onChange={onChange[key]}
+            onEnt={onEnt}
+            {...props}
         ref={form.register}
         errors={errors}
         valid={valid}

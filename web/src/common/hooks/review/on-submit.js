@@ -8,10 +8,10 @@ structure = {
   }, topics: {
     previous: `links`,
     next: `prerequisites`,
-    finish: `thanks`
+    finish: `confirm`
   }, prerequisites: {
     previous: `topics`,
-    finish: `thanks`
+    finish: `confirm`
   }
 },
 
