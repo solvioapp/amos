@@ -3,6 +3,7 @@ import Bubble from './bubble'
 import Top_ from './top.sc'
 import Avatar from './avatar'
 import ChatFlow_ from './chat-flow.sc'
+import CallToAction_ from './call-to-action.sc'
 
 // s
 
@@ -24,7 +25,7 @@ const AmosChat = ({avatar = `regular`, children, callToAction, ...rest}) => {
       <ChatFlow_ size={avatar}>
         <Bubble>{toText (children[0])}</Bubble>
         {children.slice(1).map (toBubble)}
-        <div>{callToAction}</div>
+        <CallToAction_>{callToAction}</CallToAction_>
       </ChatFlow_>
     </div>
   )

@@ -3,6 +3,7 @@ import {
   Button,
 } from 'common'
 import Bubble from './bubble'
+import CallToAction_ from './call-to-action.sc'
 
 const
 
@@ -28,12 +29,15 @@ ChatFlow_ = styled.div`
   display: flex;
   flex-direction: column;
 
-  > ${Button} {
+  ${CallToAction_} {
     margin-top: 30px;
-    align-self: center;
+    /* align-self: center; */
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
   }
 
-  > ${Bubble} + ${Bubble} {
+  ${Bubble} + ${Bubble} {
     margin-top: 16px;
   }
 

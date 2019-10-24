@@ -46,7 +46,7 @@ Confirm = (props) => {
           Cancel
         </Button>
         <Button primary onClick={submitReview}>
-          Go ahead, submit!
+          Submit!
         </Button>
         </>
       }>{messages}</AmosChat>
