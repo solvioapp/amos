@@ -15,7 +15,7 @@ const Routes = () => (
   <Switch>
     <Route path='/' exact component={Search}/>
     <Route path='/review' component={Review}/>
-    <Route path='/t' component={Topic}/>
+    <Route path='/t/:name' component={Topic}/>
     <PublicRoute path='/login' component={Login}/>
     <PublicRoute path='/signup' component={Signup}/>
     {/* <Route path='/forgot-password' component={NotFound}/> */}
