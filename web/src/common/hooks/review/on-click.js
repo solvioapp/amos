@@ -1,4 +1,4 @@
-import {R, H, React} from 'common'
+import {R, H} from 'common'
 
 const
 
@@ -8,7 +8,7 @@ const
 addOnClick = (props) => {
   const
 
-  {topic, form, fields, setOneValid} = props,
+  {form, fields, setOneValid} = props,
 
   /* eslint-disable no-shadow */
   addOnClick = (field, key) => ({currentTarget: {textContent: t}}) => {
@@ -18,7 +18,11 @@ addOnClick = (props) => {
 
   onClick = H.map (addOnClick) (fields),
 
-  onEnt = H.navto (`/t/${topic}`)
+  // onEnt = H.navto (`/t/${topic}`)
+  onEnt = (field) => (value) => {
+    form.setValue (field, value)
+    setOneValid (field) (true)
+  }
   return R.merge ({onClick, onEnt}) (props)
 }
 

@@ -1,11 +1,28 @@
 import {
-  React, useState, useEffect, Link, H
+  React, useState, useCallback, useEffect, Link, H
 } from 'common'
 
 import {Dropdown_} from './dropdown.sc.js'
 
-export default ({results, onClick, link, active}) => {
-  const [_active, _setActive] = useState (active)
+export default ({results, onClick, link, name, active, onEnt}) => {
+  const [_active, _setActive] = useState (active),
+
+  [] = [onEnt |> console.log ('onEnt dropdown', #)],
+  onKeyPress = useCallback (({key}) => {
+    key |> console.log ('onKeyPress key', #)
+    onEnt |> console.log ('onEnt', #)
+    results |> console.log ('results', #)
+    results?.[_active] |> console.log ('results[_active]', #)
+    results?.[_active]?.text |> console.log ('results?.[_active]?.text', #)
+    name |> console.log ('name', #)
+    key === `Enter` && onEnt && onEnt (name) (results[_active].text)
+  }, [results, _active])
+
+  useEffect(() => {
+    document.addEventListener(`keyup`, onKeyPress)
+
+    return () => document.removeEventListener(`keyup`, onKeyPress)
+  }, [onKeyPress])
 
   useEffect (() => {
     H.neq (_active) (active) && _setActive (active)

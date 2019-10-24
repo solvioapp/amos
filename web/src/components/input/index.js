@@ -11,15 +11,12 @@ import icon from './icon.sc'
 const Input = ({
   label, results, name, type,
   onEnt, link, onClick, className, valid: isValid = false,
-  placeholder = label, errors, loading,
+  placeholder = label, errors, loading, key,
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
   const
-  // @param e Event
-  onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt),
 
   [dropdown, setDropdown] = useState (true),
-  [] = [dropdown |> console.log ('dropdown', #)],
   [valid, setValid] = useState (false),
 
   [] = [!valid && isValid && (() => {
@@ -60,6 +57,9 @@ const Input = ({
 
   const [active, setActive] = useState (0)
 
+  // @param e Event
+  // onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt),
+
   /* Using pattern described in
   https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks */
   const handleUserKeyPress = useCallback (({key}) => {
@@ -84,11 +84,10 @@ const Input = ({
       <Label_>{label}</Label_>
       <Input_ autoComplete='off' onClick={_onClick} ref={forwardRef}
         {...{placeholder,
-          onKeyPress,
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
-      {dropdown && <Dropdown {...{results, onClick, active}}/>}
+      {dropdown && <Dropdown {...{results, onClick, onEnt, name, active}}/>}
     </div>
   )
 }
