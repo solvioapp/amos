@@ -3,7 +3,7 @@ import {R, H, React} from 'common'
 const
 
 /**
- * @description adds config and onChange
+ * @description adds onChange and valid
  */
 onChange = (props) => {
   const
@@ -14,15 +14,15 @@ onChange = (props) => {
 
   /* eslint-disable no-shadow */
   onChange = async ({target: {name, value}}) => {
-    (await schema.isValid ({[name]: value}))
+    (await schema.isValid ({link: [value]}))
       |> setValid
   },
 
   /* We are loading from store */
-  [] = [review?.links && do {
+  [] = [review?.link && do {
     onChange ({target: {
-      name: `links`,
-      value: review.links
+      name: `link`,
+      value: review.link[0]
     }})
   }]
 

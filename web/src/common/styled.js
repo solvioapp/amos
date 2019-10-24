@@ -10,12 +10,12 @@ _styled.div |> console.log ('styled', #)
 // }
 
 const styled = (component) => {
-  console.log (`styled called`)
+  // console.log (`styled called`)
   const returning = (...args) => {
-    args |> console.log ('args', #)
+    // args |> console.log ('args', #)
     return _styled[component](...args)
   }
-  returning |> console.log ('returning', #)
+  // returning |> console.log ('returning', #)
   return returning
 }
 

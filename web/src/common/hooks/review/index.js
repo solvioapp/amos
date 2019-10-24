@@ -24,6 +24,7 @@ formOpts = name => ({
 
 opts = name => ({
   // fields: [name],
+  name,
   message,
 })
 

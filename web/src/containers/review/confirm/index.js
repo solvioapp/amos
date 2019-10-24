@@ -4,8 +4,6 @@ import {
 } from 'common'
 import Top_ from '../top.sc'
 
-const goRoot = H.navto (`/review`)
-
 const messages = [
   `Thanks for the review!`,
   `This is the last chance to get Reputation for this fantastic review by signing up. 🤟`,
@@ -22,19 +20,16 @@ ADD_REVIEW_GQL = gql`
 
 GET_REVIEW_CLIENT_GQL = gql`
   query {
-    review @client
+    review @client {
+      # links
+      # topic
+      prerequisite
+    }
   }
 `,
 
-Guest = ({...rest}) => {
-  // const {submitReview} = useReviewCtx()
-
-  // const submitAndGo = useCallback(() => {
-  //   submitReview()
-  //   goRoot()
-  // }, [submitReview])
-
-  const {data} = useQuery (GET_REVIEW_CLIENT_GQL)
+Confirm = ({...rest}) => {
+  const {data} = useQuery (GET_REVIEW_CLIENT_GQL, {returnPartialData: true})
 
   data |> console.log ('data', #)
 
@@ -54,4 +49,4 @@ Guest = ({...rest}) => {
   </div>
 }
 
-export default Guest
+export default Confirm

@@ -9,7 +9,7 @@ const Links = (props) => {
   
   const {
     onSubmit, messages, form, errors, valid, onChange, onEnt, ...rest
-  } = hooks.useReviewLinks (`links`) (props)
+  } = hooks.useReviewLinks (`link`) (props)
 
   return <div css={Top_} {...rest}>
     <AmosChat>
@@ -18,7 +18,7 @@ const Links = (props) => {
     <InputForm_>
       <Title>Links</Title>
       <Input
-        name='links'
+        name='link[0]'
         errors={form.errors[name]}
         onEnt={onEnt}
         ref={form.register}

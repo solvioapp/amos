@@ -26,8 +26,6 @@ withSearch = C => ({...rest}) => {
 
   onEnt = H.navto (`/t/${topics}`)
 
-  results |> console.log ('results', #)
-
   return (
     <C {...rest} {...{onEnt, results, register}} />
   )

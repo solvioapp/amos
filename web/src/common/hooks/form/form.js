@@ -7,10 +7,8 @@ const form =
 
   const
 
-  [] = [formOpts |> console.log ('formOpts', #)],
-
   {validationSchema: schema} = formOpts,
-  {useContext, message} = opts,
+  {useContext, name, message} = opts,
 
   /* Get methods */
   /* eslint-disable no-shadow */
@@ -33,9 +31,8 @@ const form =
   /* Merge default messages with errors */
   messages = H.getMessages (message (form.formState)) (errors)
 
-
   /* Conditionally add validate */
-  return R.merge ({fields, messages,
+  return R.merge ({fields, messages, name,
     form, schema}) (props)
 }
 

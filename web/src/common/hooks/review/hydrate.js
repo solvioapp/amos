@@ -5,9 +5,9 @@ const
 GET_REVIEW_CLIENT_GQL = gql`
   query {
     review @client {
-      links
+      link
       topic
-      prerequisites
+      prerequisite
     }
   }
 `,

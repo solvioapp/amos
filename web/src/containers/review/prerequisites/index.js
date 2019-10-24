@@ -14,7 +14,7 @@ const Prerequisites = (props) => {
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid
-  } = hooks.useReviewTopics (`prerequisites`) (props)
+  } = hooks.useReviewTopics (`prerequisite`) (props)
 
   return <div css={Top_} {...props}>
     <AmosChat>
@@ -24,8 +24,8 @@ const Prerequisites = (props) => {
       <Title>Prerequisites</Title>
       {R.times (
         (key,
-          name = `topic[${key}]`,
-          res = results?.topic?.[key]) => (
+          name = `prerequisite[${key}]`,
+          res = results?.prerequisite?.[key]) => (
           <Input
             name={name}
             ref={form.register}

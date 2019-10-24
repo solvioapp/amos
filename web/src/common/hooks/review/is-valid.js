@@ -9,7 +9,7 @@ const isValid = (props) => {
 
   const
 
-  {results, loading, review, form} = props,
+  {results, loading, review, name, form} = props,
   [valid, setValid] = React.useState ([]),
 
   /*
@@ -17,9 +17,9 @@ const isValid = (props) => {
     Here we're assuming that anything that was in review was in store
     and anything that is in store is valid
   */
-  [] = [review?.topic
-    && (R.length (review.topic) > R.length (valid))
-    && (setValid (R.repeat (true) (R.length (review.topic))))],
+  [] = [review?.[name]
+    && (R.length (review[name]) > R.length (valid))
+    && (setValid (R.repeat (true) (R.length (review[name]))))],
 
   /* eslint-disable no-shadow */
   setOneValid = key => isValid => {
@@ -28,7 +28,7 @@ const isValid = (props) => {
 
   createOnChange = (fn, key) => (e) => {
     const {target: {value}} = e,
-    res = results.topic[key],
+    res = results[name][key],
     /* to be valid, value must be among results */
     isValid = res && (!loading) && R.includes (value) (R.pluck (`text`) (res))
     /* Set validity in state */
@@ -39,17 +39,15 @@ const isValid = (props) => {
 
   onChange = H.map (createOnChange) (props.onChange),
 
-  topics = form.watch (`topic`, []),
+  fields = form.watch (name, []),
 
   // TODO: generalize
   getInvalidField = (acc, val, i) => {
     /* Empty is considered vallid */
-    const test = !val && H.isNotNilOrEmpty (topics[i])
-    return test ? R.append (`topic[${i}]`) (acc) : acc
+    const test = !val && H.isNotNilOrEmpty (fields[i])
+    return test ? R.append (`${name}[${i}]`) (acc) : acc
   },
   invalidFields = H.reduce (getInvalidField) ([]) (valid),
-
-  [] = [invalidFields |> console.log ('invalidFields', #)],
 
   isAllValid = R.length (invalidFields) === 0,
 
@@ -67,9 +65,13 @@ const isValid = (props) => {
   ),
 
   previousValidation = cb => (...args) => do {
-    const defValues = R.repeat (``) (R.length (invalidFields))
-      |> R.zipObj (invalidFields) (#)
-    form.reset (defValues)
+    form.unregister (invalidFields)
+    // invalidFields |> console.log ('invalidFields', #)
+    // const defValues = R.repeat (``) (R.length (invalidFields))
+    //   |> R.zipObj (invalidFields) (#)
+    // defValues |> console.log ('defValues', #)
+    // form.reset (defValues)
+    // form.getValues() |> console.log ('form.getValues()', #)
     cb (...args)
   },
 

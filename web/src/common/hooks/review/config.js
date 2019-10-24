@@ -9,7 +9,7 @@ config = (props) => {
   const
 
   {fields} = props,
-  
+
   /* eslint-disable no-shadow */
   [config, setConfig] = React.useState ({skip: true})
   const createOnChange = (field, key) => ({target: {name, value}}) => {

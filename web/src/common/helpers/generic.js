@@ -88,13 +88,13 @@ update = R.curry((idx, val, arr) => {
 }),
 
 collapse = val => {
-  val |> console.log ('val', #)
+  // val |> console.log ('val', #)
   return R.cond ([
     [R.is (Object), x => do {console.log(`x`, x); R.all (collapse)}],
     [R.T, isNotNilOrEmpty]
   ]) (val)
 }
 
-const col = R.filter (collapse) ({input: {topic: ['', '', '']}})
+// const col = R.filter (collapse) ({input: {topic: ['', '', '']}})
 
-col |> console.log ('col', #)
+// col |> console.log ('col', #)

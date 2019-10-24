@@ -5,16 +5,12 @@ const times = (props) => {
 
   /* eslint-disable no-shadow */
   [times, setTimes] = React.useState (1),
-  {valid, review} = props,
-
-  [] = [times |> console.log ('times', #)],
-
-  [] = [review |> console.log ('review', #)],
+  {valid, review, name} = props,
 
   /* Set times on hydration */
-  [] = [review?.topic
-    && (R.length (review.topic) > times)
-    && (R.length (review.topic) |> setTimes)],
+  [] = [review?.[name]
+    && (R.length (review[name]) > times)
+    && (R.length (review[name]) |> setTimes)],
 
   /* Find last valid index */
   lastIndex = R.findLastIndex (R.identity) (valid),
