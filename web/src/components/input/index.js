@@ -19,6 +19,7 @@ const Input = ({
   onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt),
 
   [dropdown, setDropdown] = useState (true),
+  [] = [dropdown |> console.log ('dropdown', #)],
   [valid, setValid] = useState (false),
 
   [] = [!valid && isValid && (() => {
@@ -26,11 +27,11 @@ const Input = ({
     setDropdown (!dropdown)
   })()],
 
-  onBlur = () => console.log(`onBlur fired`) || setDropdown (false),
-
-  onFocus= () => console.log(`onfocus fired`),
-
-  _onClick = () => setDropdown (!dropdown)
+  _onClick = (e) => {
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+    setDropdown (R.not)
+  }
 
   // window.keydown(function (e) {
   //   var code = (e.keyCode ? e.keyCode : e.which);
@@ -46,22 +47,15 @@ const Input = ({
     inputRef.current = e
   }
 
-  const onHidden = e => {
-    alert(`hi`)
-    e.preventDefault()
-    e.returnValue = `hello`
-    console.log (`onUnload fired`)
-    inputRef.current === document.activeElement
-      && setDropdown (true)
-  }
+  const onBlur = () => setDropdown (false)
 
   H.useMount(() => {
     inputRef.current.focus()
-    document.addEventListener(`webkitvisibilitychange`, onHidden)
+    document.addEventListener (`click`, onBlur)
   })
 
   H.useUnmount (() => {
-    window.removeEventListener (`webkitvisibilitychange`, onHidden)
+    document.addEventListener (`click`, onBlur)
   })
 
   const [active, setActive] = useState (0)
@@ -89,8 +83,8 @@ const Input = ({
     <div className={className}>
       <Label_>{label}</Label_>
       <Input_ autoComplete='off' onClick={_onClick} ref={forwardRef}
-        {...{placeholder, onBlur, onKeyPress,
-          onFocus,
+        {...{placeholder,
+          onKeyPress,
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
