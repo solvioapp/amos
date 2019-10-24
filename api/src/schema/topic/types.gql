@@ -8,13 +8,6 @@ type Topic {
   # getChildrenRec (level: Int!): [Path!]!
   getChildrenRec (level: Int!): [String!]!
   getMostCommonPrerequisites: [String!]!
-  getTopResources: [Resource!]! @cypher (statement:
-    """
-    match (this)
-    <-[:FOR_TOPIC]->(a:AmosGame)-[:FOR_RESOURCE]->(r:Resource)
-    with r return r
-    """
-  )
   createLink (name: String!): String!
 }
 
@@ -55,6 +48,7 @@ extend type Query {
   # TODO: Change to [Path!]!
   # topic (name: String!): Topic!
   autocomplete (input: AutocompleteInput!): AutocompleteResponse!
+  getTopResourcesByName (name: String!): [Resource!]!
 }
 
 extend type Mutation {

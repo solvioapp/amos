@@ -4,8 +4,8 @@ import {
 } from 'common'
 
 const QUERY_TOPIC = gql`
-  query GetResources ($name: String!) {
-    Topic (name: $name) {
+  query GetResources ($names: [String!]!) {
+    Topic (names: $names) {
       getTopResources {
         type
         name
@@ -16,7 +16,7 @@ const QUERY_TOPIC = gql`
 
 const Topic = ({match: {params: {name}}}) => {
   name |> console.log ('name', #)
-  const {loading, error, data} = useQuery (QUERY_TOPIC, {variables: {name}})
+  const {loading, error, data} = useQuery (QUERY_TOPIC, {variables: {names: [name]}})
 
   loading |> console.log('loading', #)
   error |> console.log('error', #)
