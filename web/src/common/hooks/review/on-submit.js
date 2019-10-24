@@ -8,10 +8,10 @@ structure = {
   }, topics: {
     previous: `links`,
     next: `prerequisites`,
-    finish: true
+    finish: `thanks`
   }, prerequisites: {
     previous: `topics`,
-    finish: true
+    finish: `thanks`
   }
 },
 
@@ -36,12 +36,12 @@ onSubmit = (props) => {
 
   /* create onSubmit */
   obj = structure[page],
-  previous = H.intercept (H.navto (`/review/${obj.previous}`)) (exec) |> R.of,
-  next = H.intercept (H.navto (`/review/${obj.next}`)) (exec) |> R.of,
-  finish = [H.navto (`/review/thanks`)],
+  previous = obj.previous && (H.intercept (H.navto (`/review/${obj.previous}`)) (exec) |> R.of),
+  next = obj.next && (H.intercept (H.navto (`/review/${obj.next}`)) (exec) |> R.of),
+  finish = obj.finish && (H.intercept (H.navto (`/review/${obj.finish}`)) (exec) |> R.of),
 
   /* eslint-disable no-shadow */
-  onSubmit = {previous, next, finish}
+  onSubmit = R.filter (R.identity) ({previous, next, finish})
   return R.merge ({onSubmit}) (props)
 }
 
