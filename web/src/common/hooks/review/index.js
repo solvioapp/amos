@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import {React, gql, R, CONST, useMutation, validation} from 'common'
+import {R, CONST, validation} from 'common'
 import {multiForm} from '../form'
 import times from './times'
 import onClick from './on-click'
@@ -9,6 +9,7 @@ import config from './config'
 import hydrate from './hydrate'
 import onSubmit from './on-submit'
 import onChange from './on-change'
+import onEnt from './on-ent'
 
 const
 
@@ -42,6 +43,7 @@ useReviewLinks = name => (
   R.pipe (
     useReview (name), // see above
     onChange, // adds onChange, valid
+    onEnt // adds onEnt
   )
 ),
 
@@ -53,7 +55,8 @@ useReviewTopics = name => (
     /* Adds {valid, setOneValid, setValid}
       Overrides onChange, onSubmit */
     isValid,
-    onClick, // adds onClick, onEnt
+    onClick, // adds onClick
+    onEnt, // adds onEnt
     times // adds times
   )
 )

@@ -19,15 +19,8 @@ const Links = (props) => {
       <Title>Links</Title>
       <Input
         name='links'
-            link={false}
-            loading={loading}
-            errors={form.errors[name]}
-            results={res}
-            onClick={onClick[key]}
-            valid={valid[key]}
-            onChange={onChange[key]}
-            onEnt={onEnt}
-            {...props}
+        errors={form.errors[name]}
+        onEnt={onEnt}
         ref={form.register}
         errors={errors}
         valid={valid}
