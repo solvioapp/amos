@@ -5,7 +5,6 @@ import {
 import {Dropdown_} from './dropdown.sc.js'
 
 export default ({results, onClick, link, name, active, _key, onEnt}) => {
-  onEnt |> console.log ('onEnt', #)
   const [_active, _setActive] = useState (active),
 
   onKeyPress = useCallback (({key}) => {
@@ -13,9 +12,9 @@ export default ({results, onClick, link, name, active, _key, onEnt}) => {
   }, [results, _active])
 
   useEffect(() => {
-    document.addEventListener(`keyup`, onKeyPress)
+    document.addEventListener (`keyup`, onKeyPress)
 
-    return () => document.removeEventListener(`keyup`, onKeyPress)
+    return () => document.removeEventListener (`keyup`, onKeyPress)
   }, [onKeyPress])
 
   useEffect (() => {

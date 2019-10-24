@@ -11,10 +11,9 @@ import icon from './icon.sc'
 const Input = ({
   label, results, name, type,
   onEnt, link, onClick, className, valid: isValid = false,
-  placeholder = label, errors, loading, _key,
+  placeholder = label, errors, loading, _key, noDropdown = false,
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
-  isValid |> console.log ('isValid Input', #)
   const
 
   [dropdown, setDropdown] = useState (true),
@@ -25,7 +24,20 @@ const Input = ({
     setDropdown (!dropdown)
   })()],
 
-  _onClick = (e) => {
+  onKeyPress = useCallback (({key}) => {
+    /* Use this if there is no dropdown or if it's disabled
+    (otherwise use <Dropdown>'s onKeyPress */
+    (!dropdown || noDropdown)
+      && key === `Enter` && onEnt && onEnt () () (`SUBMIT`)
+  }, [dropdown, noDropdown])
+
+  useEffect(() => {
+    document.addEventListener (`keyup`, onKeyPress)
+
+    return () => document.removeEventListener(`keyup`, onKeyPress)
+  }, [onKeyPress])
+
+  const _onClick = (e) => {
     // console.log (`_onClick`)
     e.stopPropagation()
     e.nativeEvent.stopImmediatePropagation()
@@ -77,7 +89,7 @@ const Input = ({
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
-      {dropdown && <Dropdown {...{results, onClick, onEnt, name, _key, active}}/>}
+      {!noDropdown && dropdown && <Dropdown {...{results, onClick, onEnt, name, _key, active}}/>}
     </div>
   )
 }

@@ -22,6 +22,7 @@ const Links = (props) => {
         errors={form.errors[name]}
         onEnt={onEnt}
         ref={form.register}
+        noDropdown={true}
         errors={errors}
         valid={valid}
         onChange={onChange}
