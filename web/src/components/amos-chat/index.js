@@ -24,7 +24,7 @@ const AmosChat = ({avatar = `regular`, children, callToAction, ...rest}) => {
       <ChatFlow_ size={avatar}>
         <Bubble>{toText (children[0])}</Bubble>
         {children.slice(1).map (toBubble)}
-        {callToAction}
+        <div>{callToAction}</div>
       </ChatFlow_>
     </div>
   )

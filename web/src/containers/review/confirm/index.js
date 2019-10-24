@@ -1,5 +1,5 @@
 import {
-  H, React, useQuery, useMutation, gql,
+  H, R, React, useQuery, useMutation, gql, hooks,
   AmosChat, AuthBox, Button
 } from 'common'
 import Top_ from '../top.sc'
@@ -18,31 +18,37 @@ ADD_REVIEW_GQL = gql`
   }
 `,
 
-GET_REVIEW_CLIENT_GQL = gql`
-  query {
-    review @client {
-      # links
-      # topic
-      prerequisite
-    }
-  }
-`,
+Confirm = (props) => {
 
-Confirm = ({...rest}) => {
-  const {data} = useQuery (GET_REVIEW_CLIENT_GQL, {returnPartialData: true})
+  const {review} = hooks.loadReview (props)
 
-  data |> console.log ('data', #)
-
+  review |> console.log ('review Confirm', #)
+  
   const onCompleted = () => {}
 
-  const [submitReview] = useMutation (ADD_REVIEW_GQL, {variables: {input: {data}}, onCompleted})
+  const [exec] = useMutation (ADD_REVIEW_GQL, {onCompleted})
 
-  return <div css={Top_} columns='two' {...rest}>
+  const submitReview = () => {
+    const _review = {
+      links: review.link,
+      topics: review.topic,
+      prerequisites: [{level: 0, strength: 0, topic: review.prerequisite[0]}]
+    }
+      |> R.filter (R.identity) (#)
+    exec ({variables: {input: {..._review}}})
+  }
+
+  return <div css={Top_} columns='two' {...props}>
     <div css={Top_} columns='left'>
       <AmosChat callToAction={
-        <Button primary onClick={submitReview}>
-          Submit anonymously
+        <>
+        <Button onClick={H.navto (`/`)}>
+          Cancel
         </Button>
+        <Button primary onClick={submitReview}>
+          Go ahead, submit!
+        </Button>
+        </>
       }>{messages}</AmosChat>
     </div>
     <AuthBox/>

@@ -1,16 +1,6 @@
-import {R, H, React, useQuery, gql, flatten} from 'common'
+import {R, H, flatten} from 'common'
 
 const
-
-GET_REVIEW_CLIENT_GQL = gql`
-  query {
-    review @client {
-      link
-      topic
-      prerequisite
-    }
-  }
-`,
 
 /* eslint-disable indent */
 /**
@@ -20,11 +10,7 @@ hydrate = (props) => {
 
   const
 
-  {form} = props,
-  // [valid, setValid] = React.useState ([]),
-
-  // TODO: Change to false
-  {data: {review}} = useQuery (GET_REVIEW_CLIENT_GQL, {returnPartialData: true})
+  {review, form} = props
 
   H.useMount(() => {
     review && (review |> flatten |> R.mapObjIndexed ((val, key) => {

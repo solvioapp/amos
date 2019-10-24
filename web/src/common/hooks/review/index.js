@@ -6,6 +6,7 @@ import onClick from './on-click'
 import isValid from './is-valid'
 import results from './results'
 import config from './config'
+import loadReview from './load-review'
 import hydrate from './hydrate'
 import onSubmit from './on-submit'
 import onChange from './on-change'
@@ -36,7 +37,8 @@ useReview = name => (
     /* Adds {fields, messages, form, schema}
       Overrides onSubmit */
     multiForm (formOpts (name)) (opts (name)),
-    hydrate, // adds Review
+    loadReview, // loads Review
+    hydrate // hydrates inputs with review
   )
 ),
 
@@ -61,3 +63,5 @@ useReviewTopics = name => (
     times // adds times
   )
 )
+
+export {loadReview}
