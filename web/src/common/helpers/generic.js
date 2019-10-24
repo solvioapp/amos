@@ -50,10 +50,10 @@ intercept = cb => fn => R.converge (R.nthArg (0)) ([fn, cb]),
  * @param Arb Arbitrary number of params
  */
 debug = intercept (console.log),
-mapIfNotNil = fn => obj => (
+safeMap = fn => obj => (
   R.isNil (obj)
     ? null
-    : R.map (fn) (obj)
+    : map (fn) (obj)
 ),
 
 getMessages = def => R.pipe (

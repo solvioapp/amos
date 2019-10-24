@@ -26,7 +26,7 @@ export const Dropdown_ = styled.div`
     z-index: 2;
   }
   
-  span:hover {
+  .active {
     font-weight: 600;
   }
 

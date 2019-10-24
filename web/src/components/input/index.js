@@ -1,4 +1,7 @@
-import {R, H, React, styled, Icon} from 'common'
+import {
+  R, H, React, useEffect, useState, useCallback, useRef, styled,
+  Icon
+} from 'common'
 import Input_ from './input.sc'
 import Label_ from './label.sc'
 import Top_ from './top.sc'
@@ -6,7 +9,7 @@ import Dropdown from './dropdown'
 import icon from './icon.sc'
 
 const Input = ({
-  label, results, name, type, _ref,
+  label, results, name, type,
   onEnt, link, onClick, className, valid: isValid = false,
   placeholder = label, errors, loading,
   hasError = Boolean (errors?.[name]), ...rest
@@ -15,15 +18,17 @@ const Input = ({
   // @param e Event
   onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt),
 
-  [dropdown, setDropdown] = React.useState (true),
-  [valid, setValid] = React.useState (false),
+  [dropdown, setDropdown] = useState (true),
+  [valid, setValid] = useState (false),
 
   [] = [!valid && isValid && (() => {
     setValid (isValid)
     setDropdown (!dropdown)
   })()],
 
-  onBlur = () => setDropdown (false),
+  onBlur = () => console.log(`onBlur fired`) || setDropdown (false),
+
+  onFocus= () => console.log(`onfocus fired`),
 
   _onClick = () => setDropdown (!dropdown)
 
@@ -34,33 +39,62 @@ const Input = ({
   //   }
   // })
 
+  const inputRef = useRef()
 
-  const test = React.useRef()
+  const forwardRef = e => {
+    ref (e)
+    inputRef.current = e
+  }
+
+  const onHidden = e => {
+    alert(`hi`)
+    e.preventDefault()
+    e.returnValue = `hello`
+    console.log (`onUnload fired`)
+    inputRef.current === document.activeElement
+      && setDropdown (true)
+  }
 
   H.useMount(() => {
-    test |> console.log ('test', #)
-    test.current.focus()
-      document.addEventListener (`keyup`, ({code}) => {
-  // const code = keyCode || which
-    code === `ArrowDown` && console.log(`tab`)
+    inputRef.current.focus()
+    document.addEventListener(`webkitvisibilitychange`, onHidden)
   })
 
+  H.useUnmount (() => {
+    window.removeEventListener (`webkitvisibilitychange`, onHidden)
   })
 
-  /* In case user is using Tab etc. to focus */
-  // onFocus = () => setDropdown (true)
-  // onFocus = () => setDropdown (true)
+  const [active, setActive] = useState (0)
+
+  /* Using pattern described in
+  https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks */
+  const handleUserKeyPress = useCallback (({key}) => {
+    inputRef.current === document.activeElement |> console.log ('inputRef.current === document.activeElement', #)
+    results |> console.log ('results', #)
+    inputRef.current === document.activeElement && results && key === `ArrowUp`
+      && (console.log (`arrowup`) || setActive (R.pipe (R.dec, R.max (0))))
+    inputRef.current === document.activeElement && results && key === `ArrowDown`
+      && (console.log (`arrowdown`) || setActive (R.pipe (R.inc, R.min (R.length (results) - 1))))
+  }, [results])
+
+  useEffect(() => {
+    inputRef.current.addEventListener (`keyup`, handleUserKeyPress)
+
+    return () => inputRef.current.removeEventListener (`keyup`, handleUserKeyPress)
+  }, [handleUserKeyPress])
+
+  active |> console.log ('active', #)
 
   return (
     <div className={className}>
       <Label_>{label}</Label_>
-      <Input_ autoComplete='off' onClick={_onClick} ref={e => {ref (e); test.current=e}}
+      <Input_ autoComplete='off' onClick={_onClick} ref={forwardRef}
         {...{placeholder, onBlur, onKeyPress,
-          // onFocus,
+          onFocus,
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
-      {dropdown && <Dropdown {...{results, onClick}}/>}
+      {dropdown && <Dropdown {...{results, onClick, active}}/>}
     </div>
   )
 }
