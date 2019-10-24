@@ -15,7 +15,7 @@ const Input = ({
   // @param e Event
   onKeyPress = R.when (R.propEq (`key`) (`Enter`)) (onEnt),
 
-  [dropdown, setDropdown] = React.useState (false),
+  [dropdown, setDropdown] = React.useState (true),
   [valid, setValid] = React.useState (false),
 
   [] = [!valid && isValid && (() => {
@@ -27,11 +27,36 @@ const Input = ({
 
   _onClick = () => setDropdown (!dropdown)
 
+  // window.keydown(function (e) {
+  //   var code = (e.keyCode ? e.keyCode : e.which);
+  //   if (code == 9) {
+  //     alert('I was tabbed!');
+  //   }
+  // })
+
+
+  const test = React.useRef()
+
+  H.useMount(() => {
+    test |> console.log ('test', #)
+    test.current.focus()
+      document.addEventListener (`keyup`, ({code}) => {
+  // const code = keyCode || which
+    code === `ArrowDown` && console.log(`tab`)
+  })
+
+  })
+
+  /* In case user is using Tab etc. to focus */
+  // onFocus = () => setDropdown (true)
+  // onFocus = () => setDropdown (true)
+
   return (
     <div className={className}>
       <Label_>{label}</Label_>
-      <Input_ autoComplete='off' ref={ref} onClick={_onClick}
+      <Input_ autoComplete='off' onClick={_onClick} ref={e => {ref (e); test.current=e}}
         {...{placeholder, onBlur, onKeyPress,
+          // onFocus,
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
