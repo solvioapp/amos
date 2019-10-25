@@ -14,8 +14,9 @@ const Input_ = styled.input`
 
   &:active,
   &:focus {
+    /* border-color: rgb(91, 183, 255); */
     border-color: #3273dc;
-    box-shadow: 0 0 0 0.125em rgba(50,115,220,.25);
+    box-shadow: 0 0 0 0.31em rgb(217, 238, 255);
     outline: none;
   }
 `
