@@ -1,6 +1,6 @@
 import _styled from 'styled-components'
 
-_styled.div |> console.log ('styled', #)
+// _styled.div |> console.log ('styled', #)
 
 // class Styled {
 //   constructor () {
@@ -9,15 +9,17 @@ _styled.div |> console.log ('styled', #)
 //   }
 // }
 
-const styled = (component) => {
-  // console.log (`styled called`)
-  const returning = (...args) => {
-    // args |> console.log ('args', #)
-    return _styled[component](...args)
-  }
-  // returning |> console.log ('returning', #)
-  return returning
-}
+// const styled = (component) => {
+//   // console.log (`styled called`)
+//   const returning = (...args) => {
+//     // args |> console.log ('args', #)
+//     return _styled[component](...args)
+//   }
+//   // returning |> console.log ('returning', #)
+//   return returning
+// }
+
+const styled = _styled
 
 // const styled = new Styled
 

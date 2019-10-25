@@ -19,3 +19,5 @@ style = C => (css, attrs) => styled (C).attrs (attrs) `${css};`,
 styleAndForwardRef = C => css => (
   style (React.forwardRef (C)) (css)
 )
+
+export {styled}

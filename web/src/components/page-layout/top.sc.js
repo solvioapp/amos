@@ -1,10 +1,10 @@
 import {css} from 'common'
 
-const Top_ = css`
+const top = css`
   background: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
 `
 
-export default Top_
+export default top

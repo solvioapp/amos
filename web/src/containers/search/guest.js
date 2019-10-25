@@ -1,7 +1,8 @@
 import {
   React, hooks,
-  Input
+  Input, AmosChat
 } from 'common'
+import top from './top.sc'
 
 // const messages = [
 //   `👋 I'm Amos. I was created to be 'the best learning mentor in the world'.`,
@@ -9,8 +10,16 @@ import {
 //   `So I need your help! Create an account and submit reviews for your favorite learning resources. Vamos, amigo! 🤗`,
 // ]
 
+const messages = [
+  `👋 I'm Amos. I lived in the 1600s and was a reformer of education. 😎 I'm back to teach you anything you want!`,
+  `So, Watcha interested in? 🤗`
+]
+
 const Guest = ({onEnt, results, register, onSubmit, ...rest}) => (
-  <form autocomplete='off' onSubmit={onSubmit}>
+  <form css={top} autocomplete='off' onSubmit={onSubmit}>
+    <AmosChat avatar='regular'>
+      {messages}
+    </AmosChat>
     <Input
       name='str'
       link={true}

@@ -6,7 +6,7 @@ const Content_ = styled.div`
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: ${({match: {url}}) => url === `/` ? `3%` : `10%`};
   padding: 30px;
 `
 

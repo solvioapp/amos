@@ -1,16 +1,18 @@
 import {
-  H, React,
+  H, React, withRouter,
   NavMenu, Footer
 } from 'common'
 import Content_ from './content.sc'
-import Top_ from './top.sc'
+import top from './top.sc'
 
-const PageLayout = ({isAuthenticated, children, ...rest}) => (
-  <div {...rest}>
-    <NavMenu isAuthenticated={isAuthenticated}/>
-    <Content_>{children}</Content_>
+const PageLayout = ({isAuthenticated, children, match, ...rest}) => (
+  <div css={top} {...rest}>
+    <NavMenu {...{isAuthenticated}}/>
+    <Content_ {...{match}}>{children}</Content_>
     <Footer/>
   </div>
 )
 
-export default H.style (PageLayout) (Top_)
+export default PageLayout
+  |> withRouter
+  |> H.styled (#) ``

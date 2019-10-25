@@ -1,10 +1,15 @@
-import {css, styled, Panel, Button} from 'common'
+import {css, Input} from 'common'
 
-const Top_ = css`
-  ${Panel}
-  > ${Button} {
-    margin-top: 30px;
+const top = css`
+  ${'' /* ${Panel} */}
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 600px;
+
+  ${Input} {
+    margin-top: 8px;
   }
 `
 
-export default Top_
+export default top
