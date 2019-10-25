@@ -1,5 +1,5 @@
 import {
-  H, R, React, W,
+  H, R, React, W, styled,
   Button, AuthOptions
 } from 'common'
 import Top_ from './top.sc'
@@ -18,7 +18,7 @@ const onClick = (authFacebook) => () => {
 const github = 'https://github.com/login/oauth/authorize?client_id=72be28a7ee64c7cd1948&scope=user:email'
 
 const AuthBox = ({authFacebook, ...rest}) => (
-  <div {...rest}>
+  <div css={Top_} {...rest}>
     <a href={github}>
       <Button
         icon='github'
@@ -41,3 +41,4 @@ const AuthBox = ({authFacebook, ...rest}) => (
 // export default H.style (withFacebook (AuthBox)) (Top_)
 export default AuthBox
   |> W.FACEBOOK
+  |> styled (#) ``

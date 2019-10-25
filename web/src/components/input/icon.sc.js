@@ -2,6 +2,7 @@ import {css} from 'common'
 
 export default css`
   position: relative;
-  right: 35px;
+  bottom: 34px;
+  left: 315px;
   height: 19px;
 `

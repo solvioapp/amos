@@ -1,5 +1,5 @@
 import {
-  R, hooks, H, React, CONST, validation,
+  R, hooks, H, React, CONST, validation, styled,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
 import Top_ from './top.sc'
@@ -7,6 +7,8 @@ import Top_ from './top.sc'
 const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 )
+
+const boxShadowWidth = `0`
 
 const Form = (props) => {
   const {
@@ -17,29 +19,32 @@ const Form = (props) => {
       {messages}
     </AmosChat>
     <Input
-      errors={errors}
       name='username'
       label='Username'
       ref={register}
+      {...{errors, boxShadowWidth}}
     />
     <Input
-      errors={errors}
       name='email'
       label='Email'
       ref={register}
+      dontFocus={true}
+      {...{errors, boxShadowWidth}}
     />
     <Input
-      errors={errors}
       type='password'
       name='password'
       label='password'
+      dontFocus={true}
+      {...{errors, boxShadowWidth}}
       ref={register}
     />
     <Input
-      errors={errors}
       type='password'
       name='repeatPassword'
       label='Repeat password'
+      dontFocus={true}
+      {...{errors, boxShadowWidth}}
       ref={register}
     />
     {/* {repeatPasswordErr()} */}
@@ -57,5 +62,6 @@ const Form = (props) => {
 }
 
 export default Form
+  |> hooks.SIGNUP
+  |> styled (#) ``
 // |> hooks.form ({validationSchema: validation.signup}) ({message}) (#)
-|> hooks.SIGNUP

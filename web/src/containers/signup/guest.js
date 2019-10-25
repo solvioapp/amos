@@ -1,11 +1,11 @@
 import {
-  H, React,
+  H, React, styled,
   AmosChat, AuthBox
 } from 'common'
 import Top_ from './top.sc'
 
 const Guest = ({...rest}) => (
-  <div {...rest}>
+  <div css={Top_} {...rest}>
     {/* <Title>Sign up</Title> */}
     <AmosChat>
       Once you sign up, you'll be able to get reputation for your Reviews. And it's free!
@@ -14,4 +14,4 @@ const Guest = ({...rest}) => (
   </div>
 )
 
-export default H.style (Guest) (Top_)
+export default styled (Guest) ``

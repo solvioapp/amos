@@ -8,6 +8,8 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.login
 )
 
+const boxShadowWidth = `0`
+
 const Form = (props) => {
   const {
     onSubmit, messages, form: {register, errors}
@@ -17,16 +19,17 @@ const Form = (props) => {
       {messages}
     </AmosChat>
     <Input
-      errors={errors}
       label='Username or email'
       name='usernameOrEmail'
       ref={register}
+      {...{errors, boxShadowWidth}}
     />
     <Input
-      errors={errors}
       label='Password'
       name='password'
       type='password'
+      dontFocus={true}
+      {...{errors, boxShadowWidth}}
       ref={register}
     />
     {/* <Link to='/forgot-password'>Forgot password</Link> */}

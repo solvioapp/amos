@@ -14,7 +14,7 @@ const Top_ = css`
   text-align: center;
   margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7 + (AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px;
 
-  > ${Button} + ${Button} {
+  > a + ${Button} {
     margin-top: 20px;
   }
 

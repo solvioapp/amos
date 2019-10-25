@@ -16,7 +16,7 @@ const Input_ = styled.input`
   &:focus {
     /* border-color: rgb(91, 183, 255); */
     border-color: #3273dc;
-    box-shadow: 0 0 0 0.31em rgb(217, 238, 255);
+    box-shadow: 0 0 0 ${props => props.boxShadowWidth || `0.31em`} rgb(217, 238, 255);
     outline: none;
   }
 `

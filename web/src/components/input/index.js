@@ -9,7 +9,7 @@ import Dropdown from './dropdown'
 import icon from './icon.sc'
 
 const Input = ({
-  label, results, name, type,
+  label, results, name, type, boxShadowWidth, dontFocus,
   onEnt, link, onClick, className, valid: isValid = false,
   placeholder = label, errors, loading, _key, noDropdown = false,
   hasError = Boolean (errors?.[name]), ...rest
@@ -56,7 +56,7 @@ const Input = ({
   const onBlur = () => setDropdown (false)
 
   H.useMount(() => {
-    inputRef.current.focus()
+    !dontFocus && inputRef.current.focus()
     document.addEventListener (`click`, onBlur)
   })
 
@@ -84,10 +84,10 @@ const Input = ({
   }, [handleUserKeyPress])
 
   return (
-    <div className={className}>
+    <div css={Top_} {...{className}}>
       <Label_>{label}</Label_>
       <Input_ autoComplete='off' onClick={_onClick} ref={forwardRef}
-        {...{placeholder,
+        {...{placeholder, boxShadowWidth,
           name, type, hasError, ...rest}}
       />
       {isValid && <Icon src='checkmark' css={icon}/>}
