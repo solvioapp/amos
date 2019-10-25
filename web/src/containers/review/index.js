@@ -1,5 +1,5 @@
 import {
-  React, H, gql, useMutation, Switch, Route
+  R, React, H, gql, useMutation, Switch, Route, Redirect, W
 } from 'common'
 import Guest from './guest'
 import Links from './links'
@@ -13,20 +13,28 @@ const RESET_REVIEW_GQL = gql`
     resetReview @client
   }
 `
+const redirect = R.both (
+  R.propEq (`isAuthenticated`, true),
+  R.pathEq ([`location`, `pathname`], `/review`)
+)
 
-const Review = () => {
+const Review = (props) => {
   const [resetReview] = useMutation (RESET_REVIEW_GQL)
 
   H.useUnmount(() => resetReview())
 
-  return <Switch>
-    <Route path='/review' exact component={Guest} />
-    <Route path='/review/links' component={Links} />
-    <Route path='/review/topics' component={Topics} />
-    <Route path='/review/prerequisites' component={Prerequisites} />
-    <Route path='/review/confirm' component={Confirm} />
-    <Route path='/review/thanks' component={Thanks} />
-  </Switch>
+  return redirect (props)
+    ? <Redirect to='/review/links'/>
+    : (
+      <Switch>
+        <Route path='/review' exact component={Guest} />
+        <Route path='/review/links' component={Links} />
+        <Route path='/review/topics' component={Topics} />
+        <Route path='/review/prerequisites' component={Prerequisites} />
+        <Route path='/review/confirm' component={Confirm} />
+        <Route path='/review/thanks' component={Thanks} />
+      </Switch>
+    )
 }
 
-export default (Review)
+export default W.GET_AUTH (Review)

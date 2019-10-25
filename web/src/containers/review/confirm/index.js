@@ -1,5 +1,5 @@
 import {
-  H, R, React, useMutation, gql, hooks,
+  H, R, React, useMutation, gql, hooks, W,
   AmosChat, AuthBox, Button
 } from 'common'
 import Top_ from '../top.sc'
@@ -37,21 +37,33 @@ Confirm = (props) => {
     exec ({variables: {input: {..._review}}})
   }
 
-  return <div css={Top_} columns='two' {...props}>
-    <div css={Top_} columns='left'>
-      <AmosChat callToAction={
-        <>
-        <Button onClick={H.navto (`/review`)}>
-          Cancel
-        </Button>
-        <Button primary onClick={submitReview}>
-          Submit!
-        </Button>
-        </>
-      }>{messages}</AmosChat>
-    </div>
-    <AuthBox/>
-  </div>
+  const amosChat = (
+    <AmosChat callToAction={
+      <>
+      <Button onClick={H.navto (`/review`)}>
+        Cancel
+      </Button>
+      <Button primary onClick={submitReview}>
+        Submit!
+      </Button>
+      </>
+    }>{messages}</AmosChat>
+  )
+
+  return props.isAuthenticated
+    ? (
+      <div css={Top_} {...props}>
+        {amosChat}
+      </div>
+    )
+    : (
+      <div css={Top_} columns='two' {...props}>
+        <div css={Top_} columns='left'>
+          {amosChat}
+        </div>
+        <AuthBox/>
+      </div>
+    )
 }
 
-export default Confirm
+export default W.GET_AUTH (Confirm)
