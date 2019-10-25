@@ -34,15 +34,18 @@ createHackPragueReview = async (rev) => {
 
 export default async () => {
   console.log (`Creating HackPrague reviews`)
-  await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview)
+  // await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview)
+  await Promise.mapSeries (hackprague, createHackPragueReview)
   console.log (`Successfully created HackPrague reviews`)
 
   console.log (`Creating Other reviews`)
-  await Promise.mapSeries (R.slice (0) (100) (others), createReview)
+  // await Promise.mapSeries (R.slice (0) (100) (others), createReview)
+  await Promise.mapSeries (others, createReview)
   console.log (`Successfully created Other reviews`)
 
   console.log (`Creating Goodreads reviews`)
-  await Promise.mapSeries (R.slice (0) (100) (goodreads), createReview)
+  // await Promise.mapSeries (R.slice (0) (100) (goodreads), createReview)
+  await Promise.mapSeries (goodreads, createReview)
   console.log (`Successfully created Goodreads reviews`)
 
 }
