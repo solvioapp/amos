@@ -25,9 +25,9 @@ const Input = ({
   })()],
 
   onKeyPress = useCallback (({key}) => {
-    /* Use this if there is no dropdown or if it's disabled
+    /* Use this if there is no results, no dropdown or if it's disabled
     (otherwise use <Dropdown>'s onKeyPress */
-    if (!dropdown || noDropdown) {
+    if (!results || !dropdown || noDropdown) {
       console.log (`onKeyPress input`)
       key === `Enter` && onEnt && onEnt () () (`SUBMIT`)
     }

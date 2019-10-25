@@ -1,12 +1,11 @@
 import {
-  H, R, React, useQuery, useMutation, gql, hooks,
+  H, R, React, useMutation, gql, hooks,
   AmosChat, AuthBox, Button
 } from 'common'
 import Top_ from '../top.sc'
 
 const messages = [
-  `Thanks for the review!`,
-  `This is the last chance to get Reputation for this fantastic review by signing up. 🤟`,
+  `Do you really wanna review?`
 ],
 
 ADD_REVIEW_GQL = gql`
@@ -22,17 +21,17 @@ Confirm = (props) => {
 
   const {review} = hooks.loadReview (props)
 
-  review |> console.log ('review Confirm', #)
-  
-  const onCompleted = () => {}
+  const onCompleted = H.navto (`/review/thanks`)
 
   const [exec] = useMutation (ADD_REVIEW_GQL, {onCompleted})
 
   const submitReview = () => {
+    const {link, topic, prerequisite} = review
     const _review = {
-      links: review.link,
-      topics: review.topic,
-      prerequisites: [{level: 0, strength: 0, topic: review.prerequisite[0]}]
+      links: link,
+      topics: H.isNotNilOrEmpty (topic) && topic,
+      prerequisites: H.isNotNilOrEmpty (prerequisite)
+        && [{level: 0, strength: 0, topic: review.prerequisite[0]}]
     }
       |> R.filter (R.identity) (#)
     exec ({variables: {input: {..._review}}})
@@ -42,7 +41,7 @@ Confirm = (props) => {
     <div css={Top_} columns='left'>
       <AmosChat callToAction={
         <>
-        <Button onClick={H.navto (`/`)}>
+        <Button onClick={H.navto (`/review`)}>
           Cancel
         </Button>
         <Button primary onClick={submitReview}>

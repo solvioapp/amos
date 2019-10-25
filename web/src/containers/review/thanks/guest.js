@@ -8,7 +8,6 @@ const goRoot = H.navto (`/review`)
 
 const messages = [
   `Thanks for the review!`,
-  `This is the last chance to get Reputation for this fantastic review by signing up. 🤟`,
 ]
 
 const Guest = ({...rest}) => {
@@ -22,8 +21,8 @@ const Guest = ({...rest}) => {
   return <div css={Top_} columns='two' {...rest}>
     <div css={Top_} columns='left'>
       <AmosChat callToAction={
-        <Button primary onClick={5}>
-          Submit anonymously
+        <Button primary onClick={H.navto (`/review/links`)}>
+          Submit another review
         </Button>
       }>{messages}</AmosChat>
     </div>

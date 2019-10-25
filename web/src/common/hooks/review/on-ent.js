@@ -11,9 +11,11 @@ onClick = (props) => {
   {form, setOneValid, onSubmit} = props
 
   const onEnt = (field) => (key) => (t) => {
+    t |> console.log ('onEnt t', #)
     const val = form.getValues()
 
     if (t === `SUBMIT` || field && H.isNilOrEmpty (val[field])) {
+      onSubmit.next |> console.log ('onSubmit.next', #)
       onSubmit.next
         ? onSubmit.next()
         : onSubmit.finish()
