@@ -39,6 +39,8 @@ const defaults = {
   tracing: !!CONFIG.DEBUG,
   playground: true,
   introspection: true,
+  // TODO: Change
+  allowUndefinedInResolve: true,
 }
 
 const CLIENT_BUILD_PATH = path.join(__dirname, `../../web/public`);

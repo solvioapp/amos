@@ -9,6 +9,8 @@ import CONFIG from '../config'
 export default {
   typeDefs,
   resolvers,
+  // TODO: Change
+  allowUndefinedInResolve: true,
   config: {
     debug: !!CONFIG.DEBUG,
     auth: {
