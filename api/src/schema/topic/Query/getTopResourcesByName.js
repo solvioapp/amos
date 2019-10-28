@@ -1,8 +1,8 @@
 import {R} from 'common'
 
 const _1 = `
-match (t:Topic)
-<-[:FOR_TOPIC]->(a:AmosGame)-[:FOR_RESOURCE]->(r:Resource)
+match (r: Resource)
+-[:HAS_TOPIC]->(t: Topic)
 where $name in t.names
 with r
 return r

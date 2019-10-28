@@ -155,7 +155,7 @@ const addReview = async (_, {input}, {session, ip, user}) => {
       R.map (r => ({
         gameId: r.get (`g`).identity.low,
         topicId: r.get (`t`).identity.low,
-        noVotes: r.get (`noVotes`)
+        noVotes: r.get (`noVotes`).low
       })) (records)
     }
     : [],
@@ -166,7 +166,7 @@ const addReview = async (_, {input}, {session, ip, user}) => {
       const {records} = await session.run (amosGamePrerequisites, {resourceId, prerequisites})
       R.map (r => ({
         gameId: r.get (`g`).identity.low,
-        noVotes: r.get (`noVotes`)
+        noVotes: r.get (`noVotes`).low
       })) (records)
     }
     : [],
@@ -181,7 +181,10 @@ const addReview = async (_, {input}, {session, ip, user}) => {
     ? await session.run (authorized, {userId, ...gamesIds, resourceId})
     : await session.run (guest, {ip, ...gamesIds, resourceId}),
   
-  {noVotesTopics, noVotesPrerequisites} = resource.get (`r`).properties,
+  {
+    noVotesTopics: {low: noVotesTopics},
+    noVotesPrerequisites: {low: noVotesPrerequisites}
+  } = resource.get (`r`).properties,
   /* 
    * cool word! 
    * (comes from `consensus` :-))

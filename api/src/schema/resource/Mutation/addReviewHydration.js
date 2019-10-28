@@ -5,9 +5,7 @@ const metascraper = require (`metascraper`)([
 
 import got from 'got'
 
-const THRESHOLD_TOPIC = 0.1,
-
-THRESHOLD_PREREQUISITE = 0.02
+const THRESHOLD_TOPIC = 0.1
 
 export const 
 
@@ -18,13 +16,19 @@ match = `
 createResource = `
   create (r: Resource)
   set r = $input
+  set r.noVotesTopics = 0
+  set r.noVotesPrerequisites = 0
   return r
 `,
 
 amosGameTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
-  unwind $topics as topicId
-  match (t: Topic) where id (t) = toInteger (topicId)
+  unwind $topics as topicName
+  with r, toLower (topicName) as topicNameLower
+  match (t: Topic)
+  unwind t.names as name
+  with toLower (name) as nameLower, r, t
+  where topicNameLower = nameLower
   with r, t
   merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {type: "TOPIC"})-[:FOR_TOPIC]->(t)
   with g, t
@@ -36,23 +40,6 @@ amosGameTopics = `
 /* Doesn't work :( */
   // on match return 1
   // on create return 0
-    
-amosGamePrerequisites = `
-  match (r: Resource) where id (r) = toInteger ($resourceId)
-  unwind $prerequisites as p
-  match (t: Topic) where id (t) = toInteger (p.topic)
-  with r, t, p
-  merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {
-    type: "PREREQUSIITE",
-    level: toInteger (p.level),
-    strength: toInteger (p.strength)
-  })-[:FOR_TOPIC]->(t)
-  with g
-  optional match (u:User)-[:VOTED_ON]->(g)
-  optional match (a:AnonymousUser)-[:VOTED_ON_ANONYMOUS]->(g)
-  with g, count (u) as noVotesAuthorized, count (a) as noVotesAnonymous
-  return g, noVotesAuthorized + noVotesAnonymous as noVotes
-`,
 
 authorized = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
@@ -62,48 +49,15 @@ authorized = `
   merge (u)-[:VOTED_ON]->(topicGame)
     on create
       set r.noVotesTopics = r.noVotesTopics + 1
-  with u, r
-  unwind $prerequisiteGames as prerequisiteGameId
-  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = prerequisiteGameId
-  merge (u)-[:VOTED_ON]->(prerequisiteGame)
-    on create
-      set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
+  with r
   return r
 `,
-      // topicGame.noVotes = topicGame.noVotes + 1
-
-guest = `
-  match (r: Resource) where id (r) = toInteger ($resourceId)
-  merge (u:AnonymousUser {ip: $ip})
-  with u, r
-  unwind $topicGames as topicGameId
-  // Attach AnonymousUser to AmosGame's
-  match (topicGame: AmosGame) where id (topicGame) = topicGameId
-  merge (u)-[:VOTED_ON_ANONYMOUS]->(topicGame)
-    on create
-      set r.noVotesTopics = r.noVotesTopics + 1
-  with u, r
-  unwind $prerequisiteGames as prerequisiteGameId
-  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = prerequisiteGameId
-  merge (u)-[:VOTED_ON_ANONYMOUS]->(prerequisiteGame)
-    on create
-      set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
-  return r
-`,
-      // prerequisiteGame.noVotes = prerequisiteGame.noVotes + 1
 
 updateTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedTopicIds as topicId
   match (t: Topic) where id (t) = topicId
   merge (r)-[:HAS_TOPIC]->(t)
-`,
-
-updatePrerequisites = `
-  match (r: Resource) where id (r) = toInteger ($resourceId)
-  unwind $consensedPrerequisiteIds as prerequisiteId
-  match (g: AmosGame) where id (g) = prerequisiteId
-  merge (r)-[:HAS_PREREQUISITE]->(g)
 `
 
 const addReviewHydration = async (_, {input}, {session, user}) => {
@@ -119,31 +73,27 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
     ? R.over (R.lensProp (`url_goodreads`)) (x => normalizeUrl (x, {stripWWW: false})) (_input)
     : _input,
 
+  /* Ok this has to be refactored :D */
+  ___input = R.omit ([`topics`]) (__input),
+
   /* Create resource */
-  {records: [_resource]} = await session.run (createResource, __input),
+  {records: [_resource]} = await session.run (createResource, {input: ___input}),
 
   resourceId = _resource.get (`r`).identity.low,
-  
+
   /* Create Topic AmosGame */
   topicGames = do {
     const {records} = await session.run (amosGameTopics, {resourceId, topics: __input.topics})
     R.map (r => ({
       gameId: r.get (`g`).identity.low,
       topicId: r.get (`t`).identity.low,
-      noVotes: r.get (`noVotes`)
+      noVotes: r.get (`noVotes`).low
     })) (records)
   },
 
-  /* Create Prerequisite AmosGame */
-  prerequisiteGames = do {
-    const {records} = await session.run (amosGamePrerequisites, {resourceId, prerequisites})
-    R.map (r => ({
-      gameId: r.get (`g`).identity.low,
-      noVotes: r.get (`noVotes`)
-    })) (records)
-  },
+  [] = [topicGames |> console.log ('topicGames', #)],
 
-  games = {topicGames, prerequisiteGames},
+  games = {topicGames},
 
   /* gamesIds is an obj of arrays */
   gamesIds = R.map (R.pluck (`gameId`)) (games),
@@ -151,26 +101,23 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
   /* Attach AmosGame's to user */
   {records: [resource]} = await session.run (authorized, {userId, ...gamesIds, resourceId}),
   
-  {noVotesTopics, noVotesPrerequisites} = resource.get (`r`).properties,
+  {noVotesTopics: {low: noVotesTopics}} = resource.get (`r`).properties,
+
+  [] = [noVotesTopics |> console.log ('noVotesTopics', #)],
   /* 
    * cool word! 
    * (comes from `consensus` :-))
    */
   consensedTopicIds = R.reduce ((acc, {topicId, noVotes}) => (
-    noVotesTopics / noVotes <= 1 / THRESHOLD_TOPIC
+    noVotesTopics / (noVotes + 1) <= 1 / THRESHOLD_TOPIC
       ? R.append (topicId) (acc)
       : acc
-  )) ([]) (topicGames),
+  )) ([]) (topicGames)
 
-  consensedPrerequisiteIds = R.reduce ((acc, {gameId, noVotes}) => (
-    noVotesPrerequisites / noVotes <= 1 / THRESHOLD_PREREQUISITE
-      ? R.append (gameId) (acc)
-      : acc
-  )) ([]) (prerequisiteGames)
-  
+  consensedTopicIds |> console.log ('consensedTopicIds', #)
+
   /* Set new topics/prerequisites */
   await session.run (updateTopics, {resourceId, consensedTopicIds})
-  await session.run (updatePrerequisites, {resourceId, consensedPrerequisiteIds})
 }
 
 export default H.wrapInResponse (addReviewHydration)

@@ -26,7 +26,7 @@ withSearch = C => ({...rest}) => {
     ? R.map (r => ({name: r.name, text: r.name})) (data.autocomplete.results)
     : null,
 
-  onEnt = () => () => (text) => H.navto (`/t/${text}`) (),
+  onEnt = () => () => (text) => H.navto (`/topic/${text}`) (),
 
   onSubmit = handleSubmit(() => {})
 
