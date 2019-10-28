@@ -11,17 +11,15 @@ onClick = (props) => {
   {form, setOneValid, onSubmit} = props
 
   const onEnt = (field) => (key) => (t) => {
-    t |> console.log ('onEnt t', #)
     const val = form.getValues()
-
-    if (t === `SUBMIT` || field && H.isNilOrEmpty (val[field])) {
-      onSubmit.next |> console.log ('onSubmit.next', #)
+    if (t === `SUBMIT` || field && H.isNilOrEmpty (val[field])) { 
       onSubmit.next
         ? onSubmit.next()
         : onSubmit.finish()
     }
     else {
-      form.setValue (field, t) || setOneValid (key) (true)
+      form.setValue (field, t)
+      setOneValid (key) (true)
     }
 
     /* So weird that this code doesn't work, maybe a babel bug? */

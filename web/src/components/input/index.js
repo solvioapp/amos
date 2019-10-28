@@ -19,27 +19,24 @@ const Input = ({
   [dropdown, setDropdown] = useState (true),
   [valid, setValid] = useState (false),
 
-  [] = [valid |> console.log ('valid input', #)],
-  [] = [isValid |> console.log ('isValid input', #)],
-
   [] = [!valid && isValid && (() => {
     setValid (isValid)
     setDropdown (!dropdown)
   })()],
 
-  onKeyPress = useCallback (({key}) => {
+  onKeyPress = useCallback ((e) => {
+    const {key} = e
     /* Use this if there is no results, no dropdown or if it's disabled
     (otherwise use <Dropdown>'s onKeyPress */
     if (!results || !dropdown || noDropdown) {
-      console.log (`onKeyPress input`)
       key === `Enter` && onEnt && onEnt () () (`SUBMIT`)
     }
   }, [dropdown, noDropdown, onEnt])
 
   useEffect(() => {
-    document.addEventListener (`keyup`, onKeyPress)
+    document.addEventListener (`keypress`, onKeyPress)
 
-    return () => document.removeEventListener(`keyup`, onKeyPress)
+    return () => document.removeEventListener(`keypress`, onKeyPress)
   }, [onKeyPress])
 
   const _onClick = (e) => {
