@@ -84,5 +84,5 @@ input AddReviewHydrationInput {
 extend type Mutation {
   addReview (input: AddReviewInput!): Response!
   # For hydration
-  addReviewHydration (input: AddReviewHydrationInput!): Response!
+  addReviewHydration (input: AddReviewHydrationInput!): Response! @hasRole (roles: [ADMIN])
 }

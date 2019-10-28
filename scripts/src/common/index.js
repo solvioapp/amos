@@ -4,7 +4,8 @@ import {v1 as neo4j} from 'neo4j-driver'
 import fetch from 'node-fetch'
 import ApolloClient from 'apollo-client'
 import gql from 'graphql-tag'
-import {HttpLink} from 'apollo-link-http'
+import {HttpLink, createHttpLink} from 'apollo-link-http'
+import {setContext} from 'apollo-link-context'
 import {InMemoryCache} from 'apollo-cache-inmemory'
 import Promise from 'bluebird'
 import coreJs from 'core-js/stable'
@@ -22,6 +23,8 @@ export {
   gql,
   fetch,
   HttpLink,
+  createHttpLink,
+  setContext,
   InMemoryCache,
   Promise,
   coreJs,

@@ -28,7 +28,7 @@ export default {
     //   ],
     // },
     // mutation: false,
-    mutation: true,
+    // mutation: true,
     // mutation: {
     //   exclude: [
     //     `Topic`,

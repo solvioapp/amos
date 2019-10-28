@@ -8,10 +8,11 @@ export const
 
 RESERVED_PATHS = [
   `profile`, `review`, `reviews`, `signup`, `login`, `topic`, `topics`, `topic-graph`,
-  `resource`, `resources`, `admin`, `bot`, `amos`, `solvio`, `solviofoundation`,
+  `resource`, `resources`, `admin`, `bot`, `solvio`, `solviofoundation`,
   `home`, `callback`, `success`, `thanks`, `settings`, `help`, `news`, `newsfeed`,
   `feed`, `search`, `discover`, `explore`, `proposals`, `proposal`, `dashboard`,
-  `terms`, `privacy`, `sponsors`, `about`, `school`, `schools`, `courses`, `logout`
+  `terms`, `privacy`, `sponsors`, `about`, `school`, `schools`, `courses`, `logout`,
+  `bootcamp`, `bootcamps`, `api`, `forum`, `new`, `groups`, `rules`, `user`, 
 ],
 
 noAt = R.complement (R.includes (`@`)),
@@ -19,10 +20,15 @@ noAt = R.complement (R.includes (`@`)),
 username = string()
   .min(3)
   .max(16)
-  .notOneOf(RESERVED_PATHS)
+  .notOneOf (RESERVED_PATHS, `That username is a reserved path 😕`)
   .test(``, `This is not a valid email and username can't have '@'.`, noAt)
   .label(`Username`)
   .required(),
+
+usernameOnly = object()
+  .shape ({
+    username
+  }),
 
 email = string()
   .email()
@@ -64,15 +70,26 @@ login = object().shape ({usernameOrEmail, password}),
 
 /* Add review */
 // links = array().of (string().url().required()).required(),
-links = object().shape ({links: string()}),
-// links = string().required(),
-topics = string(),
+// _links = string().url(),
+
+// links = object().shape ({links: _links})
+_link = string().url(`Link must be a valid URL.`).required(`Link is a required field.`),
+link = object().shape ({link: array().of (_link)}),
+_topics = string()
+// topics = object().shape ({topic: _topics})
+
 // topics = array().of (string().required()),
-prerequisites = string(),
+// prerequisites = string(),
 // prerequisites = array().of (object().shape ({
 //   strength: number().oneOf ([1, 2, 3]).required(),
 //   level: number().oneOf ([1, 2, 3, 4]).required(),
 //   topic: string().required(),
 // })),
 
-addReview = object().shape ({links, topics, prerequisites})
+// review = {
+//   links: object().shape ({links}),
+  // topics: object().shape ({topics}),
+  // prererequisites: object().shape ({prerequisites}),
+// }
+
+// review = object().shape ({links, topics, prerequisites})

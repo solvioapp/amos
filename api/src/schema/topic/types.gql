@@ -52,8 +52,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  # createTopic (input: CreateTopicInput!): Topic! @hasRole (roles: [ADMIN])
-  createTopic (input: CreateTopicInput!): Response!
-  addIsPartOf (input: AddIsPartOfInput!): Response!
-  # addIsPartOf (name: String!, names: [String!]!, _id: String): Topic!
+  createTopic (input: CreateTopicInput!): Response! @hasRole (roles: [ADMIN])
+  addIsPartOf (input: AddIsPartOfInput!): Response! @hasRole (roles: [ADMIN])
 }

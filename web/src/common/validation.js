@@ -8,7 +8,7 @@ export const
 
 RESERVED_PATHS = [
   `profile`, `review`, `reviews`, `signup`, `login`, `topic`, `topics`, `topic-graph`,
-  `resource`, `resources`, `admin`, `bot`, `amos`, `solvio`, `solviofoundation`,
+  `resource`, `resources`, `admin`, `bot`, `solvio`, `solviofoundation`,
   `home`, `callback`, `success`, `thanks`, `settings`, `help`, `news`, `newsfeed`,
   `feed`, `search`, `discover`, `explore`, `proposals`, `proposal`, `dashboard`,
   `terms`, `privacy`, `sponsors`, `about`, `school`, `schools`, `courses`, `logout`,
