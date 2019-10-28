@@ -28,8 +28,12 @@ createResource = `
 
 amosGameTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
-  unwind $topics as topicId
-  match (t: Topic) where id (t) = toInteger (topicId)
+  unwind $topics as topicName
+  with r, toLower (topicName) as topicNameLower
+  match (t: Topic)
+  unwind t.names as name
+  with toLower (name) as nameLower, r, t
+  where topicNameLower = nameLower
   with r, t
   merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {type: "TOPIC"})-[:FOR_TOPIC]->(t)
   with g, t
@@ -45,7 +49,11 @@ amosGameTopics = `
 amosGamePrerequisites = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $prerequisites as p
-  match (t: Topic) where id (t) = toInteger (p.topic)
+  with r, toLower (p.topic) as topicNameLower, p
+  match (t: Topic)
+  unwind t.names as name
+  with toLower (name) as nameLower, r, t, p
+  where topicNameLower = nameLower
   with r, t, p
   merge (r)<-[:FOR_RESOURCE]-(g:AmosGame {
     type: "PREREQUSIITE",
@@ -115,7 +123,6 @@ updatePrerequisites = `
 const addReview = async (_, {input}, {session, ip, user}) => {
   // TODO: Add validation
 
-  input |> console.log ('input', #)
   const
   {topics, prerequisites} = input,
   /* Check either topics or prerequisites are provided */
@@ -152,8 +159,6 @@ const addReview = async (_, {input}, {session, ip, user}) => {
 
   {identity: {low: resourceId}} = resource,
 
-  [] = [resource |> console.log ('resource', #)],
-  
   /* Condtionally create Topic AmosGame */
   topicGames = H.isNotNilOrEmpty (topics)
     ? do {
@@ -182,11 +187,6 @@ const addReview = async (_, {input}, {session, ip, user}) => {
   /* gamesIds is an obj of arrays */
   gamesIds = R.map (R.pluck (`gameId`)) (games),
 
-  [] = [games |> console.log ('games', #)],
-  [] = [gamesIds |> console.log ('gamesIds', #)],
-  [] = [resourceId |> console.log ('resourceId', #)],
-  [] = [userId |> console.log ('userId', #)],
-
   /* Attach AmosGame's to user */
   {} = userId
     ? await session.run (authorized, {userId, ...gamesIds, resourceId})
@@ -199,17 +199,17 @@ const addReview = async (_, {input}, {session, ip, user}) => {
    * (comes from `consensus` :-))
    */
   consensedTopicIds = R.reduce ((acc, {topicId, noVotes}) => (
-    noVotesTopics / noVotes <= 1 / THRESHOLD_TOPIC
+    noVotesTopics / (noVotes + 1) <= 1 / THRESHOLD_TOPIC
       ? R.append (topicId) (acc)
       : acc
   )) ([]) (topicGames),
 
   consensedPrerequisiteIds = R.reduce ((acc, {gameId, noVotes}) => (
-    noVotesPrerequisites / noVotes <= 1 / THRESHOLD_PREREQUISITE
+    noVotesPrerequisites / (noVotes + 1) <= 1 / THRESHOLD_PREREQUISITE
       ? R.append (gameId) (acc)
       : acc
   )) ([]) (prerequisiteGames)
-  
+
   /* Set new topics/prerequisites */
   await session.run (updateTopics, {resourceId, consensedTopicIds})
   await session.run (updatePrerequisites, {resourceId, consensedPrerequisiteIds})
