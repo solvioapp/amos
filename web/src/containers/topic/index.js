@@ -35,24 +35,23 @@ const Topic = ({match: {params: {name}}}) => {
   data |> console.log('data', #)
 
   const renderResource = (res, key) => (
-    <div>
-      {res.type && <p>{res.type}</p>}
-      {res.name && <p>{res.name}</p>}
-      {res.link && <p>{res.link}</p>}
-      {res.title && <p>{res.title}</p>}
-      {res.urls && <a href={res.urls} key={key}>{res.name}</a>}
-      {res.url_main && <p>{res.url_main}</p>}
-      {res.url_goodreads && <p>{res.url_goodreads}</p>}
-      {res.url_download_pdf && <p>{res.url_download_pdf}</p>}
-      {res.url_download_epub && <p>{res.url_download_epub}</p>}
-      {res.url_download_mobi && <p>{res.url_download_mobi}</p>}
-      {res.typeSpecific_authors && <p>{res.typeSpecific_authors}</p>}
-      {res.typeSpecific_goodreadsAvgRating && <p>{res.typeSpecific_goodreadsAvgRating}</p>}
-      {res.typeSpecific_goodreadsNoRatings && <p>{res.typeSpecific_goodreadsNoRatings}</p>}
-      {res.typeSpecific_pages && <p>{res.typeSpecific_pages}</p>}
-      {res.typeSpecific_datePublished && <p>{res.typeSpecific_datePublished}</p>}
-      {res.typeSpecific_isbn && <p>{res.typeSpecific_isbn}</p>}
-      {res.typeSpecific_dewey && <p>{res.typeSpecific_dewey}</p>}
+    <div style={{width: `500px`}}>
+      {res.type && <div>{res.type}</div>}
+      {res.name && <div>{res.name}</div>}
+      {res.link && <div>{res.link}</div>}
+      {res.title && <div>{res.title}</div>}
+      {res.url_main && <a href={res.url_main}>Main</a>}
+      {res.url_goodreads && <a href={res.url_goodreads}>Goodreads</a>}
+      {res.url_download_pdf && <a href={res.url_download_pdf}>PDF</a>}
+      {res.url_download_epub && <a href={res.url_download_epub}>EPUB</a>}
+      {res.url_download_mobi && <a href={res.url_download_mobi}>MOBI</a>}
+      {res.typeSpecific_authors && <div>{res.typeSpecific_authors}</div>}
+      {res.typeSpecific_goodreadsAvgRating && <div>{res.typeSpecific_goodreadsAvgRating}</div>}
+      {res.typeSpecific_goodreadsNoRatings && <div>{res.typeSpecific_goodreadsNoRatings}</div>}
+      {res.typeSpecific_pages && <div>{res.typeSpecific_pages}</div>}
+      {res.typeSpecific_datePublished && <div>{res.typeSpecific_datePublished}</div>}
+      {res.typeSpecific_isbn && <div>{res.typeSpecific_isbn}</div>}
+      {res.typeSpecific_dewey && <div>{res.typeSpecific_dewey}</div>}
       <hr/>
     </div>
   )

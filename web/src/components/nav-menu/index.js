@@ -2,7 +2,11 @@ import {H, React, R, withRouter} from 'common'
 import Top_ from './top.sc'
 import Link_ from './link.sc'
 
-const isActive = (_, {pathname: p}) => R.either (R.equals (`/`)) (R.startsWith (`/t/`)) (p)
+const isActive = (_, {pathname: p}) => (
+  R.either
+  (R.equals (`/search`))
+  (R.startsWith (`/topic/`)) (p)
+)
 
 const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
@@ -11,12 +15,15 @@ const NavMenu = ({isAuthenticated, className, ...rest}) => (
     <Link_ to='/review'>
       Review
     </Link_>
-    <Link_ to='/' exact {...{isActive}}>
+    <Link_ to='/search' {...{isActive}}>
       Search
     </Link_>
-    <Link_ to='/notifications' hidden={true}>
-      Notifications
+    <Link_ to='/about'>
+      About
     </Link_>
+    {/* <Link_ to='/notifications' hidden={true}>
+      Notifications
+    </Link_> */}
     <Link_ to='/profile' hidden={!isAuthenticated}>
       Profile
     </Link_>

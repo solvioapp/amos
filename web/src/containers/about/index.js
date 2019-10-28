@@ -5,7 +5,7 @@ import {
 
 const About = () => (
   <AmosChat>
-    Hi
+    Hello
   </AmosChat>
 )
 

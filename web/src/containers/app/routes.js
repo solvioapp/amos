@@ -2,6 +2,7 @@ import {
   React, Redirect, Route, Switch, W,
   NotFound
 } from 'common'
+import Home from './home'
 import About from 'containers/about'
 import Login from 'containers/login'
 import Profile from 'containers/profile'
@@ -12,14 +13,11 @@ import Topic from 'containers/topic'
 import PublicRoute from './public-route'
 import PrivateRoute from './private-route'
 
-const Routes = ({isAuthenticated}) => (
+const Routes = () => (
   <Switch>
-    {/* {
-      isAuthenticated
-        ? <Route path='/' exact component={Search}/>
-        : <Route path='/' exact component={About}/>
-    } */}
-    <Route path='/' exact component={Search}/>
+    <Route path='/' exact component={Home}/>
+    <Route path='/about' component={About}/>
+    <Route path='/search' exact component={Search}/>
     <Route path='/review' component={Review}/>
     <Route path='/topic/:name' component={Topic}/>
     <PublicRoute path='/login' component={Login}/>
@@ -30,4 +28,4 @@ const Routes = ({isAuthenticated}) => (
   </Switch>
 )
 
-export default W.GET_AUTH (Routes)
+export default (Routes)
