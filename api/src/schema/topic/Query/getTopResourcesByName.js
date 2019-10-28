@@ -3,7 +3,9 @@ import {R} from 'common'
 const _1 = `
 match (r: Resource)
 -[:HAS_TOPIC]->(t: Topic)
-where $name in t.names
+unwind t.names as topicName
+with toLower (topicName) as topicNameLower, toLower ($name) as nameLower, r
+where topicNameLower = nameLower
 with r
 return r
 `

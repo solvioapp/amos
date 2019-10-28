@@ -39,18 +39,17 @@ export default async (token) => {
   })
   
   console.log (`Creating HackPrague reviews`)
-  await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview (client))
-  // await Promise.mapSeries (hackprague, createHackPragueReview (client))
+  // await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview (client))
+  await Promise.mapSeries (hackprague, createHackPragueReview (client))
   console.log (`Successfully created HackPrague reviews`)
 
-  // console.log (`Creating Other reviews`)
-  // // await Promise.mapSeries (R.slice (0) (100) (others), createReview (client))
-  // await Promise.mapSeries (others, createReview (client))
-  // console.log (`Successfully created Other reviews`)
+  console.log (`Creating Other reviews`)
+  // await Promise.mapSeries (R.slice (0) (100) (others), createReview (client))
+  await Promise.mapSeries (others, createReview (client))
+  console.log (`Successfully created Other reviews`)
 
-  // console.log (`Creating Goodreads reviews`)
-  // // await Promise.mapSeries (R.slice (0) (100) (goodreads), createReview (client))
-  // await Promise.mapSeries (goodreads, createReview (client))
-  // console.log (`Successfully created Goodreads reviews`)
-
+  console.log (`Creating Goodreads reviews`)
+  // await Promise.mapSeries (R.slice (0) (100) (goodreads), createReview (client))
+  await Promise.mapSeries (goodreads, createReview (client))
+  console.log (`Successfully created Goodreads reviews`)
 }

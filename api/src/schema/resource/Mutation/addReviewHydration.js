@@ -91,8 +91,6 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
     })) (records)
   },
 
-  [] = [topicGames |> console.log ('topicGames', #)],
-
   games = {topicGames},
 
   /* gamesIds is an obj of arrays */
@@ -103,9 +101,7 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
   
   {noVotesTopics: {low: noVotesTopics}} = resource.get (`r`).properties,
 
-  [] = [noVotesTopics |> console.log ('noVotesTopics', #)],
-  /* 
-   * cool word! 
+   /* cool word! 
    * (comes from `consensus` :-))
    */
   consensedTopicIds = R.reduce ((acc, {topicId, noVotes}) => (
@@ -113,8 +109,6 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
       ? R.append (topicId) (acc)
       : acc
   )) ([]) (topicGames)
-
-  consensedTopicIds |> console.log ('consensedTopicIds', #)
 
   /* Set new topics/prerequisites */
   await session.run (updateTopics, {resourceId, consensedTopicIds})
