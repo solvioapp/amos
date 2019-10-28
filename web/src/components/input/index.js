@@ -15,9 +15,12 @@ const Input = ({
   hasError = Boolean (errors?.[name]), ...rest
 }, ref) => {
   const
-  
+
   [dropdown, setDropdown] = useState (true),
   [valid, setValid] = useState (false),
+
+  [] = [valid |> console.log ('valid input', #)],
+  [] = [isValid |> console.log ('isValid input', #)],
 
   [] = [!valid && isValid && (() => {
     setValid (isValid)

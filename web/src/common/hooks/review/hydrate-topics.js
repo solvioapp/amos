@@ -18,7 +18,7 @@ hydrate = (props) => {
     }) (#))
   })
 
-  return R.merge ({review}) (props)
+  return props
 }
 
 export default hydrate

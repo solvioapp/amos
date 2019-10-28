@@ -26,7 +26,7 @@ results = (props) => {
 
   parseResults = data => {
     const _results = data
-      && R.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results)
+      && H.map (res => ({name: res.name, text: res.name})) (data.autocomplete.results)
     return {[name]: H.update (config.key) (_results) (results[name])}
   },
 

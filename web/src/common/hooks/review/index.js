@@ -7,9 +7,9 @@ import isValid from './is-valid'
 import results from './results'
 import config from './config'
 import loadReview from './load-review'
-import hydrate from './hydrate'
+import hydrateTopics from './hydrate-topics'
 import onSubmit from './on-submit'
-import onChange from './on-change'
+import hydrateLinks from './hydrate-links'
 import onEnt from './on-ent'
 
 const
@@ -45,14 +45,13 @@ useReview = name => (
       Overrides onSubmit */
     multiForm (formOpts (name)) (opts (name)),
     loadReview, // loads Review
-    hydrate // hydrates inputs with review
   )
 ),
 
 useReviewLinks = name => (
   R.pipe (
     useReview (name), // see above
-    onChange, // adds onChange, valid
+    hydrateLinks, // hydrates inputs with review
     onEnt // adds onEnt
   )
 ),
@@ -60,6 +59,7 @@ useReviewLinks = name => (
 useReviewTopics = name => (
   R.pipe (
     useReview (name),
+    hydrateTopics, // hydrates inputs with review
     config, // adds config, onChange
     results, // adds results, loading
     /* Adds {valid, setOneValid, setValid}
