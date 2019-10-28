@@ -41,7 +41,7 @@ export default ({results, onClick, link, name, active, _key, onEnt}) => {
     )
 
     const optionallyWrap = (wrap) => (
-      wrap ? <Link to={`/t/${name}`}> {label} </Link> : label
+      wrap ? <Link to={`/topic/${name}`}> {label} </Link> : label
     )
 
     return (

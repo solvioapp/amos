@@ -38,6 +38,8 @@ const Topic = ({match: {params: {name}}}) => {
     <div>
       {res.type && <p>{res.type}</p>}
       {res.name && <p>{res.name}</p>}
+      {res.link && <p>{res.link}</p>}
+      {res.title && <p>{res.title}</p>}
       {res.urls && <a href={res.urls} key={key}>{res.name}</a>}
       {res.url_main && <p>{res.url_main}</p>}
       {res.url_goodreads && <p>{res.url_goodreads}</p>}

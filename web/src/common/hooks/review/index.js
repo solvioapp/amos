@@ -18,8 +18,15 @@ message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 ),
 
+defaultValues = {
+  link: {link: ``},
+  topic: {topic: []},
+  prerequisite: {prerequisite: []},
+},
+
 formOpts = name => ({
   ...(validation[name] && {validationSchema: validation[name]}),
+  defaultValues: defaultValues[name],
   // mode: `onBlur`
 }),
 

@@ -93,6 +93,7 @@ guest = `
   merge (u)-[:VOTED_ON_ANONYMOUS]->(prerequisiteGame)
     on create
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
+  with r
   return r
 `,
       // prerequisiteGame.noVotes = prerequisiteGame.noVotes + 1
@@ -114,6 +115,7 @@ updatePrerequisites = `
 const addReview = async (_, {input}, {session, ip, user}) => {
   // TODO: Add validation
 
+  input |> console.log ('input', #)
   const
   {topics, prerequisites} = input,
   /* Check either topics or prerequisites are provided */
@@ -141,12 +143,16 @@ const addReview = async (_, {input}, {session, ip, user}) => {
     const {title} = await metascraper ({html, url})
     /* Create resource */
     const {records: [resource]} = await session.run (createResource, {link, title})
-    return resource.get (`r`).identity.low
+    return resource.get (`r`)
   },
 
-  resourceId = R.isEmpty (resources)
+  resource = R.isEmpty (resources)
     ? await _createResource()
-    : resources[0].get (`r`).identity.low,
+    : resources[0].get (`r`),
+
+  {identity: {low: resourceId}} = resource,
+
+  [] = [resource |> console.log ('resource', #)],
   
   /* Condtionally create Topic AmosGame */
   topicGames = H.isNotNilOrEmpty (topics)
@@ -176,15 +182,18 @@ const addReview = async (_, {input}, {session, ip, user}) => {
   /* gamesIds is an obj of arrays */
   gamesIds = R.map (R.pluck (`gameId`)) (games),
 
+  [] = [games |> console.log ('games', #)],
+  [] = [gamesIds |> console.log ('gamesIds', #)],
+  [] = [resourceId |> console.log ('resourceId', #)],
+  [] = [userId |> console.log ('userId', #)],
+
   /* Attach AmosGame's to user */
-  {records: [resource]} = userId
+  {} = userId
     ? await session.run (authorized, {userId, ...gamesIds, resourceId})
     : await session.run (guest, {ip, ...gamesIds, resourceId}),
   
-  {
-    noVotesTopics: {low: noVotesTopics},
-    noVotesPrerequisites: {low: noVotesPrerequisites}
-  } = resource.get (`r`).properties,
+  noVotesTopics = resource.properties.noVotesTopics.low,
+  noVotesPrerequisites = resource.properties.noVotesPrerequisites.low,
   /* 
    * cool word! 
    * (comes from `consensus` :-))

@@ -9,6 +9,7 @@ const submit = (props) => {
     const variables = H.isNilOrEmpty (input)
       ? {input: _input}
       : {input: R.mergeDeepRight (_input) (input)}
+    variables |> console.log ('variables', #)
     props.onSubmit[0] ({variables})
   })
 
