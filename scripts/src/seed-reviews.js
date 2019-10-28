@@ -18,12 +18,12 @@ mutation = gql`
   }
 `,
 
-createReview = async (client) => async (rev) => {
+createReview = (client) => async (rev) => {
   // JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
   await client.mutate ({mutation, variables: {input: rev}})
 },
 
-createHackPragueReview = async (client) => async (rev) => {
+createHackPragueReview = (client) => async (rev) => {
   // JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
   const _rev = R.omit ([`prerequisites`]) (H.renameKeys ({urls: `url_main`}) (rev))
   await client.mutate ({mutation, variables: {input: _rev}})  

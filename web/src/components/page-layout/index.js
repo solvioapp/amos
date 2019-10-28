@@ -9,7 +9,7 @@ const PageLayout = ({isAuthenticated, children, match, ...rest}) => (
   <div css={top} {...rest}>
     <NavMenu {...{isAuthenticated}}/>
     <Content_ {...{match}}>{children}</Content_>
-    <Footer/>
+    {/* <Footer/> */}
   </div>
 )
 
