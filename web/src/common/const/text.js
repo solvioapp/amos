@@ -13,7 +13,7 @@ login = `Welcome back! 🎊`,
 
 lets_go = `Let's go!`,
 
-passwords_dont_match = `Bar`,
+passwords_dont_match = `The passwords don't seem to match. Good we caught that now, right?!`,
 
 coming_soon = `Coming soon 🥳`,
 

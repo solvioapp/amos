@@ -13,7 +13,11 @@ const boxShadowWidth = `0`
 const Form = (props) => {
   const {
     onSubmit, messages, form: {register, errors}
-  } = hooks.form ({validationSchema: validation.login}) ({message}) (props)
+  } = hooks.form
+  /* eslint-disable indent */
+    ({validationSchema: validation.signup, submitFocusError: false})
+    ({message})
+    (props)
   return <Form_ onSubmit={onSubmit}>
     <AmosChat>
       {messages}
