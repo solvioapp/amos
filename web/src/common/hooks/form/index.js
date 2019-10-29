@@ -1,6 +1,6 @@
 /* eslint-disable indent, max-lines */
 import {R} from 'common'
-import _form from './form'
+import formOnly from './formOnly'
 import submit from './submit'
 import multiSubmit from './multi-submit'
 
@@ -8,14 +8,14 @@ export const
 
 form = (formOpts) => (opts) => (
   R.pipe (
-    _form (formOpts) (opts),
+    formOnly (formOpts) (opts),
     submit,
   )
 ),
 
 multiForm = (formOpts) => (opts) => (
   R.pipe (
-    _form (formOpts) (opts),
+    formOnly (formOpts) (opts),
     multiSubmit
   )
 )

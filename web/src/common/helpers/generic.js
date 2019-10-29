@@ -66,13 +66,21 @@ getMessages = def => R.pipe (
   )
 ),
 
-importContext = req => {
-  const cache = R.reduce ((acc, key) => R.append (req (key)) (acc)) ([]) (req.keys())
-  /* Accept default exports */
-  const _cache = R.map (val => R.propOr (val) (`default`) (val)) (cache)
-  /* Wrap defaultly exported functions in an object */
-  return R.map (R.when (fn => fn instanceof Function) (fn => ({[fn.name]: fn}))) (_cache)
-},
+importContext = req => (
+  R.reduce ((acc, key) => {
+    const name = key
+      /* Get file name */
+      |> R.split (`/`) (#) |> R.last
+      /* Drop extension */
+      |> R.split (`.`) (#) |> R.head
+    const _exports = req (key)
+    const exportsMerged = R.merge (R.omit ([`default`]) (_exports)) (acc)
+    const defaultExport = R.has (`default`) (_exports)
+      ? {[name]: _exports.default}
+      : {}
+    return R.merge (defaultExport) (exportsMerged)
+  }) ({}) (req.keys())
+),
 
 reduce = R.addIndex (R.reduce),
 

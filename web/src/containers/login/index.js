@@ -16,7 +16,7 @@ const Form = (props) => {
   } = hooks.form
   /* eslint-disable indent */
     ({
-      validationSchema: validation.signup,
+      validationSchema: validation.login,
       submitFocusError: false,
       mode: `onBlur`,
     })

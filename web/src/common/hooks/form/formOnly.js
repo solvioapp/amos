@@ -1,7 +1,7 @@
 import {R, H, React, useForm, useFormContext} from 'common'
 
 /* eslint-disable indent */
-const form =
+const formOnly =
   (formOpts) => (opts) =>
   (props) => {
 
@@ -34,4 +34,4 @@ const form =
     form, schema}) (props)
 }
 
-export default form
+export default formOnly
