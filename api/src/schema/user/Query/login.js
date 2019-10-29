@@ -24,7 +24,7 @@ login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   
   /* Get query args */
   args = isEmail 
-    ? [getUserByEmail, {email: {usernameOrEmail}}]
+    ? [getUserByEmail, {email: usernameOrEmail}]
     : do {
       await validation.username.validate (usernameOrEmail, {abortEarly: false})
       const res = [getUserByUsername, {username: usernameOrEmail}]
