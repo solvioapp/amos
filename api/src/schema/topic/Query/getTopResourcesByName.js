@@ -16,7 +16,7 @@ const getTopResourcesByName = async (_, {name}, {session}) => {
     ...r.get (`r`).properties,
     _id: r.get (`r`).identity.low
   })) (resources)
-  // results |> console.log ('results', #)
+
   return results
 }
 

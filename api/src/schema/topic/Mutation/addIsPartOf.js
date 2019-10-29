@@ -14,11 +14,7 @@ _1 = `
 `,
 
 addIsPartOf = async (_, {input}, {session}) => {
-  const {records: recs} = await session.run (_1, input)
-
-  // const toReturn = R.nth (0) (R.map (rec => rec.get (`c`).properties) (recs))
-  // toReturn |> console.log ('toReturn', __filename, #)
-  // return true
+  await session.run (_1, input)
 }
 
 export default H.wrapInResponse (addIsPartOf)

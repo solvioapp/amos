@@ -1,24 +1,26 @@
 import {R,A,H,validation,CONST,rp} from 'common'
 
-const _1a = `
+const getUserByUsername = `
   MATCH (u:User) WHERE u.username = $username RETURN u
-`
+`,
 
-const _1b = `
+createGhAccount = `
   create (u:User {username: $username})
   -[:AUTHENTICATED_WITH]->
   (gh:GhAccount {userGhId: $userGhId})
   return u
-`
+`,
 
-const attachEmail = `
-  match (gh: GhAccount {userGhId: $userGhId})
-  with gh
-  set gh.email = $email
-`
+attachEmail = `
+  match (u: User {username: $username})
+  with u
+  create (u)
+  -[:HAS_EMAIL]->
+  (e: Email {email: $email})
+`,
 
 
-const signupGithub = async (_, {input}, {session}) => {
+signupGithub = async (_, {input}, {session}) => {
   const
 
   {ghAccessToken, username} = input,
@@ -27,7 +29,7 @@ const signupGithub = async (_, {input}, {session}) => {
   [] = [await validation.username.validate (username, {abortEarly: false})],
 
   /* Check if username is free */
-  {records: usernames} = await session.run (_1a, {username}),
+  {records: usernames} = await session.run (getUserByUsername, {username}),
   [] = [H.assert (R.isEmpty (usernames)) (CONST.username_taken (username))],
 
   getUser = {
@@ -45,7 +47,7 @@ const signupGithub = async (_, {input}, {session}) => {
   // TODO: query params
   // TODO: Error handling
 
-  {records: [user]} = await session.run (_1b, {userGhId, username}),
+  {records: [user]} = await session.run (createGhAccount, {userGhId, username}),
 
   userId = user.get (`u`).identity.low,
   getEmails = R.mergeRight (getUser) ({
@@ -56,7 +58,7 @@ const signupGithub = async (_, {input}, {session}) => {
     |> R.filter (R.propEq (`primary`) (true)) (#),
 
   email = _email?.email,
-  [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {userGhId, email})],
+  [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {username, email})],
 
   message = await A.createToken (process.env.JWT_SECRET, {sub: userId})
 

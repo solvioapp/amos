@@ -11,9 +11,13 @@ const getUserByEmail = `
 
 getUserByUsername = `
   match (u: User {username: $username})
-  -[:AUTHENTICATED_WITH]->
-  (l: LocalAccount)
-  return u, l.hashedPassword as hashedPassword
+  return u
+`,
+
+getHashedPassword = `
+  match (u: User {username: $username})
+  -[:AUTHENTICATED_WITH]->(l: LocalAccount)
+  return l.hashedPassword as hashedPassword
 `,
 
 login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
@@ -40,14 +44,11 @@ login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   [] = [H.assert (H.isNotNil (user)) (CONST.cant_find_user (isEmail) (usernameOrEmail))],
 
   /* Check if user has local account */
-  _user = isEmail && do {
-    const username = user.get (`u`).properties.username,
-    {records: [_user]} = session.run (getUserByUsername, {username})
-    H.assert (H.isNotNil (_user.get (`hashedPassword`))) (CONST.no_local_account)
-    _user
-  },
+  username = user.get (`u`).properties.username,
+  {records: [result]} = await session.run (getHashedPassword, {username})
+  H.assert (H.isNotNil (result)) (CONST.no_local_account)
 
-  hashedPassword = (isEmail ? _user : user).get (`hashedPassword`),
+  const hashedPassword = result.get (`hashedPassword`),
 
   /* Check if password is correct */
   correctPassword = await bcrypt.compare (password, hashedPassword),

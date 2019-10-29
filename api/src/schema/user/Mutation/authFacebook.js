@@ -1,5 +1,4 @@
 import {A,H,rp} from 'common'
-import signupFacebook from './signupFacebook'
 
 const matchUserFbId = `
   match (u: User)
@@ -11,8 +10,17 @@ const matchUserFbId = `
 getUserByEmail = `
   match (u: User)
   -[:HAS_EMAIL]->
-  (e: Email)
-  return u, e.email as email
+  (e: Email {email: $email})
+  return u
+`,
+
+createFbAccount = `
+  match (u:User {username: $username})
+  with u
+  create (u)
+  -[:AUTHENTICATED_WITH]->
+  (fb:FbAccount {userFbId: $userFbId})
+  return u
 `,
 
 authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
@@ -38,13 +46,16 @@ authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
       const {email} = await rp (
         `https://graph.facebook.com/me/?access_token=${fbAccessToken}&fields=email`
       ) |> JSON.parse,
-      {records: [_result]} = await session.run (getUserByEmail, {email}),
-      _email  = _result.get (`email`)
-      _email
+      {records: [user]} = await session.run (getUserByEmail, {email}),
+      user
         ? do {
           /* User has another account */
-          const username = _result.get (`u`).properties.username
-          signupFacebook (_, {input: {fbAccessToken, username}}, {session})
+          const username = user.get (`u`).properties.username
+          const userId = user.get (`u`).identity.low
+          await session.run (createFbAccount, {username, userFbId})
+          const token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+          const res = [`token`, token]
+          res
         }
         : [`fbAccessToken`, fbAccessToken]
     }

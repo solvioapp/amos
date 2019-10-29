@@ -1,10 +1,10 @@
 import {R,A,H,validation,CONST,rp} from 'common'
 
-const _1a = `
+const matchUser = `
   MATCH (u:User) WHERE u.username = $username RETURN u
 `
 
-const _1b = `
+const createAccount = `
   create (u:User {username: $username})
   -[:AUTHENTICATED_WITH]->
   (fb:FbAccount {userFbId: $userFbId})
@@ -12,9 +12,11 @@ const _1b = `
 `
 
 const attachEmail = `
-  match (fb: FbAccount {userFbId: $userFbId})
-  with fb
-  set fb.email = $email
+  match (u: User {username: $username})
+  with u
+  create (u)
+  -[:HAS_EMAIL]->
+  (e: Email {email: $email})
 `
 
 
@@ -26,9 +28,8 @@ const signupFacebook = async (_, {input}, {session}) => {
   /* Validation */
   [] = [await validation.username.validate (username, {abortEarly: false})],
 
-
   /* Check if username is free */
-  {records: usernames} = await session.run (_1a, {username}),
+  {records: usernames} = await session.run (matchUser, {username}),
   [] = [H.assert (R.isEmpty (usernames)) (CONST.username_taken (username))],
   
   // TODO: query params
@@ -37,14 +38,14 @@ const signupFacebook = async (_, {input}, {session}) => {
     `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`
   ) |> JSON.parse,
 
-  {records: [user]} = await session.run (_1b, {userFbId, username}),
+  {records: [user]} = await session.run (createAccount, {userFbId, username}),
   userId = user.get (`u`).identity.low,
 
   {email} = await rp (
     `https://graph.facebook.com/me/?access_token=${fbAccessToken}&fields=email`
   ) |> JSON.parse,
 
-  [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {userFbId, email})],
+  [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {username, email})],
 
   message = await A.createToken (process.env.JWT_SECRET, {sub: userId})
 

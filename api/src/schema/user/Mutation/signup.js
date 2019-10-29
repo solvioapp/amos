@@ -6,9 +6,29 @@ const getUsername = `
   return u
 `,
 
-getEmail = `
-  match (e: Email {email: $email})
-  return e
+getUserByEmail = `
+  match (u: User)
+  -[:HAS_EMAIL]->
+  (e: Email {email: $email})
+  return u
+`,
+
+getLocalAccountById = `
+  match (u: User)
+  -[:AUTHENTICATED_WITH]->
+  (l: LocalAccount)
+  where id (u) = toInteger ($userId)
+  return l
+`,
+
+createLocalAccount = `
+  match (u: User {username: $username})
+  with u
+  create (u)
+  -[:AUTHENTICATED_WITH]->
+  (l: LocalAccount {hashedPassword: $hashedPassword})
+  with u
+  return u
 `,
 
 saveUser = `
@@ -17,7 +37,7 @@ saveUser = `
   (u: User {username: $username})
   -[:AUTHENTICATED_WITH]->
   (l: LocalAccount {hashedPassword: $hashedPassword})
-  RETURN u
+  return u
 `,
 
 signup = async (_, {input}, {session}) => {
@@ -27,20 +47,41 @@ signup = async (_, {input}, {session}) => {
   [] = [await validation.signup.validate (input, {abortEarly: false})],
   {username, email, password} = input,
 
-  /* Check if email is free */
-  {records: [_email]} = await session.run (getEmail, {email}),
-  [] = [H.assert (R.isNil (_email)) (CONST.email_taken (email))],
+  /* Check if email is registered */
+  {records: [user]} = await session.run (getUserByEmail, {email})
 
-  /* Check if username is free */
-  {records: [_username]} = await session.run (getUsername, {username}),
-  [] = [H.assert (R.isNil (_username)) (CONST.username_taken (username))],
+  H.isNotNilOrEmpty (user)
+    ? do {
+      /* Check if user has local account */
+      const userId = user.get (`u`).identity.low,
+      {records: [localAccount]} = await session.run (getLocalAccountById, {userId})
 
-  /* Hash password */
-  hashedPassword = await bcrypt.hash (password, 12),
+      H.assert (R.isNil (localAccount)) (CONST.email_taken)
 
-  /* Save user to db! */
-  {records: [user]} = await session.run (saveUser, {username, email, hashedPassword}),
-  id = user.get (`u`).identity.low,
+      /* Usernames should match too */
+      const realUsername = user.get (`u`).properties.username
+      H.assert (R.equals (username) (realUsername)) (CONST.wrong_username)
+
+      /* Hash password */
+      const hashedPassword = await bcrypt.hash (password, 12)
+      
+      /* Create local account */
+      await session.run (createLocalAccount, {username, hashedPassword})
+    }
+    : do {    
+      /* User doesn't have an account */
+      /* Check if username is free */
+      const {records: [_username]} = await session.run (getUsername, {username})
+      H.assert (R.isNil (_username)) (CONST.username_taken (username))
+
+      /* Hash password */
+      const hashedPassword = await bcrypt.hash (password, 12)
+
+      /* Save user to db! */
+      await session.run (saveUser, {username, email, hashedPassword})
+    }
+
+  const id = user.get (`u`).identity.low,
 
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */

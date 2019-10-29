@@ -1,11 +1,11 @@
 import {
-  H, React, gql, useQuery, useMutation, useQueryParam, StringParam,
+  H, React, gql, useMutation, useQueryParam, StringParam,
 } from 'common'
 
 export const
 
 AUTH_GITHUB_GQL = gql`
-  query AuthGithub ($input: AuthGithubInput!) {
+  mutation AuthGithub ($input: AuthGithubInput!) {
     authGithub (input: $input) {
       success
       message
@@ -28,14 +28,17 @@ GITHUB = C => ({match, ...rest}) => {
   const
 
   [ghCode] = useQueryParam (`code`, StringParam),
-  [] = [ghCode |> console.log ('ghCode', #)],
-  {data} = useQuery (AUTH_GITHUB_GQL, {variables: {input: {ghCode}}}),
-  [] = [data |> console.log ('data', #)],
+
+  [exec, {data}] = useMutation (AUTH_GITHUB_GQL, {variables: {input: {ghCode}}}),
   ghAccessToken = data?.authGithub?.handleGithub,
   skip = H.isNilOrEmpty (ghAccessToken),
   input = {ghAccessToken},
-  [] = [input |> console.log ('input GITHUB', #)],
+
   signupGithub = useMutation (SIGNUP_GITHUB_GQL, {skip})
+
+  H.useMount(() => {
+    exec()
+  })
 
   return (
     <C onSubmit={signupGithub} {...{input}} {...rest}/>

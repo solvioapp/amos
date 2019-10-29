@@ -1,11 +1,29 @@
 import {R,A,H,rp} from 'common'
 
-const _1 = `
-  match (gh:GhAccount {userGhId: $userGhId})
-  return gh
-`
+const matchUserGhId = `
+  match (u: User)
+  -[:AUTHENTICATED_WITH]->
+  (gh: GhAccount {userGhId: $userGhId})
+  return u
+`,
 
-const authGithub = async (_, {input: {ghCode}}, {session}) => {
+getUserByEmail = `
+  match (u: User)
+  -[:HAS_EMAIL]->
+  (e: Email {email: $email})
+  return u
+`,
+
+createGhAccount = `
+  match (u: User {username: $username})
+  with u
+  create (u)
+  -[:AUTHENTICATED_WITH]->
+  (gh:GhAccount {userGhId: $userGhId})
+  return u
+`,
+
+authGithub = async (_, {input: {ghCode}}, {session}) => {
   const
 
   qs = {
@@ -36,17 +54,53 @@ const authGithub = async (_, {input: {ghCode}}, {session}) => {
   user = await rp (getUser),
   userGhId = user?.id,
 
-  // TODO: Check if user has LocalAccount
-  {records: [ghAccount]} = await session.run (_1, {userGhId}),
-  message = H.isNotNilOrEmpty (ghAccount)
+  {records: [result]} = await session.run (matchUserGhId, {userGhId}),
+  message = H.isNotNilOrEmpty (result)
     ? do {
-      const userId = ghAccount.get (`gh`).identity.low,
+      /* User has a GhAccount */
+      const userId = result.get (`u`).identity.low,
       token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
       /* Fsr this fails unless it's named first */
       const res = [`token`, token]
       res
     }
-    : [`ghAccessToken`, ghAccessToken]
+    : do {
+      /* User doesn't have a GhAccount,
+      check if they have another account */
+      const getEmails = R.mergeRight (getUser) ({
+        'uri': `https://api.github.com/user/emails`,
+      }),
+
+      [_email] = (await rp (getEmails))
+        |> R.filter (R.propEq (`primary`) (true)) (#),
+
+      email = _email?.email
+
+      const res = H.isNotNilOrEmpty (email)
+        ? do {
+          const {records: [user]} = await session.run (getUserByEmail, {email})
+          const _res = H.isNotNilOrEmpty (user)
+            ? do {
+              /* User doesn't have GhAccount but they have another one */
+              const {username} = user.get (`u`).properties
+              await session.run (createGhAccount, {username, userGhId})
+              const userId = user.get (`u`).identity.low,
+              token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+              const __res = [`token`, token]
+              __res
+            }
+            : do {
+              /* No user with this email */
+              [`ghAccessToken`, ghAccessToken]
+            }
+          _res
+        }
+        : do {
+          [`ghAccessToken`, ghAccessToken]
+        }
+      
+      res
+    }
 
   return {message}
 }
