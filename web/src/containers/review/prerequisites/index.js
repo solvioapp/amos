@@ -6,11 +6,13 @@ import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
 import InputForm_ from '../input-form.sc'
 
-const Prerequisites = (props) => {
-  // const {
-  //   results, messages, isValid,
-  //   onSubmit, onClick, form, onChange, ...rest
-  // } = hooks.useReviewTopics (`prerequisites`) (props)
+const elements = {
+  strength: {
+
+  }
+},
+
+Prerequisites = (props) => {
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid
@@ -38,38 +40,37 @@ const Prerequisites = (props) => {
         (key,
           name = `prerequisite[${key}]`,
           res = results?.prerequisite?.[key]) => (
-          <>
-          <RadioGroup />
-          <RadioGroup />
-          <Input
-            name={name}
-            ref={form.register}
-            key={key}
-            _key={key}
-            link={false}
-            loading={loading}
-            errors={form.errors[name]}
-            results={res}
-            onClick={onClick[key]}
-            valid={valid[key]}
-            onChange={onChange[key]}
-            onEnt={onEnt}
-            {...props}
-          />
-          </>
+          <React.Fragment key={key}>
+            <RadioGroup
+              header='I:'
+              name='strength'
+              elements={elements.strength}
+            />
+            <RadioGroup
+              header='for people to be atleast:'
+              name='level'
+              elements={elements.level}
+              footer='in:'
+            />
+            <Input
+              name={name}
+              ref={form.register}
+              key={key}
+              _key={key}
+              link={false}
+              loading={loading}
+              errors={form.errors[name]}
+              results={res}
+              onClick={onClick[key]}
+              valid={valid[key]}
+              onChange={onChange[key]}
+              onEnt={onEnt}
+              {...props}
+            />
+          </React.Fragment>
         )) (times)}
     </InputForm_>
   </div>
 }
-// <Input
-//   name='prerequisites'
-//   ref={form.register}
-//   link={false}
-//   errors={form.errors}
-//   dropdown={!isValid}
-//   onChange={onChange[0]}
-//   {...{results, onClick}}
-// />
 
-// export default hooks.withReviewTopics (`prerequisites`) (Prerequisites)
 export default Prerequisites

@@ -28,12 +28,7 @@ AUTH_FACEBOOK_GQL = gql`
 FACEBOOK = C => (props) => {
   const
 
-  [_authFacebook] = useMutation (AUTH_FACEBOOK_GQL),
-
-  authFacebook = (...args) => {
-    args |> console.log ('args', #)
-    return _authFacebook (...args)
-  },
+  [authFacebook] = useMutation (AUTH_FACEBOOK_GQL),
 
   forwardProps = R.merge ({authFacebook}) (props)
 

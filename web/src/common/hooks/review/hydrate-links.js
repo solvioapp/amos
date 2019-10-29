@@ -9,7 +9,7 @@ hydrateLinks = (props) => {
   const
 
   {schema, review, form} = props,
-  
+
   [valid, setValid] = React.useState (false),
 
   onChange = async ({target: {value}}) => {
@@ -24,20 +24,6 @@ hydrateLinks = (props) => {
       setValid (true)
     }) (#))
   })
-
-  /* We are loading from store */
-  // link = form.getValue (`link`),
-  // [] = [review?.link && H.isNilOrEmpty () && setValid (true)]
-
-  // valid |> console.log ('valid later', #)
-
-  /* This doesn't work bc it fires on every change! */
-  // do {
-  //   onChange ({target: {
-  //     name: `link`,
-  //     value: review.link[0]
-  //   }})
-  // }]
 
   return R.merge ({onChange, valid}) (props)
 }

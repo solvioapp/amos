@@ -66,36 +66,8 @@ const isValid = (props) => {
 
   previousValidation = cb => (...args) => do {
     form.unregister (invalidFields)
-    // invalidFields |> console.log ('invalidFields', #)
-    // const defValues = R.repeat (``) (R.length (invalidFields))
-    //   |> R.zipObj (invalidFields) (#)
-    // defValues |> console.log ('defValues', #)
-    // form.reset (defValues)
-    // form.getValues() |> console.log ('form.getValues()', #)
     cb (...args)
   },
-
-  // validate = R.pipe (
-  //   R.pick (VALIDATE),
-  //   R.map 
-  // ) (props.onSubmit)
-  
-  // onSubmit = R.merge (validate) (dontValidate)
-
-  // onSubmit = R.converge (
-  //   R.merge,
-  //   [R.pipe , ]
-  // )
-
-  // partition = (val, key) => R.includes (VALIDATE) (key)
-
-  // part = R.partition (R.flip (R.includes) (VALIDATE)) (R.keys (props.onSubmit)),
-
-  // onSubmit = R.map (_addValidation) (props.onSubmit)
-
-  // onSubmit |> console.log ('onSubmit', #)
-
-  // valid |> console.log ('valid2', #)
 
   onSubmit = {}
 

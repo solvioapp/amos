@@ -24,7 +24,6 @@ const formOnly =
 
   /* Merge form errors with API errors */
   errors = R.merge (form.errors) (props.onSubmit[1]?.data || {}),
-  // [] = [form  |> console.log ('form form.js', #)],
 
   /* Merge default messages with errors */
   messages = H.getMessages (message (form.formState)) (errors)

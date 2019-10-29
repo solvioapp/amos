@@ -1,34 +1,33 @@
-import {H, React} from 'common'
+import {R, H, React} from 'common'
 import Top_ from './top.sc'
 import RadioGroupHead_ from './radio-group-head.sc'
 import RadioList_ from './radio-list.sc'
 
-const makeTitle = title => (
+const makeText = title => (
   title
     ? <RadioGroupHead_>{title}</RadioGroupHead_>
     : null
 )
 
-// const makeRadios = => ()
-
-const RadioGroup = ({title, name, elements, checkedValue, ...rest}) => (
-  <div {...rest}>
-    {makeTitle (title)}
+const RadioGroup = (
+  {header, footer, name, elements, ...rest}
+) => (
+  <div css={Top_} {...rest}>
+    {header && makeText (header)}
     <RadioList_>
-      {elements.map(el => (
+      {R.map (el => (
         <label key={el.value}>
           <input
             type='radio'
             name={name}
-            value={el.value}
-            defaultChecked={el.value === checkedValue}
+            register={register}
           />
           {el.text}
         </label>
-      ))}
+      )) (elements)}
     </RadioList_>
+    {footer && makeText (footer)}
   </div>
 )
 
-export {RadioGroupHead_}
-export default H.style (RadioGroup) (Top_)
+export default H.styled (RadioGroup) ``

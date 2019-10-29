@@ -8,8 +8,6 @@ const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 )
 
-hooks.FACEBOOK |> console.log ('hooks.FACEBOOK', #)
-
 const Facebook = (props) => {
   const {
     onSubmit, messages, form: {register}, errors, ...rest
