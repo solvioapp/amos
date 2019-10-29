@@ -12,7 +12,7 @@ getEmail = `
 `,
 
 saveUser = `
-  create (e: Email)
+  create (e: Email {email: $email})
   <-[:HAS_EMAIL]-
   (u: User {username: $username})
   -[:AUTHENTICATED_WITH]->
