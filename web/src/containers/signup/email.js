@@ -22,7 +22,6 @@ const Form = (props) => {
     })
     ({message})
     (props)
-  errors |> console.log ('errors signup form', #)
   return <form css={Top_} onSubmit={onSubmit} {...rest}>
     <AmosChat>
       {messages}

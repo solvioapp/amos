@@ -1,6 +1,6 @@
 import {
   React, hooks, R,
-  AmosChat, Button, Title, Input
+  AmosChat, Button, Title, Input, RadioGroup
 } from 'common'
 import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
@@ -38,6 +38,9 @@ const Prerequisites = (props) => {
         (key,
           name = `prerequisite[${key}]`,
           res = results?.prerequisite?.[key]) => (
+          <>
+          <RadioGroup />
+          <RadioGroup />
           <Input
             name={name}
             ref={form.register}
@@ -53,6 +56,7 @@ const Prerequisites = (props) => {
             onEnt={onEnt}
             {...props}
           />
+          </>
         )) (times)}
     </InputForm_>
   </div>

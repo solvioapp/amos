@@ -33,8 +33,8 @@ export default ({results, onClick, link, name, active, _key, onEnt}) => {
        * Using onMouseDown here, otherwise onBlur interferes
        * See https://stackoverflow.com/questions/44142273/react-ul-with-onblur-event-is-preventing-onclick-from-firing-on-li
       */
-      <label className='dropdown' onMouseDown={onClick} key={key}>
-        <span className={_active === key && `active`}
+      <label className='dropdown' onMouseDown={onClick}>
+        <span className={_active === key ? `active` : ``}
           onMouseEnter={() => H.neq (_active) (key) && _setActive (key)}
           onMouseLeave={() => H.neq (_active) (active) && _setActive (active)}
         >
@@ -48,9 +48,9 @@ export default ({results, onClick, link, name, active, _key, onEnt}) => {
     )
 
     return (
-      <>
+      <React.Fragment key= {`wrapper${key}`}>
         {optionallyWrap (link)}
-      </>
+      </React.Fragment>
     )
   }
 

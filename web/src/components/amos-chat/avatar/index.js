@@ -6,9 +6,12 @@ import image from './amos-frame-0.png'
 const Avatar = ({size, timeout, ...rest}) => {
   const [src, setSrc] = React.useState (gif)
 
-  setTimeout(() => {
-    R.equals (src) (gif) && setSrc (image)
-  }, timeout)
+  React.useEffect(() => {
+    const timer = setTimeout (() => {
+      R.equals (src) (gif) && setSrc (image)
+    }, timeout)
+    return () => clearTimeout(timer)
+  }, [])
 
   return <img size={size} src={src} {...rest}/>
 }

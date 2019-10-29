@@ -9,7 +9,7 @@ const authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
   const
 
   {data: {user_id: userFbId}} = await rp (
-    `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.APP_ID}|${process.env.APP_SECRET}`
+    `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`
     ) |> JSON.parse,
     
   {records: [fbAccount]} = await session.run (_1, {userFbId}),

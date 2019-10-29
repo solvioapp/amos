@@ -28,7 +28,12 @@ AUTH_FACEBOOK_GQL = gql`
 FACEBOOK = C => (props) => {
   const
 
-  [authFacebook] = useLazyQuery (AUTH_FACEBOOK_GQL),
+  [_authFacebook] = useLazyQuery (AUTH_FACEBOOK_GQL),
+
+  authFacebook = (...args) => {
+    args |> console.log ('args', #)
+    return _authFacebook (...args)
+  },
 
   forwardProps = R.merge ({authFacebook}) (props)
 

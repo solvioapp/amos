@@ -22,13 +22,8 @@ const form =
 
   fields = R.keys (form.getValues()),
 
-  // [] = [fields |> console.log ('fields', #)],
-
-  [] = [form.errors |> console.log ('form.errors form.js', #)],
-  
   /* Merge form errors with API errors */
   errors = R.merge (form.errors) (props.onSubmit[1]?.data || {}),
-  [] = [errors |> console.log ('errors form.js', #)],
   // [] = [form  |> console.log ('form form.js', #)],
 
   /* Merge default messages with errors */

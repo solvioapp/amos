@@ -39,8 +39,6 @@ const signupGithub = async (_, {input}, {session}) => {
     json: true
   },
 
-  [] = [getUser |> console.log ('getUser', #)],
-  
   userGh = await rp (getUser),
   userGhId = userGh?.id,
   
@@ -54,7 +52,6 @@ const signupGithub = async (_, {input}, {session}) => {
     'uri': `https://api.github.com/user/emails`,
   }),
 
-  [] = [getEmails |> console.log ('getEmails', #)],
   [_email] = (await rp (getEmails))
     |> R.filter (R.propEq (`primary`) (true)) (#),
 
