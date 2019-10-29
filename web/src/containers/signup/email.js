@@ -15,7 +15,11 @@ const Form = (props) => {
     onSubmit, messages, form: {register}, errors, ...rest
   } = hooks.form
   /* eslint-disable indent */
-    ({validationSchema: validation.signup, submitFocusError: false})
+    ({
+      validationSchema: validation.signup,
+      submitFocusError: false,
+      mode: `onBlur`,
+    })
     ({message})
     (props)
   errors |> console.log ('errors signup form', #)

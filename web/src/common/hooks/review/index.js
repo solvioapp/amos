@@ -28,7 +28,7 @@ formOpts = name => ({
   ...(validation[name] && {validationSchema: validation[name]}),
   defaultValues: defaultValues[name],
   submitFocusError: false,
-  // mode: `onBlur`
+  mode: `onBlur`,
 }),
 
 opts = name => ({
