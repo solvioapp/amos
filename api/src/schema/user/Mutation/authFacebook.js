@@ -46,7 +46,7 @@ authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
       const {email} = await rp (
         `https://graph.facebook.com/me/?access_token=${fbAccessToken}&fields=email`
       ) |> JSON.parse,
-      {records: [user]} = await session.run (getUserByEmail, {email}),
+      {records: [user]} = await session.run (getUserByEmail, {email})
       user
         ? do {
           /* User has another account */
