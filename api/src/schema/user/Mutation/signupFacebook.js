@@ -14,7 +14,7 @@ const _1b = `
 const attachEmail = `
   match (fb: FbAccount {userFbId: $userFbId})
   with fb
-  fb.email = $email
+  set fb.email = $email
 `
 
 
