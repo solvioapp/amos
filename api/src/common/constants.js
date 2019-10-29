@@ -10,4 +10,6 @@ email_taken = email => `We've met already! 😊 Go  ahead and log in with email 
 
 username_taken = username => `Username ${username} is already taken. 😕`,
 
-no_topic_or_prerequisite = `I need at least one topic or prerequisite..`
+no_topic_or_prerequisite = `I need at least one topic or prerequisite..`,
+
+no_local_account = `Looks like you've previously signed up like Github or Facebook, but not with password. Go ahead and sign up to create a password 🙂`

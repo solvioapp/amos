@@ -2,33 +2,34 @@ import {
   A, H, R, CONST, bcrypt, validation
 } from 'common'
 
-const _1 = `
-  match (u:User)
-  -[:AUTHENTICATED_WITH]->
-  (l:LocalAccount {email: $email}) 
-  return l.hashedPassword as hashedPassword
-`
+const getUserByEmail = `
+  match (u: User)
+  -[:HAS_EMAIL]->
+  (e: Email {email: $email}) 
+  return u
+`,
 
-const _2 = `
-  match (u:User {username: $username})
+getUserByUsername = `
+  match (u: User {username: $username})
   -[:AUTHENTICATED_WITH]->
-  (l:LocalAccount)
+  (l: LocalAccount)
   return u, l.hashedPassword as hashedPassword
-`
+`,
 
-const login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
+login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   const 
   
   /* Is valid email? */
   isEmail = await validation.email.isValid (usernameOrEmail),
   
-  /* Get cypher args */
+  /* Get query args */
   args = isEmail 
-    && [_1, {email: {usernameOrEmail}}]
-    || await (async () => {
+    ? [getUserByEmail, {email: {usernameOrEmail}}]
+    : do {
       await validation.username.validate (usernameOrEmail, {abortEarly: false})
-      return [_2, {username: usernameOrEmail}]
-    })(),
+      const res = [getUserByUsername, {username: usernameOrEmail}]
+      res
+    },
 
   /* Don't validate password */
 
@@ -38,8 +39,18 @@ const login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   /* Check if user exists */
   [] = [H.assert (H.isNotNil (user)) (CONST.cant_find_user (isEmail) (usernameOrEmail))],
 
+  /* Check if user has local account */
+  _user = isEmail && do {
+    const username = user.get (`u`).properties.username,
+    {records: [_user]} = session.run (getUserByUsername, {username})
+    H.assert (H.isNotNil (_user.get (`hashedPassword`))) (CONST.no_local_account)
+    _user
+  },
+
+  hashedPassword = (isEmail ? _user : user).get (`hashedPassword`),
+
   /* Check if password is correct */
-  correctPassword = await bcrypt.compare (password, user.get (`hashedPassword`)),
+  correctPassword = await bcrypt.compare (password, hashedPassword),
   [] = [H.assert (correctPassword) (CONST.incorrect_password)],
 
   id = user.get (`u`).identity.low,

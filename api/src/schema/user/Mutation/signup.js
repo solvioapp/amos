@@ -1,21 +1,26 @@
 import {A,H,R,bcrypt,CONST,validation} from 'common'
 
-const _1a = `
-  MATCH (u:User) WHERE u.username = $username RETURN u
-`
+const getUsername = `
+  match (u: User)
+  where u.username = $username
+  return u
+`,
 
-const _1b = `
-  MATCH (la:LocalAccount {email: $email})
-  RETURN la
-`
-const _2 = `
-  CREATE (u:User {username: $username})
+getEmail = `
+  match (e: Email {email: $email})
+  return e
+`,
+
+saveUser = `
+  create (e: Email)
+  <-[:HAS_EMAIL]-
+  (u: User {username: $username})
   -[:AUTHENTICATED_WITH]->
-  (l:LocalAccount {hashedPassword: $hashedPassword, email: $email})
+  (l: LocalAccount {hashedPassword: $hashedPassword)
   RETURN u
-`
+`,
 
-const signup = async (_, {input}, {session}) => {
+signup = async (_, {input}, {session}) => {
   const
 
   /* Validation */
@@ -23,18 +28,18 @@ const signup = async (_, {input}, {session}) => {
   {username, email, password} = input,
 
   /* Check if email is free */
-  {records: emails} = await session.run (_1b, {email}),
-  [] = [H.assert (R.isEmpty (emails)) (CONST.email_taken (email))],
+  {records: [_email]} = await session.run (getEmail, {email}),
+  [] = [H.assert (R.isNil (_email)) (CONST.email_taken (email))],
 
   /* Check if username is free */
-  {records: usernames} = await session.run (_1a, {username}),
-  [] = [H.assert (R.isEmpty (usernames)) (CONST.username_taken (username))],
+  {records: [_username]} = await session.run (getUsername, {username}),
+  [] = [H.assert (R.isNil (_username)) (CONST.username_taken (username))],
 
   /* Hash password */
   hashedPassword = await bcrypt.hash (password, 12),
 
   /* Save user to db! */
-  {records: [user]} = await session.run (_2, {username, email, hashedPassword}),
+  {records: [user]} = await session.run (saveUser, {username, email, hashedPassword}),
   id = user.get (`u`).identity.low,
 
   /* Grant jwt */

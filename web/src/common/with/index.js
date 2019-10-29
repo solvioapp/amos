@@ -1,4 +1,4 @@
-import {R, H, React, gql, useQuery, useLazyQuery} from 'common'
+import {R, H, React, gql, useQuery, useMutation} from 'common'
 
 export const
 
@@ -16,7 +16,7 @@ GET_AUTH = C => ({...rest}) => {
 },
 
 AUTH_FACEBOOK_GQL = gql`
-  query AuthFacebook ($input: AuthFacebookInput!) {
+  mutation AuthFacebook ($input: AuthFacebookInput!) {
     authFacebook (input: $input) {
       success
       message
@@ -28,7 +28,7 @@ AUTH_FACEBOOK_GQL = gql`
 FACEBOOK = C => (props) => {
   const
 
-  [_authFacebook] = useLazyQuery (AUTH_FACEBOOK_GQL),
+  [_authFacebook] = useMutation (AUTH_FACEBOOK_GQL),
 
   authFacebook = (...args) => {
     args |> console.log ('args', #)

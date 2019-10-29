@@ -62,8 +62,6 @@ input AuthGithubInput {
 
 extend type Query {
   login (input: LoginInput!): Response!
-  authFacebook (input: AuthFacebookInput!): Response!
-  authGithub (input: AuthGithubInput!): Response!
   # currentUser (name: String): String
   # users: [User!] @hasRole (roles: [ADMIN])
   #   @cypher(
@@ -92,6 +90,8 @@ extend type Mutation {
   signup (input: SignupInput!): Response!
   signupFacebook (input: SignupFacebookInput!): Response!
   signupGithub (input: SignupGithubInput!): Response!
+  authFacebook (input: AuthFacebookInput!): Response!
+  authGithub (input: AuthGithubInput!): Response!
   # updatePassword (email: String!, password: String!, _new: String!): String!
   # selfAttest (topic: String!): Boolean!
 }
