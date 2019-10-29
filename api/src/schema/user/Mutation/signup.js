@@ -16,7 +16,7 @@ saveUser = `
   <-[:HAS_EMAIL]-
   (u: User {username: $username})
   -[:AUTHENTICATED_WITH]->
-  (l: LocalAccount {hashedPassword: $hashedPassword)
+  (l: LocalAccount {hashedPassword: $hashedPassword})
   RETURN u
 `,
 
