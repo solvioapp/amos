@@ -7,7 +7,11 @@ GET_REVIEW_CLIENT_GQL = gql`
     review @client {
       link
       topic
-      prerequisite
+      prerequisite {
+        strength
+        level
+        topic
+      }
     }
   }
 `,

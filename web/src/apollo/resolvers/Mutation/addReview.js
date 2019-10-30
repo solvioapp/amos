@@ -6,7 +6,11 @@ const addReview = (_, {input}, {cache}) => {
       review @client {
         link
         topic
-        prerequisite
+        prerequisite {
+          strength
+          level
+          topic
+        }
       }
     }
   `
@@ -14,7 +18,8 @@ const addReview = (_, {input}, {cache}) => {
   // TODO: Hacky
   let previous
   try {
-    previous = cache.readQuery ({query: GET_REVIEW_CLIENT_GQL, returnPartialData: true})
+    const {review} = cache.readQuery ({query: GET_REVIEW_CLIENT_GQL, returnPartialData: true})
+    previous = review
   }
   catch (e) {
     previous = {}
@@ -22,21 +27,25 @@ const addReview = (_, {input}, {cache}) => {
   const name = R.keys (input) [0]
   let _input
   if (name === `prerequisite`) {
+    input |> console.log ('addReview input', #)
     const prerequisite = (
       /* Filter invalid fields */
       H.reduce ((acc, obj, key) => (
         /* Check if all fields are valid */
-        H.reduce ((_acc, field) => _acc && H.isNotNilOrEmpty (field)) (true) (obj)
-          ? R.append ({__typename: `prerequisite[${key}]`, ...obj}) (acc)
+        H.reduce ((_acc, field) => _acc && H.isNotNilOrEmpty (field)) (true) (R.values (obj))
+          ? R.append ({__typename: `Prerequisite[${key}]`, ...obj}) (acc)
           : acc
       )) ([]) (input[name])
     )
+    prerequisite |> console.log ('addReview prerequisite', #)
     _input = {prerequisite}
   }
   else {
     _input = {[name]: R.filter (H.isNotNilOrEmpty) (input[name])}
   }
-  const review = {__typename: `review`, ..._input, ...previous}
+  previous |> console.log ('addReview previous', #)
+  const review = {__typename: `Review`, ...previous, ..._input}
+  review |> console.log ('addReview review', #)
   cache.writeData ({data: {review}})
 }
 

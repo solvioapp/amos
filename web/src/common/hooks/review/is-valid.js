@@ -11,19 +11,30 @@ const isValid = (props) => {
 
   {results, loading, review, name, form} = props,
   [valid, setValid] = React.useState ([]),
-  [checkboxesValid, setCheckboxesValid] = React.useState ([]),
+  [checkboxesValid, setCheckboxesValid] = React.useState ([])
 
   /*
     Set valid on hydration
     Here we're assuming that anything that was in review was in store
     and anything that is in store is valid
   */
-  [] = [review?.[name]
-    && (R.length (review[name]) > R.length (valid))
-    && (setValid (R.repeat (true) (R.length (review[name]))))],
-
+  H.useMount (() => {
+    name === `prerequisite`
+      ? do {
+        review?.[name]
+          && (R.length (review[name]) > R.length (valid)) && do {
+            setValid (R.repeat (true) (R.length (review[name])))
+            setCheckboxesValid (R.repeat (true) (R.length (review[name])))
+          }
+      }
+      : do {
+        review?.[name]
+          && (R.length (review[name]) > R.length (valid))
+          && setValid (R.repeat (true) (R.length (review[name])))
+      }
+  })
   /* eslint-disable no-shadow */
-  setOneValid = key => isValid => {
+  const setOneValid = key => isValid => {
     setValid (H.update (key) (isValid) (valid))
   },
 

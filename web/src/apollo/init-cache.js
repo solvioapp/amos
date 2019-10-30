@@ -5,7 +5,15 @@ const initCache = client => {
 
   /* Default data */
   {cache} = client,
-  defaultData = {isAuthenticated: false},
+  defaultData = {
+    isAuthenticated: false,
+    review: {
+      __typename: `Review`,
+      link: null,
+      topic: [],
+      // prerequisite: [{__typename: `Prerequisite`, strength: null, level: null, topic: null}]
+    }
+  },
   [] = [client.onResetStore = () => cache.writeData ({data: defaultData})],
 
   /* Initial Data */

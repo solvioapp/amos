@@ -1,5 +1,5 @@
 import {
-  React, hooks, R,
+  React, hooks, R, useState, H, useCallback,
   AmosChat, Button, Title, Input, RadioGroup, Hr
 } from 'common'
 import Buttons from '../buttons.sc'
@@ -21,10 +21,18 @@ const elements = {
 },
 
 Prerequisites = (props) => {
+  const [checked, setChecked] = useState ([])
+  const setOneChecked = useCallback ((key) => val => {
+    key |> console.log ('setOneChecked key', #)
+    val |> console.log ('setOneChecked val', #)
+    setChecked (H.update (key) (val))
+  })
+  checked |> console.log ('setOneChecked checked', #)
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid, checkboxesValid
-  } = hooks.useReviewTopics (`prerequisite`) (props)
+  } = hooks.useReviewTopics (`prerequisite`) ({...props, setOneChecked})
+
 
   return <div css={Top_} {...props}>
     <AmosChat>
@@ -52,15 +60,21 @@ Prerequisites = (props) => {
               header='I:'
               name={`prerequisite[${key}].strength`}
               elements={elements.strength}
+              _key={key}
               onClick={(e, checked) => onClick [3 * key] (e, key, `strength`, checked)}
+              checked={checked?.[3 * key]}
+              setChecked={setOneChecked (3 * key)}
               {...{form}}
             />
             <RadioGroup
               header='for people to be atleast:'
               name={`prerequisite[${key}].level`}
               elements={elements.level}
+              _key={key}
               onClick={(e, checked) => onClick [3 * key + 1] (e, key, `level`, checked)}
               footer='in:'
+              checked={checked?.[3 * key + 1]}
+              setChecked={setOneChecked (3 * key + 1)}
               {...{form}}
             />
             <Input
