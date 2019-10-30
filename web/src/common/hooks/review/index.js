@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import {R, CONST, validation} from 'common'
-import {multiForm} from '../form'
+import {multiForm} from '..'
 import times from './times'
 import onClick from './on-click'
 import isValid from './is-valid'
@@ -18,10 +18,16 @@ message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 ),
 
+/* We need default values
+so that at first render everything works :-) */
 defaultValues = {
   link: {link: ``},
   topic: {topic: []},
-  prerequisite: {prerequisite: []},
+  prerequisite: {
+    'prerequisite[0].strength': null,
+    'prerequisite[0].level': null,
+    'prerequisite[0].topic': null,
+  },
 },
 
 formOpts = name => ({

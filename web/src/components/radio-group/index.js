@@ -11,15 +11,18 @@ const makeText = title => (
 )
 
 const RadioGroup = (
-  {header, footer, name, elements, form, ...rest}
+  {header, footer, _key, name, elements, form, onClick, ...rest}
 ) => {
-
   const [checked, setChecked] = useState (null),
 
-  onClick = useCallback ((key) => () => {
+  /* eslint-disable no-shadow */
+  _onClick = useCallback ((key) => (e) => {
     checked === key
       ? setChecked (null)
-      : setChecked (key)
+      : do {
+        setChecked (key)
+        onClick (e)
+      }
   }, [checked])
 
   return <div css={Top_} {...rest}>
@@ -31,7 +34,7 @@ const RadioGroup = (
             type='radio'
             value={key}
             checked={checked === key}
-            onClick={onClick (key)}
+            onClick={_onClick (key)}
             ref={form.register}
             {...{name, form}}
           />
