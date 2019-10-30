@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 import {R, CONST, validation} from 'common'
-import {multiForm} from '..'
+import {multiForm} from '../form'
 import times from './times'
 import onClick from './on-click'
 import isValid from './is-valid'
