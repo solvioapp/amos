@@ -9,8 +9,9 @@ export const Dropdown_ = styled.div`
     z-index: 2;
     width: 350px;
     background-color: white;
-    border: 1px solid #dbdbdb;
-
+    border-radius: 12px;
+    border: 1.3px solid black;
+    margin-top: 10px;
     /*  transition: all 1s ease-out;*/
   }
 
@@ -19,7 +20,7 @@ export const Dropdown_ = styled.div`
     display: block;
     width: 100%;
     height: 100%;
-    padding: 1.2em 0.85em;
+    padding: 1.2em 0.45em;
     background: white;
     /* border-top: 1px solid rgba(0, 0, 0, 0.3); */
     cursor: pointer;
@@ -32,7 +33,7 @@ export const Dropdown_ = styled.div`
 
   a {
     text-decoration: none;
-    color: #777 !important;
+    color: inherit !important;
   }
 
   /* .show {display: block;} */

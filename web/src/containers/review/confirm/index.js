@@ -27,7 +27,6 @@ Confirm = (props) => {
 
   const submitReview = () => {
     const {link, topic, prerequisite} = review
-    review |> console.log ('review', #)
     const _review = {
       links: link,
       topics: H.isNotNilOrEmpty (topic) && topic,
