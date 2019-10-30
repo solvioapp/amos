@@ -11,26 +11,19 @@ onClick = (props) => {
   {form, fields, setOneValid} = props,
 
   addOnClick = (field, key) => (e, _key) => {
-    H.isNotNilOrEmpty (e.target.checked)
+    /* It's a dropdown */
+    const {currentTarget: {textContent: t}} = e
+    form.setValue (field, t)
+    H.isNotNilOrEmpty (_key)
       ? do {
-        /* It's a checkbox */
-
+        /* it's a prerequisite */
+        const {prerequisite: {strength, level}} = form.getValues ({nest: true})
+        H.isNotNilOrEmpty (strength) && H.isNotNilOrEmpty (level)
+          && setOneValid (_key) (true)
       }
       : do {
-        /* It's a dropdown */
-        const {currentTarget: {textContent: t}} = e
-        form.setValue (field, t)
-        H.isNotNilOrEmpty (_key)
-          ? do {
-            /* it's a prerequisite */
-            const {prerequisite: {strength, level}} = form.getValues ({nest: true})
-            H.isNotNilOrEmpty (strength) && H.isNotNilOrEmpty (level)
-              && setOneValid (_key) (true)
-          }
-          : do {
-            /* it's a topic */
-            setOneValid (key) (true)
-          }
+        /* it's a topic */
+        setOneValid (key) (true)
       }
   },
 

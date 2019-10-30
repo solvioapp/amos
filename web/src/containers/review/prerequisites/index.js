@@ -52,16 +52,12 @@ Prerequisites = (props) => {
               header='I:'
               name={`prerequisite[${key}].strength`}
               elements={elements.strength}
-              // onClick={e => [3 * key] (e, )}
-              // onClick={e => console.log(`INPUT pr`, e)}
-              // onClick={console.l}
               {...{form}}
             />
             <RadioGroup
               header='for people to be atleast:'
               name={`prerequisite[${key}].level`}
               elements={elements.level}
-              // onClick={e => onClick [3 * key + 1]}
               footer='in:'
               {...{form}}
             />
