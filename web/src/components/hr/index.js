@@ -1,8 +1,9 @@
 import {H, React} from 'common'
 
 const Hr = H.styled.hr`
-  border: 40px solid red;
-  width: 100%;
+  margin: 20px auto;
+  border: 3.5px solid #0066FF;
+  width: 175px;
   /* height: 20px; */
 `
 
