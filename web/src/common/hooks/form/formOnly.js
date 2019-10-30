@@ -22,6 +22,8 @@ const formOnly =
 
   fields = R.keys (form.getValues()),
 
+  [] = [form.getValues() |> console.log ('form.getValues()', #)],
+
   /* Merge form errors with API errors */
   errors = R.merge (form.errors) (props.onSubmit[1]?.data || {}),
 

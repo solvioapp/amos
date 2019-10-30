@@ -7,9 +7,17 @@ import Top_ from '../top.sc'
 import InputForm_ from '../input-form.sc'
 
 const elements = {
-  strength: {
-
-  }
+  strength: [
+    <span>think it would be <em>helpful</em></span>,
+    <span>would <em>recommend</em></span>,
+    <span>think it's <em>necessary</em></span>
+  ],
+  level: [
+    `beginner`,
+    `intermediate`,
+    `advanced`,
+    `domain expert`
+  ]
 },
 
 Prerequisites = (props) => {
@@ -38,22 +46,23 @@ Prerequisites = (props) => {
       </Buttons>
       {R.times (
         (key,
-          name = `prerequisite[${key}]`,
           res = results?.prerequisite?.[key]) => (
           <React.Fragment key={key}>
             <RadioGroup
               header='I:'
-              name='strength'
+              name={`prerequisite[${key}].strength`}
               elements={elements.strength}
+              {...{form}}
             />
             <RadioGroup
               header='for people to be atleast:'
-              name='level'
+              name={`prerequisite[${key}].level`}
               elements={elements.level}
               footer='in:'
+              {...{form}}
             />
             <Input
-              name={name}
+              name={`prerequisite[${key}].topic`}
               ref={form.register}
               key={key}
               _key={key}

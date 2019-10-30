@@ -21,7 +21,7 @@ loadReview = (props) => {
   const
 
   onCompleted = ({review}) => {
-    review |> console.log ('review loadReview', #)
+    /* Jump to beginning if links don't exist */
     review?.link || props.match.url === `/review/links` || H.navto (`/review`) ()
   },
 

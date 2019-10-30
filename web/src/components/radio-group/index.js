@@ -10,24 +10,26 @@ const makeText = title => (
 )
 
 const RadioGroup = (
-  {header, footer, name, elements, ...rest}
-) => (
-  <div css={Top_} {...rest}>
+  {header, footer, name, elements, form, ...rest}
+) => {
+
+  return <div css={Top_} {...rest}>
     {header && makeText (header)}
     <RadioList_>
-      {R.map (el => (
-        <label key={el.value}>
+      {H.map ((element, key) => (
+        <label key={key}>
           <input
             type='radio'
-            name={name}
-            register={register}
+            value={key}
+            ref={form.register}
+            {...{name}}
           />
-          {el.text}
+          {element}
         </label>
       )) (elements)}
     </RadioList_>
     {footer && makeText (footer)}
   </div>
-)
+}
 
 export default H.styled (RadioGroup) ``
