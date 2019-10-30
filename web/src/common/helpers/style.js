@@ -1,4 +1,4 @@
-import {R, React, styled} from 'common'
+import {R, React, styled, css} from 'common'
 
 export const
 
@@ -20,4 +20,4 @@ styleAndForwardRef = C => css => (
   style (React.forwardRef (C)) (css)
 )
 
-export {styled}
+export {styled, css}

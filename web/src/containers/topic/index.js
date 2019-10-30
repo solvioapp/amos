@@ -1,7 +1,8 @@
 import {
   React, gql, useQuery, R, H, Link,
-  Input
+  Input, Icon
 } from 'common'
+import top from './top.sc'
 
 const QUERY_TOPIC = gql`
   query GetResources ($name: String!) {
@@ -35,8 +36,8 @@ const Topic = ({match: {params: {name}}}) => {
   data |> console.log('data', #)
 
   const renderResource = (res, key) => (
-    <div style={{width: `500px`}}>
-      {res.type && <div>{res.type}</div>}
+    <div css={top}>
+      {res.type && <div>TYPE: <Icon src='book' book/></div>}
       {res.name && <div>{res.name}</div>}
       {res.link && <div>{res.link}</div>}
       {res.title && <div>{res.title}</div>}
@@ -52,7 +53,6 @@ const Topic = ({match: {params: {name}}}) => {
       {res.typeSpecific_datePublished && <div>{res.typeSpecific_datePublished}</div>}
       {res.typeSpecific_isbn && <div>{res.typeSpecific_isbn}</div>}
       {res.typeSpecific_dewey && <div>{res.typeSpecific_dewey}</div>}
-      <hr/>
     </div>
   )
 
