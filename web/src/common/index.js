@@ -2,7 +2,7 @@
 import * as R from 'ramda'
 import * as yup from 'yup'
 import styled, {css} from 'styled-components'
-import React, {useState, useContext, useEffect, useMemo, useRef, useCallback} from 'react'
+import React, {useState, useContext, useEffect, useMemo, useRef, forwardRef, useCallback} from 'react'
 import {Link, NavLink, Switch, Redirect, Router, Route, withRouter} from 'react-router-dom'
 import useForm, {FormContext, useFormContext} from 'react-hook-form'
 import {Cookies, CookiesProvider, useCookies} from 'react-cookie'
@@ -39,6 +39,7 @@ import NavMenu from 'components/nav-menu'
 import NotFound from 'components/not-found'
 import RadioGroup from 'components/radio-group'
 import Title from 'components/title'
+import Hr from 'components/hr'
 
 /* Special */
 import Panel from 'components/panel/top.sc'
@@ -59,7 +60,7 @@ export {
   R,
   yup,
   styled, css,
-  React, useState, useMemo, useRef, useCallback, useContext, useEffect, // React
+  React, useState, useMemo, useRef, forwardRef, useCallback, useContext, useEffect, // React
   Link, NavLink, Switch, Router, Redirect, Route, withRouter, // React Router DOM
   useForm, FormContext, useFormContext,
   // myUseForm,
@@ -90,6 +91,7 @@ export {
   NotFound,
   RadioGroup,
   Title,
+  Hr,
   Panel,
   Button,
   AmosChat,

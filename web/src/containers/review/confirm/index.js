@@ -30,8 +30,7 @@ Confirm = (props) => {
     const _review = {
       links: link,
       topics: H.isNotNilOrEmpty (topic) && topic,
-      prerequisites: H.isNotNilOrEmpty (prerequisite)
-        && [{level: 0, strength: 0, topic: review.prerequisite[0]}]
+      prerequisites: H.isNotNilOrEmpty (prerequisite) && prerequisite,
     }
       |> R.filter (R.identity) (#)
     exec ({variables: {input: {..._review}}})

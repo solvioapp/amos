@@ -1,6 +1,6 @@
 import {
   React, hooks, R,
-  AmosChat, Button, Title, Input, RadioGroup
+  AmosChat, Button, Title, Input, RadioGroup, Hr
 } from 'common'
 import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
@@ -52,12 +52,16 @@ Prerequisites = (props) => {
               header='I:'
               name={`prerequisite[${key}].strength`}
               elements={elements.strength}
+              // onClick={e => [3 * key] (e, )}
+              // onClick={e => console.log(`INPUT pr`, e)}
+              // onClick={console.l}
               {...{form}}
             />
             <RadioGroup
               header='for people to be atleast:'
               name={`prerequisite[${key}].level`}
               elements={elements.level}
+              // onClick={e => onClick [3 * key + 1]}
               footer='in:'
               {...{form}}
             />
@@ -68,14 +72,15 @@ Prerequisites = (props) => {
               _key={key}
               link={false}
               loading={loading}
-              errors={form.errors[name]}
+              errors={form.errors [name]}
               results={res}
-              onClick={onClick[key]}
+              onClick={e => onClick [3 * key + 2] (e, key)}
               valid={valid[key]}
               onChange={onChange[key]}
               onEnt={onEnt}
               {...props}
             />
+            <Hr/>
           </React.Fragment>
         )) (times)}
     </InputForm_>

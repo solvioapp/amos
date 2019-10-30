@@ -11,7 +11,6 @@ const addReview = (_, {input}, {cache}) => {
     }
   `
 
-  input |> console.log ('input addReview', #)
   // TODO: Hacky
   let previous
   try {
@@ -27,7 +26,7 @@ const addReview = (_, {input}, {cache}) => {
       /* Filter invalid fields */
       H.reduce ((acc, obj, key) => (
         /* Check if all fields are valid */
-        H.reduce ((acc, field) => acc && H.isNotNilOrEmpty (field)) (true) (obj)
+        H.reduce ((_acc, field) => _acc && H.isNotNilOrEmpty (field)) (true) (obj)
           ? R.append ({__typename: `prerequisite[${key}]`, ...obj}) (acc)
           : acc
       )) ([]) (input[name])
@@ -38,7 +37,6 @@ const addReview = (_, {input}, {cache}) => {
     _input = {[name]: R.filter (H.isNotNilOrEmpty) (input[name])}
   }
   const review = {__typename: `review`, ..._input, ...previous}
-  review |> console.log ('review addReview', #)
   cache.writeData ({data: {review}})
 }
 
