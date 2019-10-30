@@ -38,28 +38,38 @@ const Topic = ({match: {params: {name}}}) => {
   const renderResource = (res, key) => (
     <div css={top}>
       {res.type && <div>TYPE: <Icon src='book' book/></div>}
-      {res.name && <div>{res.name}</div>}
-      {res.link && <div>{res.link}</div>}
-      {res.title && <div>{res.title}</div>}
-      {res.url_main && <a href={res.url_main}>Main</a>}
-      {res.url_goodreads && <a href={res.url_goodreads}>Goodreads</a>}
+      {res.name || res.title && (
+        <a href={res.link || res.url_main || res.url_goodreads}>
+          {res.name || res.title}
+        </a>
+      )}
+      {/* {res.url_main && <a href={res.url_main}>Main</a>} */}
+      {/* {res.url_goodreads && <a href={res.url_goodreads}>Goodreads</a>} */}
       {res.url_download_pdf && <a href={res.url_download_pdf}>PDF</a>}
       {res.url_download_epub && <a href={res.url_download_epub}>EPUB</a>}
       {res.url_download_mobi && <a href={res.url_download_mobi}>MOBI</a>}
-      {res.typeSpecific_authors && <div>{res.typeSpecific_authors}</div>}
-      {res.typeSpecific_goodreadsAvgRating && <div>{res.typeSpecific_goodreadsAvgRating}</div>}
-      {res.typeSpecific_goodreadsNoRatings && <div>{res.typeSpecific_goodreadsNoRatings}</div>}
-      {res.typeSpecific_pages && <div>{res.typeSpecific_pages}</div>}
-      {res.typeSpecific_datePublished && <div>{res.typeSpecific_datePublished}</div>}
+      {/* {res.typeSpecific_authors && <div>{res.typeSpecific_authors}</div>} */}
+      {/* {res.typeSpecific_goodreadsAvgRating && <div>{res.typeSpecific_goodreadsAvgRating}</div>} */}
+      {/* {res.typeSpecific_goodreadsNoRatings && <div>noRatings: {res.typeSpecific_goodreadsNoRatings}</div>} */}
+      {/* {res.typeSpecific_pages && <div>{res.typeSpecific_pages} p.</div>} */}
+      {/* {res.typeSpecific_datePublished && <div>{res.typeSpecific_datePublished}</div>}
       {res.typeSpecific_isbn && <div>{res.typeSpecific_isbn}</div>}
-      {res.typeSpecific_dewey && <div>{res.typeSpecific_dewey}</div>}
+      {res.typeSpecific_dewey && <div>{res.typeSpecific_dewey}</div>} */}
     </div>
   )
 
   return (
     <div>
       {H.isNotNilOrEmpty (data)
-        ? H.map (renderResource) (data.getTopResourcesByName)
+        ? H.map (renderResource) (R.sort ((res1, res2) => (
+          res1.title
+            ? -1
+            : res1.typeSpecific_goodreadsNoRatings
+              ? res2.typeSpecific_goodreadsNoRatings
+                ? res2.typeSpecific_goodreadsNoRatings - res1.typeSpecific_goodreadsNoRatings
+                : 1
+              : -1
+        )) (data.getTopResourcesByName))
         : null
       }
     </div>
