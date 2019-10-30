@@ -8,21 +8,35 @@ const
 onClick = (props) => {
   const
 
-  {form, fields, setOneValid} = props,
+  {form, fields, setOneValid,
+    setCheckboxesOneValid,
+  } = props,
 
-  addOnClick = (field, key) => (e, _key, name) => {
+  /* key is unnested */
+  /* _key is nested */
+  addOnClick = (field, key) => (e, _key, name, checked) => {
     const {currentTarget: {textContent: t}} = e
     H.isNilOrEmpty (t)
       ? do {
         /* It's a checkbox */
-        name === `strength`
+        checked
           ? do {
-            const {prerequisite: {level}} = form.getValues ({nest: true})
-            H.isNotNilOrEmpty (level) && setOneValid (_key) (true)
+            /* It is unchecked */
+            setCheckboxesOneValid (_key) (false)
           }
           : do {
-            const {prerequisite: {strength}} = form.getValues ({nest: true})
-            H.isNotNilOrEmpty (strength) && setOneValid (_key) (true)
+            /* It is checked */
+            name === `strength`
+              ? do {
+                const {prerequisite} = form.getValues ({nest: true})
+                const {level} = prerequisite[_key]
+                H.isNotNilOrEmpty (level) && setCheckboxesOneValid (_key) (true)
+              }
+              : do {
+                const {prerequisite} = form.getValues ({nest: true})
+                const {strength} = prerequisite[_key]
+                H.isNotNilOrEmpty (strength) && setCheckboxesOneValid (_key) (true)
+              }
           }
       }
       : do {
@@ -31,9 +45,7 @@ onClick = (props) => {
         H.isNotNilOrEmpty (_key)
           ? do {
             /* it's a prerequisite */
-            const {prerequisite: {strength, level}} = form.getValues ({nest: true})
-            H.isNotNilOrEmpty (strength) && H.isNotNilOrEmpty (level)
-              && setOneValid (_key) (true)
+            setOneValid (_key) (true)
           }
           : do {
             /* it's a topic */

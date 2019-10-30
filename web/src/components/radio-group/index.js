@@ -18,10 +18,13 @@ const RadioGroup = (
   /* eslint-disable no-shadow */
   _onClick = useCallback ((key) => (e) => {
     checked === key
-      ? setChecked (null)
+      ? do {
+        setChecked (null)
+        onClick (e, true)
+      } 
       : do {
         setChecked (key)
-        onClick (e)
+        onClick (e, false)
       }
   }, [checked])
 

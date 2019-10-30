@@ -23,7 +23,7 @@ const elements = {
 Prerequisites = (props) => {
   const {
     results, messages, times, onChange, loading,
-    onSubmit, onClick, form, onEnt, valid
+    onSubmit, onClick, form, onEnt, valid, checkboxesValid
   } = hooks.useReviewTopics (`prerequisite`) (props)
 
   return <div css={Top_} {...props}>
@@ -52,14 +52,14 @@ Prerequisites = (props) => {
               header='I:'
               name={`prerequisite[${key}].strength`}
               elements={elements.strength}
-              onClick={e => onClick [3 * key] (e, key, `strength`)}
+              onClick={(e, checked) => onClick [3 * key] (e, key, `strength`, checked)}
               {...{form}}
             />
             <RadioGroup
               header='for people to be atleast:'
               name={`prerequisite[${key}].level`}
               elements={elements.level}
-              onClick={e => onClick [3 * key + 1] (e, key, `level`)}
+              onClick={(e, checked) => onClick [3 * key + 1] (e, key, `level`, checked)}
               footer='in:'
               {...{form}}
             />
@@ -73,7 +73,7 @@ Prerequisites = (props) => {
               errors={form.errors [name]}
               results={res}
               onClick={e => onClick [3 * key + 2] (e, key)}
-              valid={valid[key]}
+              valid={valid[key] && checkboxesValid[key]}
               onChange={onChange[key]}
               onEnt={onEnt}
               {...props}

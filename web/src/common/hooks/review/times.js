@@ -5,7 +5,7 @@ const times = (props) => {
 
   /* eslint-disable no-shadow */
   [times, setTimes] = React.useState (1),
-  {valid, review, name} = props,
+  {valid, checkboxesValid, review, name} = props,
 
   /* Set times on hydration */
   [] = [review?.[name]
@@ -13,7 +13,12 @@ const times = (props) => {
     && (R.length (review[name]) |> setTimes)],
 
   /* Find last valid index */
-  lastIndex = R.findLastIndex (R.identity) (valid),
+  lastIndex = name === `prerequisite`
+    ? do {
+      const valids = R.zip (valid, checkboxesValid)
+      R.findLastIndex (R.reduce ((acc, val) => acc && val) (true)) (valids)
+    }
+    : R.findLastIndex (R.identity) (valid),
 
   /* times should always be lastIndex + 2 */
   [] = [lastIndex + 2 > times && setTimes (lastIndex + 2)]

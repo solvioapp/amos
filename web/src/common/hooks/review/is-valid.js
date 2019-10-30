@@ -11,6 +11,7 @@ const isValid = (props) => {
 
   {results, loading, review, name, form} = props,
   [valid, setValid] = React.useState ([]),
+  [checkboxesValid, setCheckboxesValid] = React.useState ([]),
 
   /*
     Set valid on hydration
@@ -24,6 +25,10 @@ const isValid = (props) => {
   /* eslint-disable no-shadow */
   setOneValid = key => isValid => {
     setValid (H.update (key) (isValid) (valid))
+  },
+
+  setCheckboxesOneValid = key => isValid => {
+    setCheckboxesValid (H.update (key) (isValid) (checkboxesValid))
   },
 
   createOnChange = (fn, key) => (e) => {
@@ -43,7 +48,7 @@ const isValid = (props) => {
 
   // TODO: generalize
   getInvalidField = (acc, val, i) => {
-    /* Empty is considered vallid */
+    /* Empty is considered valid */
     const test = !val && H.isNotNilOrEmpty (fields[i])
     return test ? R.append (`${name}[${i}]`) (acc) : acc
   },
@@ -76,7 +81,11 @@ const isValid = (props) => {
   onSubmit.finish = addValidation (props.onSubmit.finish)
 
   /* Override valid, onChange and onSubmit */
-  return R.mergeAll ([{setOneValid, setValid}, props, {valid, onChange, onSubmit}])
+  return R.mergeAll ([
+    {setOneValid, checkboxesValid, setCheckboxesOneValid},
+    props,
+    {valid, onChange, onSubmit}
+  ])
 }
 
 export default isValid
