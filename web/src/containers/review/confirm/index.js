@@ -27,10 +27,17 @@ Confirm = (props) => {
 
   const submitReview = () => {
     const {link, topic, prerequisite} = review
+    review |> console.log ('review', #)
     const _review = {
       links: link,
       topics: H.isNotNilOrEmpty (topic) && topic,
-      prerequisites: H.isNotNilOrEmpty (prerequisite) && prerequisite,
+      prerequisites: H.isNotNilOrEmpty (prerequisite) && do {
+        R.map (p => ({
+          strength: parseInt (p.strength, 10),
+          level: parseInt (p.level, 10),
+          topic: p.topic
+        })) (prerequisite)
+      }
     }
       |> R.filter (R.identity) (#)
     exec ({variables: {input: {..._review}}})
