@@ -29,7 +29,11 @@ const common = {
         loader: `svg-sprite-loader`,
         options: {extract: true},
       }, `svgo-loader`]
-    },
+    }, {
+      /* We need this for React bootstrap */
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader']
+    }
     ]
   },
   output: {

@@ -6,6 +6,9 @@ const top = H.css`
   border: 1.3px solid black;
   padding: 10px;
   margin: 48px auto;
+  /* text-align: justify; */
+  word-break: break-word;
+  hyphens: auto;
 `
 
 export default top
