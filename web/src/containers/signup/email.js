@@ -56,9 +56,9 @@ const Form = (props) => {
       ref={register}
     />
     {/* {repeatPasswordErr()} */}
-    <Checkbox>
+    {/* <Checkbox>
       Subscribe to Solvio Monthly
-    </Checkbox>
+    </Checkbox> */}
     <Button primary width='150px' type='submit'>
       Sign up
     </Button>
