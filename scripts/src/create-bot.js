@@ -31,6 +31,6 @@ export default async () => {
     repeatPassword: password
   }
   const {data: {signup: {success, message}}} = await client.mutate ({mutation, variables: {input}})
-  !success && throw new Error (`Couldn't create Amos`)
+  !success && throw new Error (`Couldn't create Amos ${message}`)
   return message
 }

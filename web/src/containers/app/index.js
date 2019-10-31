@@ -4,7 +4,6 @@ import {
 import PageLayout from './page-layout'
 import Routes from './routes'
 import client from 'apollo/client'
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 const App = () => (
   <CookiesProvider>

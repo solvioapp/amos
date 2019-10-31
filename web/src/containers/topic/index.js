@@ -2,11 +2,6 @@ import {
   React, gql, useQuery, R, H, Link,
   Input, Icon
 } from 'common'
-import Button from 'react-bootstrap/Button'
-import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
-import Dropdown from 'react-bootstrap/Dropdown'
-import SplitButton from 'react-bootstrap/SplitButton'
-import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import top from './top.sc'
 
 const DOWNLOAD_DOMAIN = `http://93.174.95.29/main`
@@ -36,7 +31,6 @@ const QUERY_TOPIC = gql`
 
 const Topic = ({match: {params: {name}}}) => {
   const {data} = useQuery (QUERY_TOPIC, {variables: {name}, returnPartialData: true})
-  const variant = `Primary`
   const renderResource = (res, key) => {
     const icon = R.cond ([
       [R.equals (`BOOK`), R.always (`book`)],
@@ -51,36 +45,36 @@ const Topic = ({match: {params: {name}}}) => {
       {icon && <div>TYPE: <Icon src={icon} book/></div>}
       {title && (
         <a target='_blank' href={link}>
-          <h2>{title}</h2>
+          <h3><i>{title}</i></h3>
         </a>
-      )}
-
+      )}      
       {download &&
-        <ButtonToolbar>
-          <SplitButton
-            title={`View`}
-            variant={variant.toLowerCase()}
-            id={`dropdown-split-variants-primary`}
-            target='_blank'
-            href={`${DOWNLOAD_DOMAIN}${download}`}
-          >
-            {res.url_download_pdf &&
-              <Dropdown.Item target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_pdf}`}>
+        <>
+        <p>View:</p>
+        <ul>
+          {res.url_download_pdf &&
+            <li>
+              <a target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_pdf}`}>
                 PDF
-              </Dropdown.Item>
-            }
-            {res.url_download_epub &&
-              <Dropdown.Item target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_epub}`}>
+              </a>
+            </li>
+          }
+          {res.url_download_epub &&
+            <li>
+              <a target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_epub}`}>
                 EPUB
-              </Dropdown.Item>
-            }
-            {res.url_download_mobi &&
-              <Dropdown.Item target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_pdf}`}>
+              </a>
+            </li>
+          }
+          {res.url_download_mobi &&
+            <li>
+              <a target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_mobi}`}>
                 MOBI
-              </Dropdown.Item>
-            }
-          </SplitButton>
-        </ButtonToolbar>
+              </a>
+            </li>
+          }
+        </ul>
+        </>
       }
       {res.typeSpecific_authors && <div>By {res.typeSpecific_authors}</div>}
       {res.typeSpecific_datePublished && <div>published in {res.typeSpecific_datePublished}</div>}

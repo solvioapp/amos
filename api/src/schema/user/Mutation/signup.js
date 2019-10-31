@@ -48,9 +48,9 @@ signup = async (_, {input}, {session}) => {
   {username, email, password} = input,
 
   /* Check if email is registered */
-  {records: [user]} = await session.run (getUserByEmail, {email})
+  {records: [user]} = await session.run (getUserByEmail, {email}),
 
-  H.isNotNilOrEmpty (user)
+  _user = H.isNotNilOrEmpty (user)
     ? do {
       /* Check if user has local account */
       const userId = user.get (`u`).identity.low,
@@ -67,6 +67,7 @@ signup = async (_, {input}, {session}) => {
       
       /* Create local account */
       await session.run (createLocalAccount, {username, hashedPassword})
+      user
     }
     : do {    
       /* User doesn't have an account */
@@ -78,10 +79,11 @@ signup = async (_, {input}, {session}) => {
       const hashedPassword = await bcrypt.hash (password, 12)
 
       /* Save user to db! */
-      await session.run (saveUser, {username, email, hashedPassword})
+      const {records: [__user]} = await session.run (saveUser, {username, email, hashedPassword})
+      __user
     }
 
-  const id = user.get (`u`).identity.low,
+  const id = _user.get (`u`).identity.low,
 
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
