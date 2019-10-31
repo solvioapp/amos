@@ -4,11 +4,15 @@ const top = H.css`
   width: 500px;
   border-radius: 12px;
   border: 1.3px solid black;
-  padding: 10px;
+  padding: 10px 15px;
   margin: 48px auto;
   /* text-align: justify; */
   word-break: break-word;
   hyphens: auto;
+
+  * {
+    margin: 10px 0;
+  }
 `
 
 export default top

@@ -9,6 +9,8 @@ import SplitButton from 'react-bootstrap/SplitButton'
 import ButtonGroup from 'react-bootstrap/ButtonGroup'
 import top from './top.sc'
 
+const DOWNLOAD_DOMAIN = `http://93.174.95.29/main`
+
 const QUERY_TOPIC = gql`
   query GetResources ($name: String!) {
     getTopResourcesByName (name: $name) {
@@ -44,37 +46,42 @@ const Topic = ({match: {params: {name}}}) => {
     ]) (res.type)
     const link = res.link || res.url_main || res.url_goodreads
     const title = res.name || res.title
+    const download = res.url_download_pdf || res.url_download_epub || res.url_download_mobi
     return <div css={top} key={key}>
       {icon && <div>TYPE: <Icon src={icon} book/></div>}
       {title && (
-        <a href={link}>
+        <a target='_blank' href={link}>
           <h2>{title}</h2>
         </a>
       )}
 
-      {/* {res.url_main && <a href={res.url_main}>Main</a>} */}
-      {/* {res.url_goodreads && <a href={res.url_goodreads}>Goodreads</a>} */}
-
-      <ButtonToolbar>
-        <SplitButton
-          title={variant}
-          variant={variant.toLowerCase()}
-          id={`dropdown-split-variants-${variant}`}
-          key={variant}
-        >
-          <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-          <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-          <Dropdown.Item eventKey="3" active>
-            Active Item
-          </Dropdown.Item>
-          <Dropdown.Divider />
-          <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-        </SplitButton>
-      </ButtonToolbar>
-
-      {res.url_download_pdf && <a href={res.url_download_pdf}>PDF</a>}
-      {res.url_download_epub && <a href={res.url_download_epub}>EPUB</a>}
-      {res.url_download_mobi && <a href={res.url_download_mobi}>MOBI</a>}
+      {download &&
+        <ButtonToolbar>
+          <SplitButton
+            title={`View`}
+            variant={variant.toLowerCase()}
+            id={`dropdown-split-variants-primary`}
+            target='_blank'
+            href={`${DOWNLOAD_DOMAIN}${download}`}
+          >
+            {res.url_download_pdf &&
+              <Dropdown.Item target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_pdf}`}>
+                PDF
+              </Dropdown.Item>
+            }
+            {res.url_download_epub &&
+              <Dropdown.Item target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_epub}`}>
+                EPUB
+              </Dropdown.Item>
+            }
+            {res.url_download_mobi &&
+              <Dropdown.Item target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_pdf}`}>
+                MOBI
+              </Dropdown.Item>
+            }
+          </SplitButton>
+        </ButtonToolbar>
+      }
       {res.typeSpecific_authors && <div>By {res.typeSpecific_authors}</div>}
       {res.typeSpecific_datePublished && <div>published in {res.typeSpecific_datePublished}</div>}
       {res.typeSpecific_goodreadsAvgRating && <div>Avg. rating: {res.typeSpecific_goodreadsAvgRating}</div>}
