@@ -17,7 +17,7 @@ config = (props) => {
       ? setConfig ({
         key,
         field: name,
-        variables: {input: {str: value, first: 3}},
+        variables: {input: {str: value, first: 4}},
         skip: false
       })
       : setConfig ({
