@@ -28,10 +28,10 @@ Confirm = (props) => {
   messages = [
     `Do you really wanna submit the following review?`,
     <a href={url}>{url}</a>,
-    ... topic ? ([
+    ... H.isNotNilOrEmpty (topic) ? ([
       <span>Resource is on {H.safeMap (t => <span>{t}, </span>) (R.dropLast (2) (topic))} {R.nth (R.length (topic) - 2) (topic)} and {R.last (topic)}.</span>
     ]) : [],
-    ... prerequisite ? ([
+    ... H.isNotNilOrEmpty (prerequisite) ? ([
       <span>Resource has prerequisites {H.safeMap (p => <span>{p.topic}, </span>) (R.dropLast (2) (prerequisite))} {(R.nth (R.length (prerequisite) - 2) (prerequisite)).topic} and {(R.last (prerequisite)).topic}.</span>
     ]) : []
   ],

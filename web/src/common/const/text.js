@@ -7,7 +7,7 @@ profile = [
   `Don't leave when there's work to do 🧐`
 ],
 
-signup = `Foo`,
+signup = `Once you sign up, you'll be able to get attribution for your Reviews. And it's free!`,
 
 login = `Welcome back! 🎊`,
 

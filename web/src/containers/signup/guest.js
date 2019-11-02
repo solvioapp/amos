@@ -8,7 +8,7 @@ const Guest = ({...rest}) => (
   <div css={Top_} {...rest}>
     {/* <Title>Sign up</Title> */}
     <AmosChat>
-      Once you sign up, you'll be able to get reputation for your Reviews. And it's free!
+      Once you sign up, you'll be able to get attribution for your Reviews. And it's free!
     </AmosChat>
     <AuthBox/>
   </div>
