@@ -48,7 +48,9 @@ export default async (token) => {
   })
 
   const parsed = parser (topics)
+  console.log (`Still works`)
   await Promise.mapSeries (parsed.graph.nodes, createTopic (client))
+  console.log (`Still works2`)
   console.log (`Successfully seeded nodes`)
   await Promise.mapSeries (parsed.graph.edges, createRelation (client))
   console.log (`Successfully seeded relations`)

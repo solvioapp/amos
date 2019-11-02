@@ -27,7 +27,7 @@ export default {
     //     // `autocomplete`,
     //   ],
     // },
-    // mutation: false,
+    mutation: false,
     // mutation: true,
     // mutation: {
     //   exclude: [
