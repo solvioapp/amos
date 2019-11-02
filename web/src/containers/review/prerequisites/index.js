@@ -47,7 +47,7 @@ Prerequisites = (props) => {
           </Button>
         </form>
         <form onSubmit={onSubmit.finish}>
-          <Button type='submit'>
+          <Button primary type='submit'>
             Finish
           </Button>
         </form>

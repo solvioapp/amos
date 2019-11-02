@@ -15,7 +15,11 @@ import onEnt from './on-ent'
 const
 
 message = (name) => ({isSubmitted}) => (
-  isSubmitted ? CONST.lets_go : CONST.signup
+  isSubmitted ? CONST.lets_go : R.cond ([
+    [R.equals (`link`), R.always (CONST.links)],
+    [R.equals (`topic`), R.always (CONST.topics)],
+    [R.equals (`prerequisite`), R.always (CONST.prerequisites)]
+  ]) (name)
 ),
 
 /* We need default values
@@ -40,7 +44,7 @@ formOpts = name => ({
 opts = name => ({
   // fields: [name],
   name,
-  message (name),
+  message: message (name),
 })
 
 export const

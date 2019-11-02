@@ -4,11 +4,7 @@ import {
 } from 'common'
 import Top_ from '../top.sc'
 
-const messages = [
-  `Do you really wanna review?`
-],
-
-ADD_REVIEW_GQL = gql`
+const ADD_REVIEW_GQL = gql`
   mutation AddReview ($input: AddReviewInput!) {
     addReview (input: $input) {
       success
@@ -17,16 +13,39 @@ ADD_REVIEW_GQL = gql`
   }
 `,
 
+RESET_REVIEW_GQL = gql`
+  mutation ResetReview {
+    resetReview @client
+  }
+`,
+
 Confirm = (props) => {
 
-  const {review} = hooks.loadReview (props)
+  const {review} = hooks.loadReview (props),
+  {link, topic, prerequisite} = review,
+  url = link?.[0],
 
-  const onCompleted = H.navto (`/review/thanks`)
+  messages = [
+    `Do you really wanna submit the following review?`,
+    <a href={url}>{url}</a>,
+    ... topic ? ([
+      <span>Resource is on {H.safeMap (t => <span>{t}, </span>) (R.dropLast (2) (topic))} {R.nth (R.length (topic) - 2) (topic)} and {R.last (topic)}.</span>
+    ]) : [],
+    ... prerequisite ? ([
+      <span>Resource has prerequisites {H.safeMap (p => <span>{p.topic}, </span>) (R.dropLast (2) (prerequisite))} {(R.nth (R.length (prerequisite) - 2) (prerequisite)).topic} and {(R.last (prerequisite)).topic}.</span>
+    ]) : []
+  ],
 
-  const [exec] = useMutation (ADD_REVIEW_GQL, {onCompleted})
+  [resetReview] = useMutation (RESET_REVIEW_GQL),
 
-  const submitReview = () => {
-    const {link, topic, prerequisite} = review
+  onCompleted = () => {
+    resetReview()
+    H.navto (`/review/thanks`)()
+  },
+
+  [exec] = useMutation (ADD_REVIEW_GQL, {onCompleted}),
+
+  submitReview = () => {
     const _review = {
       links: link,
       topics: H.isNotNilOrEmpty (topic) && topic,
@@ -40,13 +59,13 @@ Confirm = (props) => {
     }
       |> R.filter (R.identity) (#)
     exec ({variables: {input: {..._review}}})
-  }
+  },
 
-  const amosChat = (
+  amosChat = (
     <AmosChat callToAction={
       <>
-      <Button onClick={H.navto (`/review`)}>
-        Cancel
+      <Button onClick={H.navto (`/review/links`)}>
+        Edit review
       </Button>
       <Button primary onClick={submitReview}>
         Submit!

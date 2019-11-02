@@ -73,7 +73,7 @@ login = object().shape ({usernameOrEmail, password}),
 // _links = string().url(),
 
 // links = object().shape ({links: _links})
-_link = string().url(`Link must be a valid URL.`).required(`Link is a required field.`),
+_link = string().url(`Link must be a valid URL (must start with http:// or https://).`).required(`A link is required!`),
 link = object().shape ({link: array().of (_link)}),
 _topics = string()
 // topics = object().shape ({topic: _topics})

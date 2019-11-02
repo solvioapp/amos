@@ -19,9 +19,9 @@ const redirect = R.both (
 )
 
 const Review = (props) => {
-  const [resetReview] = useMutation (RESET_REVIEW_GQL)
+  // const [resetReview] = useMutation (RESET_REVIEW_GQL)
 
-  H.useUnmount(() => resetReview())
+  // H.useUnmount(() => resetReview())
 
   return redirect (props)
     ? <Redirect to='/review/links'/>
