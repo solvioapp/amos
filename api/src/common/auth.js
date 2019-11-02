@@ -6,21 +6,23 @@ import CONFIG from '../config'
 
 export const decode = async (driver, authorizationHeader) => {
   if (!authorizationHeader) return null
-  const token = authorizationHeader.replace('Bearer ', '')
+  const token = R.replace (`Bearer `) (``) (authorizationHeader)
   let id = null
   try {
     const decoded = await jwt.verify(token, CONFIG.JWT_SECRET)
     id = decoded.sub
+    id |> console.log ('id', #)
   } catch (err) {
     return null
   }
   const session = driver.session()
   const query = `
-    MATCH (u:User) where id(u) = $id
+    MATCH (u:User) where id(u) = toInteger ($id)
     RETURN u
     LIMIT 1
   `
   const {records} = await session.run(query, { id })
+  records |> console.log ('records', #)
   session.close()
   const _user = records[0].get (`u`)
   const user = {..._user.properties, id: _user.identity.low}

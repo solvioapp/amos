@@ -80,7 +80,7 @@ signup = async (_, {input}, {session}) => {
 
       /* Save user to db! */
       const {records: [__user]} = await session.run (saveUser, {username, email, hashedPassword})
-      [] = [__user |> console.log ('__user', #)],
+      __user |> console.log ('__user', #)
       __user
     }
 
