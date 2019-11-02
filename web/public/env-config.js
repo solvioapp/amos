@@ -1,1 +1,1 @@
-window._env_ = {"CUSTOM_API_URL":"http://localhost:4001"}
+window._env_ = {"CUSTOM_API_URL":"https://www.amos.services"}

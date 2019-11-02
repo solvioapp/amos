@@ -101,7 +101,9 @@ collapse = val => {
     [R.is (Object), x => do {console.log(`x`, x); R.all (collapse)}],
     [R.T, isNotNilOrEmpty]
   ]) (val)
-}
+},
+
+hasLength = length => R.pipe (R.length, R.equals (length))
 
 // const col = R.filter (collapse) ({input: {topic: ['', '', '']}})
 

@@ -19,6 +19,19 @@ RESET_REVIEW_GQL = gql`
   }
 `,
 
+createTopics = R.cond ([
+  [H.hasLength (1), R.identity],
+  [H.hasLength (2), topics => (
+    <span>
+      {topics[0]} and {topics[1]}
+    </span>
+  )],
+  [R.T, topics => (
+    <span>{H.safeMap (t => <span>{t}, </span>) (R.dropLast (2) (topics))} {R.nth (R.length (topics) - 2) (topics)} and {R.last (topics)}
+    </span>
+  )]
+]),
+
 Confirm = (props) => {
 
   const {review} = hooks.loadReview (props),
@@ -29,10 +42,10 @@ Confirm = (props) => {
     `Do you really wanna submit the following review?`,
     <a href={url}>{url}</a>,
     ... H.isNotNilOrEmpty (topic) ? ([
-      <span>Resource is on {H.safeMap (t => <span>{t}, </span>) (R.dropLast (2) (topic))} {R.nth (R.length (topic) - 2) (topic)} and {R.last (topic)}.</span>
+      <span>Resource is on {createTopics (topic)}.</span>
     ]) : [],
     ... H.isNotNilOrEmpty (prerequisite) ? ([
-      <span>Resource has prerequisites {H.safeMap (p => <span>{p.topic}, </span>) (R.dropLast (2) (prerequisite))} {(R.nth (R.length (prerequisite) - 2) (prerequisite)).topic} and {(R.last (prerequisite)).topic}.</span>
+      <span>Resource has prerequisites {createTopics (R.pluck (`topic`) (prerequisite))}.</span>
     ]) : []
   ],
 
