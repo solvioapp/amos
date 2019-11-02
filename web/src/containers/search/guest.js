@@ -4,20 +4,13 @@ import {
 } from 'common'
 import top from './top.sc'
 
-// const messages = [
-//   `👋 I'm Amos. I was created to be 'the best learning mentor in the world'.`,
-//   `For now I'm trying to sort the web's learning resources. Then in the future I'll be able to show you learning paths on any topic, tailored to your requirements.`,
-//   `So I need your help! Create an account and submit reviews for your favorite learning resources. Vamos, amigo! 🤗`,
-// ]
-
 const messages = [
-  `👋 I'm Amos. I lived in the 1600s and was a reformer of education. 😎 I'm back to teach you anything you want!`,
-  `So, Watcha interested in? 🤗`
+  `Watcha interested in? 🤗`
 ]
 
 const Guest = ({onEnt, results, register, onSubmit, ...rest}) => (
   <form css={top} autocomplete='off' onSubmit={onSubmit}>
-    <AmosChat avatar='regular'>
+    <AmosChat avatar='small'>
       {messages}
     </AmosChat>
     <Input

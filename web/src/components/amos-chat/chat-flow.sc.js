@@ -7,10 +7,14 @@ import CallToAction_ from './call-to-action.sc'
 
 const
 
-{AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE} = CSS_CONST,
+{AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE, AVATAR_SIZE_SMALL} = CSS_CONST,
 
 none = css`
   margin-top: 0;
+`,
+
+small = css`
+  margin-top: ${AVATAR_SIZE_SMALL / 2 - 21.7+ (AVATAR_SIZE_LARGE - AVATAR_SIZE_SMALL) / 2}px;
 `,
 
 regular = css`

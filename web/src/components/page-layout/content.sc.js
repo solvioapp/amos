@@ -6,7 +6,7 @@ const Content_ = styled.div`
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: ${({match}) => {match |> console.log ('match', #)}};
+  margin-top: 10%;
   padding: 30px;
 `
 

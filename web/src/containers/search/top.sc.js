@@ -8,7 +8,7 @@ const top = css`
   width: 600px;
 
   ${Input} {
-    margin-top: 8px;
+    margin-top: 42px;
   }
 `
 
