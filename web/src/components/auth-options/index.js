@@ -4,7 +4,7 @@ import Top_ from './top.sc'
 const AuthOptions = ({
   first = {
     link: `/signup/email`,
-    text: `Sign up`
+    text: `Use email`
   },
   second = {
     link: `/login`,

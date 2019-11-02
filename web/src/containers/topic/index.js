@@ -1,5 +1,5 @@
 import {
-  React, gql, useQuery, R, H,
+  React, gql, useQuery, R, H, Link,
   Icon, AmosChat, SplitButton
 } from 'common'
 import top from './top.sc'
@@ -74,7 +74,9 @@ const Topic = ({match: {params: {name}}}) => {
     </div>
   }
 
-  const message = `Great! Here are some resources for ${name}.`
+  const message = [
+    <span>Great! Here are some resources for {name}. Help me expand my collection by submitting a <Link to='/review'>Review</Link>.</span>
+  ]
 
   return (
     <div>

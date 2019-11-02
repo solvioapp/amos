@@ -14,7 +14,7 @@ import onEnt from './on-ent'
 
 const
 
-message = ({isSubmitted}) => (
+message = (name) => ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
 ),
 
@@ -40,7 +40,7 @@ formOpts = name => ({
 opts = name => ({
   // fields: [name],
   name,
-  message,
+  message (name),
 })
 
 export const

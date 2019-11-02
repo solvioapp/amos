@@ -12,7 +12,7 @@ const messages = [
 ]
 
 const About = () => (
-  <AmosChat callToAction={
+  <AmosChat avatar='large' callToAction={
     <>
     <Button onClick={H.navto (`/signup`)}>
       Sign up
