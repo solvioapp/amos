@@ -18,6 +18,7 @@
   "dependencies": {
     "@apollo/react-hooks": "^3.1.1",
     "@babel/cli": "^7.6.4",
+    "@zippytech/react-toolkit": "^1.1.9",
     "apollo-boost": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.3",
     "dotenv": "^8.1.0",

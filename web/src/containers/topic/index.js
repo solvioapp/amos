@@ -1,6 +1,6 @@
 import {
-  React, gql, useQuery, R, H, Link,
-  Input, Icon
+  React, gql, useQuery, R, H,
+  Icon, AmosChat, SplitButton
 } from 'common'
 import top from './top.sc'
 
@@ -29,6 +29,10 @@ const QUERY_TOPIC = gql`
   }
 `
 
+const onMenuClick = (e, {item: {url}}) => {
+  window.location.href = `${DOWNLOAD_DOMAIN}${url}`
+}
+
 const Topic = ({match: {params: {name}}}) => {
   const {data} = useQuery (QUERY_TOPIC, {variables: {name}, returnPartialData: true})
   const renderResource = (res, key) => {
@@ -40,54 +44,43 @@ const Topic = ({match: {params: {name}}}) => {
     ]) (res.type)
     const link = res.link || res.url_main || res.url_goodreads
     const title = res.name || res.title
-    const download = res.url_download_pdf || res.url_download_epub || res.url_download_mobi
+    const downloads = [res.url_download_pdf, res.url_download_epub, res.url_download_mobi]
+    const strings = [`PDF`, `EPUB`, `MOBI`]
+    const download = R.reduce ((acc, val) => acc || val) (false) (downloads)
+    
+    const items = H.reduce ((acc, val, _key) => (
+      val ? R.append ({label: strings[_key], url: val}) (acc) : acc
+    )) ([]) (downloads)
+    const onClick = () => window.location.href = `${DOWNLOAD_DOMAIN}${items?.[0]?.url}`
     return <div css={top} key={key}>
       {icon && <div>TYPE: <Icon src={icon} book/></div>}
       {title && (
         <a target='_blank' href={link}>
           <h3><i>{title}</i></h3>
         </a>
-      )}      
+      )}
       {download &&
-        <>
-        <p>View:</p>
-        <ul>
-          {res.url_download_pdf &&
-            <li>
-              <a target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_pdf}`}>
-                PDF
-              </a>
-            </li>
-          }
-          {res.url_download_epub &&
-            <li>
-              <a target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_epub}`}>
-                EPUB
-              </a>
-            </li>
-          }
-          {res.url_download_mobi &&
-            <li>
-              <a target='_blank' href={`${DOWNLOAD_DOMAIN}${res.url_download_mobi}`}>
-                MOBI
-              </a>
-            </li>
-          }
-        </ul>
-        </>
+        <SplitButton {...{items, onClick, onMenuClick}}>
+          View
+        </SplitButton>
       }
-      {res.typeSpecific_authors && <div>By {res.typeSpecific_authors}</div>}
-      {res.typeSpecific_datePublished && <div>published in {res.typeSpecific_datePublished}</div>}
-      {res.typeSpecific_goodreadsAvgRating && <div>Avg. rating: {res.typeSpecific_goodreadsAvgRating}</div>}
-      {res.typeSpecific_goodreadsNoRatings && <div># of ratings: {res.typeSpecific_goodreadsNoRatings}</div>}
-      {res.typeSpecific_pages && <div>{res.typeSpecific_pages} p.</div>}
-      {res.typeSpecific_isbn && <div>ISBN: {res.typeSpecific_isbn}</div>}
-      {/* {res.typeSpecific_dewey && <div>{res.typeSpecific_dewey}</div>}} */}
+      {res.typeSpecific_authors && <p>By {res.typeSpecific_authors}</p>}
+      {res.typeSpecific_datePublished && <p>published in {res.typeSpecific_datePublished}</p>}
+      {res.typeSpecific_goodreadsAvgRating && <p>Avg. rating: {res.typeSpecific_goodreadsAvgRating}</p>}
+      {res.typeSpecific_goodreadsNoRatings && <p># of ratings: {res.typeSpecific_goodreadsNoRatings}</p>}
+      {res.typeSpecific_pages && <p>{res.typeSpecific_pages} p.</p>}
+      {res.typeSpecific_isbn && <p>ISBN: {res.typeSpecific_isbn}</p>}
+      {/* {res.typeSpecific_dewey && <p>{res.typeSpecific_dewey}</p>}} */}
     </div>
   }
 
+  const message = `Great! Here are some resources for ${name}.`
+
   return (
     <div>
+      <AmosChat>
+        {message}
+      </AmosChat>
       {H.isNotNilOrEmpty (data)
         ? H.map (renderResource) (R.sort ((res1, res2) => (
           res1.title

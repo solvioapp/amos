@@ -17,6 +17,12 @@ type Resource {
   # TODO: Change
   title: String
   link: String
+  topics: [HAS_TOPIC!]!
+}
+
+type HAS_TOPIC @relation (name: "HAS_TOPIC") {
+  from: Resource!
+  to: Topic!
 }
 
 enum ResourceType {

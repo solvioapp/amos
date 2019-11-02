@@ -40,6 +40,7 @@ import NotFound from 'components/not-found'
 import RadioGroup from 'components/radio-group'
 import Title from 'components/title'
 import Hr from 'components/hr'
+import SplitButton from 'components/split-button'
 
 /* Special */
 import Panel from 'components/panel/top.sc'
@@ -92,6 +93,7 @@ export {
   RadioGroup,
   Title,
   Hr,
+  SplitButton,
   Panel,
   Button,
   AmosChat,

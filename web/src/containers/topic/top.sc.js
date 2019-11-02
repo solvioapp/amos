@@ -1,4 +1,4 @@
-import {H} from 'common'
+import {H, SplitButton, Icon} from 'common'
 
 const top = H.css`
   width: 500px;
@@ -10,9 +10,30 @@ const top = H.css`
   word-break: break-word;
   hyphens: auto;
 
-  * {
+  /* > * {
+    margin: 10px 0;
+  } */
+
+  > p {
     margin: 10px 0;
   }
+
+  ${Icon} {
+    margin-bottom: 10px;
+  }
+
+  ${SplitButton} {
+    margin-top: -5px;
+    margin-bottom: 5px;
+  }
+
+  /* * {
+    margin: 10px 0;
+  } */
+
 `
+  /* ${SplitButton} {
+    margin
+  } */
 
 export default top
