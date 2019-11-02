@@ -39,12 +39,12 @@ const Input = ({
     return () => document.removeEventListener(`keypress`, onKeyPress)
   }, [onKeyPress])
 
-  // const _onClick = (e) => {
-  //   // console.log (`_onClick`)
-  //   e.stopPropagation()
-  //   e.nativeEvent.stopImmediatePropagation()
-  //   setDropdown (R.not)
-  // }
+  const _onClick = (e) => {
+    // console.log (`_onClick`)
+    e.stopPropagation()
+    e.nativeEvent.stopImmediatePropagation()
+    setDropdown (true)
+  }
 
   const inputRef = useRef()
 
@@ -86,7 +86,7 @@ const Input = ({
   return (
     <div css={Top_} {...{className}} key={`div${_key}`}>
       <Label_ key={`label${_key}`}>{label}</Label_>
-      <Input_ autoComplete='off' ref={forwardRef} key={`input${_key}`}
+      <Input_ autoComplete='off' onClick={_onClick} ref={forwardRef} key={`input${_key}`}
         {...{placeholder, boxShadowWidth,
           name, type, hasError, ...rest}}
       />
