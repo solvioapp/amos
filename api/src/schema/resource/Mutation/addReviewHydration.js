@@ -45,7 +45,7 @@ authorized = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   match (u: User) where id (u) = toInteger ($userId)
   unwind $topicGames as topicGameId
-  match (topicGame: AmosGame) where id (topicGame) = topicGameId
+  match (topicGame: AmosGame) where id (topicGame) = toInteger (topicGameId)
   merge (u)-[:VOTED_ON]->(topicGame)
     on create
       set r.noVotesTopics = r.noVotesTopics + 1
@@ -56,7 +56,7 @@ authorized = `
 updateTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedTopicIds as topicId
-  match (t: Topic) where id (t) = topicId
+  match (t: Topic) where id (t) = toInteger (topicId)
   merge (r)-[:HAS_TOPIC]->(t)
 `
 
@@ -98,7 +98,7 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
 
   /* Attach AmosGame's to user */
   {records: [resource]} = await session.run (authorized, {userId, ...gamesIds, resourceId}),
-  
+
   {noVotesTopics: {low: noVotesTopics}} = resource.get (`r`).properties,
 
    /* cool word! 

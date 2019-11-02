@@ -71,13 +71,13 @@ authorized = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   match (u: User) where id (u) = toInteger ($userId)
   unwind $topicGames as topicGameId
-  match (topicGame: AmosGame) where id (topicGame) = topicGameId
+  match (topicGame: AmosGame) where id (topicGame) = toInteger (topicGameId)
   merge (u)-[:VOTED_ON]->(topicGame)
     on create
       set r.noVotesTopics = r.noVotesTopics + 1
   with u, r
   unwind $prerequisiteGames as prerequisiteGameId
-  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = prerequisiteGameId
+  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = toInteger (prerequisiteGameId)
   merge (u)-[:VOTED_ON]->(prerequisiteGame)
     on create
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
@@ -91,13 +91,13 @@ guest = `
   with u, r
   unwind $topicGames as topicGameId
   // Attach AnonymousUser to AmosGame's
-  match (topicGame: AmosGame) where id (topicGame) = topicGameId
+  match (topicGame: AmosGame) where id (topicGame) = toInteger (topicGameId)
   merge (u)-[:VOTED_ON_ANONYMOUS]->(topicGame)
     on create
       set r.noVotesTopics = r.noVotesTopics + 1
   with u, r
   unwind $prerequisiteGames as prerequisiteGameId
-  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = prerequisiteGameId
+  match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = toInteger (prerequisiteGameId)
   merge (u)-[:VOTED_ON_ANONYMOUS]->(prerequisiteGame)
     on create
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
@@ -109,14 +109,14 @@ guest = `
 updateTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedTopicIds as topicId
-  match (t: Topic) where id (t) = topicId
+  match (t: Topic) where id (t) = toInteger (topicId)
   merge (r)-[:HAS_TOPIC]->(t)
 `,
 
 updatePrerequisites = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedPrerequisiteIds as prerequisiteId
-  match (g: AmosGame) where id (g) = prerequisiteId
+  match (g: AmosGame) where id (g) = toInteger (prerequisiteId)
   merge (r)-[:HAS_PREREQUISITE]->(g)
 `
 

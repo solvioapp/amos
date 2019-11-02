@@ -15,15 +15,10 @@ R.mapObjIndexed ((val, key) => val ? null : throw new Error(`ERROR: "${key}" env
 const driver = getDriver()
 
 const context = async ({req}) => {
-  console.log (`context being created`)
   const session = driver.session()
-  console.log (`c1`)
   const {headers} = req
-  console.log (`c2`)
   const user = await decode (driver, headers.authorization)
-  console.log (`c3`)
   const ip = headers[`x-forwarded-for`] || req.connection.remoteAddress
-  console.log (`c4`)
 
   return {
     driver,
