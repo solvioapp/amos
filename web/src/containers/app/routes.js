@@ -9,6 +9,7 @@ import Profile from 'containers/profile'
 import Review from 'containers/review'
 import Search from 'containers/search'
 import Signup from 'containers/signup'
+import OpenSearch from 'containers/open-search'
 import Topic from 'containers/topic'
 import PublicRoute from './public-route'
 import PrivateRoute from './private-route'
@@ -20,6 +21,7 @@ const Routes = () => (
     <Route path='/search' exact component={Search}/>
     <Route path='/review' component={Review}/>
     <Route path='/topic/:name' component={Topic}/>
+    <Route path='/opensearch' component={OpenSearch}/>
     <PublicRoute path='/login' component={Login}/>
     <PublicRoute path='/signup' component={Signup}/>
     {/* <Route path='/forgot-password' component={NotFound}/> */}

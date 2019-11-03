@@ -33,7 +33,10 @@ const onMenuClick = (e, {item: {url}}) => {
   window.location.href = `${DOWNLOAD_DOMAIN}${url}`
 }
 
-const Topic = ({match: {params: {name}}}) => {
+const Topic = ({location, match}) => {
+  location |> console.log ('location', #)
+  match |> console.log ('match', #)
+  const name = match.params.name
   const {data} = useQuery (QUERY_TOPIC, {variables: {name}, returnPartialData: true})
   const renderResource = (res, key) => {
     const icon = R.cond ([
