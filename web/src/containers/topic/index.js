@@ -25,6 +25,16 @@ const QUERY_TOPIC = gql`
       name
       title
       link
+      topics {
+        names
+      }
+      prerequisites {
+        level
+        strength
+        topic {
+          names
+        }
+      }
     }
   }
 `
@@ -33,12 +43,20 @@ const onMenuClick = (e, {item: {url}}) => {
   window.location.href = `${DOWNLOAD_DOMAIN}${url}`
 }
 
+const makeTopics = topics => {
+  topics |> console.log ('topics', #)
+  return <span>
+    {R.map (R.identity) (R.pluck (`names`) (topics))}
+  </span>
+}
+
 const Topic = ({location, match}) => {
   location |> console.log ('location', #)
   match |> console.log ('match', #)
   const name = match.params.name
   const {data} = useQuery (QUERY_TOPIC, {variables: {name}, returnPartialData: true})
   const renderResource = (res, key) => {
+    res |> console.log ('res', #)
     const icon = R.cond ([
       [R.equals (`BOOK`), R.always (`book`)],
       [R.equals (`ONLINE_COURSE`), R.always (`online_course`)],
@@ -73,6 +91,8 @@ const Topic = ({location, match}) => {
       {res.typeSpecific_goodreadsNoRatings && <p># of ratings: {res.typeSpecific_goodreadsNoRatings}</p>}
       {res.typeSpecific_pages && <p>{res.typeSpecific_pages} p.</p>}
       {res.typeSpecific_isbn && <p>ISBN: {res.typeSpecific_isbn}</p>}
+      {H.isNotNilOrEmpty (res.topics) && <p>Topics: {makeTopics (res.topics)}</p>}
+      {H.isNotNilOrEmpty (res.prerequisites) && <p>Prerequisites: {makeTopics (R.pluck (`topic`) (res.prerequisites))}</p>}
       {/* {res.typeSpecific_dewey && <p>{res.typeSpecific_dewey}</p>}} */}
     </div>
   }
