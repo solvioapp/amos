@@ -6,4 +6,4 @@ ENV NEO4JLABS_PLUGINS '["apoc"]'
 
 EXPOSE 7474 7473 7687
 
-CMD ["neo4j"]
+CMD neo4j

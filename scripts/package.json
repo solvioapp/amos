@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npx babel src -d build",
     "start:prod": "cross-env NODE_ENV=production node -r dotenv-flow/config build/index.js",
-    "start:weird": "cross-env NODE_ENV=production npx babel-node -r node_modules/dotenv-flow/config src/index.js",
+    "start:prod:watch": "cross-env NODE_ENV=production npx babel-node -r node_modules/dotenv-flow/config src/index.js",
     "start": "cross-env NODE_ENV=development npx nodemon --exec npx babel-node -r node_modules/dotenv-flow/config src/index.js"
   },
   "author": "",

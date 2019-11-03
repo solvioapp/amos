@@ -30,7 +30,6 @@ const common = {
         options: {extract: true},
       }, `svgo-loader`]
     }, {
-      /* We need this for React bootstrap */
       test: /\.css$/,
       use: ['style-loader', 'css-loader']
     }
@@ -80,14 +79,14 @@ const production = {
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: `static`,
-      reportFilename: rootPath(`bundle-report.html`)
+      reportFilename: rootPath (`bundle-report.html`)
     }),
   ],
 }
 
-const makeConfigs = R.mergeDeepWith(R.concat, common)
+const makeConfigs = R.mergeDeepWith (R.concat, common)
 
-console.log (`process.env.NODE_ENV`, process.env.NODE_ENV)
+console.log (`Running webpack with process.env.NODE_ENV ${process.env.NODE_ENV}.`)
 
 const config = (
   process.env.NODE_ENV === `production`

@@ -4,10 +4,7 @@
   "description": "Amos API",
   "main": "src/index.js",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/solviofoundation/amos-back/tree/master/api"
-  },
+  "repository": "https://github.com/solviofoundation/amos/tree/master/api",
   "scripts": {
     "start:prod": "cross-env NODE_ENV=production node -r dotenv-flow/config build/index.js",
     "start": "cross-env NODE_ENV=development npx nodemon -e js,gql,json,cypher --exec npx babel-node -r node_modules/dotenv-flow/config src/index.js",

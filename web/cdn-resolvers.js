@@ -1,4 +1,4 @@
-const moduleToCdn = require(`module-to-cdn`)
+const moduleToCdn = require (`module-to-cdn`)
 
 function resolve(name, version) {
   const list = [
@@ -47,10 +47,10 @@ function resolve(name, version) {
     },
   ]
 
-  return list.find(pkg => pkg.name === name)
+  return list.find (pkg => pkg.name === name)
 }
 
 module.exports = (name, version, opts) => (
-  resolve(name, version) ||
-  moduleToCdn(name, version, opts)
+  resolve (name, version) ||
+  moduleToCdn (name, version, opts)
 )
