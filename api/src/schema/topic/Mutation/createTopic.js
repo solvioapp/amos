@@ -8,7 +8,6 @@ _1 = `
 `,
 
 createTopic = async (_, {input}, {session}) => {
-  input |> console.log ('input createTopic', #)
   await session.run (_1, input)
 }
 

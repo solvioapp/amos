@@ -1,7 +1,6 @@
 import express from 'express'
 import {ApolloServer} from 'apollo-server-express'
 import CONFIG, {requiredConfigs} from './config'
-import middleware from './middleware'
 import {getDriver} from './bootstrap/neo4j'
 import schema from './schema'
 import {R,path} from 'common'

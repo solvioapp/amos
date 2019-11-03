@@ -32,8 +32,8 @@ const run = async () => {
     console.log(`amosJwt`, amosJwt)
     console.log (`seeding topics`)
     await seedTopics (amosJwt)
-    console.log (`seeding reviews`)
-    await seedReviews (amosJwt)
+    // console.log (`seeding reviews`)
+    // await seedReviews (amosJwt)
   } catch (e) {
     console.log (`Something went wrong`, e.message)
   }
