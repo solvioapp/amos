@@ -46,6 +46,7 @@ const common = {
       components: rootPath(`src/components`),
       containers: rootPath(`src/containers`),
       apollo: rootPath(`src/apollo`),
+      repoCommon: rootPath (`../common`)
     }
   },
   plugins: [
