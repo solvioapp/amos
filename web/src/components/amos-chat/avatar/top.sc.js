@@ -11,13 +11,13 @@ options = {
   `,
 
   small: css`
-    height: ${AVATAR_SIZE_SMALL}px;
+    min-height: ${AVATAR_SIZE_SMALL}px;
     width: ${AVATAR_SIZE_SMALL}px;
     margin-top: ${(AVATAR_SIZE_LARGE - AVATAR_SIZE_SMALL) / 2}px;
   `,
 
   regular: css`
-    height: ${AVATAR_SIZE_REGULAR}px;
+    min-height: ${AVATAR_SIZE_REGULAR}px;
     width: ${AVATAR_SIZE_REGULAR}px;
     margin-top: ${(AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px;
   `,
@@ -25,7 +25,7 @@ options = {
     /* margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7+ (AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px; */
 
   large: css`
-    height: ${AVATAR_SIZE_LARGE}px;
+    min-height: ${AVATAR_SIZE_LARGE}px;
     width: ${AVATAR_SIZE_LARGE}px;
   `,
 },

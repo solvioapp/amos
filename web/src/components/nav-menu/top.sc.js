@@ -6,6 +6,12 @@ const Top_ = css`
 
   @media (max-width: 768px) {
     order: 100;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    z-index: 100;
+    width: 100%;
+    ${'' /* height: 65px; */}
   }
 `
 

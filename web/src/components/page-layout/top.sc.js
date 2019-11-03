@@ -5,6 +5,7 @@ const top = css`
   display: flex;
   flex-direction: column;
   height: 100vh;
+  position: relative;
 `
 
 export default top
