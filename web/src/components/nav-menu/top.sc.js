@@ -11,6 +11,7 @@ const Top_ = css`
     background-color: white;
     z-index: 100;
     width: 100%;
+    padding-left: 0;
     ${'' /* height: 65px; */}
   }
 `
