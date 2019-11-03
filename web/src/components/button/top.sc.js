@@ -36,7 +36,7 @@ const Top_ = css`
   color: black;
   cursor: pointer;
   font-size: 15px;
-  height: ${H.prop(`height`, `40px`)};
+  min-height: ${H.prop(`height`, `40px`)};
   padding: 0 20px;
   user-select: none;
   width: ${H.prop(`width`, `auto`)};

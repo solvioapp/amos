@@ -8,6 +8,7 @@ const Content_ = styled.div`
   justify-content: center;
   margin-top: 10%;
   padding: 30px;
+  padding-bottom: 65px;
 `
 
 export default Content_
