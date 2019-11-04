@@ -6,7 +6,9 @@
   "plugins": [
     "@babel/plugin-transform-runtime",
     "babel-plugin-styled-components",
-    ["@babel/plugin-proposal-pipeline-operator", { "proposal": "smart" }],
+    ["@babel/plugin-proposal-pipeline-operator", {
+      "proposal": "smart"
+    }],
     "@babel/plugin-proposal-optional-chaining",
     "@babel/plugin-proposal-export-default-from",
     "@babel/plugin-proposal-object-rest-spread",
