@@ -1,4 +1,4 @@
-import {React, gql, useQuery} from 'common'
+import {React, useQuery, gql} from 'common'
 
 export const
 

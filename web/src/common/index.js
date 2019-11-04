@@ -21,7 +21,7 @@ import H from './helpers'
 import CONST from './const'
 import * as validation from 'repoCommon/validation'
 import hooks from './hooks'
-import * as W from './with'
+import W from './with'
 
 /* /apollo */
 
