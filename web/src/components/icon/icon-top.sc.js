@@ -1,16 +1,19 @@
 import {H} from 'common'
 
-const _book = H.css`
+const book = H.css`
   position: relative;
   top: 12px;
   left: 5px;
-`
+`,
 
-const Top_ = H.css`
-  display: ${(props) => props.book ? '' : `inline-block`};
+otherwise = H.css`
+  display: inline-block;
+  vertical-align: middle;
+`,
+
+top = H.css`
   height: ${H.prop (`height`, `24px`)};
-  vertical-align: ${(props) => props.book ? '' : `middle`};
-  ${({book}) => book && _book}
+  ${(p) => p.book ? book : otherwise};
 `
 
-export default Top_
+export default top
