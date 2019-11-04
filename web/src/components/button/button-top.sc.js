@@ -10,10 +10,9 @@ const primary = H.css`
   &:hover {
     background-color: #2F82FF;
   }
-`
+`,
 
-const iconOnly = H.css`
-  ${'' /* ${props=>console.log(`iconOnly!`, props)} */}
+iconOnly = H.css`
   font-size: 0;
   padding: 0;
   width: 40px;
@@ -21,21 +20,19 @@ const iconOnly = H.css`
   > svg {
     height: 17px;
   }
-`
+`,
 
-const top = H.css`
-  ${'' /* ${props => console.log(`props button`, props)} */}
-  ${'' /* ${props => console.log(`props top`, props)} */}
+top = H.css`
   background-color: white;
   border-radius: 8px;
   border: 1.3px solid #959595;
   color: black;
   cursor: pointer;
   font-size: 15px;
-  min-height: ${H.prop(`height`, `40px`)};
+  min-height: ${H.prop (`height`, `40px`)};
   padding: 0 20px;
   user-select: none;
-  width: ${H.prop(`width`, `auto`)};
+  width: ${H.prop (`width`, `auto`)};
 
   &:disabled {
     background-color: grey;
@@ -45,6 +42,9 @@ const top = H.css`
       background-color:grey;
     }
   }
+
+  ${H.ifProp (`primary`, primary)}
+  ${H.ifProp (`iconOnly`, iconOnly)}
 
   > ${Icon} {
     height: 15px;
@@ -67,10 +67,6 @@ const top = H.css`
   &:focus {
     outline: none;
   }
-
-  ${H.ifProp (`primary`, primary)}
 `
-  // ${({icon, children}) => icon && !children && iconOnly}
-// ${({icon, children}) => {if (icon && !children) return iconOnly}}
 
 export default top
