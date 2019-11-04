@@ -29,7 +29,7 @@ const addReview = (_, {input}, {cache}) => {
   if (name === `prerequisite`) {
     const prerequisite = (
       /* Filter invalid fields */
-      H.reduce ((acc, obj, key) => (
+      H.reduce ((acc, obj) => (
         /* Check if all fields are valid */
         H.reduce ((_acc, field) => _acc && H.isNotNilOrEmpty (field)) (true) (R.values (obj))
           ? R.append ({__typename: `Prerequisite`, ...obj}) (acc)

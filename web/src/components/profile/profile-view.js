@@ -7,7 +7,7 @@ import useProfileHook from './profile-hook'
 
 const Profile = (props) => {
   const {logout} = useProfileHook (props)
-  return <div css={top} {...prop}>
+  return <div css={top} {...props}>
     <AmosChat callToAction={
       <Button primary onClick={logout}>
         Logout

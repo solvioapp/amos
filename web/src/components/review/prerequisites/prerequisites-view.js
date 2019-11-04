@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   React, R, useState, H, useCallback, CONST,
   AmosChat, Button, Title, Input, RadioGroup, Hr

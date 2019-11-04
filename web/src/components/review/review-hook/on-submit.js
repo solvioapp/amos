@@ -1,4 +1,4 @@
-import {R, H, React, useMutation, gql} from 'common'
+import {R, H, useMutation, gql} from 'common'
 
 const
 

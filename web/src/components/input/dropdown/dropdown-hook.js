@@ -28,6 +28,7 @@ const dropdownHook = (props) => {
     const {text} = result
 
     const label = (
+      /* eslint-disable max-len */
       /*
        * Using onMouseDown here, otherwise onBlur interferes
        * See https://stackoverflow.com/questions/44142273/react-ul-with-onblur-event-is-preventing-onclick-from-firing-on-li

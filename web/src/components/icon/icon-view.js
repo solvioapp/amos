@@ -1,5 +1,5 @@
-import {H, React, styled, css} from 'common'
-import Top_ from './icon-top.sc'
+import {React, styled} from 'common'
+import top from './icon-top.sc'
 import iconsList from './svg'
 
 function Icon ({src, book, ...rest}) {
@@ -8,7 +8,7 @@ function Icon ({src, book, ...rest}) {
     throw new Error(`No icon found: '${src}'`)
   }
   return (
-    <svg viewBox={svg.viewBox} css={Top_} {...{book}} {...rest}>
+    <svg viewBox={svg.viewBox} css={top} {...{book}} {...rest}>
       <use xlinkHref={svg.url}/>
     </svg>
   )

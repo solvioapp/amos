@@ -4,7 +4,7 @@ import {
 } from 'common'
 import _Input from './input'
 import Label from './label'
-import Top_ from './input-top.sc'
+import top from './input-top.sc'
 import Dropdown from './dropdown'
 import icon from './icon.sc'
 import useInputHook from './input-hook'
@@ -19,7 +19,7 @@ const Input = (props, ref) => {
   const {_onClick, forwardRef, dropdown, active} = useInputHook ({...props, ref})
 
   return (
-    <div css={Top_} {...{className}} key={`div${_key}`}>
+    <div css={top} {...{className}} key={`div${_key}`}>
       <Label key={`label${_key}`}>{label}</Label>
       <_Input autoComplete='off' onClick={_onClick} ref={forwardRef} key={`input${_key}`}
         {...{placeholder, boxShadowWidth,

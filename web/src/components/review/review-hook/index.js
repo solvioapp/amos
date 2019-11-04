@@ -27,9 +27,9 @@ defaultValues = {
   link: {link: ``},
   topic: {topic: []},
   // prerequisite: {
-    // 'prerequisite[0].strength': null,
-    // 'prerequisite[0].level': null,
-    // 'prerequisite[0].topic': null,
+  // 'prerequisite[0].strength': null,
+  // 'prerequisite[0].level': null,
+  // 'prerequisite[0].topic': null,
   // },
 },
 

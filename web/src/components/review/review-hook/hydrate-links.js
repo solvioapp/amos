@@ -20,7 +20,6 @@ hydrateLinks = (props) => {
 
   H.useMount(() => {
     review && (review |> flatten |> R.mapObjIndexed ((val, key) => {
-      val |> console.log ('useMount val', #)
       H.isNotNilOrEmpty (val) && do {
         form.setValue (key, val)
         val !== `Review` && val !== `Prerequisite` && setValid (true)

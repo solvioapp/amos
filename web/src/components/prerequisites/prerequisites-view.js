@@ -1,5 +1,6 @@
 import {H, R, React, CONST} from 'common'
 
+/* eslint-disable max-len */
 const makeOne = p => (
   <span>
     {CONST.elements.strength[p.strength]} to be at least <i>{CONST.elements.level[p.level]}</i> in {p.topic?.names?.[0] || p.topic}

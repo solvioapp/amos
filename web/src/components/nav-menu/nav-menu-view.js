@@ -1,5 +1,5 @@
 import {H, React, R, withRouter} from 'common'
-import Top_ from './nav-menu-top.sc'
+import top from './nav-menu-top.sc'
 import Link from './link'
 
 const isActive = (_, {pathname: p}) => (
@@ -10,8 +10,8 @@ const isActive = (_, {pathname: p}) => (
 
 const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
-const NavMenu = ({isAuthenticated, className, ...rest}) => (
-  <div className={className}>
+const NavMenu = ({isAuthenticated, ...rest}) => (
+  <div css={top} {...rest}>
     <Link to='/review'>
       Review
     </Link>
@@ -37,5 +37,5 @@ const NavMenu = ({isAuthenticated, className, ...rest}) => (
 )
 
 export default NavMenu
-  |> H.style (#) (Top_)
+  |> H.styled (#) ``
   |> withRouter

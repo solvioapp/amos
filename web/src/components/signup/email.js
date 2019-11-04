@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   H, hooks, React, CONST, validation,
   AmosChat, Button, Input, AuthOptions

@@ -1,4 +1,4 @@
-import {R, H} from 'common'
+import {H} from 'common'
 
 const
 

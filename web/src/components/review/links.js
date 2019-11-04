@@ -3,7 +3,7 @@ import {
   AmosChat, Button, Title, Input
 } from 'common'
 import {useReviewLinks} from './review-hook'
-import Top_ from './review-top.sc'
+import top from './review-top.sc'
 import Buttons from './buttons'
 import inputForm from './input-form.sc'
 
@@ -12,7 +12,7 @@ const Links = (props) => {
     onSubmit, messages, form, errors, valid, onChange, onEnt, ...rest
   } = useReviewLinks (`link`) (props)
 
-  return <div css={Top_} {...rest}>
+  return <div css={top} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>

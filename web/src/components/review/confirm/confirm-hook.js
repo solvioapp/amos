@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {
   H, R, React, useMutation, gql, useState, useEffect,
   AmosChat, Button, Topics, Prerequisites

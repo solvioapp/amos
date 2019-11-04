@@ -1,5 +1,5 @@
 import {
-  React, H, R, useCookies, gql, useQuery, useMutation
+  useCookies, gql, useQuery, useMutation
 } from 'common'
 
 const GET_AUTH = gql`

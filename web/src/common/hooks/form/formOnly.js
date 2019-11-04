@@ -1,4 +1,4 @@
-import {R, H, React, useForm, useFormContext} from 'common'
+import {R, H, useForm, useFormContext} from 'common'
 
 /* eslint-disable indent */
 const formOnly =
@@ -21,8 +21,6 @@ const formOnly =
   // fields = H.isNotNilOrEmpty (schemaFields) && schemaFields || opts.fields,
 
   fields = R.keys (form.getValues()),
-
-  [] = [form.getValues() |> console.log ('form.getValues()', #)],
 
   /* Merge form errors with API errors */
   errors = R.merge (form.errors) (props.onSubmit[1]?.data || {}),

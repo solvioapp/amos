@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {React} from 'common'
 
 export const
@@ -39,4 +40,18 @@ elements = {
     `advanced`,
     `domain expert`
   ]
-}
+},
+
+about = [
+  `👋 I'm Amos. I lived in the 1600s and was a reformer of education. 😎`,
+  `Now I'm back to teach you anything you want!`,
+  `You can learn something. You can also submit a Review for your fav resources and help me expand my database.`,
+  `Finally, you can sign up to get attribution for your Reviews and full access to the app. 🙃`,
+  <span>If you'd like to learn more about what I'm doing, check out my <a href='https://github.com/amosapp/amos/wiki'>wiki</a>!</span>
+],
+
+review = [
+  `Here you can add reviews for online learning resources - either anonymously or
+  by signing up. I would recommend signing up first because then you'll never have to see this screen again!!`,
+  `... and you'll get attribution for your reviews.`
+]

@@ -1,7 +1,7 @@
 import {H} from 'common'
 import Label from './label'
 
-const Top_ = H.css`
+const top = H.css`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -11,4 +11,4 @@ const Top_ = H.css`
   }
 `
 
-export default Top_
+export default top

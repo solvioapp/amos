@@ -1,4 +1,4 @@
-import {R, React, styled, css} from 'common'
+import {R, styled, css} from 'common'
 
 export const
 
@@ -20,11 +20,12 @@ propEq = (name, a, b) => R.ifElse (
   R.always (b)
 ),
 
-style = C => (css, attrs) => styled (C).attrs (attrs) `${css};`,
+/* eslint-disable no-shadow */
+// style = C => (css, attrs) => styled (C).attrs (attrs) `${css};`,
 
-styleAndForwardRef = C => css => (
-  style (React.forwardRef (C)) (css)
-),
+// styleAndForwardRef = C => css => (
+//   style (React.forwardRef (C)) (css)
+// ),
 
 options = (obj, name, defKey) => props => props[name] ? obj[props[name]] : obj[defKey]
 

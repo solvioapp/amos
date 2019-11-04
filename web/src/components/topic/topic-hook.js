@@ -49,6 +49,7 @@ const topicHook = props => {
   }
   const {data} = useQuery (QUERY_TOPIC, options)
 
+  /* eslint-disable max-len */
   const message = [
     <span>Great! Here are some resources for {name}. Help me expand my collection by submitting a <Link to='/review'>Review</Link>.</span>
   ]

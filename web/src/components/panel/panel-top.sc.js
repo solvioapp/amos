@@ -26,7 +26,7 @@ const left = H.css`
 
 const options = {one, two, left}
 
-const Top_ = H.css`
+const top = H.css`
   ${H.options (options, `columns`, `one`)}
 
   > ${Title} {
@@ -34,4 +34,4 @@ const Top_ = H.css`
   }
 `
 
-export default Top_
+export default top

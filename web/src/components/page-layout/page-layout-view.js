@@ -1,5 +1,5 @@
 import {
-  H, React, withRouter,
+  H, React,
   NavMenu,
 } from 'common'
 import content from './content.sc'

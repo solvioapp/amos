@@ -1,4 +1,4 @@
-import {R, H, React} from 'common'
+import {R, React} from 'common'
 
 const times = (props) => {
   const

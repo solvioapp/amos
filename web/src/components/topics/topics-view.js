@@ -8,6 +8,7 @@ const makeTopics = R.cond ([
     </span>
   )],
   [R.T, topics => (
+    /* eslint-disable max-len */
     <span>
       {H.safeMap (t => <span>{t}, </span>) (R.dropLast (2) (topics))} {R.nth (R.length (topics) - 2) (topics)} and {R.last (topics)}
     </span>

@@ -3,7 +3,7 @@ import {
   AuthBox
 } from 'common'
 import useThanksHook from './thanks-hook'
-import Top_ from '../review-top.sc'
+import top from '../review-top.sc'
 
 const messages = [
   `Thanks for the review!`,
@@ -15,13 +15,13 @@ const Thanks = (props) => {
 
   return props.isAuthenticated
     ? (
-      <div css={Top_} {...props}>
+      <div css={top} {...props}>
         {amosChat}
       </div>
     )
     : (
-      <div css={Top_} columns='two' {...props}>
-        <div css={Top_} columns='left'>
+      <div css={top} columns='two' {...props}>
+        <div css={top} columns='left'>
           {amosChat}
         </div>
         <AuthBox/>

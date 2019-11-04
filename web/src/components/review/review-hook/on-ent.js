@@ -18,7 +18,6 @@ onClick = (props) => {
         : onSubmit.finish()
     }
     else {
-      console.log (`else`)
       form.setValue (field, t)
       setOneValid (key) (true)
     }

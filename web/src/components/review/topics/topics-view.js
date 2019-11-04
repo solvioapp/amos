@@ -5,7 +5,7 @@ import {
 import {useReviewTopics} from '../review-hook'
 import Buttons from '../buttons'
 import inputForm from '../input-form.sc'
-import Top_ from '../review-top.sc'
+import top from '../review-top.sc'
 
 const Topics = (props) => {
   const {
@@ -13,7 +13,7 @@ const Topics = (props) => {
     onSubmit, onClick, form, onEnt, valid
   } = useReviewTopics (`topic`) (props)
 
-  return <div css={Top_} {...props}>
+  return <div css={top} {...props}>
     <AmosChat>
       {messages}
     </AmosChat>
