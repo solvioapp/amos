@@ -6,11 +6,13 @@ const dropdownHook = (props) => {
   const {results, onClick, link, name, active, _key, onEnt} = props,
   [_active, _setActive] = useState (active),
 
+  text = results?.[_active]?.text,
+
   onKeyPress = useCallback ((e) => {
     const {key} = e
     key === `Enter` && onEnt && results && do {
       e.preventDefault()
-      onEnt (name) (_key) (results?.[_active]?.text)
+      onEnt (name) (_key) (text)
     }
   }, [results, _active])
 
@@ -43,7 +45,7 @@ const dropdownHook = (props) => {
     )
 
     const optionallyWrap = (wrap) => (
-      wrap ? <Link to={`/topic/${name}`}> {label} </Link> : label
+      wrap ? <Link to={`/topic/${text}`}> {label} </Link> : label
     )
 
     return (

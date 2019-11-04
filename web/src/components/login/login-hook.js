@@ -1,6 +1,6 @@
-import {React, gql, useLazyQuery} from 'common'
+import {gql, useLazyQuery} from 'common'
 
-export const
+const
 
 LOGIN_GQL = gql`
   query Login ($input: LoginInput!) {
@@ -12,10 +12,10 @@ LOGIN_GQL = gql`
   }
 `,
 
-LOGIN = C => ({...rest}) => {
+loginHook = () => {
   const login = useLazyQuery (LOGIN_GQL)
 
-  return (
-    <C login={login} onSubmit={login} {...rest}/>
-  )
+  return {login}
 }
+
+export default loginHook

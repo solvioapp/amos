@@ -1,7 +1,8 @@
 import {
-  R, hooks, H, React, CONST, validation, styled,
-  AmosChat, Button, Input, Checkbox, AuthOptions
+  H, hooks, React, CONST, validation,
+  AmosChat, Button, Input, AuthOptions
 } from 'common'
+import useEmailHook from './email-hook'
 import Top_ from './signup-top.sc'
 
 const message = ({isSubmitted}) => (
@@ -10,7 +11,8 @@ const message = ({isSubmitted}) => (
 
 const boxShadowWidth = `0`
 
-const Form = (props) => {
+const Email = (props) => {
+  const {signup} = useEmailHook (props)
   const {
     onSubmit, messages, form: {register}, errors, ...rest
   } = hooks.form
@@ -21,7 +23,7 @@ const Form = (props) => {
       mode: `onBlur`,
     })
     ({message})
-    (props)
+    ({...props, onSubmit: signup})
   return <form css={Top_} onSubmit={onSubmit} {...rest}>
     <AmosChat>
       {messages}
@@ -69,7 +71,4 @@ const Form = (props) => {
   </form>
 }
 
-export default Form
-  |> hooks.SIGNUP
-  |> styled (#) ``
-// |> hooks.form ({validationSchema: validation.signup}) ({message}) (#)
+export default H.styled (Email) ``

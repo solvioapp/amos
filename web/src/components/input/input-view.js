@@ -16,6 +16,8 @@ const Input = (props, ref) => {
     hasError = Boolean (errors?.[name]), ...rest
   } = props
 
+  name |> console.log ('name', #)
+
   const {_onClick, forwardRef, dropdown, active} = useInputHook ({...props, ref})
 
   return (

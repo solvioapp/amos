@@ -1,6 +1,6 @@
-import {React, gql, useMutation} from 'common'
+import {gql, useMutation} from 'common'
 
-export const
+const
 
 SIGNUP_GQL = gql`
   mutation Signup ($input: SignupInput!) {
@@ -12,10 +12,10 @@ SIGNUP_GQL = gql`
   }
 `,
 
-SIGNUP = C => ({...rest}) => {
+emailHook = () => {
   const signup = useMutation (SIGNUP_GQL)
 
-  return (
-    <C signup={signup} onSubmit={signup} {...rest}/>
-  )
+  return {signup}
 }
+
+export default emailHook

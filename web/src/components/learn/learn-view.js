@@ -8,7 +8,7 @@ const messages = [
   `Watcha interested in? 🤗`
 ]
 
-const Guest = ({onEnt, results, register, onSubmit, ...rest}) => (
+const Learn = ({onEnt, results, register, onSubmit, ...rest}) => (
   <form css={top} autocomplete='off' onSubmit={onSubmit}>
     <AmosChat avatar='small'>
       {messages}
@@ -24,4 +24,4 @@ const Guest = ({onEnt, results, register, onSubmit, ...rest}) => (
   </form>
 )
 
-export default hooks.withSearch (Guest)
+export default hooks.withSearch (Learn)
