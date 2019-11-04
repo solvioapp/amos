@@ -15,14 +15,10 @@ const one = css`
 const two = css`
   display: grid;
   grid-template-columns: 2fr 1fr;
-  gap: 200px;
+  gap: 12.5vw;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-  }
-
-  @media (max-width: 768px) {
-    align-items: stretch;
   }
 `
 

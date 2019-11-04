@@ -1,6 +1,6 @@
 import {H, R, React} from 'common'
 import Bubble from './bubble'
-import Top_ from './top.sc'
+import top from './top.sc'
 import Avatar from './avatar'
 import ChatFlow_ from './chat-flow.sc'
 import CallToAction_ from './call-to-action.sc'
@@ -20,7 +20,7 @@ const AmosChat = ({avatar = `regular`, children, callToAction, ...rest}) => {
   }
 
   return (
-    <div {...rest}>
+    <div css={top} {...{avatar}} {...rest}>
       {avatar !== `none` && <Avatar size={avatar} timeout={2400}/>}
       <ChatFlow_ size={avatar}>
         <Bubble>{toText (children[0])}</Bubble>
@@ -31,4 +31,4 @@ const AmosChat = ({avatar = `regular`, children, callToAction, ...rest}) => {
   )
 }
 
-export default H.style (AmosChat) (Top_)
+export default H.styled (AmosChat) ``

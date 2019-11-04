@@ -6,9 +6,12 @@ const Content_ = styled.div`
   flex-grow: 1;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 10%;
   padding: 30px;
   padding-bottom: 65px;
+
+  @media (min-width: 768px) {
+    margin-top: 20vh;
+  }
 `
 
 export default Content_
