@@ -3,7 +3,7 @@ import {
   AmosChat, Button, Input, AuthOptions
 } from 'common'
 import useEmailHook from './email-hook'
-import Top_ from './signup-top.sc'
+import top from './signup-top.sc'
 
 const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup
@@ -24,7 +24,7 @@ const Email = (props) => {
     })
     ({message})
     ({...props, onSubmit: signup})
-  return <form css={Top_} onSubmit={onSubmit} {...rest}>
+  return <form css={top} onSubmit={onSubmit} {...rest}>
     <AmosChat>
       {messages}
     </AmosChat>
