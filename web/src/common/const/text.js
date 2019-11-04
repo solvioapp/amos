@@ -1,3 +1,5 @@
+import {React} from 'common'
+
 export const
 
 email = `Email must be... well... an email!`,
@@ -23,4 +25,18 @@ links = `Let's start with the links. Please enter the  URLs that lead to the res
 
 topics = `What topics is the resource on? Please try to be as specific as possible to help others the most.`,
 
-prerequisites = `What do you need to know in order to make the most out of this resource? Again, try to be as detailed as possible, thanks.`
+prerequisites = `What do you need to know in order to make the most out of this resource? Again, try to be as detailed as possible, thanks.`,
+
+elements = {
+  strength: [
+    <span>think it would be <em>helpful</em></span>,
+    <span>would <em>recommend</em></span>,
+    <span>think it's <em>necessary</em></span>
+  ],
+  level: [
+    `beginner`,
+    `intermediate`,
+    `advanced`,
+    `domain expert`
+  ]
+}

@@ -41,6 +41,8 @@ import RadioGroup from 'components/radio-group'
 import Title from 'components/title'
 import Hr from 'components/hr'
 import SplitButton from 'components/split-button'
+import Topics from 'components/topics'
+import Prerequisites from 'components/prerequisites'
 
 /* Special */
 import Panel from 'components/panel/top.sc'
@@ -94,6 +96,8 @@ export {
   Title,
   Hr,
   SplitButton,
+  Topics,
+  Prerequisites,
   Panel,
   Button,
   AmosChat,

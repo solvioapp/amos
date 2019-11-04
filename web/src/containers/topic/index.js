@@ -1,10 +1,8 @@
 import {
-  React, gql, useQuery, R, H, Link,
-  Icon, AmosChat, SplitButton
+  React, gql, useQuery, R, H, Link, CONST,
+  Icon, AmosChat, SplitButton, Topics, Prerequisites
 } from 'common'
 import top from './top.sc'
-
-const DOWNLOAD_DOMAIN = `http://93.174.95.29/main`
 
 const QUERY_TOPIC = gql`
   query GetResources ($name: String!) {
@@ -40,21 +38,19 @@ const QUERY_TOPIC = gql`
 `
 
 const onMenuClick = (e, {item: {url}}) => {
-  window.location.href = `${DOWNLOAD_DOMAIN}${url}`
-}
-
-const makeTopics = topics => {
-  topics |> console.log ('topics', #)
-  return <span>
-    {R.map (R.identity) (R.pluck (`names`) (topics))}
-  </span>
+  window.location.href = `${CONST.DOWNLOAD_DOMAIN}${url}`
 }
 
 const Topic = ({location, match}) => {
   location |> console.log ('location', #)
   match |> console.log ('match', #)
   const name = match.params.name
-  const {data} = useQuery (QUERY_TOPIC, {variables: {name}, returnPartialData: true})
+  const options = {
+    variables: {name},
+    returnPartialData: true,
+    fetchPolicy: `cache-and-network`
+  }
+  const {data} = useQuery (QUERY_TOPIC, options)
   const renderResource = (res, key) => {
     res |> console.log ('res', #)
     const icon = R.cond ([
@@ -72,7 +68,8 @@ const Topic = ({location, match}) => {
     const items = H.reduce ((acc, val, _key) => (
       val ? R.append ({label: strings[_key], url: val}) (acc) : acc
     )) ([]) (downloads)
-    const onClick = () => window.location.href = `${DOWNLOAD_DOMAIN}${items?.[0]?.url}`
+    const onClick = () => window.location.href = `${CONST.DOWNLOAD_DOMAIN}${items?.[0]?.url}`
+    const {topics, prerequisites} = res
     return <div css={top} key={key}>
       {icon && <div>TYPE: <Icon src={icon} book/></div>}
       {title && (
@@ -91,8 +88,8 @@ const Topic = ({location, match}) => {
       {res.typeSpecific_goodreadsNoRatings && <p># of ratings: {res.typeSpecific_goodreadsNoRatings}</p>}
       {res.typeSpecific_pages && <p>{res.typeSpecific_pages} p.</p>}
       {res.typeSpecific_isbn && <p>ISBN: {res.typeSpecific_isbn}</p>}
-      {H.isNotNilOrEmpty (res.topics) && <p>Topics: {makeTopics (res.topics)}</p>}
-      {H.isNotNilOrEmpty (res.prerequisites) && <p>Prerequisites: {makeTopics (R.pluck (`topic`) (res.prerequisites))}</p>}
+      {H.isNotNilOrEmpty (topics) && <p>The topics are <Topics topics={R.pluck (`names`) (topics)}/>.</p>}
+      {H.isNotNilOrEmpty (prerequisites) && <p>People told me they <Prerequisites {...{prerequisites}}/>.</p>}
       {/* {res.typeSpecific_dewey && <p>{res.typeSpecific_dewey}</p>}} */}
     </div>
   }

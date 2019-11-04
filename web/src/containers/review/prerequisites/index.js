@@ -1,26 +1,12 @@
 import {
-  React, hooks, R, useState, H, useCallback,
+  React, hooks, R, useState, H, useCallback, CONST,
   AmosChat, Button, Title, Input, RadioGroup, Hr
 } from 'common'
 import Buttons from '../buttons.sc'
 import Top_ from '../top.sc'
 import InputForm_ from '../input-form.sc'
 
-const elements = {
-  strength: [
-    <span>think it would be <em>helpful</em></span>,
-    <span>would <em>recommend</em></span>,
-    <span>think it's <em>necessary</em></span>
-  ],
-  level: [
-    `beginner`,
-    `intermediate`,
-    `advanced`,
-    `domain expert`
-  ]
-},
-
-Prerequisites = (props) => {
+const Prerequisites = (props) => {
   const [checked, setChecked] = useState ([])
   const setOneChecked = useCallback ((key) => val => {
     key |> console.log ('setOneChecked key', #)
@@ -59,9 +45,9 @@ Prerequisites = (props) => {
             <RadioGroup
               header='I:'
               name={`prerequisite[${key}].strength`}
-              elements={elements.strength}
+              elements={CONST.elements.strength}
               _key={key}
-              onClick={(e, checked) => onClick [3 * key] (e, key, `strength`, checked)}
+              onClick={(e, _checked) => onClick [3 * key] (e, key, `strength`, _checked)}
               checked={checked?.[3 * key]}
               setChecked={setOneChecked (3 * key)}
               {...{form}}
@@ -69,9 +55,9 @@ Prerequisites = (props) => {
             <RadioGroup
               header='for people to be atleast:'
               name={`prerequisite[${key}].level`}
-              elements={elements.level}
+              elements={CONST.elements.level}
               _key={key}
-              onClick={(e, checked) => onClick [3 * key + 1] (e, key, `level`, checked)}
+              onClick={(e, _checked) => onClick [3 * key + 1] (e, key, `level`, _checked)}
               footer='in:'
               checked={checked?.[3 * key + 1]}
               setChecked={setOneChecked (3 * key + 1)}

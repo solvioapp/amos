@@ -1,6 +1,6 @@
 import {
-  H, R, React, useMutation, gql, hooks, W,
-  AmosChat, AuthBox, Button
+  H, R, React, useMutation, gql, hooks, W, useState, useEffect,
+  AmosChat, AuthBox, Button, Topics, Prerequisites
 } from 'common'
 import Top_ from '../top.sc'
 
@@ -19,41 +19,36 @@ RESET_REVIEW_GQL = gql`
   }
 `,
 
-createTopics = R.cond ([
-  [H.hasLength (1), R.identity],
-  [H.hasLength (2), topics => (
-    <span>
-      {topics[0]} and {topics[1]}
-    </span>
-  )],
-  [R.T, topics => (
-    <span>{H.safeMap (t => <span>{t}, </span>) (R.dropLast (2) (topics))} {R.nth (R.length (topics) - 2) (topics)} and {R.last (topics)}
-    </span>
-  )]
-]),
-
 Confirm = (props) => {
 
   const {review} = hooks.loadReview (props),
   {link, topic, prerequisite} = review,
   url = link?.[0],
 
-  messages = [
+  defMessages = [
     `Do you really wanna submit the following review?`,
     <a href={url}>{url}</a>,
     ... H.isNotNilOrEmpty (topic) ? ([
-      <span>Resource is on {createTopics (topic)}.</span>
+      <span>Resource is on <Topics topics={topic}/>.</span>
     ]) : [],
     ... H.isNotNilOrEmpty (prerequisite) ? ([
-      <span>Resource has prerequisites {createTopics (R.pluck (`topic`) (prerequisite))}.</span>
+      <span>You <Prerequisites prerequisites={prerequisite}/>.</span>
     ]) : []
   ],
 
+  [messages, setMessages] = useState (defMessages),
+
   [resetReview] = useMutation (RESET_REVIEW_GQL),
 
-  onCompleted = () => {
-    resetReview()
-    H.navto (`/review/thanks`)()
+  onCompleted = (res) => {
+    res.addReview.success
+      ? do {
+        resetReview()
+        H.navto (`/review/thanks`)()
+      }
+      : do {
+        setMessages (R.append (`Something went wrong. Are you sure the URL is correct?`))
+      }
   },
 
   [exec] = useMutation (ADD_REVIEW_GQL, {onCompleted}),
@@ -86,6 +81,20 @@ Confirm = (props) => {
       </>
     }>{messages}</AmosChat>
   )
+
+  const onKeyPress = (e) => {
+    const {key} = e
+    key === `Enter` && do {
+      e.preventDefault()
+      submitReview()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener (`keypress`, onKeyPress)
+
+    return () => document.removeEventListener (`keypress`, onKeyPress)
+  }, [onKeyPress])
 
   return props.isAuthenticated
     ? (

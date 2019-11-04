@@ -1,5 +1,5 @@
 import {
-  H, React, W,
+  H, React, W, useEffect,
   AmosChat, AuthBox, Button
 } from 'common'
 import Top_ from '../top.sc'
@@ -12,11 +12,25 @@ const Guest = ({isAuthenticated, ...rest}) => {
 
   const amosChat = (
     <AmosChat callToAction={
-      <Button primary onClick={H.navto (`/review/links`)}>
-        Submit another review
+      <Button primary onClick={H.navto (`/search`)}>
+        Search
       </Button>
     }>{messages}</AmosChat>
   )
+
+  const onKeyPress = (e) => {
+    const {key} = e
+    key === `Enter` && do {
+      e.preventDefault()
+      H.navto (`/search`) ()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener (`keypress`, onKeyPress)
+
+    return () => document.removeEventListener (`keypress`, onKeyPress)
+  }, [onKeyPress])
 
   return isAuthenticated
     ? (
