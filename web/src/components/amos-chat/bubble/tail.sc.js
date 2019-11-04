@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import {H} from 'common'
 
-const Tail_ = styled.div`
+const tail = H.css`
   height: 12px;
   left: -10px;
   overflow: hidden;
@@ -22,4 +22,4 @@ const Tail_ = styled.div`
   }
 `
 
-export default Tail_
+export default tail

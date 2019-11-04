@@ -1,14 +1,9 @@
-import {
-  H, styled,
-  Button,
-} from 'common'
-import Bubble from './bubble'
+import {H} from 'common'
 
 const
 
-CallToAction_ = styled.div`
-
+callToAction = H.css`
   display: flex;
 `
 
-export default CallToAction_
+export default callToAction
