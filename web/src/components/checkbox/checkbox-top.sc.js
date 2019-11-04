@@ -1,9 +1,8 @@
 import {H} from 'common'
 
-const Top_ = H.css`
+const top = H.css`
   display: flex;
   align-items: center;
-  flex-direction: row;
 `
 
-export default Top_
+export default top

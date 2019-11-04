@@ -1,14 +1,14 @@
 import {H, React} from 'common'
-import Top_ from './checkbox-top.sc'
-import Checkbox_ from './checkbox.sc'
+import top from './checkbox-top.sc'
+import checkbox from './checkbox.sc'
 
 const Checkbox = ({children, ...rest}) => (
-  <div {...rest}>
-    <Checkbox_ checkboxSize={20} checkboxBorderSize={2}>
+  <div css={top} {...rest}>
+    <span css={checkbox} size={20} border={2}>
       <input type='checkbox' defaultChecked/>
-    </Checkbox_>
+    </span>
     {children}
   </div>
 )
 
-export default H.style (Checkbox) (Top_)
+export default H.styled (Checkbox) ``

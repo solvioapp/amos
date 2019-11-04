@@ -1,7 +1,6 @@
-import {styled} from 'common'
+import {H, R} from 'common'
 
-const Checkbox_ = styled.span`
-
+const checkbox = H.css`
   display: flex;
   align-items: center;
   padding: .5rem;
@@ -17,10 +16,10 @@ const Checkbox_ = styled.span`
     outline: none; // TODO: manage :focus
     background: white;
     cursor: pointer;
-    width: ${props => (2 * props.checkboxSize) - (2 * props.checkboxBorderSize) + 'px'};
-    height: ${props => props.checkboxSize + 'px'};
-    border: ${props => props.checkboxBorderSize}px solid #959595;
-    border-radius: ${props => props.checkboxSize - (2* props.checkboxBorderSize)}px;
+    width: ${p => (2 * p.size) - (2 * p.border)}px;
+    height: ${R.prop (`size`)}px;
+    border: ${R.prop (`border`)}px solid #959595;
+    border-radius: ${p => p.size - (2 * p.border)}px;
 
     &::before {
       content: ' ';
@@ -31,10 +30,10 @@ const Checkbox_ = styled.span`
       left: 50%;
       transition: all .1s;
       background: #0066FF;
-      top: ${props => props.checkboxBorderSize}px;
-      right: ${props => props.checkboxSize - props.checkboxBorderSize}px;
-      bottom: ${props => props.checkboxBorderSize}px;
-      left: ${props => props.checkboxBorderSize}px;
+      top: ${R.prop (`border`)}px;
+      right: ${p => p.size - p.border}px;
+      bottom: ${R.prop (`border`)}px;
+      left: ${R.prop (`border`)}px;
       border-radius: 50%;
       background: #959595;
     }
@@ -43,12 +42,12 @@ const Checkbox_ = styled.span`
       border-color: #0066FF;
 
       &::before {
-        right: ${props => props.checkboxBorderSize}px;
-        left: ${props => props.checkboxSize - props.checkboxBorderSize}px;
+        right: ${R.prop (`border`)}px;
+        left: ${p => p.size - p.border}px;
         background: #0066FF;
       }
     }
   }
 `
 
-export default Checkbox_
+export default checkbox
