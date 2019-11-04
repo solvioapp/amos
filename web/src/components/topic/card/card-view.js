@@ -41,7 +41,7 @@ const Card = (props) => {
     {res.typeSpecific_goodreadsNoRatings && <p># of ratings: {res.typeSpecific_goodreadsNoRatings}</p>}
     {res.typeSpecific_pages && <p>{res.typeSpecific_pages} p.</p>}
     {res.typeSpecific_isbn && <p>ISBN: {res.typeSpecific_isbn}</p>}
-    {H.isNotNilOrEmpty (topics) && <p>Topics: <Topics topics={R.pluck (`names`) (topics)}/>.</p>}
+    {H.isNotNilOrEmpty (topics) && <p>{R.length (topics) === 1 ? `Topic:` : `Topics:`} <Topics topics={R.pluck (`names`) (topics)}/>.</p>}
     {H.isNotNilOrEmpty (prerequisites) && <p>People told me they <Prerequisites {...{prerequisites}}/>.</p>}
     {/* {res.typeSpecific_dewey && <p>{res.typeSpecific_dewey}</p>}} */}
   </div>

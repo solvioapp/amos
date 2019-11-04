@@ -6,10 +6,6 @@ const one = H.css`
   align-items: center;
   max-width: 550px;
   width: 100%;
-
-  @media (max-width: 768px) {
-    align-items: stretch;
-  }
 `
 
 const two = H.css`
@@ -23,13 +19,9 @@ const two = H.css`
 `
 
 const left = H.css`  
-  align-items: center;
   display: flex;
   flex-direction: column;
-
-  @media (max-width: 768px) {
-    align-items: stretch;
-  }
+  align-items: center;
 `
 
 const options = {

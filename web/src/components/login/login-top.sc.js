@@ -10,10 +10,6 @@ const top = H.css`
   max-width: 550px;
   width: 100%;
 
-  @media (max-width: 768px) {
-    align-items: stretch;
-  }
-
   ${Input} {
     margin-top: 24px;
   }
