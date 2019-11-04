@@ -1,7 +1,8 @@
 import {
-  H, React, R, hooks,
+  H, React, R,
   AmosChat, Button, Title, Input
 } from 'common'
+import {useReviewTopics} from '../review-hook'
 import Buttons from '../buttons.sc'
 import InputForm_ from '../input-form.sc'
 import Top_ from '../review-top.sc'
@@ -10,7 +11,7 @@ const Topics = (props) => {
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid
-  } = hooks.useReviewTopics (`topic`) (props)
+  } = useReviewTopics (`topic`) (props)
 
   return <div css={Top_} {...props}>
     <AmosChat>

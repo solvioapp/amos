@@ -1,16 +1,16 @@
 import {
-  React, hooks,
+  React,
   AmosChat, Button, Title, Input
 } from 'common'
+import {useReviewLinks} from './review-hook'
 import Top_ from './review-top.sc'
 import Buttons_ from './buttons.sc'
 import InputForm_ from './input-form.sc'
 
 const Links = (props) => {
-  
   const {
     onSubmit, messages, form, errors, valid, onChange, onEnt, ...rest
-  } = hooks.useReviewLinks (`link`) (props)
+  } = useReviewLinks (`link`) (props)
 
   return <div css={Top_} {...rest}>
     <AmosChat>

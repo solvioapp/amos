@@ -1,7 +1,8 @@
 import {
-  React, hooks, R, useState, H, useCallback, CONST,
+  React, R, useState, H, useCallback, CONST,
   AmosChat, Button, Title, Input, RadioGroup, Hr
 } from 'common'
+import {useReviewTopics} from '../review-hook'
 import Buttons from '../buttons.sc'
 import Top_ from '../review-top.sc'
 import InputForm_ from '../input-form.sc'
@@ -14,7 +15,7 @@ const Prerequisites = (props) => {
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid, checkboxesValid
-  } = hooks.useReviewTopics (`prerequisite`) ({...props, setOneChecked})
+  } = useReviewTopics (`prerequisite`) ({...props, setOneChecked})
 
   return <div css={Top_} {...props}>
     <AmosChat>

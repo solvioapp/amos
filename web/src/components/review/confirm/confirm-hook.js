@@ -1,7 +1,8 @@
 import {
-  H, R, React, useMutation, gql, hooks, useState, useEffect,
+  H, R, React, useMutation, gql, useState, useEffect,
   AmosChat, Button, Topics, Prerequisites
 } from 'common'
+import {loadReview} from '../review-hook'
 
 const ADD_REVIEW_GQL = gql`
   mutation AddReview ($input: AddReviewInput!) {
@@ -19,7 +20,7 @@ RESET_REVIEW_GQL = gql`
 `,
 
 confirmHook = (props) => {
-  const {review} = hooks.loadReview (props),
+  const {review} = loadReview (props),
   {link, topic, prerequisite} = review,
   url = link?.[0],
 
