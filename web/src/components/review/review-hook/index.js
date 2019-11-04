@@ -1,6 +1,5 @@
 /* eslint-disable max-lines */
 import {R, CONST, validation, hooks} from 'common'
-import {multiForm} from 'common/hooks/form'
 import times from './times'
 import onClick from './on-click'
 import isValid from './is-valid'
@@ -54,7 +53,7 @@ useReview = name => (
     onSubmit, // adds onSubmit
     /* Adds {fields, messages, form, schema}
       Overrides onSubmit */
-    multiForm (formOpts (name)) (opts (name)),
+    hooks.multiForm (formOpts (name)) (opts (name)),
     loadReview, // loads Review
   )
 ),
