@@ -1,12 +1,12 @@
 import {
-  styled,
+  H,
   AuthOptions, Button, Input
 } from 'common'
 
-const Form = styled.form`
-  align-items: center;
+const top = H.css`
   display: flex;
   flex-direction: column;
+  align-items: center;
   max-width: 550px;
   width: 100%;
 
@@ -14,17 +14,17 @@ const Form = styled.form`
     align-items: stretch;
   }
 
-  > ${Input} {
+  ${Input} {
     margin-top: 24px;
   }
 
-  > ${Button} {
+  ${Button} {
     margin-top: 24px;
   }
 
-  > ${AuthOptions} {
+  ${AuthOptions} {
     margin-top: 20px;
   }
 `
 
-export default Form
+export default top

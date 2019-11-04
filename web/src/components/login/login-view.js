@@ -3,7 +3,7 @@ import {
   AmosChat, Input, Button, AuthOptions
 } from 'common'
 import useLoginHook from './login-hook'
-import Form_ from './form.sc'
+import top from './login-top.sc'
 
 const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.login
@@ -11,7 +11,7 @@ const message = ({isSubmitted}) => (
 
 const boxShadowWidth = `0`
 
-const Form = (props) => {
+const Login = (props) => {
   const {login} = useLoginHook (props)
   const {
     onSubmit, messages, form: {register, errors}
@@ -24,7 +24,7 @@ const Form = (props) => {
     })
     ({message})
     ({...props, onSubmit: login})
-  return <Form_ onSubmit={onSubmit}>
+  return <form css={top} onSubmit={onSubmit} {...props}>
     <AmosChat>
       {messages}
     </AmosChat>
@@ -56,7 +56,7 @@ const Form = (props) => {
         text: `Sign up`
       }}
     />
-  </Form_>
+  </form>
 }
 
-export default H.styled (Form) ``
+export default H.styled (Login) ``

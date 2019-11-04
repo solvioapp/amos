@@ -1,7 +1,6 @@
 import {H, Input} from 'common'
 
 const top = H.css`
-  ${'' /* ${Panel} */}
   display: flex;
   flex-direction: column;
   align-items: center;

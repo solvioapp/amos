@@ -1,5 +1,5 @@
 import {
-  React, hooks,
+  H, React, hooks,
   Input, AmosChat
 } from 'common'
 import top from './learn-top.sc'
@@ -9,7 +9,7 @@ const messages = [
 ]
 
 const Learn = ({onEnt, results, register, onSubmit, ...rest}) => (
-  <form css={top} autocomplete='off' onSubmit={onSubmit}>
+  <form css={top} autocomplete='off' onSubmit={onSubmit} {...rest}>
     <AmosChat avatar='small'>
       {messages}
     </AmosChat>
@@ -24,4 +24,4 @@ const Learn = ({onEnt, results, register, onSubmit, ...rest}) => (
   </form>
 )
 
-export default hooks.withSearch (Learn)
+export default H.styled (hooks.withSearch (Learn)) ``
