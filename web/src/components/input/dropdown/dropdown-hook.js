@@ -2,11 +2,9 @@ import {
   React, useState, useCallback, useEffect, Link, H
 } from 'common'
 
-import {Dropdown_} from './dropdown.sc.js'
-
-export default ({results, onClick, link, name, active, _key, onEnt}) => {
-  results |> console.log ('results dropdown', #)
-  const [_active, _setActive] = useState (active),
+const DropdownHook = (props) => {
+  const {results, onClick, link, name, active, _key, onEnt} = props,
+  [_active, _setActive] = useState (active),
 
   onKeyPress = useCallback ((e) => {
     const {key} = e
@@ -27,7 +25,7 @@ export default ({results, onClick, link, name, active, _key, onEnt}) => {
   }, [active])
 
   const renderResults = (result, key) => {
-    const {name, text} = result
+    const {text} = result
 
     const label = (
       /*
@@ -55,11 +53,7 @@ export default ({results, onClick, link, name, active, _key, onEnt}) => {
     )
   }
 
-  return (
-    <Dropdown_>
-      <div className='dropdown'>
-        {H.safeMap (renderResults) (results)}
-      </div>
-    </Dropdown_>
-  )
+  return {renderResults}
 }
+
+export default DropdownHook

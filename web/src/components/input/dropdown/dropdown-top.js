@@ -1,8 +1,8 @@
 import {
-  R, styled
+  css
 } from 'common'
 
-export const Dropdown_ = styled.div`
+const top = css`
   label {
     display: block;
     overflow: hidden;
@@ -38,3 +38,5 @@ export const Dropdown_ = styled.div`
 
   /* .show {display: block;} */
 `
+
+export default top

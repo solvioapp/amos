@@ -31,9 +31,8 @@ import * as CSS_CONST from './const/css'
 
 /* No dependencies */
 import Icon from 'components/icon'
-import AuthOptions from 'components/auth-options'
+import AuthOptions from 'components/auth-box/auth-options'
 import Checkbox from 'components/checkbox'
-import Footer from 'components/footer'
 import Input from 'components/input'
 import NavMenu from 'components/nav-menu'
 import NotFound from 'components/not-found'
@@ -43,9 +42,7 @@ import Hr from 'components/hr'
 import SplitButton from 'components/split-button'
 import Topics from 'components/topics'
 import Prerequisites from 'components/prerequisites'
-
-/* Special */
-import Panel from 'components/panel/top.sc'
+import Panel from 'components/panel'
 
 /* Icon */
 import Button from 'components/button'
@@ -98,7 +95,6 @@ export {
   Icon,
   AuthOptions,
   Checkbox,
-  Footer,
   Input,
   NavMenu,
   NotFound,
