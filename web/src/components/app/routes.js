@@ -12,7 +12,7 @@ const onKeyPress = (e) => {
   H.neq (`input`) (document.activeElement.localName) && do {
     e.preventDefault()
     const target = R.cond ([
-      [R.equals (`c`), R.always (`/review`)],
+      [R.equals (`r`), R.always (`/review`)],
       [R.equals (`l`), R.always (`/learn`)],
       [R.equals (`s`), R.always (`/learn`)],
       [R.equals (`a`), R.always (`/about`)],
