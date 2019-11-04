@@ -10,7 +10,7 @@ const Content_ = styled.div`
   padding-bottom: 65px;
 
   @media (min-width: 768px) {
-    margin-top: 20vh;
+    margin-top: 10vh;
   }
 `
 

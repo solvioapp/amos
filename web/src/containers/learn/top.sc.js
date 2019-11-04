@@ -7,6 +7,10 @@ const top = css`
   align-items: center;
   width: 600px;
 
+  @media (min-width: 768px) {
+    margin-top: -7.5vh;
+  }
+
   ${Input} {
     margin-top: 42px;
   }
