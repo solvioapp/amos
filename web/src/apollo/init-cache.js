@@ -11,7 +11,6 @@ const initCache = client => {
       __typename: `Review`,
       link: null,
       topic: [],
-      // prerequisite: [{__typename: `Prerequisite`, strength: null, level: null, topic: null}]
     }
   },
   [] = [client.onResetStore = () => cache.writeData ({data: defaultData})],

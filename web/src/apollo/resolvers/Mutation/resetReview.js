@@ -1,5 +1,3 @@
-import {R, H, gql} from 'common'
-
 const resetReview = (_, $, {cache}) => {
   cache.writeData ({data: {review: {__typename: `Review`, link: null, topic: [], prerequisites: [{
     __typename: `Prerequisite`,

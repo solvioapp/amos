@@ -2,12 +2,12 @@ import {R, H} from 'common'
 
 const
 
-queries = require.context (`.`, true, /\.\/Query\/.+\.js$/),
-mutations = require.context (`.`, true, /\.\/Mutation\/.+\.js$/),
-responses = require.context (`.`, true, /\.\/Response\/.+\.js$/)
+query = require.context (`.`, true, /\.\/Query\/.+\.js$/),
+mutation = require.context (`.`, true, /\.\/Mutation\/.+\.js$/),
+response = require.context (`.`, true, /\.\/Response\/.+\.js$/)
 
 export default {
-  Query: queries |> H.importContext,
-  Mutation: mutations |> H.importContext,
-  Response: responses |> H.importContext,
+  Query: query |> H.importContext,
+  Mutation: mutation |> H.importContext,
+  Response: response |> H.importContext,
 }

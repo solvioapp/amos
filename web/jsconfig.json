@@ -5,7 +5,6 @@
     "ClientApp/*": ["./ClientApp/*"],
     "common/*": ["./src/common/*"],
     "components/*": ["./src/components/*"],
-    "containers/*": ["./src/containers/*"],
     "apollo/*": ["./src/apollo/*"]
   }
 },

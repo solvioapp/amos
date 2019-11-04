@@ -7,9 +7,6 @@ const handleGithub = async ({success, message: [type, message]}, _, {cache}) => 
         await login ({success, message}, _, {cache})
       }
       : message
-      // : do {
-      //   cache.writeData ({data: {ghAccessToken: message[1]}})
-      // }
   }
 )
 

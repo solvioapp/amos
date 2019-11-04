@@ -27,7 +27,6 @@ const addReview = (_, {input}, {cache}) => {
   const name = R.keys (input) [0]
   let _input
   if (name === `prerequisite`) {
-    input |> console.log ('addReview input', #)
     const prerequisite = (
       /* Filter invalid fields */
       H.reduce ((acc, obj, key) => (
@@ -37,15 +36,12 @@ const addReview = (_, {input}, {cache}) => {
           : acc
       )) ([]) (input[name])
     )
-    prerequisite |> console.log ('addReview prerequisite', #)
     _input = {prerequisite}
   }
   else {
     _input = {[name]: R.filter (H.isNotNilOrEmpty) (input[name])}
   }
-  previous |> console.log ('addReview previous', #)
   const review = {__typename: `Review`, ...previous, ..._input}
-  review |> console.log ('addReview review', #)
   cache.writeData ({data: {review}})
 }
 
