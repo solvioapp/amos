@@ -14,24 +14,25 @@ import Topic from 'containers/topic'
 import PublicRoute from './public-route'
 import PrivateRoute from './private-route'
 
-const Routes = () => {
-  const onKeyPress = (e) => {
-    const {key} = e
-    H.neq (`input`) (document.activeElement.localName) && do {
-      e.preventDefault()
-      const target = R.cond ([
-        [R.equals (`c`), R.always (`/review`)],
-        [R.equals (`l`), R.always (`/search`)],
-        [R.equals (`s`), R.always (`/search`)],
-        [R.equals (`a`), R.always (`/about`)],
-        [R.equals (`p`), R.always (`/profile`)],
-        [R.equals (`i`), R.always (`/login`)],
-        [R.equals (`u`), R.always (`/signup`)],
-        [R.equals (`e`), R.always (`/signup/email`)],
-      ]) (key)
-      target && H.navto (target) ()
-    }
+const onKeyPress = (e) => {
+  const {key} = e
+  H.neq (`input`) (document.activeElement.localName) && do {
+    e.preventDefault()
+    const target = R.cond ([
+      [R.equals (`c`), R.always (`/review`)],
+      [R.equals (`l`), R.always (`/search`)],
+      [R.equals (`s`), R.always (`/search`)],
+      [R.equals (`a`), R.always (`/about`)],
+      [R.equals (`p`), R.always (`/profile`)],
+      [R.equals (`i`), R.always (`/login`)],
+      [R.equals (`u`), R.always (`/signup`)],
+      [R.equals (`e`), R.always (`/signup/email`)],
+    ]) (key)
+    target && H.navto (target) ()
   }
+}
+
+const Routes = () => {
 
   useEffect(() => {
     document.addEventListener (`keypress`, onKeyPress)
