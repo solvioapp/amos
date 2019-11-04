@@ -5,7 +5,7 @@ import {
 const inputHook = (props) => {
   const
 
-  {isValid, results, noDropdown, onEnt, dontFocus, ref} = props,
+  {valid: isValid = false, results, noDropdown = false, onEnt, dontFocus, ref} = props,
 
   [dropdown, setDropdown] = useState (true),
   [valid, setValid] = useState (false),

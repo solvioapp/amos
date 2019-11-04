@@ -12,12 +12,13 @@ onClick = (props) => {
 
   const onEnt = (field) => (key) => (t) => {
     const val = form.getValues()
-    if (t === `SUBMIT` || field && H.isNilOrEmpty (val[field])) { 
+    if (t === `SUBMIT` || field && H.isNilOrEmpty (val[field])) {
       onSubmit.next
         ? onSubmit.next()
         : onSubmit.finish()
     }
     else {
+      console.log (`else`)
       form.setValue (field, t)
       setOneValid (key) (true)
     }

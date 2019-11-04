@@ -12,7 +12,7 @@ const isValid = (props) => {
   {results, loading, review, name, form} = props,
   [valid, setValid] = React.useState ([]),
   [checkboxesValid, setCheckboxesValid] = React.useState ([])
-
+  valid |> console.log ('valid is-valid.js', #)
   /*
     Set valid on hydration
     Here we're assuming that anything that was in review was in store

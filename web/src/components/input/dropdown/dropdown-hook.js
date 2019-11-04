@@ -2,7 +2,7 @@ import {
   React, useState, useCallback, useEffect, Link, H
 } from 'common'
 
-const DropdownHook = (props) => {
+const dropdownHook = (props) => {
   const {results, onClick, link, name, active, _key, onEnt} = props,
   [_active, _setActive] = useState (active),
 
@@ -56,4 +56,4 @@ const DropdownHook = (props) => {
   return {renderResults}
 }
 
-export default DropdownHook
+export default dropdownHook
