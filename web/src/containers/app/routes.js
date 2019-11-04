@@ -1,5 +1,5 @@
 import {
-  React, Redirect, Route, Switch, W,
+  H, R, React, Route, Switch, W, useEffect,
   NotFound
 } from 'common'
 import Home from './home'
@@ -14,8 +14,31 @@ import Topic from 'containers/topic'
 import PublicRoute from './public-route'
 import PrivateRoute from './private-route'
 
-const Routes = () => (
-  <Switch>
+const Routes = () => {
+  const onKeyPress = (e) => {
+    const {key} = e
+    H.neq (`input`) (document.activeElement.localName) && do {
+      e.preventDefault()
+      const target = R.cond ([
+        [R.equals (`c`), R.always (`/review`)],
+        [R.equals (`l`), R.always (`/search`)],
+        [R.equals (`s`), R.always (`/signup`)],
+        [R.equals (`o`), R.always (`/login`)],
+        [R.equals (`p`), R.always (`/profile`)],
+        [R.equals (`a`), R.always (`/about`)],
+        [R.equals (`e`), R.always (`/signup/email`)],
+      ]) (key)
+      target && H.navto (target) ()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener (`keypress`, onKeyPress)
+
+    return () => document.removeEventListener (`keypress`, onKeyPress)
+  }, [onKeyPress])
+
+  return <Switch>
     <Route path='/' exact component={Home}/>
     <Route path='/about' component={About}/>
     <Route path='/search' exact component={Search}/>
@@ -28,6 +51,6 @@ const Routes = () => (
     <PrivateRoute path='/profile' component={Profile}/>
     <Route component={NotFound}/>
   </Switch>
-)
+}
 
 export default (Routes)
