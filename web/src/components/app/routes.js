@@ -3,7 +3,6 @@ import {
   NotFound, About, Login, Profile, Review, Learn, Signup, OpenSearch, Topic
 } from 'common'
 import Home from './home'
-
 import PublicRoute from './public-route'
 import PrivateRoute from './private-route'
 
