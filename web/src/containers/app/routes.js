@@ -22,10 +22,11 @@ const Routes = () => {
       const target = R.cond ([
         [R.equals (`c`), R.always (`/review`)],
         [R.equals (`l`), R.always (`/search`)],
-        [R.equals (`s`), R.always (`/signup`)],
-        [R.equals (`o`), R.always (`/login`)],
-        [R.equals (`p`), R.always (`/profile`)],
+        [R.equals (`s`), R.always (`/search`)],
         [R.equals (`a`), R.always (`/about`)],
+        [R.equals (`p`), R.always (`/profile`)],
+        [R.equals (`i`), R.always (`/login`)],
+        [R.equals (`u`), R.always (`/signup`)],
         [R.equals (`e`), R.always (`/signup/email`)],
       ]) (key)
       target && H.navto (target) ()
