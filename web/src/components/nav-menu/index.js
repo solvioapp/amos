@@ -4,7 +4,7 @@ import Link_ from './link.sc'
 
 const isActive = (_, {pathname: p}) => (
   R.either
-  (R.equals (`/search`))
+  (R.equals (`/learn`))
   (R.startsWith (`/topic/`)) (p)
 )
 
@@ -15,8 +15,8 @@ const NavMenu = ({isAuthenticated, className, ...rest}) => (
     <Link_ to='/review'>
       Review
     </Link_>
-    <Link_ to='/search' {...{isActive}}>
-      Search
+    <Link_ to='/learn' {...{isActive}}>
+      Learn
     </Link_>
     <Link_ to='/about'>
       About

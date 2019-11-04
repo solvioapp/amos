@@ -12,8 +12,8 @@ const Guest = ({isAuthenticated, ...rest}) => {
 
   const amosChat = (
     <AmosChat callToAction={
-      <Button primary onClick={H.navto (`/search`)}>
-        Search
+      <Button primary onClick={H.navto (`/learn`)}>
+        Learn
       </Button>
     }>{messages}</AmosChat>
   )
@@ -22,7 +22,7 @@ const Guest = ({isAuthenticated, ...rest}) => {
     const {key} = e
     key === `Enter` && do {
       e.preventDefault()
-      H.navto (`/search`) ()
+      H.navto (`/learn`) ()
     }
   }
 

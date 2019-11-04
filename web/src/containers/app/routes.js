@@ -7,7 +7,7 @@ import About from 'containers/about'
 import Login from 'containers/login'
 import Profile from 'containers/profile'
 import Review from 'containers/review'
-import Search from 'containers/search'
+import Learn from 'containers/learn'
 import Signup from 'containers/signup'
 import OpenSearch from 'containers/open-search'
 import Topic from 'containers/topic'
@@ -20,8 +20,8 @@ const onKeyPress = (e) => {
     e.preventDefault()
     const target = R.cond ([
       [R.equals (`c`), R.always (`/review`)],
-      [R.equals (`l`), R.always (`/search`)],
-      [R.equals (`s`), R.always (`/search`)],
+      [R.equals (`l`), R.always (`/learn`)],
+      [R.equals (`s`), R.always (`/learn`)],
       [R.equals (`a`), R.always (`/about`)],
       [R.equals (`p`), R.always (`/profile`)],
       [R.equals (`i`), R.always (`/login`)],
@@ -43,7 +43,7 @@ const Routes = () => {
   return <Switch>
     <Route path='/' exact component={Home}/>
     <Route path='/about' component={About}/>
-    <Route path='/search' exact component={Search}/>
+    <Route path='/learn' exact component={Learn}/>
     <Route path='/review' component={Review}/>
     <Route path='/topic/:name' component={Topic}/>
     <Route path='/opensearch' component={OpenSearch}/>

@@ -5,7 +5,7 @@ import {
 const Home = ({isAuthenticated}) => (
   <>
     {isAuthenticated
-      ? <Redirect to='/search'/>
+      ? <Redirect to='/learn'/>
       : <Redirect to='/about'/>
     }
   </>
