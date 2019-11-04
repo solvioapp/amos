@@ -1,16 +1,9 @@
 import {
-  H, R, React, Route, Switch, W, useEffect,
-  NotFound
+  H, R, React, Route, Switch, useEffect,
+  NotFound, About, Login, Profile, Review, Learn, Signup, OpenSearch, Topic
 } from 'common'
 import Home from './home'
-import About from 'components/about'
-import Login from 'components/login'
-import Profile from 'components/profile'
-import Review from 'components/review'
-import Learn from 'components/learn'
-import Signup from 'components/signup'
-import OpenSearch from 'components/open-search'
-import Topic from 'components/topic'
+
 import PublicRoute from './public-route'
 import PrivateRoute from './private-route'
 

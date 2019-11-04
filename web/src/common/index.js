@@ -59,6 +59,16 @@ import AuthBox from 'components/auth-box'
 /* NavMenu, Footer */
 import PageLayout from 'components/page-layout'
 
+/* Pages */
+import About from 'components/about'
+import Login from 'components/login'
+import Profile from 'components/profile'
+import Review from 'components/review'
+import Learn from 'components/learn'
+import Signup from 'components/signup'
+import OpenSearch from 'components/open-search'
+import Topic from 'components/topic'
+
 export {
   R,
   yup,
@@ -103,4 +113,12 @@ export {
   AmosChat,
   AuthBox,
   PageLayout,
+  About,
+  Login,
+  Profile,
+  Review,
+  Learn,
+  Signup,
+  OpenSearch,
+  Topic,
 }
