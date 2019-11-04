@@ -1,5 +1,5 @@
 import {
-  React, H,
+  React, H, useEffect,
   AmosChat, Button
 } from 'common'
 
@@ -11,8 +11,22 @@ const messages = [
   <span>If you'd like to learn more about what I'm doing, check out my <a href='https://github.com/amosapp/amos/wiki'>wiki</a>!</span>
 ]
 
-const About = () => (
-  <AmosChat avatar='large' callToAction={
+const About = () => {
+  const onKeyPress = (e) => {
+    const {key} = e
+    key === `Enter` && do {
+      e.preventDefault()
+      H.navto (`/learn`) ()
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener (`keypress`, onKeyPress)
+
+    return () => document.removeEventListener (`keypress`, onKeyPress)
+  }, [onKeyPress])
+
+  return <AmosChat avatar='large' callToAction={
     <>
     <Button onClick={H.navto (`/signup`)}>
       Sign up
@@ -24,6 +38,6 @@ const About = () => (
   }>
     {messages}
   </AmosChat>
-)
+}
 
 export default About
