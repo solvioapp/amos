@@ -1,10 +1,10 @@
 import {H, React} from 'common'
-import Top_ from './not-found-top.sc'
+import top from './not-found-top.sc'
 
 const NotFound = ({...rest}) => (
-  <div {...rest}>
+  <div css={top} {...rest}>
     Page not found
   </div>
 )
 
-export default H.style (NotFound) (Top_)
+export default H.styled (NotFound) ``

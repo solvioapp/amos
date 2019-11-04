@@ -1,6 +1,6 @@
 import {H, React, R, withRouter} from 'common'
 import Top_ from './nav-menu-top.sc'
-import Link_ from './link.sc'
+import Link from './link'
 
 const isActive = (_, {pathname: p}) => (
   R.either
@@ -12,27 +12,27 @@ const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
 const NavMenu = ({isAuthenticated, className, ...rest}) => (
   <div className={className}>
-    <Link_ to='/review'>
+    <Link to='/review'>
       Review
-    </Link_>
-    <Link_ to='/learn' {...{isActive}}>
+    </Link>
+    <Link to='/learn' {...{isActive}}>
       Learn
-    </Link_>
-    <Link_ to='/about'>
+    </Link>
+    <Link to='/about'>
       About
-    </Link_>
-    {/* <Link_ to='/notifications' hidden={true}>
+    </Link>
+    {/* <Link to='/notifications' hidden={true}>
       Notifications
-    </Link_> */}
-    <Link_ to='/profile' hidden={!isAuthenticated}>
+    </Link> */}
+    <Link to='/profile' hidden={!isAuthenticated}>
       Profile
-    </Link_>
-    <Link_ to='/signup' hidden={isAuthenticated || isLogin (rest)}>
+    </Link>
+    <Link to='/signup' hidden={isAuthenticated || isLogin (rest)}>
       Sign up
-    </Link_>
-    <Link_ to='/login' hidden={isAuthenticated || !isLogin (rest)}>
+    </Link>
+    <Link to='/login' hidden={isAuthenticated || !isLogin (rest)}>
       Log in
-    </Link_>
+    </Link>
   </div>
 )
 

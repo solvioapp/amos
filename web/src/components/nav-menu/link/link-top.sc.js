@@ -1,8 +1,8 @@
-import {styled, H, NavLink} from 'common'
+import {H} from 'common'
 
-const Link_ = styled(NavLink)`
+const link = H.css`
   color: black;
-  display: ${H.ifProp(`hidden`, `none`, `inline`)};
+  display: ${H.ifProp (`hidden`, `none`, `inline`)};
   font-size: 20px;
   font-weight: 500;
   padding: 0px 10px;
@@ -25,4 +25,4 @@ const Link_ = styled(NavLink)`
   }
 `
 
-export default Link_
+export default link

@@ -1,6 +1,6 @@
 import {H} from 'common'
 
-const Top_ = H.css`
+const top = H.css`
   padding: 20px;
   text-align: center;
 
@@ -12,8 +12,7 @@ const Top_ = H.css`
     z-index: 100;
     width: 100%;
     padding-left: 0;
-    ${'' /* height: 65px; */}
   }
 `
 
-export default Top_
+export default top
