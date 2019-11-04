@@ -1,8 +1,8 @@
 import {
-  React, H, styled, useEffect,
+  React, H, useEffect,
   AmosChat, AuthBox, Button,
 } from 'common'
-import Top_ from './review-top.sc'
+import top from './review-top.sc'
 
 const messages = [
   `Here you can add reviews for online learning resources - either anonymously or
@@ -25,8 +25,8 @@ const Guest = ({...rest}) => {
     return () => document.removeEventListener (`keypress`, onKeyPress)
   }, [onKeyPress])
 
-  return <div css={Top_} {...rest} columns='two'>
-    <div css={Top_} columns='left'>
+  return <div css={top} {...rest} columns='two'>
+    <div css={top} columns='left' {...rest}>
       <AmosChat callToAction={
         <Button onClick={H.navto (`/review/links`)}>
           Submit anonymously
@@ -39,4 +39,4 @@ const Guest = ({...rest}) => {
   </div>
 }
 
-export default styled (Guest) ``
+export default H.styled (Guest) ``

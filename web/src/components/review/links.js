@@ -1,11 +1,11 @@
 import {
-  React,
+  H, React,
   AmosChat, Button, Title, Input
 } from 'common'
 import {useReviewLinks} from './review-hook'
 import Top_ from './review-top.sc'
-import Buttons_ from './buttons.sc'
-import InputForm_ from './input-form.sc'
+import Buttons from './buttons'
+import inputForm from './input-form.sc'
 
 const Links = (props) => {
   const {
@@ -16,15 +16,15 @@ const Links = (props) => {
     <AmosChat>
       {messages}
     </AmosChat>
-    <InputForm_>
+    <div css={inputForm}>
       <Title>Links</Title>
-      <Buttons_>
+      <Buttons>
         <form onSubmit={onSubmit.next}>
           <Button primary type='submit'>
             Next
           </Button>
         </form>
-      </Buttons_>
+      </Buttons>
       <Input
         name='link[0]'
         errors={form.errors[name]}
@@ -35,9 +35,8 @@ const Links = (props) => {
         valid={valid}
         onChange={onChange}
       />
-    </InputForm_>
+    </div>
   </div>
 }
 
-// export default hooks.withReview (`links`) (Links)
-export default Links
+export default H.styled (Links) ``

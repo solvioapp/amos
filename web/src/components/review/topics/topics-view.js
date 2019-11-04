@@ -3,8 +3,8 @@ import {
   AmosChat, Button, Title, Input
 } from 'common'
 import {useReviewTopics} from '../review-hook'
-import Buttons from '../buttons.sc'
-import InputForm_ from '../input-form.sc'
+import Buttons from '../buttons'
+import inputForm from '../input-form.sc'
 import Top_ from '../review-top.sc'
 
 const Topics = (props) => {
@@ -17,7 +17,7 @@ const Topics = (props) => {
     <AmosChat>
       {messages}
     </AmosChat>
-    <InputForm_>
+    <div css={inputForm}>
       <Title>Topics</Title>
       <Buttons>
         <form onSubmit={onSubmit.previous}>
@@ -56,9 +56,8 @@ const Topics = (props) => {
             {...props}
           />
         )) (times)}
-    </InputForm_>
+    </div>
   </div>
 }
 
-// export default hooks.withReviewTopics (`topics`) (Topics)
-export default Topics
+export default H.styled (Topics) ``

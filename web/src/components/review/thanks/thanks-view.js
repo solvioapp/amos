@@ -1,5 +1,5 @@
 import {
-  React, W,
+  H, React, W,
   AuthBox
 } from 'common'
 import useThanksHook from './thanks-hook'
@@ -29,4 +29,4 @@ const Thanks = (props) => {
     )
 }
 
-export default W.GET_AUTH (Thanks)
+export default H.styled (W.GET_AUTH (Thanks)) ``

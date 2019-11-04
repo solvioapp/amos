@@ -1,9 +1,9 @@
 import {
-  styled,
-  Button, Input, Title
+  H,
+  Input, Title
 } from 'common'
 
-const InputForm_ = styled.div`
+const inputForm = H.css`
   display: flex;
   flex-direction: column;
   align-content: flex-start;
@@ -20,10 +20,6 @@ const InputForm_ = styled.div`
     display: flex;
     justify-content: center;
   }
-
-  form > ${Button} {
-    /* margin-top: 30px; */
-  }
 `
 
-export default InputForm_
+export default inputForm

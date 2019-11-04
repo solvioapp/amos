@@ -1,9 +1,9 @@
 import {
-  React, W,
+  H, React, W,
   AuthBox
 } from 'common'
 import useConfirmHook from './confirm-hook'
-import Top_ from '../review-top.sc'
+import top from '../review-top.sc'
 
 const Confirm = (props) => {
 
@@ -11,13 +11,13 @@ const Confirm = (props) => {
 
   return props.isAuthenticated
     ? (
-      <div css={Top_} {...props}>
+      <div css={top} {...props}>
         {amosChat}
       </div>
     )
     : (
-      <div css={Top_} columns='two' {...props}>
-        <div css={Top_} columns='left'>
+      <div css={top} columns='two' {...props}>
+        <div css={top} columns='left'>
           {amosChat}
         </div>
         <AuthBox/>
@@ -25,4 +25,4 @@ const Confirm = (props) => {
     )
 }
 
-export default W.GET_AUTH (Confirm)
+export default H.styled (W.GET_AUTH (Confirm)) ``

@@ -3,9 +3,9 @@ import {
   AmosChat, Button, Title, Input, RadioGroup, Hr
 } from 'common'
 import {useReviewTopics} from '../review-hook'
-import Buttons from '../buttons.sc'
-import Top_ from '../review-top.sc'
-import InputForm_ from '../input-form.sc'
+import Buttons from '../buttons'
+import top from '../review-top.sc'
+import inputForm from '../input-form.sc'
 
 const Prerequisites = (props) => {
   const [checked, setChecked] = useState ([])
@@ -17,11 +17,11 @@ const Prerequisites = (props) => {
     onSubmit, onClick, form, onEnt, valid, checkboxesValid
   } = useReviewTopics (`prerequisite`) ({...props, setOneChecked})
 
-  return <div css={Top_} {...props}>
+  return <div css={top} {...props}>
     <AmosChat>
       {messages}
     </AmosChat>
-    <InputForm_>
+    <div css={inputForm}>
       <Title>Prerequisites</Title>
       <Buttons>
         <form onSubmit={onSubmit.previous}>
@@ -78,8 +78,8 @@ const Prerequisites = (props) => {
             <Hr/>
           </React.Fragment>
         )) (times)}
-    </InputForm_>
+    </div>
   </div>
 }
 
-export default Prerequisites
+export default H.styled (Prerequisites) ``
