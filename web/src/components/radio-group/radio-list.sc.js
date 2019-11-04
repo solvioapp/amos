@@ -1,6 +1,6 @@
-import {styled} from 'common'
+import {H} from 'common'
 
-const RadioList_ = styled.div`
+const radioList = H.css`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
@@ -29,4 +29,4 @@ const RadioList_ = styled.div`
   }
 `
 
-export default RadioList_
+export default radioList

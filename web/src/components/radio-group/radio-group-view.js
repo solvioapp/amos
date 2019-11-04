@@ -1,14 +1,8 @@
-import {R, H, React, useState, useCallback} from 'common'
+import {H, React, useCallback} from 'common'
+import top from './radio-group-top.sc'
 import Radio from './radio'
-import Top_ from './radio-group-top.sc'
-import RadioGroupHead_ from './radio-group-head.sc'
-import RadioList_ from './radio-list.sc'
-
-const makeText = title => (
-  title
-    ? <RadioGroupHead_>{title}</RadioGroupHead_>
-    : null
-)
+import Text from './text'
+import radioList from './radio-list.sc'
 
 const RadioGroup = (
   {header, footer, _key, name, elements, form, checked, setChecked, onClick, ...rest}
@@ -26,9 +20,9 @@ const RadioGroup = (
       }
   }, [checked, setChecked, onClick])
 
-  return <div css={Top_} {...rest}>
-    {header && makeText (header)}
-    <RadioList_>
+  return <div css={top} {...rest}>
+    {header && <Text>{header}</Text>}
+    <div css={radioList} {...rest}>
       {H.map ((element, key) => (
         <label key={key}>
           <Radio
@@ -42,8 +36,8 @@ const RadioGroup = (
           {element}
         </label>
       )) (elements)}
-    </RadioList_>
-    {footer && makeText (footer)}
+    </div>
+    {footer && <Text css={top} {...rest}>{footer}</Text>}
   </div>
 }
 

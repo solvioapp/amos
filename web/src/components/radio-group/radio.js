@@ -1,4 +1,4 @@
-import {H, R, React, forwardRef} from 'common'
+import {H, React, forwardRef} from 'common'
 
 const Radio = ({...rest}, ref) => (
   <input ref={ref} {...rest}/>
