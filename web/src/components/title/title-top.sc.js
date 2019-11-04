@@ -1,9 +1,9 @@
 import {H} from 'common'
 
-const Top_ = H.css`
-  font-size: 24px;
-  font-weight: 300;
+const top = H.css`
   align-self: flex-start;
+  font-weight: 300;
+  font-size: 24px;
 `
 
-export default Top_
+export default top

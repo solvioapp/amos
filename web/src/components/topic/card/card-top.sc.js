@@ -7,13 +7,8 @@ const top = H.css`
   border: 1.3px solid black;
   padding: 10px 15px;
   margin: 48px auto;
-  /* text-align: justify; */
   word-break: break-word;
   hyphens: auto;
-
-  /* > * {
-    margin: 10px 0;
-  } */
 
   > p {
     margin: 10px 0;
@@ -27,14 +22,6 @@ const top = H.css`
     margin-top: -5px;
     margin-bottom: 5px;
   }
-
-  /* * {
-    margin: 10px 0;
-  } */
-
 `
-  /* ${SplitButton} {
-    margin
-  } */
 
 export default top

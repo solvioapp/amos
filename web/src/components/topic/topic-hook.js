@@ -1,6 +1,5 @@
 import {
-  React, gql, useQuery, R, H, Link, CONST,
-  Icon, SplitButton, Topics, Prerequisites
+  React, gql, useQuery, Link, CONST
 } from 'common'
 
 const QUERY_TOPIC = gql`

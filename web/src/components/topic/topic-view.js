@@ -28,4 +28,4 @@ const Topic = (props) => {
   )
 }
 
-export default Topic
+export default H.styled (Topic) ``

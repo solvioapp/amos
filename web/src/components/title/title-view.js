@@ -1,10 +1,10 @@
 import {H, React} from 'common'
-import Top_ from './title-top.sc'
+import top from './title-top.sc'
 
 const Title = ({children, ...rest}) => (
-  <h1 {...rest}>
+  <h1 css={top} {...rest}>
     {children}
   </h1>
 )
 
-export default H.style (Title) (Top_)
+export default H.styled (Title) ``

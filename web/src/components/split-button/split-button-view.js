@@ -1,4 +1,4 @@
-import {H, React, css} from 'common'
+import {H, React} from 'common'
 import _SplitButton from '@zippytech/react-toolkit/SplitButton'
 import '@zippytech/react-toolkit/SplitButton/index.css'
 import top from './split-button-top.sc'
