@@ -1,9 +1,9 @@
 import {
-  H, R, React, W, styled,
+  R, React, W, styled,
   Button
 } from 'common'
 import AuthOptions from './auth-options'
-import Top_ from './auth-box-top.sc'
+import top from './auth-box-top.sc'
 
 const fbLogin = (authFacebook) => ({status, authResponse: {accessToken: fbAccessToken}}) => (
   R.equals (status, `connected`) && do {
@@ -19,7 +19,7 @@ const onClick = (authFacebook) => () => {
 const github = 'https://github.com/login/oauth/authorize?client_id=72be28a7ee64c7cd1948&scope=user:email'
 
 const AuthBox = ({authFacebook, ...rest}) => (
-  <div css={Top_} {...rest}>
+  <div css={top} {...rest}>
     <a href={github}>
       <Button
         icon='github'

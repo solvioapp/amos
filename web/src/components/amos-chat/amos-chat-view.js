@@ -2,8 +2,8 @@ import {H, R, React} from 'common'
 import Bubble from './bubble'
 import top from './amos-chat-top.sc'
 import Avatar from './avatar'
-import chatFlow from './chat-flow.sc'
-import callToAction from './call-to-action.sc'
+import ChatFlow from './chat-flow'
+import CallToAction from './call-to-action'
 
 const toText = child => typeof child === `function` ? child() : child,
 
@@ -11,7 +11,7 @@ toBubble = (child, key) => (
   <Bubble key={key}>{toText (child)}</Bubble>
 ),
 
-AmosChat = ({avatar = `medium`, children, callToAction: CTA, ...rest}) => {
+AmosChat = ({avatar = `medium`, children, callToAction, ...rest}) => {
   if (typeof children !== `object`) {
     // children is either a string or a function, not an array
     children = R.of (children)
@@ -20,11 +20,11 @@ AmosChat = ({avatar = `medium`, children, callToAction: CTA, ...rest}) => {
   return (
     <div css={top} {...{avatar}} {...rest}>
       {avatar !== `none` && <Avatar size={avatar} timeout={2400}/>}
-      <div css={chatFlow} size={avatar}>
+      <ChatFlow size={avatar}>
         <Bubble>{toText (children[0])}</Bubble>
         {children.slice(1).map (toBubble)}
-        <div css={callToAction}>{CTA}</div>
-      </div>
+        <CallToAction>{callToAction}</CallToAction>
+      </ChatFlow>
     </div>
   )
 }

@@ -1,5 +1,4 @@
 import {H, React, Link} from 'common'
-import Top_ from './auth-options-top.sc'
 
 const AuthOptions = ({
   first = {
@@ -20,4 +19,4 @@ const AuthOptions = ({
   </div>
 )
 
-export default H.style (AuthOptions) (Top_)
+export default H.styled (AuthOptions) ``

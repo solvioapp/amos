@@ -1,6 +1,6 @@
 import {H, CONST} from 'common'
-import Bubble from './bubble'
-import CallToAction_ from './call-to-action.sc'
+import Bubble from '../bubble'
+import CallToAction from '../call-to-action'
 
 const
 
@@ -25,7 +25,7 @@ large = H.css`
 
 options = {none, small, medium, large},
 
-ChatFlow_ = H.css`
+top = H.css`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -36,7 +36,7 @@ ChatFlow_ = H.css`
 
   ${H.options (options, `size`)};
 
-  ${CallToAction_} {
+  ${CallToAction} {
     margin-top: 30px;
     width: 100%;
     display: flex;
@@ -48,4 +48,4 @@ ChatFlow_ = H.css`
   }
 `
 
-export default ChatFlow_
+export default top

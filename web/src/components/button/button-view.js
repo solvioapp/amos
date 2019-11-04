@@ -1,16 +1,15 @@
 import {
-  H, React, styled,
+  H, React,
   Icon
 } from 'common'
-import Top_ from './button-top.sc'
-import Text_ from './text.sc'
+import Text from './text'
+import top from './button-top.sc'
 
 const Button = ({icon, children, ...rest}) => (
-  <button css={Top_} {...rest}>
+  <button css={top} {...rest}>
     {icon && <Icon src={icon}/>}
-    {children && <Text_>{children}</Text_>}
+    {children && <Text>{children}</Text>}
   </button>
 )
 
-// export default H.style (Button) (Top_)
-export default styled (Button) ``
+export default H.styled (Button) ``

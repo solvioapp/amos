@@ -7,10 +7,10 @@ const
 
 {avatar_large, avatar_medium} = CONST
 
-const Top_ = H.css`
-  align-items: center;
+const top = H.css`
   display: flex;
   flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-top: ${avatar_medium / 2 - 21.7 + (avatar_large - avatar_medium) / 2}px;
 
@@ -23,4 +23,4 @@ const Top_ = H.css`
   }
 `
 
-export default Top_
+export default top

@@ -1,10 +1,6 @@
-import {
-  H,
-  Icon
-} from 'common'
-import Text_ from './text.sc'
+import {H, Icon} from 'common'
+import Text from './text'
 
-  // ${'' /* ${props=>console.log(`primary!`, props)} */}
 const primary = H.css`
   background-color: #0066FF;
   border: 1px solid #0066FF;
@@ -27,9 +23,9 @@ const iconOnly = H.css`
   }
 `
 
-const Top_ = H.css`
+const top = H.css`
   ${'' /* ${props => console.log(`props button`, props)} */}
-  ${'' /* ${props => console.log(`props Top_`, props)} */}
+  ${'' /* ${props => console.log(`props top`, props)} */}
   background-color: white;
   border-radius: 8px;
   border: 1.3px solid #959595;
@@ -54,11 +50,11 @@ const Top_ = H.css`
     height: 15px;
   }
 
-  > ${Text_} {
+  > ${Text} {
     vertical-align: middle;
   }
 
-  > ${Icon} + ${Text_} {
+  > ${Icon} + ${Text} {
     margin-left: 8px;
   }
 
@@ -77,4 +73,4 @@ const Top_ = H.css`
   // ${({icon, children}) => icon && !children && iconOnly}
 // ${({icon, children}) => {if (icon && !children) return iconOnly}}
 
-export default Top_
+export default top

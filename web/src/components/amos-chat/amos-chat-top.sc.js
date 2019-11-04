@@ -1,5 +1,5 @@
-import {H, css} from 'common'
-import ChatFlow_ from './chat-flow.sc'
+import {H} from 'common'
+import ChatFlow from './chat-flow'
 
 const notSmall = H.css`
   @media (max-width: 768px) {
@@ -19,7 +19,7 @@ const top = H.css`
   max-width: fit-content;
   ${H.options (options, `avatar`)}
 
-  ${ChatFlow_} {
+  ${ChatFlow} {
     @media (max-width: 768px) {
       margin-left: 20px;
     }
