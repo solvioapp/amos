@@ -1,18 +1,18 @@
 import {
-  css, CONST,
+  H, CONST,
   AuthOptions, Button
 } from 'common'
 
 const
 
-{avatar_size_large, avatar_size_regular} = CONST
+{avatar_large, avatar_medium} = CONST
 
-const Top_ = css`
+const Top_ = H.css`
   align-items: center;
   display: flex;
   flex-direction: column;
   text-align: center;
-  margin-top: ${avatar_size_regular / 2 - 21.7 + (avatar_size_large - avatar_size_regular) / 2}px;
+  margin-top: ${avatar_medium / 2 - 21.7 + (avatar_large - avatar_medium) / 2}px;
 
   > a + ${Button} {
     margin-top: 20px;

@@ -1,41 +1,36 @@
-import {R, styled, css, CONST} from 'common'
+import {H, CONST} from 'common'
 
 const
 
-{avatar_size_regular, avatar_size_large, avatar_size_small} = CONST,
+{avatar_medium, avatar_large, avatar_small} = CONST,
 
-options = {
-  none: css`
-    height: 0;
-    width: 0;
-  `,
+none = H.css`
+  height: 0;
+  width: 0;
+`,
 
-  small: css`
-    min-height: ${avatar_size_small}px;
-    width: ${avatar_size_small}px;
-    margin-top: ${(avatar_size_large - avatar_size_small) / 2}px;
-  `,
+small = H.css`
+  min-height: ${avatar_small}px;
+  width: ${avatar_small}px;
+  margin-top: ${(avatar_large - avatar_small) / 2}px;
+`,
 
-  regular: css`
-    min-height: ${avatar_size_regular}px;
-    width: ${avatar_size_regular}px;
-    margin-top: ${(avatar_size_large - avatar_size_regular) / 2}px;
-  `,
-    // margin-top: ${avatar_size_regular / 2 - 21.7}px;
-    /* margin-top: ${avatar_size_regular / 2 - 21.7+ (avatar_size_large - avatar_size_regular) / 2}px; */
+medium = H.css`
+  min-height: ${avatar_medium}px;
+  width: ${avatar_medium}px;
+  margin-top: ${(avatar_large - avatar_medium) / 2}px;
+`,
 
-  large: css`
-    min-height: ${avatar_size_large}px;
-    width: ${avatar_size_large}px;
-  `,
-},
+large = H.css`
+  min-height: ${avatar_large}px;
+  width: ${avatar_large}px;
+`,
 
-Top_ = css`
-  /* background-color: #f3f3f3;
-  border-radius: 50%;
-  border: 1px black solid; */
+options = {none, small, medium, large},
+
+top = H.css`
   display: inline;
-  ${props => options[props.size]};
+  ${H.options (options, `size`)}};
 `
 
-export default Top_
+export default top

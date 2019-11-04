@@ -1,6 +1,6 @@
-import {css, styled, Title} from 'common'
+import {H, Title} from 'common'
 
-const one = css`
+const one = H.css`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -12,7 +12,7 @@ const one = css`
   }
 `
 
-const two = css`
+const two = H.css`
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 12.5vw;
@@ -22,7 +22,7 @@ const two = css`
   }
 `
 
-const left = css`  
+const left = H.css`  
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -36,7 +36,7 @@ const options = {
   one, two, left
 }
 
-const Top_ = css`
+const Top_ = H.css`
   ${'' /* ${props => console.log(`props Panel`, props)} */}
   ${({columns = 'one'}) => options[columns]}
   > ${Title} {

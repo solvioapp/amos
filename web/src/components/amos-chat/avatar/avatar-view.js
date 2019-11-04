@@ -1,5 +1,5 @@
 import {H, R, React} from 'common'
-import Top_ from './avatar-top.sc'
+import top from './avatar-top.sc'
 import gif from './amos.gif'
 import image from './amos-frame-0.png'
 
@@ -13,7 +13,7 @@ const Avatar = ({size, timeout, ...rest}) => {
     return () => clearTimeout(timer)
   }, [])
 
-  return <img size={size} src={src} {...rest}/>
+  return <img css={top} size={size} src={src} {...rest}/>
 }
 
-export default H.style (Avatar) (Top_)
+export default H.styled (Avatar) ``

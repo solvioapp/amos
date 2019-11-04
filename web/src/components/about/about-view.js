@@ -40,4 +40,4 @@ const About = () => {
   </AmosChat>
 }
 
-export default About
+export default H.style (About) ``

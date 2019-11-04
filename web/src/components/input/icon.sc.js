@@ -1,6 +1,6 @@
-import {css} from 'common'
+import {H} from 'common'
 
-export default css`
+export default H.css`
   position: relative;
   bottom: 34px;
   left: 315px;

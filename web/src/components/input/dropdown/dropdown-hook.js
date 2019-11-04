@@ -6,13 +6,11 @@ const dropdownHook = (props) => {
   const {results, onClick, link, name, active, _key, onEnt} = props,
   [_active, _setActive] = useState (active),
 
-  text = results?.[_active]?.text,
-
   onKeyPress = useCallback ((e) => {
     const {key} = e
     key === `Enter` && onEnt && results && do {
       e.preventDefault()
-      onEnt (name) (_key) (text)
+      onEnt (name) (_key) (results?.[_active]?.text)
     }
   }, [results, _active])
 

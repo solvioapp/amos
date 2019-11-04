@@ -7,23 +7,23 @@ import CallToAction_ from './call-to-action.sc'
 
 const
 
-{avatar_size_regular, avatar_size_large, avatar_size_small} = CONST,
+{avatar_medium, avatar_large, avatar_small} = CONST,
 
-none = css`
+none = H.css`
   margin-top: 0;
 `,
 
-small = css`
-  margin-top: ${avatar_size_small / 2 - 21.7+ (avatar_size_large - avatar_size_small) / 2}px;
+small = H.css`
+  margin-top: ${avatar_small / 2 - 21.7+ (avatar_large - avatar_small) / 2}px;
 `,
 
-regular = css`
+medium = H.css`
   /* 21.7 is half of height of first line of bubble */
-  margin-top: ${avatar_size_regular / 2 - 21.7+ (avatar_size_large - avatar_size_regular) / 2}px;
+  margin-top: ${avatar_medium / 2 - 21.7+ (avatar_large - avatar_medium) / 2}px;
 `,
 
-large = css`
-  margin-top: ${avatar_size_large / 2 - 21.7 }px
+large = H.css`
+  margin-top: ${avatar_large / 2 - 21.7 }px
 `,
 
 ChatFlow_ = styled.div`

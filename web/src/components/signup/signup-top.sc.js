@@ -1,9 +1,9 @@
 import {
-  styled, css,
-  Panel, AmosChat, Checkbox, Button, AuthOptions, Input
+  H,
+  Panel, Checkbox, Button, AuthOptions, Input
 } from 'common'
 
-const Top_ = css`
+const Top_ = H.css`
   ${Panel}
 
   ${Input} {

@@ -1,6 +1,6 @@
-import {css} from 'common'
+import {H} from 'common'
 
-const top = css`
+const top = H.css`
   background: white;
   display: flex;
   flex-direction: column;

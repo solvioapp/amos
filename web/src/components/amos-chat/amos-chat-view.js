@@ -13,7 +13,7 @@ const toBubble = (child, key) => (
   <Bubble key={key}>{toText (child)}</Bubble>
 )
 
-const AmosChat = ({avatar = `regular`, children, callToAction, ...rest}) => {
+const AmosChat = ({avatar = `medium`, children, callToAction, ...rest}) => {
   if (typeof children !== `object`) {
     // children is either a string or a function, not an array
     children = R.of (children)

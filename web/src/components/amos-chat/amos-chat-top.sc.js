@@ -1,7 +1,7 @@
 import {H, css} from 'common'
 import ChatFlow_ from './chat-flow.sc'
 
-const notSmall = css`
+const notSmall = H.css`
   @media (max-width: 768px) {
     flex-direction: column;
     align-items: center;
@@ -9,11 +9,11 @@ const notSmall = css`
 `
 
 const options = {
-  regular: notSmall,
+  medium: notSmall,
   large: notSmall
 }
 
-const top = css`
+const top = H.css`
   align-items: flex-start;
   display: flex;
   max-width: fit-content;

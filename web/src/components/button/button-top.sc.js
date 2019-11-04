@@ -1,11 +1,11 @@
 import {
-  css, H,
+  H,
   Icon
 } from 'common'
 import Text_ from './text.sc'
 
   // ${'' /* ${props=>console.log(`primary!`, props)} */}
-const primary = css`
+const primary = H.css`
   background-color: #0066FF;
   border: 1px solid #0066FF;
   color: white;
@@ -16,7 +16,7 @@ const primary = css`
   }
 `
 
-const iconOnly = css`
+const iconOnly = H.css`
   ${'' /* ${props=>console.log(`iconOnly!`, props)} */}
   font-size: 0;
   padding: 0;
@@ -27,7 +27,7 @@ const iconOnly = css`
   }
 `
 
-const Top_ = css`
+const Top_ = H.css`
   ${'' /* ${props => console.log(`props button`, props)} */}
   ${'' /* ${props => console.log(`props Top_`, props)} */}
   background-color: white;

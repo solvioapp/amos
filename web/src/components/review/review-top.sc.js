@@ -1,18 +1,18 @@
 import {
-  styled, css,
+  H,
   Button, Panel
 } from 'common'
 import InputForm_ from './input-form.sc'
 
-const two = css``
+const two = H.css``
 
-const left = css`
+const left = H.css`
   /* > ${Button} {
     margin-top: 30px
   } */
 `
 
-const Top_ = css`
+const Top_ = H.css`
   ${'' /* ${props => props |> console.log ('Review Top', #)} */}
   ${Panel}
   /* ${({columns}) => eval(columns)} */

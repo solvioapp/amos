@@ -1,7 +1,7 @@
-import {css} from 'common'
+import {H} from 'common'
 import Label_ from './label.sc'
 
-const Top_ = css`
+const Top_ = H.css`
   display: flex;
   align-items: flex-start;
   flex-direction: column;

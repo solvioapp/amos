@@ -1,6 +1,6 @@
-import {css, Input} from 'common'
+import {H, Input} from 'common'
 
-const top = css`
+const top = H.css`
   ${'' /* ${Panel} */}
   display: flex;
   flex-direction: column;

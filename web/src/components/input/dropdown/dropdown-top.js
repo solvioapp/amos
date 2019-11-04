@@ -1,8 +1,6 @@
-import {
-  css
-} from 'common'
+import {H} from 'common'
 
-const top = css`
+const top = H.css`
   label {
     display: block;
     overflow: hidden;

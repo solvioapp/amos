@@ -1,5 +1,5 @@
-import {css} from 'common'
+import {H} from 'common'
 
-const Top_ = css``
+const Top_ = H.css``
 
 export default Top_

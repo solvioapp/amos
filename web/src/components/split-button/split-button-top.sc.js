@@ -1,6 +1,6 @@
-import {H, css} from 'common'
+import {H} from 'common'
 
-const top = css`
+const top = H.css`
   background-color: #0066FF !important;
   border: 1.3px solid #959595;
   border-radius: 8px;
