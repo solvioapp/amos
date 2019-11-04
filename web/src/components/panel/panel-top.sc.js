@@ -24,13 +24,11 @@ const left = H.css`
   align-items: center;
 `
 
-const options = {
-  one, two, left
-}
+const options = {one, two, left}
 
 const Top_ = H.css`
-  ${'' /* ${props => console.log(`props Panel`, props)} */}
-  ${({columns = 'one'}) => options[columns]}
+  ${H.options (options, `columns`, `one`)}
+
   > ${Title} {
     margin-bottom: 24px
   }

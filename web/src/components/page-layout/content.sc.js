@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import {H} from 'common'
 
-const Content_ = styled.div`
+const content = H.css`
   display: flex;
   flex-grow: 1;
   flex-wrap: wrap;
@@ -13,4 +13,4 @@ const Content_ = styled.div`
   }
 `
 
-export default Content_
+export default content

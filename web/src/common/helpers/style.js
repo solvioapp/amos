@@ -26,6 +26,6 @@ styleAndForwardRef = C => css => (
   style (React.forwardRef (C)) (css)
 ),
 
-options = (obj, name) => props => obj[props[name]]
+options = (obj, name, defKey) => props => props[name] ? obj[props[name]] : obj[defKey]
 
 export {styled, css}
