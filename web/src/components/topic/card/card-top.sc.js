@@ -1,7 +1,8 @@
 import {H, SplitButton, Icon} from 'common'
 
 const top = H.css`
-  width: 500px;
+  width: 90%;
+  max-width: 500px;
   border-radius: 12px;
   border: 1.3px solid black;
   padding: 10px 15px;
