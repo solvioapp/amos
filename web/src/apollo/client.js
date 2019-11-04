@@ -2,7 +2,6 @@ import {
   ApolloClient, H, Cookies
 } from 'common'
 import resolvers from 'apollo/resolvers'
-import typeDefs from './types'
 import initCache from './init-cache'
 
 const
@@ -18,7 +17,6 @@ request = op => {
 },
 
 client = new ApolloClient({
-  typeDefs,
   resolvers,
   uri,
   request,

@@ -37,7 +37,7 @@ const QUERY_TOPIC = gql`
 `
 
 const onMenuClick = (e, {item: {url}}) => {
-  window.location.href = `${CONST.DOWNLOAD_DOMAIN}${url}`
+  window.location.href = `${CONST.download_domain}${url}`
 }
 
 const topicHook = props => {
@@ -54,7 +54,7 @@ const topicHook = props => {
     <span>Great! Here are some resources for {name}. Help me expand my collection by submitting a <Link to='/review'>Review</Link>.</span>
   ]
 
-  return {message, data}
+  return {message, data, onMenuClick}
 }
 
 export default topicHook

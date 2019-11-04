@@ -5,7 +5,7 @@ import {
 import top from './card-top.sc'
 
 const Card = (props) => {
-  const {res} = props
+  const {res, onMenuClick} = props
   const icon = R.cond ([
     [R.equals (`BOOK`), R.always (`book`)],
     [R.equals (`ONLINE_COURSE`), R.always (`online_course`)],
@@ -17,11 +17,11 @@ const Card = (props) => {
   const downloads = [res.url_download_pdf, res.url_download_epub, res.url_download_mobi]
   const strings = [`PDF`, `EPUB`, `MOBI`]
   const download = R.reduce ((acc, val) => acc || val) (false) (downloads)
-  
+
   const items = H.reduce ((acc, val, _key) => (
     val ? R.append ({label: strings[_key], url: val}) (acc) : acc
   )) ([]) (downloads)
-  const onClick = () => window.location.href = `${CONST.DOWNLOAD_DOMAIN}${items?.[0]?.url}`
+  const onClick = () => window.location.href = `${CONST.download_domain}${items?.[0]?.url}`
   const {topics, prerequisites} = res
   return <div css={top}>
     {icon && <div>TYPE: <Icon src={icon} book/></div>}
@@ -31,7 +31,7 @@ const Card = (props) => {
       </a>
     )}
     {download &&
-      <SplitButton {...{items, onClick}}>
+      <SplitButton {...{items, onClick, onMenuClick}}>
         View
       </SplitButton>
     }

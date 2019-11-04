@@ -1,8 +1,8 @@
-import {R, styled, css, CSS_CONST} from 'common'
+import {R, styled, css, CONST} from 'common'
 
 const
 
-{AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE, AVATAR_SIZE_SMALL} = CSS_CONST,
+{avatar_size_regular, avatar_size_large, avatar_size_small} = CONST,
 
 options = {
   none: css`
@@ -11,22 +11,22 @@ options = {
   `,
 
   small: css`
-    min-height: ${AVATAR_SIZE_SMALL}px;
-    width: ${AVATAR_SIZE_SMALL}px;
-    margin-top: ${(AVATAR_SIZE_LARGE - AVATAR_SIZE_SMALL) / 2}px;
+    min-height: ${avatar_size_small}px;
+    width: ${avatar_size_small}px;
+    margin-top: ${(avatar_size_large - avatar_size_small) / 2}px;
   `,
 
   regular: css`
-    min-height: ${AVATAR_SIZE_REGULAR}px;
-    width: ${AVATAR_SIZE_REGULAR}px;
-    margin-top: ${(AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px;
+    min-height: ${avatar_size_regular}px;
+    width: ${avatar_size_regular}px;
+    margin-top: ${(avatar_size_large - avatar_size_regular) / 2}px;
   `,
-    // margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7}px;
-    /* margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7+ (AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px; */
+    // margin-top: ${avatar_size_regular / 2 - 21.7}px;
+    /* margin-top: ${avatar_size_regular / 2 - 21.7+ (avatar_size_large - avatar_size_regular) / 2}px; */
 
   large: css`
-    min-height: ${AVATAR_SIZE_LARGE}px;
-    width: ${AVATAR_SIZE_LARGE}px;
+    min-height: ${avatar_size_large}px;
+    width: ${avatar_size_large}px;
   `,
 },
 

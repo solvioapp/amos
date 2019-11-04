@@ -1,4 +1,5 @@
-export const AVATAR_SIZE_REGULAR = 120
-export const AVATAR_SIZE_LARGE = 150
+export const
 
-export const AVATAR_SIZE_SMALL = 70
+avatar_size_small = 70,
+avatar_size_regular = 120,
+avatar_size_large = 150

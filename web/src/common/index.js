@@ -18,11 +18,10 @@ import {flatten} from 'flattenjs'
 /* /common */
 import H from './helpers'
 // import styled from './styled'
-import * as CONST from './const/text'
+import CONST from './const'
 import * as validation from 'repoCommon/validation'
 import hooks from './hooks'
 import * as W from './with'
-import * as CSS_CONST from './const/css'
 
 /* /apollo */
 
@@ -88,7 +87,6 @@ export {
   validation,
   hooks,
   W,
-  CSS_CONST,
   /* External */
   // ReactTooltip,
   /* Components */

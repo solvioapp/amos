@@ -1,5 +1,5 @@
 import {
-  H, styled, CSS_CONST, css,
+  H, styled, CONST, css,
   Button,
 } from 'common'
 import Bubble from './bubble'
@@ -7,23 +7,23 @@ import CallToAction_ from './call-to-action.sc'
 
 const
 
-{AVATAR_SIZE_REGULAR, AVATAR_SIZE_LARGE, AVATAR_SIZE_SMALL} = CSS_CONST,
+{avatar_size_regular, avatar_size_large, avatar_size_small} = CONST,
 
 none = css`
   margin-top: 0;
 `,
 
 small = css`
-  margin-top: ${AVATAR_SIZE_SMALL / 2 - 21.7+ (AVATAR_SIZE_LARGE - AVATAR_SIZE_SMALL) / 2}px;
+  margin-top: ${avatar_size_small / 2 - 21.7+ (avatar_size_large - avatar_size_small) / 2}px;
 `,
 
 regular = css`
   /* 21.7 is half of height of first line of bubble */
-  margin-top: ${AVATAR_SIZE_REGULAR / 2 - 21.7+ (AVATAR_SIZE_LARGE - AVATAR_SIZE_REGULAR) / 2}px;
+  margin-top: ${avatar_size_regular / 2 - 21.7+ (avatar_size_large - avatar_size_regular) / 2}px;
 `,
 
 large = css`
-  margin-top: ${AVATAR_SIZE_LARGE / 2 - 21.7 }px
+  margin-top: ${avatar_size_large / 2 - 21.7 }px
 `,
 
 ChatFlow_ = styled.div`
