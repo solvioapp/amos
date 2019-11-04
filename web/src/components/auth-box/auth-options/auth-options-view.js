@@ -1,5 +1,5 @@
 import {H, React, Link} from 'common'
-import Top_ from './top.sc'
+import Top_ from './auth-options-top.sc'
 
 const AuthOptions = ({
   first = {

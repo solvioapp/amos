@@ -3,7 +3,7 @@ import {
   Button
 } from 'common'
 import AuthOptions from './auth-options'
-import Top_ from './top.sc'
+import Top_ from './auth-box-top.sc'
 
 const fbLogin = (authFacebook) => ({status, authResponse: {accessToken: fbAccessToken}}) => (
   R.equals (status, `connected`) && do {

@@ -1,6 +1,6 @@
 import {H, R, React} from 'common'
 import Bubble from './bubble'
-import top from './top.sc'
+import top from './amos-chat-top.sc'
 import Avatar from './avatar'
 import ChatFlow_ from './chat-flow.sc'
 import CallToAction_ from './call-to-action.sc'

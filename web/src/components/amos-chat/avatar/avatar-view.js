@@ -1,5 +1,5 @@
 import {H, R, React} from 'common'
-import Top_ from './top.sc'
+import Top_ from './avatar-top.sc'
 import gif from './amos.gif'
 import image from './amos-frame-0.png'
 

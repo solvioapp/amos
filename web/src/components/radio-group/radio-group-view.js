@@ -1,6 +1,6 @@
 import {R, H, React, useState, useCallback} from 'common'
 import Radio from './radio'
-import Top_ from './top.sc'
+import Top_ from './radio-group-top.sc'
 import RadioGroupHead_ from './radio-group-head.sc'
 import RadioList_ from './radio-list.sc'
 

@@ -2,7 +2,7 @@ import {
   React, hooks,
   AmosChat, Button, Title, Input
 } from 'common'
-import Top_ from './top.sc'
+import Top_ from './review-top.sc'
 import Buttons_ from './buttons.sc'
 import InputForm_ from './input-form.sc'
 

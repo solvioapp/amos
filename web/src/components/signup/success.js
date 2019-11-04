@@ -2,7 +2,7 @@ import {
   H, React,
   AmosChat, Button
 } from 'common'
-import Top_ from './top.sc'
+import Top_ from './signup-top.sc'
 
 const messages = [
   `Nice to meet you too 😴`,

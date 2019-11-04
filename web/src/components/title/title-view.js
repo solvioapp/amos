@@ -1,5 +1,5 @@
 import {H, React} from 'common'
-import Top_ from './top.sc'
+import Top_ from './title-top.sc'
 
 const Title = ({children, ...rest}) => (
   <h1 {...rest}>

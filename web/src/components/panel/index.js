@@ -1,1 +1,1 @@
-export {default} from './top.sc'
+export {default} from './panel-top.sc'

@@ -1,5 +1,5 @@
 import {H, React} from 'common'
-import Top_ from './top.sc'
+import Top_ from './checkbox-top.sc'
 import Checkbox_ from './checkbox.sc'
 
 const Checkbox = ({children, ...rest}) => (

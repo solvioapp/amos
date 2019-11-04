@@ -2,7 +2,7 @@ import {
   H, React, styled,
   Icon
 } from 'common'
-import Top_ from './top.sc'
+import Top_ from './button-top.sc'
 import Text_ from './text.sc'
 
 const Button = ({icon, children, ...rest}) => (

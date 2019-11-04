@@ -2,7 +2,7 @@ import {
   React, hooks,
   Input, AmosChat
 } from 'common'
-import top from './top.sc'
+import top from './learn-top.sc'
 
 const messages = [
   `Watcha interested in? 🤗`

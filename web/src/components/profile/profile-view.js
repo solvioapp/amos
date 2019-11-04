@@ -2,7 +2,7 @@ import {
   React, CONST,
   AmosChat, Button
 } from 'common'
-import Top_ from './top.sc'
+import Top_ from './profile-top.sc'
 import connect from './connect'
 
 const Profile = ({logout}) => (

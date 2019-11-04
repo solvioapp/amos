@@ -1,5 +1,5 @@
 import {H, React} from 'common'
-import Top_ from './top.sc'
+import Top_ from './bubble-top.sc'
 import Tail_ from './tail.sc'
 
 const Bubble = ({children, ...rest}) => (

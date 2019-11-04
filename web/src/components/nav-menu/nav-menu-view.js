@@ -1,5 +1,5 @@
 import {H, React, R, withRouter} from 'common'
-import Top_ from './top.sc'
+import Top_ from './nav-menu-top.sc'
 import Link_ from './link.sc'
 
 const isActive = (_, {pathname: p}) => (

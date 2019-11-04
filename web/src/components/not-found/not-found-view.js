@@ -1,5 +1,5 @@
 import {H, React} from 'common'
-import Top_ from './top.sc'
+import Top_ from './not-found-top.sc'
 
 const NotFound = ({...rest}) => (
   <div {...rest}>

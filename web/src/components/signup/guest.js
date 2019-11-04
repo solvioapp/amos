@@ -2,7 +2,7 @@ import {
   H, React, styled,
   AmosChat, AuthBox
 } from 'common'
-import Top_ from './top.sc'
+import Top_ from './signup-top.sc'
 
 const Guest = ({...rest}) => (
   <div css={Top_} {...rest}>

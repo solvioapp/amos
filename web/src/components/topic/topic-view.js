@@ -2,7 +2,7 @@ import {
   React, gql, useQuery, R, H, Link, CONST,
   Icon, AmosChat, SplitButton, Topics, Prerequisites
 } from 'common'
-import top from './top.sc'
+import top from './topic-top.sc'
 
 const QUERY_TOPIC = gql`
   query GetResources ($name: String!) {

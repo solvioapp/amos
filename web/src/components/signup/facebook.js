@@ -2,7 +2,7 @@ import {
   R, hooks, H, React, CONST, validation,
   AmosChat, Button, Input, Checkbox, AuthOptions
 } from 'common'
-import Top_ from './top.sc'
+import Top_ from './signup-top.sc'
 
 const message = ({isSubmitted}) => (
   isSubmitted ? CONST.lets_go : CONST.signup

@@ -1,5 +1,5 @@
 import {H, React, styled, css} from 'common'
-import Top_ from './top.sc'
+import Top_ from './icon-top.sc'
 import iconsList from './svg'
 
 function Icon ({src, book, ...rest}) {

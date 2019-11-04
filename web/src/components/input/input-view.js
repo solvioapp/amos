@@ -4,7 +4,7 @@ import {
 } from 'common'
 import Input_ from './input.sc'
 import Label_ from './label.sc'
-import Top_ from './top.sc'
+import Top_ from './input-top.sc'
 import Dropdown from './dropdown'
 import icon from './icon.sc'
 import useInputHook from './input-hook'
