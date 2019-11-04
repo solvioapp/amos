@@ -2,7 +2,7 @@ import {
   H, React,
   AmosChat, Button
 } from 'common'
-import Top_ from './signup-top.sc'
+import top from './signup-top.sc'
 
 const messages = [
   `Nice to meet you too 😴`,
@@ -10,12 +10,12 @@ const messages = [
 ]
 
 const Success = ({...rest}) => (
-  <Top_ {...rest}>
+  <div css={top} {...rest}>
     <AmosChat>{messages}</AmosChat>
     <Button primary onClick={H.navto (`/review`)}>
       Submit a Review
     </Button>
-  </Top_>
+  </div>
 )
 
-export default Success
+export default H.styled (Success) ``

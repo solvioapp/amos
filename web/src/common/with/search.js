@@ -12,7 +12,7 @@ QUERY_SEARCH = gql`
   }
 `,
 
-withSearch = C => ({...rest}) => {
+search = C => ({...rest}) => {
   const
 
   {watch, register, handleSubmit} = useForm(),

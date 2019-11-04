@@ -24,7 +24,7 @@ SIGNUP_GITHUB_GQL = gql`
   }
 `,
 
-GITHUB = C => ({match, ...rest}) => {
+github = C => ({match, ...rest}) => {
   const
 
   [ghCode] = useQueryParam (`code`, StringParam),

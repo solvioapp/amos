@@ -1,6 +1,6 @@
 import {
-  R, hooks, H, React, CONST, validation,
-  AmosChat, Button, Input, Checkbox, AuthOptions
+  H, React, hooks, W, CONST, validation,
+  AmosChat, Button, Input
 } from 'common'
 import Top_ from './signup-top.sc'
 
@@ -25,12 +25,7 @@ const Facebook = (props) => {
     <Button primary width='150px' type='submit'>
       Sign up
     </Button>
-    {/* <AuthOptions first={{
-      link: `/signup`,
-      text: `Use social`
-    }} /> */}
   </form>
 }
 
-export default Facebook
-|> hooks.FACEBOOK
+export default H.styled (W.signupFacebook (Facebook)) ``

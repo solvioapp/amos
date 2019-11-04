@@ -1,5 +1,5 @@
 import {
-  H, React, hooks,
+  H, React, W,
   Input, AmosChat
 } from 'common'
 import top from './learn-top.sc'
@@ -24,4 +24,4 @@ const Learn = ({onEnt, results, register, onSubmit, ...rest}) => (
   </form>
 )
 
-export default H.styled (hooks.withSearch (Learn)) ``
+export default H.styled (W.search (Learn)) ``

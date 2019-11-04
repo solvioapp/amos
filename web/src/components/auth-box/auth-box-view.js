@@ -41,5 +41,5 @@ const AuthBox = ({authFacebook, ...rest}) => (
 
 // export default H.style (withFacebook (AuthBox)) (Top_)
 export default AuthBox
-  |> W.FACEBOOK
+  |> W.authFacebook
   |> styled (#) ``

@@ -3,7 +3,7 @@ import {
   Panel, Checkbox, Button, AuthOptions, Input
 } from 'common'
 
-const Top_ = H.css`
+const top = H.css`
   ${Panel}
 
   ${Input} {
@@ -23,4 +23,4 @@ const Top_ = H.css`
   }
 `
 
-export default Top_
+export default top

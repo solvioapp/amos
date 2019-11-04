@@ -1,6 +1,6 @@
 import {
-  R, hooks, H, React, CONST, validation,
-  AmosChat, Button, Input, Checkbox, AuthOptions
+  H, React, hooks, W, CONST, validation,
+  AmosChat, Button, Input
 } from 'common'
 import Top_ from './signup-top.sc'
 
@@ -26,12 +26,7 @@ const Github = (props) => {
     <Button primary width='150px' type='submit'>
       Sign up
     </Button>
-    {/* <AuthOptions first={{
-      link: `/signup`,
-      text: `Use social`
-    }} /> */}
   </form>
 }
 
-export default Github
-|> hooks.GITHUB
+export default H.styled (W.github (Github)) ``
