@@ -1,9 +1,9 @@
 import {
-  React, styled,
+  H, React,
   Icon
 } from 'common'
-import Input_ from './input.sc'
-import Label_ from './label.sc'
+import _Input from './input'
+import Label from './label'
 import Top_ from './input-top.sc'
 import Dropdown from './dropdown'
 import icon from './icon.sc'
@@ -16,14 +16,12 @@ const Input = (props, ref) => {
     hasError = Boolean (errors?.[name]), ...rest
   } = props
 
-  name |> console.log ('name', #)
-
   const {_onClick, forwardRef, dropdown, active} = useInputHook ({...props, ref})
 
   return (
     <div css={Top_} {...{className}} key={`div${_key}`}>
-      <Label_ key={`label${_key}`}>{label}</Label_>
-      <Input_ autoComplete='off' onClick={_onClick} ref={forwardRef} key={`input${_key}`}
+      <Label key={`label${_key}`}>{label}</Label>
+      <_Input autoComplete='off' onClick={_onClick} ref={forwardRef} key={`input${_key}`}
         {...{placeholder, boxShadowWidth,
           name, type, hasError, ...rest}}
       />
@@ -33,4 +31,4 @@ const Input = (props, ref) => {
   )
 }
 
-export default styled (React.forwardRef (Input)) ``
+export default H.styled (React.forwardRef (Input)) ``

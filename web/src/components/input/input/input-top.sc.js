@@ -1,6 +1,6 @@
-import {styled, H} from 'common'
+import {H} from 'common'
 
-const Input_ = styled.input`
+const top = H.css`
   background-color: white;
   border-radius: 4px;
   border: 1px solid ${H.ifProp (`hasError`, `#ff7aa8`, `#dbdbdb`)};
@@ -21,4 +21,4 @@ const Input_ = styled.input`
   }
 `
 
-export default Input_
+export default top
