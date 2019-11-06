@@ -56,11 +56,9 @@ context = dirBase => dirRel => regExp => {
   const _requireContext = requireContext (dirAbs)
   _requireContext.keys = () => keys
 
-  // keys |> console.log ('keys', #)
-
   return _requireContext
 },
-defOpts = {def: true, other: true},
+defOpts = {def: true, other: true, parent: false},
 
 _importContext = _opts => req => {
   const opts = R.merge (defOpts) (_opts)
@@ -80,7 +78,16 @@ _importContext = _opts => req => {
       opts.other
         ? R.omit ([`default`]) (exports)
         : {}
-    return mergeDeepAll ([acc, other, def])
+    const _res = R.mergeDeepRight (other) (def)
+    const res =
+      opts.parent
+        ? do {
+          const parent = R.pipe (R.split (`/`), R.nth (-2)) (key)
+          const o = {[parent]: _res}
+          o
+        }
+        : _res
+    return R.mergeDeepRight (acc) (res)
   }) ({}) (req.keys())
   return toReturn
 },
@@ -91,9 +98,14 @@ _req = opts => R.curryN (3) (R.pipe (R.uncurryN (3) (context), _importContext (o
 
 req = _req (defOpts),
 
-reqResolvers = dirBase => name => (
-  context (dirBase) (`.`) (new RegExp (`\\.\\/${name}\\/(\\.|\\w)+\\.js$`))
-    |> _importContext ({other: false}) (#)
+reqResolvers = dirBase => (
+  context (dirBase) (`.`) (/\.\/.+\/.+\/.+\.js$/)
+    |> _importContext ({other: false, parent: true}) (#)
+),
+
+reqAll = dirBase => (
+  context (dirBase) (`.`) (/\.\/(?!index).+\.js/)
+    |> importContext
 ),
 
 wrapInResponse = fn => {

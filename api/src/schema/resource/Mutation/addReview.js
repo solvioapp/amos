@@ -5,10 +5,6 @@ const metascraper = require (`metascraper`)([
 
 import got from 'got'
 
-const THRESHOLD_TOPIC = 0.1,
-
-THRESHOLD_PREREQUISITE = 0.02
-
 export const 
 
 match = `
@@ -199,13 +195,13 @@ const addReview = async (_, {input}, {session, ip, user}) => {
    * (comes from `consensus` :-))
    */
   consensedTopicIds = R.reduce ((acc, {topicId, noVotes}) => (
-    noVotesTopics / (noVotes + 1) <= 1 / THRESHOLD_TOPIC
+    noVotesTopics / (noVotes + 1) <= 1 / CONST.threshold_topic
       ? R.append (topicId) (acc)
       : acc
   )) ([]) (topicGames),
 
   consensedPrerequisiteIds = R.reduce ((acc, {gameId, noVotes}) => (
-    noVotesPrerequisites / (noVotes + 1) <= 1 / THRESHOLD_PREREQUISITE
+    noVotesPrerequisites / (noVotes + 1) <= 1 / CONST.threshold_prerequisite
       ? R.append (gameId) (acc)
       : acc
   )) ([]) (prerequisiteGames)
