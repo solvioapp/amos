@@ -5,12 +5,12 @@ import {
 
 const
 
-[uri] = R.props 
-  ([`API_URL`])
-  (process.env),
+[uri] = R.props
+([`API_URL`])
+(process.env),
 
-  // createTopic (input: CreateTopicInput!): Boolean!
-  // addIsPartOf (input: AddIsPartOfInput!): Boolean!
+// createTopic (input: CreateTopicInput!): Boolean!
+// addIsPartOf (input: AddIsPartOfInput!): Boolean!
 
 createTopicMutation = gql`
   mutation CreateTopic ($input: CreateTopicInput!) {

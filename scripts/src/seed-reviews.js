@@ -6,9 +6,9 @@ const
 
 {hackprague, others, goodreads} = reviews,
 
-[uri] = R.props 
-  ([`API_URL`])
-  (process.env),
+[uri] = R.props
+([`API_URL`])
+(process.env),
 
 mutation = gql`
   mutation AddReview($input: AddReviewHydrationInput!) {
@@ -26,7 +26,7 @@ createReview = (client) => async (rev) => {
 createHackPragueReview = (client) => async (rev) => {
   // JSON.stringify (rev) |> console.log ('JSON.stringify (rev)', #)
   const _rev = R.omit ([`prerequisites`]) (H.renameKeys ({urls: `url_main`}) (rev))
-  await client.mutate ({mutation, variables: {input: _rev}})  
+  await client.mutate ({mutation, variables: {input: _rev}})
 }
 
 export default async (token) => {
@@ -37,7 +37,7 @@ export default async (token) => {
     link: authLink.concat (createHttpLink ({uri, fetch})),
     cache: new InMemoryCache()
   })
-  
+
   console.log (`Creating HackPrague reviews`)
   // await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview (client))
   await Promise.map (hackprague, createHackPragueReview (client), {concurrency: 5})

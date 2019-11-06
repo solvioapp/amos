@@ -1,4 +1,4 @@
-import {coreJs, regenerator} from './common'
+// import {coreJs, regenerator} from './common'
 import cleanDb from './clean-db'
 import createBot from './create-bot'
 import seedTopics from './seed-topics'
@@ -6,22 +6,22 @@ import seedReviews from './seed-reviews'
 
 /* from https://stackoverflow.com/a/38446960/4204961 */
 
-global.Buffer = global.Buffer || require('buffer').Buffer;
+global.Buffer = global.Buffer || require(`buffer`).Buffer
 
-if (typeof btoa === 'undefined') {
+if (typeof btoa === `undefined`) {
   global.btoa = function (str) {
-    return new Buffer(str, 'binary').toString('base64');
-  };
+    return new Buffer(str, `binary`).toString(`base64`)
+  }
 }
 
-if (typeof atob === 'undefined') {
+if (typeof atob === `undefined`) {
   global.atob = function (b64Encoded) {
-    return new Buffer(b64Encoded, 'base64').toString('binary');
-  };
+    return new Buffer(b64Encoded, `base64`).toString(`binary`)
+  }
 }
 
 /* from https://stackoverflow.com/a/51466112/4204961 */
-global.fetch = require("node-fetch")
+global.fetch = require(`node-fetch`)
 
 const run = async () => {
   try {
@@ -34,7 +34,8 @@ const run = async () => {
     await seedTopics (amosJwt)
     console.log (`seeding reviews`)
     await seedReviews (amosJwt)
-  } catch (e) {
+  }
+  catch (e) {
     console.log (`Something went wrong`, e.message)
   }
 }

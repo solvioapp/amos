@@ -1,12 +1,12 @@
 import {
-  R, H, ApolloClient, gql, createHttpLink, InMemoryCache, fetch
+  R, ApolloClient, gql, createHttpLink, InMemoryCache, fetch
 } from './common'
 
 const
 
-[uri] = R.props 
-  ([`API_URL`])
-  (process.env),
+[uri] = R.props
+([`API_URL`])
+(process.env),
 
 client = new ApolloClient ({
   link: createHttpLink ({uri, fetch}),
