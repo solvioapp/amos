@@ -1,4 +1,4 @@
-import {H,R} from 'common'
+import {H, R} from 'common'
 import {mergeTypes} from 'merge-graphql-schemas'
 
 const cache = H.context (__dirname) (`.`) (/\.gql$/)

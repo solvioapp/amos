@@ -21,13 +21,13 @@ getHashedPassword = `
 `,
 
 login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
-  const 
-  
+  const
+
   /* Is valid email? */
   isEmail = await validation.email.isValid (usernameOrEmail),
-  
+
   /* Get query args */
-  args = isEmail 
+  args = isEmail
     ? [getUserByEmail, {email: usernameOrEmail}]
     : do {
       await validation.username.validate (usernameOrEmail, {abortEarly: false})
@@ -59,7 +59,7 @@ login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
   message = R.includes ([`amos`, `amos@solvio.org`]) (usernameOrEmail)
-    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id}) 
+    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id})
     : await A.createToken (process.env.JWT_SECRET, {sub: id})
 
   return {message}

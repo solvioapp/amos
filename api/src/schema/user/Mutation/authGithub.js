@@ -1,4 +1,4 @@
-import {R,A,H,rp} from 'common'
+import {R, A, H, rp} from 'common'
 
 const matchUserGhId = `
   match (u: User)
@@ -50,7 +50,7 @@ authGithub = async (_, {input: {ghCode}}, {session}) => {
     },
     json: true
   },
-  
+
   user = await rp (getUser),
   userGhId = user?.id,
 
@@ -78,13 +78,13 @@ authGithub = async (_, {input: {ghCode}}, {session}) => {
 
       const res = H.isNotNilOrEmpty (email)
         ? do {
-          const {records: [user]} = await session.run (getUserByEmail, {email})
-          const _res = H.isNotNilOrEmpty (user)
+          const {records: [_user]} = await session.run (getUserByEmail, {email})
+          const _res = H.isNotNilOrEmpty (_user)
             ? do {
               /* User doesn't have GhAccount but they have another one */
-              const {username} = user.get (`u`).properties
+              const {username} = _user.get (`u`).properties
               await session.run (createGhAccount, {username, userGhId})
-              const userId = user.get (`u`).identity.low,
+              const userId = _user.get (`u`).identity.low,
               token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
               const __res = [`token`, token]
               __res
@@ -98,7 +98,7 @@ authGithub = async (_, {input: {ghCode}}, {session}) => {
         : do {
           [`ghAccessToken`, ghAccessToken]
         }
-      
+
       res
     }
 

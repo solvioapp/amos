@@ -1,4 +1,4 @@
-import {A,H,R,bcrypt,CONST,validation} from 'common'
+import {A, H, R, bcrypt, CONST, validation} from 'common'
 
 const getUsername = `
   match (u: User)
@@ -64,12 +64,12 @@ signup = async (_, {input}, {session}) => {
 
       /* Hash password */
       const hashedPassword = await bcrypt.hash (password, 12)
-      
+
       /* Create local account */
       await session.run (createLocalAccount, {username, hashedPassword})
       user
     }
-    : do {    
+    : do {
       /* User doesn't have an account */
       /* Check if username is free */
       const {records: [_username]} = await session.run (getUsername, {username})
@@ -80,7 +80,6 @@ signup = async (_, {input}, {session}) => {
 
       /* Save user to db! */
       const {records: [__user]} = await session.run (saveUser, {username, email, hashedPassword})
-      __user |> console.log ('__user', #)
       __user
     }
 
@@ -89,7 +88,7 @@ signup = async (_, {input}, {session}) => {
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
   message = username === `amos`
-    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id}) 
+    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id})
     : await A.createToken (process.env.JWT_SECRET, {sub: id})
 
   return {message}

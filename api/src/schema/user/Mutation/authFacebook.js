@@ -1,4 +1,4 @@
-import {A,H,rp} from 'common'
+import {A, H, rp} from 'common'
 
 const matchUserFbId = `
   match (u: User)
@@ -27,9 +27,10 @@ authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
   const
 
   {data: {user_id: userFbId}} = await rp (
+    /* eslint-disable max-len */
     `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`
-    ) |> JSON.parse,
-    
+  ) |> JSON.parse,
+
   {records: [result]} = await session.run (matchUserFbId, {userFbId}),
 
   message = H.isNotNilOrEmpty (result)

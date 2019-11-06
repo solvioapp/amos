@@ -1,4 +1,4 @@
-import {R,A,H,validation,CONST,rp} from 'common'
+import {R, A, H, validation, CONST, rp} from 'common'
 
 const getUserByUsername = `
   MATCH (u:User) WHERE u.username = $username RETURN u
@@ -18,7 +18,6 @@ attachEmail = `
   -[:HAS_EMAIL]->
   (e: Email {email: $email})
 `,
-
 
 signupGithub = async (_, {input}, {session}) => {
   const
@@ -43,7 +42,7 @@ signupGithub = async (_, {input}, {session}) => {
 
   userGh = await rp (getUser),
   userGhId = userGh?.id,
-  
+
   // TODO: query params
   // TODO: Error handling
 

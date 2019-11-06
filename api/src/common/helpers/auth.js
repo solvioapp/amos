@@ -10,7 +10,8 @@ export const decode = async (driver, authorizationHeader) => {
   try {
     const decoded = await jwt.verify(token, process.env.JWT_SECRET)
     id = decoded.sub
-  } catch (err) {
+  }
+  catch (err) {
     return null
   }
   const session = driver.session()
@@ -19,7 +20,7 @@ export const decode = async (driver, authorizationHeader) => {
     RETURN u
     LIMIT 1
   `
-  const {records} = await session.run(query, { id })
+  const {records} = await session.run(query, {id})
   session.close()
   const _user = records[0].get (`u`)
   const user = {..._user.properties, id: _user.identity.low}

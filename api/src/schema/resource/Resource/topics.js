@@ -8,9 +8,7 @@ return r,t
 
 const topics = async ({_id}, _, {session}) => {
   const {records} = await session.run (getTopics, {resourceId: _id})
-  const toReturn = R.map (rec => rec.get (`t`).properties) (records)
-  toReturn |> console.log ('toReturn', #)
-  return toReturn
+  return R.map (rec => rec.get (`t`).properties) (records)
 }
 
 export default (topics)

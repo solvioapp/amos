@@ -12,7 +12,7 @@ RESERVED_PATHS = [
   `home`, `callback`, `success`, `thanks`, `settings`, `help`, `news`, `newsfeed`,
   `feed`, `search`, `discover`, `explore`, `proposals`, `proposal`, `dashboard`,
   `terms`, `privacy`, `sponsors`, `about`, `school`, `schools`, `courses`, `logout`,
-  `bootcamp`, `bootcamps`, `api`, `forum`, `new`, `groups`, `rules`, `user`, 
+  `bootcamp`, `bootcamps`, `api`, `forum`, `new`, `groups`, `rules`, `user`,
 ],
 
 noAt = R.complement (R.includes (`@`)),
@@ -89,8 +89,8 @@ _topics = string()
 
 // review = {
 //   links: object().shape ({links}),
-  // topics: object().shape ({topics}),
-  // prererequisites: object().shape ({prerequisites}),
+// topics: object().shape ({topics}),
+// prererequisites: object().shape ({prerequisites}),
 // }
 
 // review = object().shape ({links, topics, prerequisites})

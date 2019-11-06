@@ -1,6 +1,6 @@
-import {H, R} from 'common'
+import {H} from 'common'
 
-const 
+const
 
 _1 = `
   match (p)

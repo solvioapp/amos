@@ -1,13 +1,8 @@
-import {H, R, normalizeUrl, CONST} from 'common'
-const metascraper = require (`metascraper`)([
-  require (`metascraper-title`)()
-])
-
-import got from 'got'
+import {H, R, normalizeUrl} from 'common'
 
 const THRESHOLD_TOPIC = 0.1
 
-export const 
+export const
 
 match = `
   match (r:Resource {link: $link}) return r
@@ -38,8 +33,8 @@ amosGameTopics = `
   return g, t, noVotesAuthorized + noVotesAnonymous as noVotes
 `,
 /* Doesn't work :( */
-  // on match return 1
-  // on create return 0
+// on match return 1
+// on create return 0
 
 authorized = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
@@ -101,7 +96,7 @@ const addReviewHydration = async (_, {input}, {session, user}) => {
 
   {noVotesTopics: {low: noVotesTopics}} = resource.get (`r`).properties,
 
-   /* cool word! 
+  /* cool word!
    * (comes from `consensus` :-))
    */
   consensedTopicIds = R.reduce ((acc, {topicId, noVotes}) => (

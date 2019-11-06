@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import {H, R, normalizeUrl, CONST} from 'common'
 const metascraper = require (`metascraper`)([
   require (`metascraper-title`)()
@@ -5,7 +6,7 @@ const metascraper = require (`metascraper`)([
 
 import got from 'got'
 
-export const 
+export const
 
 match = `
   match (r:Resource {link: $link}) return r
@@ -39,9 +40,9 @@ amosGameTopics = `
   return g, t, noVotesAuthorized + noVotesAnonymous as noVotes
 `,
 /* Doesn't work :( */
-  // on match return 1
-  // on create return 0
-    
+// on match return 1
+// on create return 0
+
 amosGamePrerequisites = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $prerequisites as p
@@ -79,7 +80,7 @@ authorized = `
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
   return r
 `,
-      // topicGame.noVotes = topicGame.noVotes + 1
+// topicGame.noVotes = topicGame.noVotes + 1
 
 guest = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
@@ -100,7 +101,7 @@ guest = `
   with r
   return r
 `,
-      // prerequisiteGame.noVotes = prerequisiteGame.noVotes + 1
+// prerequisiteGame.noVotes = prerequisiteGame.noVotes + 1
 
 updateTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
@@ -187,11 +188,11 @@ const addReview = async (_, {input}, {session, ip, user}) => {
   {} = userId
     ? await session.run (authorized, {userId, ...gamesIds, resourceId})
     : await session.run (guest, {ip, ...gamesIds, resourceId}),
-  
+
   noVotesTopics = resource.properties.noVotesTopics.low,
   noVotesPrerequisites = resource.properties.noVotesPrerequisites.low,
-  /* 
-   * cool word! 
+  /*
+   * cool word!
    * (comes from `consensus` :-))
    */
   consensedTopicIds = R.reduce ((acc, {topicId, noVotes}) => (

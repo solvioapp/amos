@@ -1,4 +1,4 @@
-import {R,A,H,validation,CONST,rp} from 'common'
+import {R, A, H, validation, CONST, rp} from 'common'
 
 const matchUser = `
   MATCH (u:User) WHERE u.username = $username RETURN u
@@ -19,7 +19,6 @@ const attachEmail = `
   (e: Email {email: $email})
 `
 
-
 const signupFacebook = async (_, {input}, {session}) => {
   const
 
@@ -31,10 +30,11 @@ const signupFacebook = async (_, {input}, {session}) => {
   /* Check if username is free */
   {records: usernames} = await session.run (matchUser, {username}),
   [] = [H.assert (R.isEmpty (usernames)) (CONST.username_taken (username))],
-  
+
   // TODO: query params
   // TODO: Error handling
   {data: {user_id: userFbId}} = await rp (
+    /* eslint-disable max-len */
     `https://graph.facebook.com/debug_token?input_token=${fbAccessToken}&access_token=${process.env.FACEBOOK_APP_ID}|${process.env.FACEBOOK_APP_SECRET}`
   ) |> JSON.parse,
 

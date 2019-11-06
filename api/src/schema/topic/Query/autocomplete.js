@@ -1,4 +1,4 @@
-import {H, Promise} from 'common'
+import {H} from 'common'
 
 // const _1 = `
 // match (t:Topic)
@@ -22,7 +22,6 @@ limit $first
 `
 
 const autocomplete = async (_, {input}, {session}) => {
-  console.log (`hi`)
   const {records: recs} = await session.run (_1, input)
   const results = recs.map (rec => ({
     topic: {...rec.get (`t`).properties, _id: rec.get (`t`).identity.low},
