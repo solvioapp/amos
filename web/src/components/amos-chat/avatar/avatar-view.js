@@ -3,7 +3,7 @@ import top from './avatar-top.sc'
 import gif from './amos.gif'
 import image from './amos-frame-0.png'
 
-const Avatar = ({size, timeout, ...rest}) => {
+const View = ({size, timeout, ...rest}) => {
   const [src, setSrc] = React.useState (gif)
 
   React.useEffect(() => {
@@ -16,4 +16,4 @@ const Avatar = ({size, timeout, ...rest}) => {
   return <img css={top} size={size} src={src} {...rest}/>
 }
 
-export default H.styled (Avatar) ``
+export default H.styled (View) ``

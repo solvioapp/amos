@@ -2,7 +2,7 @@ import {React, styled} from 'common'
 import top from './icon-top.sc'
 import iconsList from './svg'
 
-function Icon ({src, book, ...rest}) {
+function View ({src, book, ...rest}) {
   const svg = typeof src === `string` ? iconsList[src] : src
   if (!svg) {
     throw new Error(`No icon found: '${src}'`)
@@ -14,4 +14,4 @@ function Icon ({src, book, ...rest}) {
   )
 }
 
-export default styled (Icon) ``
+export default styled (View) ``

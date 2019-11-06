@@ -1,8 +1,8 @@
 import {H, React, NavLink} from 'common'
 import top from './link-top.sc'
 
-const Link = (props) => (
+const View = (props) => (
   <NavLink css={top} {...props}>{props.children}</NavLink>
 )
 
-export default H.styled (Link) ``
+export default H.styled (View) ``

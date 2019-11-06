@@ -39,7 +39,7 @@ const onMenuClick = (e, {item: {url}}) => {
   window.location.href = `${CONST.download_domain}${url}`
 }
 
-const topicHook = props => {
+const hook = props => {
   const {match} = props
   const name = match.params.name
   const options = {
@@ -57,4 +57,4 @@ const topicHook = props => {
   return {message, data, onMenuClick}
 }
 
-export default topicHook
+export default hook

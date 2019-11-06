@@ -12,10 +12,10 @@ LOGIN_GQL = gql`
   }
 `,
 
-loginHook = () => {
+hook = () => {
   const login = useLazyQuery (LOGIN_GQL)
 
   return {login}
 }
 
-export default loginHook
+export default hook

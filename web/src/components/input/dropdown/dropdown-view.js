@@ -4,7 +4,7 @@ import {
 import useDropdownHook from './dropdown-hook'
 import top from './dropdown-top'
 
-const Dropdown = (props) => {
+const View = (props) => {
   const {results} = props,
   {renderResults} = useDropdownHook (props)
 
@@ -17,4 +17,4 @@ const Dropdown = (props) => {
   )
 }
 
-export default H.styled (Dropdown) ``
+export default H.styled (View) ``

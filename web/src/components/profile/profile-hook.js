@@ -14,7 +14,7 @@ const LOGOUT = gql`
   }
 `
 
-const profileHook = (props) => {
+const hook = (props) => {
   const
 
   {data} = useQuery (GET_AUTH),
@@ -30,4 +30,4 @@ const profileHook = (props) => {
   return {...props, data, logout}
 }
 
-export default profileHook
+export default hook

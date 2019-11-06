@@ -20,7 +20,7 @@ RESET_REVIEW_GQL = gql`
   }
 `,
 
-confirmHook = (props) => {
+hook = (props) => {
   const {review} = loadReview (props),
   {link, topic, prerequisite} = review,
   url = link?.[0],
@@ -99,4 +99,4 @@ confirmHook = (props) => {
   return {amosChat}
 }
 
-export default confirmHook
+export default hook

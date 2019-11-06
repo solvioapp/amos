@@ -20,4 +20,4 @@ const getTopResourcesByName = async (_, {name}, {session}) => {
   return results
 }
 
-export default (getTopResourcesByName)
+export default getTopResourcesByName

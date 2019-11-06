@@ -11,7 +11,7 @@ const message = ({isSubmitted}) => (
 
 const boxShadowWidth = `0`
 
-const Login = (props) => {
+const View = (props) => {
   const {login} = useLoginHook (props)
   const {
     onSubmit, messages, form: {register, errors}
@@ -59,4 +59,4 @@ const Login = (props) => {
   </form>
 }
 
-export default H.styled (Login) ``
+export default H.styled (View) ``

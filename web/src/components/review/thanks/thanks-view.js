@@ -1,17 +1,12 @@
 import {
-  H, React, W,
+  H, React, W, CONST,
   AuthBox
 } from 'common'
 import useThanksHook from './thanks-hook'
 import top from '../review-top.sc'
 
-const messages = [
-  `Thanks for the review!`,
-]
-
-const Thanks = (props) => {
-
-  const {amosChat} = useThanksHook ({...props, messages})
+const View = (props) => {
+  const {amosChat} = useThanksHook ({...props, messages: CONST.thanks})
 
   return props.isAuthenticated
     ? (
@@ -29,4 +24,4 @@ const Thanks = (props) => {
     )
 }
 
-export default H.styled (W.GET_AUTH (Thanks)) ``
+export default H.styled (W.GET_AUTH (View)) ``

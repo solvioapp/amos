@@ -3,12 +3,7 @@ enum Role {
   ADMIN
 }
 
-# """
-# Testing descr
-# """
 type User {
-  # Fields
-  "Does this work?"
   username: String!
   # createdAt: DateTime!
 
@@ -17,8 +12,8 @@ type User {
   proficiencies: [PROFICIENCY!]!
 
   # Functions
-  discover: [Resource!]!
-  search (topic: String!): [Resource!]!
+  # discover: [Resource!]!
+  # search (topic: String!): [Resource!]!
 }
 
 type AnonymousUser {

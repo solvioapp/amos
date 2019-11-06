@@ -1,7 +1,7 @@
 import {H, React} from 'common'
 
-const CallToAction = (props) => (
+const View = (props) => (
   <div {...props}>{props.children}</div>
 )
 
-export default H.styled (CallToAction) ``
+export default H.styled (View) ``

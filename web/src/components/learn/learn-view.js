@@ -8,7 +8,7 @@ const messages = [
   `Watcha interested in? 🤗`
 ]
 
-const Learn = ({onEnt, results, register, onSubmit, ...rest}) => (
+const View = ({onEnt, results, register, onSubmit, ...rest}) => (
   <form css={top} autocomplete='off' onSubmit={onSubmit} {...rest}>
     <AmosChat avatar='small'>
       {messages}
@@ -24,4 +24,4 @@ const Learn = ({onEnt, results, register, onSubmit, ...rest}) => (
   </form>
 )
 
-export default H.styled (W.search (Learn)) ``
+export default H.styled (W.search (View)) ``

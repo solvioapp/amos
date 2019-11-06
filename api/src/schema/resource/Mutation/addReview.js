@@ -120,7 +120,7 @@ updatePrerequisites = `
   merge (r)-[:HAS_PREREQUISITE]->(g)
 `
 
-const _addReview = async (_, {input}, {session, ip, user}) => {
+const addReview = async (_, {input}, {session, ip, user}) => {
   // TODO: Add validation
 
   const
@@ -215,4 +215,4 @@ const _addReview = async (_, {input}, {session, ip, user}) => {
   await session.run (updatePrerequisites, {resourceId, consensedPrerequisiteIds})
 }
 
-export const addReview = H.wrapInResponse (_addReview)
+export default H.wrapInResponse (addReview)

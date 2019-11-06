@@ -7,7 +7,7 @@ import Buttons from '../buttons'
 import inputForm from '../input-form.sc'
 import top from '../review-top.sc'
 
-const Topics = (props) => {
+const View = (props) => {
   const {
     results, messages, times, onChange, loading,
     onSubmit, onClick, form, onEnt, valid
@@ -60,4 +60,4 @@ const Topics = (props) => {
   </div>
 }
 
-export default H.styled (Topics) ``
+export default H.styled (View) ``

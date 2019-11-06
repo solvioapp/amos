@@ -4,7 +4,7 @@ import {
 } from 'common'
 import top from './card-top.sc'
 
-const Card = (props) => {
+const View = (props) => {
   const {res, onMenuClick} = props
   const icon = R.cond ([
     [R.equals (`BOOK`), R.always (`book`)],
@@ -49,4 +49,4 @@ const Card = (props) => {
   </div>
 }
 
-export default H.styled (Card) ``
+export default H.styled (View) ``

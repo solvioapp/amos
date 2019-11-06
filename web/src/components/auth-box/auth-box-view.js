@@ -9,16 +9,16 @@ const fbLogin = (authFacebook) => ({status, authResponse: {accessToken: fbAccess
   R.equals (status, `connected`) && do {
     authFacebook ({variables: {input: {fbAccessToken}}})
   }
-)
+),
 
-const onClick = (authFacebook) => () => {
+onClick = (authFacebook) => () => {
   /* eslint-disable no-undef */
   FB.login (fbLogin (authFacebook), {scope: [`public_profile`, `email`]})
-}
+},
 
-const github = `https://github.com/login/oauth/authorize?client_id=72be28a7ee64c7cd1948&scope=user:email`
+github = `https://github.com/login/oauth/authorize?client_id=72be28a7ee64c7cd1948&scope=user:email`,
 
-const AuthBox = ({authFacebook, ...rest}) => (
+View = ({authFacebook, ...rest}) => (
   <div css={top} {...rest}>
     <a href={github}>
       <Button
@@ -39,6 +39,6 @@ const AuthBox = ({authFacebook, ...rest}) => (
   </div>
 )
 
-export default AuthBox
+export default View
   |> W.authFacebook
   |> styled (#) ``

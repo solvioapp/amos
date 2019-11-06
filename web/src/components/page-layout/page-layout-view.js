@@ -5,11 +5,11 @@ import {
 import content from './content.sc'
 import top from './page-layout-top.sc'
 
-const PageLayout = ({isAuthenticated, children, ...rest}) => (
+const View = ({isAuthenticated, children, ...rest}) => (
   <div css={top} {...rest}>
     <NavMenu {...{isAuthenticated}}/>
     <div css={content} {...rest}>{children}</div>
   </div>
 )
 
-export default H.styled (PageLayout) ``
+export default H.styled (View) ``

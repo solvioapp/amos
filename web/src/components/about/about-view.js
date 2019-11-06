@@ -3,7 +3,7 @@ import {
   AmosChat, Button
 } from 'common'
 
-const About = () => {
+const View = () => {
   const onKeyPress = (e) => {
     const {key} = e
     key === `Enter` && do {
@@ -32,4 +32,4 @@ const About = () => {
   </AmosChat>
 }
 
-export default H.styled (About) ``
+export default H.styled (View) ``

@@ -3,7 +3,7 @@ import {
   R, H, useEffect, useState, useCallback, useRef,
 } from 'common'
 
-const inputHook = (props) => {
+const hook = (props) => {
   const
 
   {valid: isValid = false, results, noDropdown = false, onEnt, dontFocus, ref} = props,
@@ -78,4 +78,4 @@ const inputHook = (props) => {
   return {_onClick, forwardRef, dropdown, active}
 }
 
-export default inputHook
+export default hook

@@ -5,7 +5,7 @@ import {
 import top from './profile-top.sc'
 import useProfileHook from './profile-hook'
 
-const Profile = (props) => {
+const View = (props) => {
   const {logout} = useProfileHook (props)
   return <div css={top} {...props}>
     <AmosChat callToAction={
@@ -17,4 +17,4 @@ const Profile = (props) => {
   </div>
 }
 
-export default H.styled (Profile) ``
+export default H.styled (View) ``

@@ -4,7 +4,7 @@ import Radio from './radio'
 import Text from './text'
 import radioList from './radio-list.sc'
 
-const RadioGroup = (
+const View = (
   {header, footer, _key, name, elements, form, checked, setChecked, onClick, ...rest}
 ) => {
   /* eslint-disable no-shadow */
@@ -41,4 +41,4 @@ const RadioGroup = (
   </div>
 }
 
-export default H.styled (RadioGroup) ``
+export default H.styled (View) ``

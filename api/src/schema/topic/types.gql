@@ -25,9 +25,6 @@ input AddIsPartOfInput {
   child: ID!
 }
 
-# type Path {
-#   list: [String!]!
-# }
 input AutocompleteInput {
   str: String!
   first: Int!

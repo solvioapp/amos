@@ -5,7 +5,7 @@ import Github from './github'
 import Success from './success'
 import Guest from './guest'
 
-const SignUp = () => (
+const Routes = () => (
   <Switch>
     <Route path='/signup' exact component={Guest}/>
     <Route path='/signup/facebook' component={Facebook}/>
@@ -15,4 +15,4 @@ const SignUp = () => (
   </Switch>
 )
 
-export default SignUp
+export default Routes

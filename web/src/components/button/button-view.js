@@ -5,11 +5,11 @@ import {
 import Text from './text'
 import top from './button-top.sc'
 
-const Button = ({icon, children, ...rest}) => (
+const View = ({icon, children, ...rest}) => (
   <button css={top} {...rest}>
     {icon && <Icon src={icon}/>}
     {children && <Text>{children}</Text>}
   </button>
 )
 
-export default H.styled (Button) ``
+export default H.styled (View) ``

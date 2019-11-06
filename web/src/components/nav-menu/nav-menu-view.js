@@ -10,7 +10,7 @@ const isActive = (_, {pathname: p}) => (
 
 const isLogin = R.pathEq([`history`, `location`, `pathname`], `/login`)
 
-const NavMenu = ({isAuthenticated, ...rest}) => (
+const View = ({isAuthenticated, ...rest}) => (
   <div css={top} {...rest}>
     <Link to='/review'>
       Review
@@ -36,6 +36,6 @@ const NavMenu = ({isAuthenticated, ...rest}) => (
   </div>
 )
 
-export default NavMenu
+export default View
   |> H.styled (#) ``
   |> withRouter

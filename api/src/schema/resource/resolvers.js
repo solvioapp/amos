@@ -1,9 +1,11 @@
 /* This file just exports everything from ./Query, ./Mutation and ./Topic */
 
 import {H} from 'common'
+const req = H._req ({other: false}) (__dirname) (`.`)
 
-const Query = H.req (__dirname) (`.`) (/\.\/Query\/(\.|\w)+\.js$/)
-const Mutation = H.req (__dirname) (`.`) (/\.\/Mutation\/(\.|\w)+\.js$/)
-const Resource = H.req (__dirname) (`.`) (/\.\/Resource\/(\.|\w)+\.js$/)
+// const Query = req (/\.\/Query\/(\.|\w)+\.js$/)
+const Mutation = req (/\.\/Mutation\/(\.|\w)+\.js$/)
+const Resource = req (/\.\/Resource\/(\.|\w)+\.js$/)
 
-export default {Query, Mutation, Resource}
+// export default {Query, Mutation, Resource}
+export default {Mutation, Resource}

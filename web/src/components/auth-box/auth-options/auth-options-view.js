@@ -1,6 +1,6 @@
 import {H, React, Link} from 'common'
 
-const AuthOptions = ({
+const View = ({
   first = {
     link: `/signup/email`,
     text: `Use email`
@@ -19,4 +19,4 @@ const AuthOptions = ({
   </div>
 )
 
-export default H.styled (AuthOptions) ``
+export default H.styled (View) ``

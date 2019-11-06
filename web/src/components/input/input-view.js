@@ -9,7 +9,7 @@ import Dropdown from './dropdown'
 import icon from './icon.sc'
 import useInputHook from './input-hook'
 
-const Input = (props, ref) => {
+const View = (props, ref) => {
   const {label, results, name, type, boxShadowWidth, dontFocus,
     onEnt, link, onClick, className, valid: isValid = false,
     placeholder = label, errors, loading, _key, noDropdown = false,
@@ -31,4 +31,4 @@ const Input = (props, ref) => {
   )
 }
 
-export default H.styled (React.forwardRef (Input)) ``
+export default H.styled (React.forwardRef (View)) ``

@@ -1,16 +1,16 @@
 import {H, React} from 'common'
-import _SplitButton from '@zippytech/react-toolkit/SplitButton'
+import SplitButton from '@zippytech/react-toolkit/SplitButton'
 import '@zippytech/react-toolkit/SplitButton/index.css'
 import top from './split-button-top.sc'
 
-const SplitButton = ({children, ...rest}) => {
+const View = ({children, ...rest}) => {
   return (
-    <_SplitButton css={top}
+    <SplitButton css={top}
       {...rest}
     >
       {children}
-    </_SplitButton>
+    </SplitButton>
   )
 }
 
-export default H.styled (SplitButton) ``
+export default H.styled (View) ``

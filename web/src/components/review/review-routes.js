@@ -13,7 +13,7 @@ const redirect = R.both (
   R.pathEq ([`location`, `pathname`], `/review`)
 )
 
-const Review = (props) => {
+const Routes = (props) => {
   return redirect (props)
     ? <Redirect to='/review/links'/>
     : (
@@ -28,4 +28,4 @@ const Review = (props) => {
     )
 }
 
-export default W.GET_AUTH (Review)
+export default W.GET_AUTH (Routes)

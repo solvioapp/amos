@@ -8,7 +8,7 @@ import Buttons from '../buttons'
 import top from '../review-top.sc'
 import inputForm from '../input-form.sc'
 
-const Prerequisites = (props) => {
+const View = (props) => {
   const [checked, setChecked] = useState ([])
   const setOneChecked = useCallback ((key) => val => {
     setChecked (H.update (key) (val))
@@ -83,4 +83,4 @@ const Prerequisites = (props) => {
   </div>
 }
 
-export default H.styled (Prerequisites) ``
+export default H.styled (View) ``

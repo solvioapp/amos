@@ -56,27 +56,45 @@ context = dirBase => dirRel => regExp => {
   const _requireContext = requireContext (dirAbs)
   _requireContext.keys = () => keys
 
+  // keys |> console.log ('keys', #)
+
   return _requireContext
 },
+defOpts = {def: true, other: true},
 
-importContext = req => (
-  R.reduce ((acc, key) => {
+_importContext = _opts => req => {
+  const opts = R.merge (defOpts) (_opts)
+  const toReturn = R.reduce ((acc, key) => {
     const name = R.pipe (
       /* Get file name */
       R.split (`/`), R.last,
       /* Drop extension */
       R.split (`.`), R.head
     ) (key)
-    const _exports = req (key)
-    const exportsMerged = R.merge (R.omit ([`default`]) (_exports)) (acc)
-    const defaultExport = R.has (`default`) (_exports)
-      ? {[name]: _exports.default}
-      : {}
-    return R.merge (defaultExport) (exportsMerged)
+    const exports = req (key)
+    const def = 
+      opts.def && R.has (`default`) (exports)
+        ? {[name]: exports.default}
+        : {}
+    const other =
+      opts.other
+        ? R.omit ([`default`]) (exports)
+        : {}
+    return mergeDeepAll ([acc, other, def])
   }) ({}) (req.keys())
-),
+  return toReturn
+},
 
-req = R.curryN (3) (R.pipe (R.uncurryN (3) (context), importContext)),
+importContext = _importContext (defOpts),
+
+_req = opts => R.curryN (3) (R.pipe (R.uncurryN (3) (context), _importContext (opts))),
+
+req = _req (defOpts),
+
+reqResolvers = dirBase => name => (
+  context (dirBase) (`.`) (new RegExp (`\\.\\/${name}\\/(\\.|\\w)+\\.js$`))
+    |> _importContext ({other: false}) (#)
+),
 
 wrapInResponse = fn => {
   const _fn = async (...args) => {

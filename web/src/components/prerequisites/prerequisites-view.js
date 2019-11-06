@@ -21,9 +21,9 @@ const makePs = R.cond ([
   )]
 ])
 
-const Prerequisites = (props) => {
+const View = (props) => {
   const {prerequisites} = props
   return <span {...props}>{makePs (prerequisites)}</span>
 }
 
-export default H.styled (Prerequisites) ``
+export default H.styled (View) ``

@@ -15,8 +15,8 @@ const makeTopics = R.cond ([
   )]
 ])
 
-const Topics = (props) => (
+const View = (props) => (
   <span {...props}>{makeTopics (props.topics)}</span>
 )
 
-export default H.styled (Topics) ``
+export default H.styled (View) ``

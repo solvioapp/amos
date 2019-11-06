@@ -1,5 +1,5 @@
-scalar Date
 scalar StringList
+scalar Date
 scalar Time
 
 type Response {

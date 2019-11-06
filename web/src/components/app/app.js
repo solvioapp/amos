@@ -2,7 +2,7 @@ import {
   React, CookiesProvider, H, Router, ApolloProvider
 } from 'common'
 import PageLayout from './page-layout'
-import Routes from './routes'
+import AppRoutes from './app-routes'
 import client from 'apollo/client'
 
 const App = () => (
@@ -10,7 +10,7 @@ const App = () => (
     <ApolloProvider client={client}>
       <Router history={H.history}>
         <PageLayout>
-          <Routes/>
+          <AppRoutes/>
         </PageLayout>
       </Router>
     </ApolloProvider>

@@ -5,7 +5,7 @@ import {
 import useTopicHook from './topic-hook'
 import Card from './card'
 
-const Topic = (props) => {
+const View = (props) => {
   const {message, data, onMenuClick} = useTopicHook (props)
   return (
     <div>
@@ -28,4 +28,4 @@ const Topic = (props) => {
   )
 }
 
-export default H.styled (Topic) ``
+export default H.styled (View) ``

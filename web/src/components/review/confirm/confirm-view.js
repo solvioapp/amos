@@ -5,8 +5,7 @@ import {
 import useConfirmHook from './confirm-hook'
 import top from '../review-top.sc'
 
-const Confirm = (props) => {
-
+const View = (props) => {
   const {amosChat} = useConfirmHook (props)
 
   return props.isAuthenticated
@@ -25,4 +24,4 @@ const Confirm = (props) => {
     )
 }
 
-export default H.styled (W.GET_AUTH (Confirm)) ``
+export default H.styled (W.GET_AUTH (View)) ``

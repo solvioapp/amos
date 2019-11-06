@@ -11,7 +11,7 @@ toBubble = (child, key) => (
   <Bubble key={key}>{toText (child)}</Bubble>
 ),
 
-AmosChat = ({avatar = `medium`, children, callToAction, ...rest}) => {
+View = ({avatar = `medium`, children, callToAction, ...rest}) => {
   if (typeof children !== `object`) {
     // children is either a string or a function, not an array
     children = R.of (children)
@@ -29,4 +29,4 @@ AmosChat = ({avatar = `medium`, children, callToAction, ...rest}) => {
   )
 }
 
-export default H.styled (AmosChat) ``
+export default H.styled (View) ``

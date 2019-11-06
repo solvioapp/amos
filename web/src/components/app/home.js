@@ -2,7 +2,7 @@ import {
   React, Redirect, W
 } from 'common'
 
-const Home = ({isAuthenticated}) => (
+const View = ({isAuthenticated}) => (
   <>
     {isAuthenticated
       ? <Redirect to='/learn'/>
@@ -11,4 +11,4 @@ const Home = ({isAuthenticated}) => (
   </>
 )
 
-export default W.GET_AUTH (Home)
+export default W.GET_AUTH (View)
