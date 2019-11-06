@@ -48,10 +48,8 @@ export default async (token) => {
   })
 
   const parsed = parser (topics)
-  console.log (`Still works`)
-  await Promise.map (parsed.graph.nodes, createTopic (client), {concurrency: 5})
-  console.log (`Still works2`)
+  await Promise.map (parsed.graph.nodes, createTopic (client), {concurrency: 1})
   console.log (`Successfully seeded nodes`)
-  await Promise.map (parsed.graph.edges, createRelation (client), {concurrency: 5})
+  await Promise.map (parsed.graph.edges, createRelation (client), {concurrency: 1})
   console.log (`Successfully seeded relations`)
 }
