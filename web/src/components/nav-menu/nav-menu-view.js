@@ -1,4 +1,4 @@
-import {H, React, R, withRouter} from 'common'
+import {H, React, R} from 'common'
 import top from './nav-menu-top.sc'
 import Link from './link'
 
@@ -36,6 +36,4 @@ const View = ({isAuthenticated, ...rest}) => (
   </div>
 )
 
-export default View
-  |> H.styled (#) ``
-  |> withRouter
+export default H.styled (View) ``

@@ -2,7 +2,7 @@
  * should be mirrored in /api/common/validation! */
 import {R, yup, CONST} from 'common'
 
-const {string, number, object, array} = yup
+const {string, object, array} = yup
 
 export const
 
@@ -68,28 +68,7 @@ signup = object().shape ({
 
 login = object().shape ({usernameOrEmail, password}),
 
-/* Add review */
-// links = array().of (string().url().required()).required(),
-// _links = string().url(),
-
-// links = object().shape ({links: _links})
-_link = string().url(`Link must be a valid URL (must start with http:// or https://).`).required(`A link is required!`),
-link = object().shape ({link: array().of (_link)}),
-_topics = string()
-// topics = object().shape ({topic: _topics})
-
-// topics = array().of (string().required()),
-// prerequisites = string(),
-// prerequisites = array().of (object().shape ({
-//   strength: number().oneOf ([1, 2, 3]).required(),
-//   level: number().oneOf ([1, 2, 3, 4]).required(),
-//   topic: string().required(),
-// })),
-
-// review = {
-//   links: object().shape ({links}),
-  // topics: object().shape ({topics}),
-  // prererequisites: object().shape ({prerequisites}),
-// }
-
-// review = object().shape ({links, topics, prerequisites})
+_link = string().url (
+  `Link must be a valid URL (must start with http:// or https://).`
+).required (`A link is required!`),
+link = object().shape ({link: array().of (_link)})

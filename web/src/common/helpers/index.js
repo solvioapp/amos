@@ -1,8 +1,5 @@
-import {R} from 'common'
-import * as common from 'repoCommon/helpers'
+import {importContext} from './generic'
 
 /* Matches "everything" except ./index.js */
-const local = require.context (`.`, true, /\.\/(?!index).+\.js/)
-  |> common.importContext
-
-export default R.merge (common) (local)
+export default require.context (`.`, true, /\.\/(?!index).+\.js/)
+  |> importContext

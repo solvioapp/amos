@@ -3,16 +3,17 @@ FROM node:latest
 RUN mkdir -p /app
 WORKDIR /app
 
-COPY web/package.json .
+COPY package.json .
 RUN npm install --quiet
-COPY web .
+COPY . .
 
-WORKDIR /common
-COPY common .
+# WORKDIR /common
+# COPY common .
 
-EXPOSE 8080
+EXPOSE 3000
 
+RUN npm run build
+CMD npm run start:prod
+# WORKDIR /app
 # RUN npm run build
 # CMD npm run start:prod
-WORKDIR /app
-CMD npm run start

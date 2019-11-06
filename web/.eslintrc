@@ -5,9 +5,11 @@
   },
   "plugins": ["react"],
   "parser": "babel-eslint",
-  "react/jsx-no-undef": [2, {
-    "allowGlobals": true
-  }],
-  "react/jsx-uses-react": "error",
-  "react/jsx-uses-vars": [2],
+  "rules": {
+    "react/jsx-no-undef": [2, {
+      "allowGlobals": true
+    }],
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": [2],
+  }
 }

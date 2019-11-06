@@ -1,4 +1,5 @@
-import {R, styled, css} from 'common'
+import * as R from 'ramda'
+import styled, {css} from 'styled-components'
 
 export const
 

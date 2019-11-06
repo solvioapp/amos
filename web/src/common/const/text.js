@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import {React} from 'common'
+import React from 'react'
 
 export const
 

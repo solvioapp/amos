@@ -19,7 +19,7 @@ import {flatten} from 'flattenjs'
 import H from './helpers'
 // import styled from './styled'
 import CONST from './const'
-import * as validation from 'repoCommon/validation'
+import * as validation from './validation'
 import hooks from './hooks'
 import W from './with'
 
