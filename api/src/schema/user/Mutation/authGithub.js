@@ -1,4 +1,4 @@
-import {R, A, H, rp} from 'common'
+import {R, H, rp} from 'common'
 
 const matchUserGhId = `
   match (u: User)
@@ -59,7 +59,7 @@ authGithub = async (_, {input: {ghCode}}, {session}) => {
     ? do {
       /* User has a GhAccount */
       const userId = result.get (`u`).identity.low,
-      token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+      token = await H.createToken (process.env.JWT_SECRET, {sub: userId})
       /* Fsr this fails unless it's named first */
       const res = [`token`, token]
       res
@@ -85,7 +85,7 @@ authGithub = async (_, {input: {ghCode}}, {session}) => {
               const {username} = _user.get (`u`).properties
               await session.run (createGhAccount, {username, userGhId})
               const userId = _user.get (`u`).identity.low,
-              token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+              token = await H.createToken (process.env.JWT_SECRET, {sub: userId})
               const __res = [`token`, token]
               __res
             }

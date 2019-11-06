@@ -11,7 +11,7 @@ import Promise from 'bluebird'
 import normalizeUrl from 'normalize-url'
 import rp from 'request-promise'
 
-import * as CONST from './const'
+import CONST from './const'
 import * as validation from './validation'
 
 export {

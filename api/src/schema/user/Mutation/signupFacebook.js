@@ -1,4 +1,4 @@
-import {R, A, H, validation, CONST, rp} from 'common'
+import {R, H, validation, CONST, rp} from 'common'
 
 const matchUser = `
   MATCH (u:User) WHERE u.username = $username RETURN u
@@ -47,7 +47,7 @@ const signupFacebook = async (_, {input}, {session}) => {
 
   [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {username, email})],
 
-  message = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+  message = await H.createToken (process.env.JWT_SECRET, {sub: userId})
 
   return {message}
 }

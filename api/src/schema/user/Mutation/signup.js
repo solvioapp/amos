@@ -1,4 +1,4 @@
-import {A, H, R, bcrypt, CONST, validation} from 'common'
+import {H, R, bcrypt, CONST, validation} from 'common'
 
 const getUsername = `
   match (u: User)
@@ -88,8 +88,8 @@ signup = async (_, {input}, {session}) => {
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
   message = username === `amos`
-    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id})
-    : await A.createToken (process.env.JWT_SECRET, {sub: id})
+    ? await H.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id})
+    : await H.createToken (process.env.JWT_SECRET, {sub: id})
 
   return {message}
 }

@@ -1,5 +1,5 @@
 import {
-  A, H, R, CONST, bcrypt, validation
+  H, R, CONST, bcrypt, validation
 } from 'common'
 
 const getUserByEmail = `
@@ -59,8 +59,8 @@ login = async (_, {input: {usernameOrEmail, password}}, {session}) => {
   /* Grant jwt */
   /* `amos` is ADMIN (can add new topics) */
   message = R.includes ([`amos`, `amos@solvio.org`]) (usernameOrEmail)
-    ? await A.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id})
-    : await A.createToken (process.env.JWT_SECRET, {sub: id})
+    ? await H.createToken (process.env.JWT_SECRET, {roles: [`ADMIN`], sub: id})
+    : await H.createToken (process.env.JWT_SECRET, {sub: id})
 
   return {message}
 }

@@ -1,4 +1,4 @@
-import {R, A, H, validation, CONST, rp} from 'common'
+import {R, H, validation, CONST, rp} from 'common'
 
 const getUserByUsername = `
   MATCH (u:User) WHERE u.username = $username RETURN u
@@ -59,7 +59,7 @@ signupGithub = async (_, {input}, {session}) => {
   email = _email?.email,
   [] = [H.isNotNilOrEmpty (email) && await session.run (attachEmail, {username, email})],
 
-  message = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+  message = await H.createToken (process.env.JWT_SECRET, {sub: userId})
 
   return {message}
 }

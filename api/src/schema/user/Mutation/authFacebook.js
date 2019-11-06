@@ -1,4 +1,4 @@
-import {A, H, rp} from 'common'
+import {H, rp} from 'common'
 
 const matchUserFbId = `
   match (u: User)
@@ -37,7 +37,7 @@ authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
     ? do {
       /* User has a FbAccount */
       const userId = result.get (`u`).identity.low,
-      token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+      token = await H.createToken (process.env.JWT_SECRET, {sub: userId})
       /* Fsr this fails unless it's named first */
       const res = [`token`, token]
       res
@@ -54,7 +54,7 @@ authFacebook = async (_, {input: {fbAccessToken}}, {session}) => {
           const username = user.get (`u`).properties.username
           const userId = user.get (`u`).identity.low
           await session.run (createFbAccount, {username, userFbId})
-          const token = await A.createToken (process.env.JWT_SECRET, {sub: userId})
+          const token = await H.createToken (process.env.JWT_SECRET, {sub: userId})
           const res = [`token`, token]
           res
         }
