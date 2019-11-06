@@ -1,18 +1,16 @@
-import express from 'express'
-import {ApolloServer} from 'apollo-server-express'
-import {getDriver} from './bootstrap/neo4j'
-import schema from './schema'
-import {H, R} from 'common'
+import {H} from 'common'
+import getDriver from './get-driver'
+import schema from '../schema'
 
 const driver = getDriver()
 
-const context = async ({req}) => {
+const context = async ({req}) => do {
   const session = driver.session()
   const {headers} = req
   const user = await H.decode (driver, headers.authorization)
   const ip = headers[`x-forwarded-for`] || req.connection.remoteAddress
 
-  return {
+  const ctx = {
     driver,
     session,
     headers,
@@ -22,9 +20,10 @@ const context = async ({req}) => {
       currentUserId: user?.id,
     },
   }
+  ctx
 }
 
-const defaults = {
+export default {
   context,
   schema,
   playground: true,
@@ -32,12 +31,3 @@ const defaults = {
   // TODO: Change
   allowUndefinedInResolve: true,
 }
-
-const server = options => do {
-  const server = new ApolloServer (R.mergeAll ([defaults, options])),
-  app = express()
-  server.applyMiddleware ({ app, path: `/` })
-  app
-}
-
-export default server

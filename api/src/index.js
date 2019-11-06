@@ -1,5 +1,5 @@
 import 'regenerator-runtime/runtime'
-import server from './server'
+import server from './server/server'
 
 console.log (`NEO4J_URI`, process.env.NEO4J_URI)
 console.log (`NEO4J_USERNAME`, process.env.NEO4J_USERNAME)
