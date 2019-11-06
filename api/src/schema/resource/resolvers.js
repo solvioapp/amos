@@ -2,11 +2,8 @@
 
 import {H} from 'common'
 
-const queries = H.req (__dirname) (`.`) (/\.\/Query\/(\.|\w)+\.js$/) (true)
-const mutations = H.req (__dirname) (`.`) (/\.\/Mutation\/(\.|\w)+\.js$/) (true)
-const topics = H.req (__dirname) (`.`) (/\.\/Topic\/(\.|\w)+\.js$/) (true)
+const Query = H.req (__dirname) (`.`) (/\.\/Query\/(\.|\w)+\.js$/)
+const Mutation = H.req (__dirname) (`.`) (/\.\/Mutation\/(\.|\w)+\.js$/)
+const Resource = H.req (__dirname) (`.`) (/\.\/Resource\/(\.|\w)+\.js$/)
 
-export default {
-  Query: H.arrayOfFnsToObject (queries),
-  Mutation: H.arrayOfFnsToObject (mutations),
-}
+export default {Query, Mutation, Resource}

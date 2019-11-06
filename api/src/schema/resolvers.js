@@ -1,6 +1,7 @@
-import {H} from 'common'
+import {H, R} from 'common'
 
-const cache = H.req (__dirname) (`.`) (/\.\/.+\/resolvers\.js$/) (true)
+const exports = H.req (__dirname) (`.`) (/\.\/.+\/resolvers\.js$/)
+  |> R.prop (`resolvers`) (#)
+  |> R.merge
 
-export default H.mergeDeepAll (cache)
-
+export default exports

@@ -17,12 +17,19 @@ type Resource {
   # TODO: Change
   title: String
   link: String
-  topics: [HAS_TOPIC!]!
+  topics: [Topic!]!
+  prerequisites: [Prerequisite!]!
 }
 
-type HAS_TOPIC @relation (name: "HAS_TOPIC") {
+type HAS_TOPIC {
   from: Resource!
   to: Topic!
+}
+
+type Prerequisite {
+  level: Int!
+  strength: Int!
+  topic: Topic!
 }
 
 enum ResourceType {
@@ -46,12 +53,12 @@ type AmosGame {
   strength: Int # only for Prerequisite
 }
 
-type FOR_RESOURCE @relation(name: "FOR_RESOURCE") {
+type FOR_RESOURCE {
   from: AmosGame!
   to: Resource!
 }
 
-type FOR_TOPIC @relation(name: "FOR_TOPIC") {
+type FOR_TOPIC {
   from: AmosGame!
   to: Topic!
 }
@@ -90,5 +97,5 @@ input AddReviewHydrationInput {
 extend type Mutation {
   addReview (input: AddReviewInput!): Response!
   # For hydration
-  addReviewHydration (input: AddReviewHydrationInput!): Response! @hasRole (roles: [ADMIN])
+  addReviewHydration (input: AddReviewHydrationInput!): Response!
 }

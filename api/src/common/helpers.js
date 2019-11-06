@@ -47,18 +47,36 @@ ls = rec => dirBase => dir => regExp => R.map (R.pipe (
 
 requireContext = dirAbs => key => require (path.resolve (dirAbs, key)),
 
-req = dirBase => dirRel => regExp => requireAlso => {
+context = dirBase => dirRel => regExp => {
   const
 
   dirAbs = path.resolve (dirBase, dirRel),
   keys = ls (true) (dirAbs) (`.`) (regExp)
 
-  return !requireAlso ? keys : (() => {
-    const cache = R.map (requireContext (dirAbs)) (keys)
-    /* Accept default exports */
-    return R.map (val => R.propOr (val) (`default`) (val)) (cache)
-  })()
+  const _requireContext = requireContext (dirAbs)
+  _requireContext.keys = () => keys
+
+  return _requireContext
 },
+
+importContext = req => (
+  R.reduce ((acc, key) => {
+    const name = R.pipe (
+      /* Get file name */
+      R.split (`/`), R.last,
+      /* Drop extension */
+      R.split (`.`), R.head
+    ) (key)
+    const _exports = req (key)
+    const exportsMerged = R.merge (R.omit ([`default`]) (_exports)) (acc)
+    const defaultExport = R.has (`default`) (_exports)
+      ? {[name]: _exports.default}
+      : {}
+    return R.merge (defaultExport) (exportsMerged)
+  }) ({}) (req.keys())
+),
+
+req = R.curryN (3) (R.pipe (R.uncurryN (3) (context), importContext)),
 
 wrapInResponse = fn => {
   const _fn = async (...args) => {
@@ -75,7 +93,17 @@ wrapInResponse = fn => {
   /* Name function */
   Object.defineProperty (_fn, `name`, R.objOf (`value`) (fn.name))
   return _fn
-}
+},
+
+lens = R.cond ([
+  [R.is (String), R.lensProp],
+  [R.is (Number), R.lensIndex],
+  [R.T, R.lensPath]
+]),
+
+set = R.curry ((path, val, obj) => R.set (lens (path, obj), val, obj)),
+
+over = R.curry ((path, cb, obj) => R.over (lens (path, obj), cb, obj))
 
 // getOne = async (cypher, _, params, {session}) => {
 //   const {records: recs} = await session.run (cypher, params)

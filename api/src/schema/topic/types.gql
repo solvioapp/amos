@@ -11,7 +11,7 @@ type Topic {
   createLink (name: String!): String!
 }
 
-type IS_PART_OF @relation (name: "IS_PART_OF") {
+type IS_PART_OF {
   from: Topic!
   to: Topic!
 }
@@ -52,6 +52,6 @@ extend type Query {
 }
 
 extend type Mutation {
-  createTopic (input: CreateTopicInput!): Response! @hasRole (roles: [ADMIN])
-  addIsPartOf (input: AddIsPartOfInput!): Response! @hasRole (roles: [ADMIN])
+  createTopic (input: CreateTopicInput!): Response!
+  addIsPartOf (input: AddIsPartOfInput!): Response!
 }

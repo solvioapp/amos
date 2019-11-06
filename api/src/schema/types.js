@@ -1,7 +1,7 @@
 import {H,R} from 'common'
 import {mergeTypes} from 'merge-graphql-schemas'
 
-const cache = H.req (__dirname) (`.`) (/.gql$/) (false)
-const all = R.map (H.read (__dirname)) (cache)
+const cache = H.context (__dirname) (`.`) (/.gql$/)
+const all = R.map (H.read (__dirname)) (cache.keys())
 
 export default mergeTypes (all)

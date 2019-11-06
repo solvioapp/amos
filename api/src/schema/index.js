@@ -1,23 +1,33 @@
 import {R} from 'common'
-import {makeAugmentedSchema} from 'neo4j-graphql-js'
+import {makeExecutableSchema} from 'apollo-server'
 import applyDirectives from '../bootstrap/directives'
 import applyScalars from '../bootstrap/scalars'
 import typeDefs from './types'
 import resolvers from './resolvers'
 import CONFIG from '../config'
+import {
+  IsAuthenticatedDirective,
+  HasRoleDirective,
+  HasScopeDirective
+} from "graphql-auth-directives"
 
 export default {
   typeDefs,
   resolvers,
   // TODO: Change
   allowUndefinedInResolve: true,
+  schemaDirectives: {
+    isAuthenticated: IsAuthenticatedDirective,
+    hasRole: HasRoleDirective,
+    hasScope: HasScopeDirective,
+  },
   config: {
     debug: !!CONFIG.DEBUG,
     auth: {
       isAuthenticated: true,
       hasRole: true,
     },
-    query: true,
+    // query: true,
     // query: false,
     // query: {
     //   exclude: [
@@ -27,7 +37,7 @@ export default {
     //     // `autocomplete`,
     //   ],
     // },
-    mutation: false,
+    // mutation: false,
     // mutation: true,
     // mutation: {
     //   exclude: [
@@ -39,6 +49,6 @@ export default {
     //   ],
     // },
   },
-} |> makeAugmentedSchema
+} |> makeExecutableSchema
   |> applyDirectives
   |> applyScalars

@@ -10,7 +10,7 @@ type User {
   # Fields
   "Does this work?"
   username: String!
-  createdAt: DateTime!
+  # createdAt: DateTime!
 
   # Relations
   votes: [VOTED_ON!]!
@@ -26,13 +26,13 @@ type AnonymousUser {
   votes: [VOTED_ON_ANONYMOUS!]!
 }
 
-type VOTED_ON @relation(name: "VOTED_ON") {
+type VOTED_ON {
   from: User!
   to: AmosGame!
-  timestamp: DateTime!
+  # timestamp: DateTime!
 }
 
-type VOTED_ON_ANONYMOUS @relation(name: "VOTED_ON_ANONYMOUS") {
+type VOTED_ON_ANONYMOUS {
   from: AnonymousUser!
   to: Foo!
   # timestamp: DateTime!
@@ -42,7 +42,7 @@ type Foo {
   bar: String!
 }
 
-type PROFICIENCY @relation (name: "PROFICIENCY") {
+type PROFICIENCY {
   from: User!
   to: Topic!
 }
