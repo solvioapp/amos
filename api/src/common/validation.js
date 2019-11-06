@@ -2,7 +2,7 @@
  * should be mirrored in /api/common/validation! */
 import {R, yup, CONST} from 'common'
 
-const {string, number, object, array} = yup
+const {string, object, array} = yup
 
 export const
 
@@ -40,6 +40,7 @@ password = string()
   .label(`Password`)
   .required(),
 
+/* eslint-disable max-len */
 /* Need to use non-arrow function per
   https://github.com/jquense/yup#mixedtestname-string-message-string--function-test-function-schema */
 validateUsernameOrEmail = async function (str) {

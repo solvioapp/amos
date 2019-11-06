@@ -1,15 +1,14 @@
-import {R} from 'common'
+import * as R from 'ramda'
 import jwt from 'jsonwebtoken'
 
 export const createToken = async (secret, user) => await jwt.sign(user, secret, {expiresIn: `90d`})
-import CONFIG from '../config'
 
 export const decode = async (driver, authorizationHeader) => {
   if (!authorizationHeader) return null
   const token = R.replace (`Bearer `) (``) (authorizationHeader)
   let id = null
   try {
-    const decoded = await jwt.verify(token, CONFIG.JWT_SECRET)
+    const decoded = await jwt.verify(token, process.env.JWT_SECRET)
     id = decoded.sub
   } catch (err) {
     return null

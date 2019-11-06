@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export const
 
 cant_find_user = email => usernameOrEmail => (

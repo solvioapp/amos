@@ -1,5 +1,4 @@
-import * as H from './helpers'
-import * as A from './auth'
+import H from './helpers'
 import * as R from 'ramda'
 import fs from 'fs'
 import dotenv from 'dotenv'
@@ -14,10 +13,9 @@ import rp from 'request-promise'
 
 import * as CONST from './constants'
 import * as validation from './validation'
-// import * as validation from 'repoCommon/validation'
 
 export {
-  A, H, R, dotenv, fs,
+  H, R, dotenv, fs,
   bcrypt,
   path,
   metascraper,

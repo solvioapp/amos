@@ -1,4 +1,4 @@
-require('dotenv-flow').config()
+require(`dotenv-flow`).config()
 const express = require (`express`)
 const fs = require (`fs`)
 const http = require (`http`)
@@ -14,7 +14,7 @@ app.use(`*`, (req, res) => {
   fs.createReadStream (HTML_FILE).pipe (res)
 })
 
-const server = http.Server(app)
+const server = http.createServer(app)
 const port = process.env.PORT || 3000
 
 server.listen(port, () => {
