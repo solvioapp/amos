@@ -1,12 +1,12 @@
 import {
   React, H
 } from 'common'
-import useDropdownHook from './dropdown-hook'
+import hook from './dropdown-hook'
 import top from './dropdown-top'
 
 const View = (props) => {
   const {results} = props,
-  {renderResults} = useDropdownHook (props)
+  {renderResults} = hook (props)
 
   return (
     <div css={top} {...props}>

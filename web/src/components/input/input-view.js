@@ -7,7 +7,7 @@ import Label from './label'
 import top from './input-top.sc'
 import Dropdown from './dropdown'
 import icon from './icon.sc'
-import useInputHook from './input-hook'
+import hook from './input-hook'
 
 const View = (props, ref) => {
   const {label, results, name, type, boxShadowWidth, dontFocus,
@@ -16,7 +16,7 @@ const View = (props, ref) => {
     hasError = Boolean (errors?.[name]), ...rest
   } = props
 
-  const {_onClick, forwardRef, dropdown, active} = useInputHook ({...props, ref})
+  const {_onClick, forwardRef, dropdown, active} = hook ({...props, ref})
 
   return (
     <div css={top} {...{className}} key={`div${_key}`}>

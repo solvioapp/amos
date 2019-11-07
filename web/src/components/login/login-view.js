@@ -2,7 +2,7 @@ import {
   H, React, hooks, CONST, validation,
   AmosChat, Input, Button, AuthOptions
 } from 'common'
-import useLoginHook from './login-hook'
+import hook from './login-hook'
 import top from './login-top.sc'
 
 const message = ({isSubmitted}) => (
@@ -12,7 +12,7 @@ const message = ({isSubmitted}) => (
 const boxShadowWidth = `0`
 
 const View = (props) => {
-  const {login} = useLoginHook (props)
+  const {login} = hook (props)
   const {
     onSubmit, messages, form: {register, errors}
   } = hooks.form

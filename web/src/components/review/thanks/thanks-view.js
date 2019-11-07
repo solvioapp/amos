@@ -2,11 +2,11 @@ import {
   H, React, W, CONST,
   AuthBox
 } from 'common'
-import useThanksHook from './thanks-hook'
+import hook from './thanks-hook'
 import top from '../review-top.sc'
 
 const View = (props) => {
-  const {amosChat} = useThanksHook ({...props, messages: CONST.thanks})
+  const {amosChat} = hook ({...props, messages: CONST.thanks})
 
   return props.isAuthenticated
     ? (

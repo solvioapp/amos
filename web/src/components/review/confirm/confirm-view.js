@@ -2,11 +2,11 @@ import {
   H, React, W,
   AuthBox
 } from 'common'
-import useConfirmHook from './confirm-hook'
+import hook from './confirm-hook'
 import top from '../review-top.sc'
 
 const View = (props) => {
-  const {amosChat} = useConfirmHook (props)
+  const {amosChat} = hook (props)
 
   return props.isAuthenticated
     ? (

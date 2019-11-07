@@ -3,10 +3,10 @@ import {
   AmosChat, Button
 } from 'common'
 import top from './profile-top.sc'
-import useProfileHook from './profile-hook'
+import hook from './profile-hook'
 
 const View = (props) => {
-  const {logout} = useProfileHook (props)
+  const {logout} = hook (props)
   return <div css={top} {...props}>
     <AmosChat callToAction={
       <Button primary onClick={logout}>

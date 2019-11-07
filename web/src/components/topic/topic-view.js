@@ -2,11 +2,11 @@ import {
   React, R, H,
   AmosChat
 } from 'common'
-import useTopicHook from './topic-hook'
+import hook from './topic-hook'
 import Card from './card'
 
 const View = (props) => {
-  const {message, data, onMenuClick} = useTopicHook (props)
+  const {message, data, onMenuClick} = hook (props)
   return (
     <div>
       <AmosChat>

@@ -3,7 +3,7 @@ import {
   H, hooks, React, CONST, validation,
   AmosChat, Button, Input, AuthOptions
 } from 'common'
-import useEmailHook from './email-hook'
+import hook from './email-hook'
 import top from './signup-top.sc'
 
 const message = ({isSubmitted}) => (
@@ -13,7 +13,7 @@ const message = ({isSubmitted}) => (
 const boxShadowWidth = `0`
 
 const Email = (props) => {
-  const {signup} = useEmailHook (props)
+  const {signup} = hook (props)
   const {
     onSubmit, messages, form: {register}, errors, ...rest
   } = hooks.form
