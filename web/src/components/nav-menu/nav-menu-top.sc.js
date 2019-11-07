@@ -1,4 +1,5 @@
 import {H} from 'common'
+import Link from './link'
 
 const top = H.css`
   padding: 20px;
@@ -12,6 +13,10 @@ const top = H.css`
     z-index: 100;
     width: 100%;
     padding-left: 0;
+
+    ${Link} {
+      font-size: 16px;
+    }
   }
 `
 

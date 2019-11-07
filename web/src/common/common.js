@@ -49,8 +49,6 @@ export Button from 'components/button'
 
 /* Button */
 export AmosChat from 'components/amos-chat'
-
-/* AuthOptions, Button */
 export AuthBox from 'components/auth-box'
 
 /* NavMenu, Footer */

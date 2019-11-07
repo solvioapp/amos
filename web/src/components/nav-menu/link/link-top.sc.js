@@ -19,10 +19,6 @@ const link = H.css`
   &:hover {
     color: #2F82FF;
   }
-
-  @media (max-width: 768px) {
-    font-size: 14px;
-  }
 `
 
 export default link
