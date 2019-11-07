@@ -9,6 +9,7 @@
     "start:prod": "cross-env NODE_ENV=production node -r dotenv-flow/config build/index.js",
     "start": "cross-env NODE_ENV=development npx nodemon -e js,gql,json,cypher --exec npx babel-node -r node_modules/dotenv-flow/config src/index.js",
     "build": "rm -rf build && npx babel src -d build --copy-files",
+    "deploy": "heroku container:push web -a amos-services && heroku container:release web -a amos-services",
     "test": "npx jest"
   },
   "dependencies": {

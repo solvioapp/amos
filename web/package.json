@@ -7,6 +7,7 @@
     "build:babel": "cross-env NODE_ENV=production npx babel src -d build",
     "start:prod": "cross-env NODE_ENV=production node index",
     "start": "cross-env NODE_ENV=development node env.js && cross-env NODE_ENV=development webpack-dev-server --host 0.0.0.0 --open",
+    "deploy": "heroku container:push web -a amos-web && heroku container:release web -a amos-web",
     "storybook": "start-storybook -p 9001 -c storybook"
   },
   "sideEffects": false,
