@@ -20,7 +20,7 @@ search = C => ({...rest}) => {
 
   skip = R.complement (H.isNotNilOrEmpty) (str),
 
-  {data} = useQuery (QUERY_SEARCH, {variables: {input: {str, first: 4}}, skip}),
+  {data} = useQuery (QUERY_SEARCH, {variables: {input: {str, first: 8}}, skip}),
 
   results = data
     ? R.map (r => ({name: r.name, text: r.name})) (data.autocomplete.results)
