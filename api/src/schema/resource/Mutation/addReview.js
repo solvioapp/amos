@@ -92,12 +92,14 @@ guest = `
   merge (u)-[:VOTED_ON_ANONYMOUS]->(topicGame)
     on create
       set r.noVotesTopics = r.noVotesTopics + 1
+      set r.created = datetime()
   with u, r
   unwind $prerequisiteGames as prerequisiteGameId
   match (prerequisiteGame: AmosGame) where id (prerequisiteGame) = toInteger (prerequisiteGameId)
   merge (u)-[:VOTED_ON_ANONYMOUS]->(prerequisiteGame)
     on create
       set r.noVotesPrerequisites = r.noVotesPrerequisites + 1
+      set r.created = datetime()
   with r
   return r
 `,
@@ -107,14 +109,14 @@ updateTopics = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedTopicIds as topicId
   match (t: Topic) where id (t) = toInteger (topicId)
-  merge (r)-[:HAS_TOPIC]->(t)
+  merge (r)-[:HAS_TOPIC {created: datetime()}]->(t)
 `,
 
 updatePrerequisites = `
   match (r: Resource) where id (r) = toInteger ($resourceId)
   unwind $consensedPrerequisiteIds as prerequisiteId
   match (g: AmosGame) where id (g) = toInteger (prerequisiteId)
-  merge (r)-[:HAS_PREREQUISITE]->(g)
+  merge (r)-[:HAS_PREREQUISITE {created: datetime()}]->(g)
 `
 
 const addReview = async (_, {input}, {session, ip, user}) => {

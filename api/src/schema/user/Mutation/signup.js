@@ -34,7 +34,7 @@ createLocalAccount = `
 saveUser = `
   create (e: Email {email: $email})
   <-[:HAS_EMAIL]-
-  (u: User {username: $username})
+  (u: User {username: $username, created: datetime()})
   -[:AUTHENTICATED_WITH]->
   (l: LocalAccount {hashedPassword: $hashedPassword})
   return u

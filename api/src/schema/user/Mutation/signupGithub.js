@@ -5,7 +5,7 @@ const getUserByUsername = `
 `,
 
 createGhAccount = `
-  create (u:User {username: $username})
+  create (u:User {username: $username, created: datetime()})
   -[:AUTHENTICATED_WITH]->
   (gh:GhAccount {userGhId: $userGhId})
   return u

@@ -3,7 +3,7 @@ import {H, CONST} from 'common'
 const
 
 _1 = `
-  merge (t:Topic {names: $names})
+  merge (t:Topic {names: $names, created: datetime()})
   return t
 `,
 

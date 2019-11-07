@@ -9,7 +9,7 @@ _1 = `
   match (c)
   where $child in c.names
   with p,c
-  create (p)<-[:IS_PART_OF]-(c)
+  create (p)<-[:IS_PART_OF {created: datetime()}]-(c)
   return c 
 `,
 

@@ -5,7 +5,7 @@ const matchUser = `
 `
 
 const createAccount = `
-  create (u:User {username: $username})
+  create (u:User {username: $username, created: datetime()})
   -[:AUTHENTICATED_WITH]->
   (fb:FbAccount {userFbId: $userFbId})
   return u
