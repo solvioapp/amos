@@ -61,10 +61,17 @@ const hook = (props) => {
   /* Using pattern described in
   https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks */
   const handleUserKeyPress = useCallback ((e) => {
-    inputRef.current === document.activeElement && results && e.key === `ArrowUp`
-      && (e.preventDefault() || setActive (R.pipe (R.dec, R.max (0))))
-    inputRef.current === document.activeElement && results && e.key === `ArrowDown`
-      && (e.preventDefault() || setActive (R.pipe (R.inc, R.min (R.length (results) - 1))))
+    inputRef.current === document.activeElement && do {
+      R.cond ([
+        [R.equals (`Escape`),
+          () => (e.preventDefault() || inputRef.current.blur() || setDropdown (false))],
+        [R.equals (`ArrowUp`),
+          () => (e.preventDefault() || setActive (R.pipe (R.dec, R.max (0))))],
+        [R.equals (`ArrowDown`),
+          () => (e.preventDefault() || setActive (R.pipe (R.inc, R.min (R.length (results) - 1))))],
+        [R.T, R.T]
+      ]) (e.key)
+    }
   }, [results])
 
   useEffect(() => {
