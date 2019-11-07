@@ -42,7 +42,7 @@ const common = {
   },
   resolve: {
     alias: {
-      common: rootPath(`src/common`),
+      common: rootPath(`src/common/common.js`),
       components: rootPath(`src/components`),
       apollo: rootPath(`src/apollo`),
       repoCommon: rootPath (`../common`)

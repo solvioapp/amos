@@ -38,18 +38,22 @@ export default async (token) => {
     cache: new InMemoryCache()
   })
 
-  console.log (`Creating HackPrague reviews`)
-  // await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview (client))
-  await Promise.map (hackprague, createHackPragueReview (client), {concurrency: 1})
-  console.log (`Successfully created HackPrague reviews`)
+  // console.log (`Creating HackPrague reviews`)
+  // // await Promise.mapSeries (R.slice (0) (100) (hackprague), createHackPragueReview (client))
+  // await Promise.mapSeries (hackprague, createHackPragueReview (client))
+  // console.log (`Successfully created HackPrague reviews`)
 
-  console.log (`Creating Other reviews`)
-  // await Promise.mapSeries (R.slice (0) (100) (others), createReview (client))
-  await Promise.map (others, createReview (client), {concurrency: 1})
-  console.log (`Successfully created Other reviews`)
+  // console.log (`Creating Other reviews`)
+  // // await Promise.mapSeries (R.slice (0) (100) (others), createReview (client))
+  // await Promise.mapSeries (others, createReview (client))
+  // console.log (`Successfully created Other reviews`)
 
   console.log (`Creating Goodreads reviews`)
-  // await Promise.mapSeries (R.slice (0) (100) (goodreads), createReview (client))
-  await Promise.map (goodreads, createReview (client), {concurrency: 1})
+  await Promise.mapSeries (R.slice (0) (7198) (goodreads), createReview (client))
+  // await Promise.mapSeries (goodreads, createReview (client))
   console.log (`Successfully created Goodreads reviews`)
+
+  // console.log (R.length (hackprague))
+  // console.log (R.length (others))
+  // console.log (R.length (goodreads))
 }

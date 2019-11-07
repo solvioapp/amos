@@ -3,7 +3,7 @@
   "baseUrl": ".",
   "paths": {
     "ClientApp/*": ["./ClientApp/*"],
-    "common/*": ["./src/common/*"],
+    "common/*": ["./src/common/common.js"],
     "components/*": ["./src/components/*"],
     "apollo/*": ["./src/apollo/*"]
   }

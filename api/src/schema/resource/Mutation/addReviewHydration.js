@@ -55,7 +55,10 @@ updateTopics = `
   merge (r)-[:HAS_TOPIC]->(t)
 `
 
-const addReviewHydration = async (_, {input}, {session, user}) => {
+const addReviewHydration = async (_, {input}, {session, user, admin}) => {
+  !admin && do {
+    return 1
+  }
   const
   userId = user?.id,
 

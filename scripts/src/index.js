@@ -25,15 +25,16 @@ global.fetch = require(`node-fetch`)
 
 const run = async () => {
   try {
-    console.log (`cleaning db`)
-    await cleanDb()
-    console.log (`creating amos profile`)
-    const amosJwt = await createBot()
-    console.log(`amosJwt`, amosJwt)
-    console.log (`seeding topics`)
-    await seedTopics (amosJwt)
+    // console.log (`cleaning db`)
+    // await cleanDb()
+    // console.log (`creating amos profile`)
+    // const amosJwt = await createBot()
+    // console.log(`amosJwt`, amosJwt)
+    // console.log (`seeding topics`)
+    // await seedTopics (amosJwt || process.env.AMOS_JWT)
     console.log (`seeding reviews`)
-    await seedReviews (amosJwt)
+    // await seedReviews (amosJwt || process.env.AMOS_JWT)
+    await seedReviews (process.env.AMOS_JWT)
   }
   catch (e) {
     console.log (`Something went wrong`, e.message)
