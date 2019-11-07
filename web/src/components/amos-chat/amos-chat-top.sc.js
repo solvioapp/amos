@@ -16,7 +16,6 @@ const options = {
 const top = H.css`
   align-items: flex-start;
   display: flex;
-  max-width: fit-content;
   ${H.options (options, `avatar`)}
 
   ${ChatFlow} {

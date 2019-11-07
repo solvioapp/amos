@@ -8,6 +8,7 @@ top = H.css`
   background-color: white;
   border-radius: 12px;
   border: 1.3px solid black;
+  width: 90%;
   max-width: ${550 - avatar_large - 50 - 10}px;
   padding: 8px 12px;
   position: relative;

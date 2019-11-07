@@ -3,6 +3,10 @@ import {H, SplitButton, Icon} from 'common'
 const top = H.css`
   width: 90%;
   max-width: 500px;
+  /* Stretch to fill screen */
+  @media (min-width: 550px) {
+    width: 500px;
+  }
   border-radius: 12px;
   border: 1.3px solid black;
   padding: 10px 15px;
