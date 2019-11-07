@@ -1,4 +1,4 @@
-import {H} from 'common'
+import {H, CONST} from 'common'
 
 const
 
@@ -13,7 +13,8 @@ _1 = `
   return c 
 `,
 
-addIsPartOf = async (_, {input}, {session}) => {
+addIsPartOf = async (_, {input}, {session, user}) => {
+  H.assert (user.admin) (CONST.authorized_endpoint)
   await session.run (_1, input)
 }
 

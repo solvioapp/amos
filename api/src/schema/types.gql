@@ -1,6 +1,4 @@
 scalar StringList
-scalar Date
-scalar Time
 
 type Response {
   success: Boolean!

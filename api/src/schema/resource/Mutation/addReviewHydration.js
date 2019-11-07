@@ -1,4 +1,4 @@
-import {H, R, normalizeUrl} from 'common'
+import {H, R, normalizeUrl, CONST} from 'common'
 
 const THRESHOLD_TOPIC = 0.1
 
@@ -55,10 +55,9 @@ updateTopics = `
   merge (r)-[:HAS_TOPIC]->(t)
 `
 
-const addReviewHydration = async (_, {input}, {session, user, admin}) => {
-  !admin && do {
-    return 1
-  }
+const addReviewHydration = async (_, {input}, {session, user}) => {
+  H.assert (user.admin) (CONST.authorized_endpoint)
+
   const
   userId = user?.id,
 

@@ -1,4 +1,4 @@
-import {H} from 'common'
+import {H, CONST} from 'common'
 
 const
 
@@ -7,7 +7,8 @@ _1 = `
   return t
 `,
 
-createTopic = async (_, {input}, {session}) => {
+createTopic = async (_, {input}, {session, user}) => {
+  H.assert (user.admin) (CONST.authorized_endpoint)
   await session.run (_1, input)
 }
 

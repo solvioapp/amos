@@ -15,4 +15,6 @@ no_topic_or_prerequisite = `I need at least one topic or prerequisite..`,
 
 no_local_account = `Looks like you've previously signed up like Github or Facebook, but not with password. Go ahead and sign up to create a password 🙂`,
 
-wrong_username = `It seems we've already met, but you used a different username. Please use the same one now so I can keep track. 😉`
+wrong_username = `It seems we've already met, but you used a different username. Please use the same one now so I can keep track. 😉`,
+
+authorized_endpoint = `Unfortunately this endpoint is currently only for admins!`
